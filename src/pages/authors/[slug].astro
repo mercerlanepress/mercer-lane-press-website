@@ -6,6 +6,6 @@ import { books } from '../../data/books';
 export function getStaticPaths() { return authors.filter(({slug}) => slug !== 'mercer-lane').map(author => ({params:{slug:author.slug},props:{author}})); }
 const { author } = Astro.props as { author: Author };
 const authoredBooks = books.filter(book => book.authorSlug === author.slug);
-const schema={'@context':'https://schema.org','@type':'Person',name:author.name,url:`https://mercerlanepress.com/authors/${author.slug}/`,description:author.bio};
+const schema={'@context':'https://schema.org','@type':'Person',name:author.name,url:`https://mercerlanepress.com/authors/${author.slug}/`,description:author.bio,...(author.sameAs ? {sameAs:[author.sameAs]} : {})};
 ---
 <BaseLayout title={`${author.name}, Author`} description={author.bio} schema={schema}><Breadcrumbs items={[{name:'Home',href:'/'},{name:'Authors',href:'/authors/'},{name:author.name}]}/><header class="page-head wrap prose"><p class="eyebrow">AUTHOR</p><h1>{author.name}</h1><p class="lede">{author.bio}</p></header><section class="section section-tint"><div class="wrap prose"><h2>Books by {author.name}</h2>{authoredBooks.map(book => <article><h3><a href={`/books/${book.slug}/`}>{book.title}</a></h3><p>{book.description}</p><a class="button" href={`/books/${book.slug}/`}>Explore the book</a></article>)}</div></section></BaseLayout>

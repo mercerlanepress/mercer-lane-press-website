@@ -1,0 +1,6 @@
+---
+import { getCollection, render } from 'astro:content'; import AiScamArticleLayout from '../../layouts/AiScamArticleLayout.astro';
+export async function getStaticPaths(){return (await getCollection('aiScamDefenceGuides')).map(entry=>({params:{slug:entry.id},props:{entry}}));}
+const {entry}=Astro.props; const {Content}=await render(entry);
+---
+<AiScamArticleLayout entry={entry}><Content /></AiScamArticleLayout>

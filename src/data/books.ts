@@ -18,6 +18,26 @@ export const books: Book[] = [{
   hubSlug: '5g-home-internet',
   hubLabel: '5G home internet troubleshooting guides'
 },{
+  slug: 'ai-scam-defence-for-families',
+  title: 'AI Scam Defence for Families',
+  subtitle: 'A practical family guide to recognizing and responding to AI-enabled scams',
+  author: 'Rebecca Tolland', authorSlug: 'rebecca-tolland',
+  publisher: 'Mercer Lane Press',
+  description: 'A practical guide for families who want to recognize AI-enabled impersonation and fraud, slow down high-pressure requests, verify what is real, and respond safely.',
+  cover: '/images/books/ai-scam-defence-for-families-front-cover.jpg',
+  coverReady: true,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HJDYFFHJ',
+  intendedReader: 'Families who want a shared, practical plan for handling suspicious calls, messages, images, videos, and payment requests without relying on guesswork.',
+  problems: [
+    'Urgent messages that appear to come from a relative or trusted organization',
+    'Voice, image, and video impersonation made more convincing with AI',
+    'Uncertainty about how to verify a request without alerting or assisting a scammer'
+  ],
+  topics: ['Pause before acting','Verify on a separate channel','Protect accounts and personal information','Create a family response plan','Preserve evidence','Report and recover'],
+  outcomes: ['A shared verification routine','Clear boundaries for money and information','A calmer response when something feels urgent'],
+  hubSlug: 'ai-scam-defence',
+  hubLabel: 'AI scam defence guides'
+},{
   slug: 'get-your-local-business-recommended-by-ai',
   title: 'Get Your Local Business Recommended by AI',
   subtitle: "The 30-Day Owner's System for Visibility in ChatGPT, Google AI, Gemini, and Perplexity - for Local Service Businesses",

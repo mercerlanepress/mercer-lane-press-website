@@ -47,3 +47,8 @@ The custom domain should only be attached to the production Worker after the pre
 - `wrangler.jsonc` — Cloudflare static-assets configuration.
 - `.github/workflows/deploy-cloudflare.yml` — automatic build/deploy workflow.
 - `.github/workflows/build.yml` — independent production-build check.
+
+
+## After adding or rotating secrets
+
+After adding or rotating either Cloudflare secret, push a commit to the pull-request branch (or re-run the workflow) so GitHub Actions executes again with the new encrypted values.

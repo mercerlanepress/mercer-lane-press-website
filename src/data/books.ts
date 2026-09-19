@@ -7,8 +7,7 @@ export const books = [{
   description: 'A practical, provider-neutral manual for finding where a 5G home internet problem begins, testing one variable at a time, and choosing the next useful step.',
   cover: '/images/books/5g-home-internet-troubleshooting-manual-cover.webp',
   coverReady: false,
-  // OWNER: paste the complete Amazon.com product URL between the quotes when available.
-  purchaseUrl: ''
+  purchaseUrl: 'https://www.amazon.com/dp/B0HK2743CQ'
 }] as const;
 
 export const featuredBook = books[0];

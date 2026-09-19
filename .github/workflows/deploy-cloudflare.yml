@@ -33,18 +33,18 @@ jobs:
       - name: Build site
         run: npm run build
 
-      - name: Select deployment name
+      - name: Select Cloudflare environment
         if: ${{ env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != '' }}
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-            echo "WORKER_NAME=mercer-lane-press-preview" >> "$GITHUB_ENV"
+            echo "CLOUDFLARE_ENV=preview" >> "$GITHUB_ENV"
           else
-            echo "WORKER_NAME=mercer-lane-press" >> "$GITHUB_ENV"
+            echo "CLOUDFLARE_ENV=production" >> "$GITHUB_ENV"
           fi
 
       - name: Deploy to Cloudflare
         if: ${{ env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != '' }}
-        run: npx wrangler@4 deploy --name "$WORKER_NAME"
+        run: npx wrangler@4 deploy --env "$CLOUDFLARE_ENV"
 
       - name: Cloudflare deployment not configured yet
         if: ${{ env.CLOUDFLARE_API_TOKEN == '' || env.CLOUDFLARE_ACCOUNT_ID == '' }}

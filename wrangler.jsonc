@@ -4,5 +4,25 @@
   "compatibility_date": "2026-09-19",
   "assets": {
     "directory": "./dist"
+  },
+  "env": {
+    "preview": {
+      "name": "mercer-lane-press-preview",
+      "workers_dev": true
+    },
+    "production": {
+      "name": "mercer-lane-press",
+      "workers_dev": true,
+      "routes": [
+        {
+          "pattern": "mercerlanepress.com",
+          "custom_domain": true
+        },
+        {
+          "pattern": "www.mercerlanepress.com",
+          "custom_domain": true
+        }
+      ]
+    }
   }
 }

@@ -88,11 +88,20 @@ Astro validates article data using `src/content.config.ts`. This helps catch mis
 
 A new subject needs a hub page in `src/pages/`, a content collection (or an extension of the current collection) in `src/content.config.ts`, and routes/templates appropriate to that subject. This is a structural change; ask a developer to follow the existing 5G hub pattern rather than duplicating it without updating links and metadata.
 
-## Deploy later on Cloudflare
+## Automated publishing and Cloudflare deployment
 
-The deployable output is the static `dist/` folder. In Cloudflare Pages, connect the Git repository, choose a Node-based build, use `npm run build` as the build command, and set `dist` as the output directory. Attach `mercerlanepress.com` as the custom domain by following Cloudflare's current Pages and DNS instructions. Preview the deployment before changing production DNS.
+The normal workflow is now GitHub-first rather than manual ZIP uploads.
 
-No credentials belong in this repository. Enter hosting credentials only in Cloudflare's secure dashboard if a future feature needs them. This version requires no environment variables or external API.
+- Pull requests build automatically.
+- Once the two Cloudflare repository secrets are configured, pull requests deploy to a stable preview Worker.
+- Merges to `main` deploy the production Worker automatically.
+- The custom domain only needs to be connected once.
+
+See `docs/AUTOMATION_SETUP.md` for the one-time Cloudflare/GitHub setup.
+
+For future books, use the reusable task in `docs/ADD_BOOK_WITH_CODEX.md`. The intended owner workflow is: provide the final manuscript, cover and verified Amazon.com URL; review the generated preview; merge if approved.
+
+No credentials belong in this repository. Cloudflare credentials must be stored only as encrypted GitHub Actions secrets.
 
 ## Files not to edit casually
 

@@ -7,7 +7,7 @@ export const GET: APIRoute = async () => {
   const guides = await getCollection('guides');
   const localBusinessAiGuides = await getCollection('localBusinessAiGuides');
   const paths = [
-    '/', '/books/', '/authors/', '/guides/', '/5g-home-internet/', '/local-business-ai/', '/about/', '/privacy/',
+    '/', '/books/', '/authors/', '/guides/', '/5g-home-internet/', '/local-business-ai/', '/about/', '/contact/', '/privacy/',
     ...books.map(({ slug }) => '/books/' + slug + '/'),
     ...authors.map(({ slug }) => '/authors/' + slug + '/'),
     ...guides.map(({ id }) => '/5g-home-internet/' + id + '/'),

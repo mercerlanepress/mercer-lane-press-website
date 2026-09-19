@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'the-reactive-dog-walking-playbook')!;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/sophie-ardenwood/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  image:new URL(book.cover,Astro.site).href,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.cover} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">REACTIVE DOG WALKING GUIDE</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/sophie-ardenwood/">Sophie Ardenwood</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/reactive-dog-walking/">Read free guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>A walking-specific system for reactive behavior</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">INSIDE THE PLAYBOOK</p>
+        <h2>Build the walk around early decisions and workable distance</h2>
+        <p>The book treats reactivity as an observable response rather than a diagnosis. The practical system uses body-language changes, trigger context, distance, recovery, and the dog's ability to move, eat, sniff, and disengage to guide decisions.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>Spot the five seconds before the reaction</h3><p>Learn your dog's normal walking baseline and act on early changes before barking or lunging begins.</p></article>
+        <article class="card"><h3>Map triggers and working distance</h3><p>Record the context that makes an encounter easier or harder and use distance as the main difficulty control.</p></article>
+        <article class="card"><h3>Rehearse four practical skills</h3><p>Build orientation, a moving hand target, food search, and a practiced turn-away in easy places first.</p></article>
+        <article class="card"><h3>Use clean emergency exits</h3><p>Turn, cross, retreat, or use a visual barrier when a trigger arrives faster than the training plan.</p></article>
+        <article class="card"><h3>Reset for 14 days</h3><p>Reduce avoidable rehearsal, install the core skills, and gather enough data to choose the first structured training target.</p></article>
+        <article class="card"><h3>Progress over eight weeks</h3><p>Change one major variable at a time and track distance, reactions, recovery, route flexibility, and handling load.</p></article>
+      </div>
+      <div class="notice"><strong>Safety first.</strong> The book is educational and is not veterinary diagnosis or individualized behavior treatment. Sudden or marked behavior change, signs of pain or illness, biting or attempted biting, redirected aggression, escape, or inability to maintain safe control are reasons to prioritize management and seek appropriate veterinary or qualified behavior support.</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">REFERENCE TOOLS</p><h2>Designed for the walk you are actually on</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>14-Day Reset Calendar</h3><p>A day-by-day sequence covering equipment, skills, trigger mapping, easy walks, planned observation, and review.</p></article>
+        <article class="card"><h3>Scenario Labs and Walk Cards</h3><p>Real-world decision sequences for head-on dogs, blind corners, loose dogs, runners, traffic, hallways, gates, elevators, crowded sidewalks, and more.</p></article>
+        <article class="card"><h3>Logs and progress trackers</h3><p>Use trigger, distance, early signs, outcome, and recovery to make the next walk easier rather than relying on memory.</p></article>
+      </div>
+      <div class="actions"><a class="button button-secondary" href="/reactive-dog-walking/">Explore the free reactive dog walking guides</a></div>
+    </div>
+  </section>
+</BaseLayout>

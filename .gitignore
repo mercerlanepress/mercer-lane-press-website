@@ -4,3 +4,7 @@ dist/
 .DS_Store
 .env*
 !.env.example
+
+# Private/local new-book intake files: never commit manuscripts, covers, or intake metadata.
+book-intake/incoming/*
+!book-intake/incoming/.gitkeep

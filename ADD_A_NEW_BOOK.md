@@ -12,7 +12,7 @@ Nothing in this workflow publishes automatically. A pull request creates a priva
 
 ## The easiest workflow: ask Codex
 
-1. Put the three files into a new folder under `book-intake/incoming/`. Copy `book-intake/example/metadata.yml` there and fill in the author and Amazon URL. Title, subtitle, category, biography, and notes may also be supplied.
+1. Put the three files into a new folder under `book-intake/incoming/`. Copy `book-intake/example/metadata.yml` there and fill in the author and Amazon URL. Title, subtitle, category, biography, and notes may also be supplied. **Everything under `book-intake/incoming/` is intentionally Git-ignored and must remain local/private; never force-add manuscripts, covers, or intake metadata to Git.**
 2. Paste the prompt from `NEW_BOOK_CODEX_PROMPT.md` into Codex.
 3. Codex reads the manuscript, completes or improves the generated page copy without unsupported claims, and runs `npm run add-book`.
 4. Codex pushes the new `book/<book-slug>` branch and opens a pull request. Existing GitHub Actions build the site and deploy the pull-request branch to the existing Cloudflare preview environment.

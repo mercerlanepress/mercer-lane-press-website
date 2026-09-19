@@ -1,5 +1,7 @@
 # Book intake area
 
+**Privacy:** `book-intake/incoming/` is intentionally ignored by Git (except `.gitkeep`). Manuscripts, cover files, and intake metadata placed there are local working files and must not be committed or force-added to this public repository.
+
 Each book gets **one folder** inside `incoming/`. That folder must contain:
 
 1. one manuscript: PDF, DOCX, Markdown, or plain text;

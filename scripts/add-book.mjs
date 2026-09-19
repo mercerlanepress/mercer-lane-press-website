@@ -59,7 +59,7 @@ const book = {
   outcomes: themes.slice(0, 3).map(theme => `A clearer framework for ${lowerFirst(theme)}`), themes
 };
 writeFileSync(booksPath, insertRecord(booksSource, book), 'utf8');
-if (!hasAuthor(authorsSource, metadata.author)) {
+if (!authorExists) {
   const bio = metadata.authorBio || `${metadata.author} is the author of ${metadata.title}, published by Mercer Lane Press.`;
   writeFileSync(authorsPath, insertRecord(authorsSource, { slug: authorSlug, name: metadata.author, bio }), 'utf8');
 }
@@ -70,6 +70,7 @@ if (metadata.optionalNotes) console.log(`Owner notes retained in the intake fold
 if (!noGit) {
   run('npm', ['run', 'check']);
   run('git', ['add', 'src/data/books.ts','src/data/authors.ts',`public/images/books/${coverFile}`]);
+  assertNoStagedIntake();
   run('git', ['commit','-m',`Add ${metadata.title}`]);
   console.log('\nCommitted on book/' + slug + '. Push this branch and open a pull request.');
   console.log('Cloudflare will report the preview deployment in the pull-request checks. STOP and wait for owner approval; never merge automatically.');
@@ -95,6 +96,21 @@ function insertRecord(source, record) { const marker = '}];'; const index=source
 function hasAuthor(source,name) { return source.includes(`name: '${name.replaceAll("'","\\'")}'`) || source.includes(`"name": "${name.replaceAll('"','\\"')}"`); }
 function extractManuscript(path) { const ext=extname(path).toLowerCase(); if(ext==='.md'||ext==='.txt') return readFileSync(path,'utf8'); if(ext==='.pdf') { const result=spawnSync('pdftotext',['-layout',path,'-'],{encoding:'utf8'}); if(result.error?.code==='ENOENT') fail('PDF intake needs the free “pdftotext” command installed. Alternatively supply Markdown or text.'); if(result.status!==0) fail('Could not extract text from the PDF: '+result.stderr); return result.stdout; } const result=spawnSync('unzip',['-p',path,'word/document.xml'],{encoding:'utf8'}); if(result.error?.code==='ENOENT') fail('DOCX intake needs the “unzip” command installed. Alternatively supply Markdown or text.'); if(result.status!==0) fail('Could not extract word/document.xml from the DOCX.'); return result.stdout.replace(/<w:tab\/?\s*>/g,'\t').replace(/<\/w:p>/g,'\n').replace(/<[^>]+>/g,' ').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>'); }
 function imageDimensions(path) { const b=readFileSync(path); if(b.toString('ascii',1,4)==='PNG') return {width:b.readUInt32BE(16),height:b.readUInt32BE(20)}; if(b[0]===0xff&&b[1]===0xd8){let p=2;while(p<b.length){if(b[p]!==0xff){p++;continue}const marker=b[p+1],len=b.readUInt16BE(p+2);if([0xc0,0xc1,0xc2,0xc3,0xc5,0xc6,0xc7,0xc9,0xca,0xcb,0xcd,0xce,0xcf].includes(marker))return {height:b.readUInt16BE(p+5),width:b.readUInt16BE(p+7)};p+=2+len}} if(b.toString('ascii',0,4)==='RIFF'&&b.toString('ascii',8,12)==='WEBP'){const type=b.toString('ascii',12,16);if(type==='VP8X')return {width:1+b.readUIntLE(24,3),height:1+b.readUIntLE(27,3)};if(type==='VP8 ' )return {width:b.readUInt16LE(26)&0x3fff,height:b.readUInt16LE(28)&0x3fff};if(type==='VP8L'){const bits=b.readUInt32LE(21);return {width:(bits&0x3fff)+1,height:((bits>>14)&0x3fff)+1}}} fail(`Could not read dimensions from ${basename(path)}. Save the cover as a standard JPG, PNG, or WebP.`); }
-function prepareBranch(slug) { const status=execFileSync('git',['status','--porcelain','--untracked-files=no'],{cwd:root,encoding:'utf8'}); if(status.trim()) fail('Tracked files must be clean before add-book starts. Commit or discard those changes first.'); run('git',['switch','main']); run('git',['switch','-c',`book/${slug}`]); }
+function prepareBranch(slug) {
+  const status=execFileSync('git',['status','--porcelain','--untracked-files=no'],{cwd:root,encoding:'utf8'});
+  if(status.trim()) fail('Tracked files must be clean before add-book starts. Commit or discard those changes first.');
+  try {
+    run('git',['fetch','origin','main']);
+    run('git',['switch','main']);
+    run('git',['merge','--ff-only','origin/main']);
+  } catch {
+    fail('Could not safely update local main to the latest origin/main with a fast-forward. Resolve the local branch state, then run add-book again. No forced reset was performed.');
+  }
+  run('git',['switch','-c',`book/${slug}`]);
+}
+function assertNoStagedIntake() {
+  const staged=execFileSync('git',['diff','--cached','--name-only','--','book-intake/incoming'],{cwd:root,encoding:'utf8'}).trim();
+  if(staged) fail(`Refusing to commit private intake files. Unstage these paths first:\n${staged}`);
+}
 function run(command, commandArgs) { execFileSync(command,commandArgs,{cwd:root,stdio:'inherit'}); }
 function fail(message) { console.error(`ERROR: ${message}`); process.exit(1); }

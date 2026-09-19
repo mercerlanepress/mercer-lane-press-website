@@ -1,0 +1,4 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'; import Breadcrumbs from '../../components/Breadcrumbs.astro'; import {authors} from '../../data/authors';
+---
+<BaseLayout title="Authors" description="Meet the authors of practical nonfiction guides from Mercer Lane Press."><Breadcrumbs items={[{name:'Home',href:'/'},{name:'Authors'}]}/><header class="page-head wrap"><p class="eyebrow">OUR AUTHORS</p><h1>Authors</h1><p class="lede">The names behind Mercer Lane Press problem-solving guides.</p></header><section class="section section-tint"><div class="wrap grid-3">{authors.map(a=><article class="card"><h2><a href={`/authors/${a.slug}/`}>{a.name}</a></h2><p>{a.bio}</p><a class="text-link" href={`/authors/${a.slug}/`}>View author <span aria-hidden="true">→</span></a></article>)}</div></section></BaseLayout>

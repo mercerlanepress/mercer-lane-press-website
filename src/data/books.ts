@@ -5,7 +5,7 @@ export const books = [{
   author: 'Mercer Lane', authorSlug: 'mercer-lane',
   publisher: 'Mercer Lane Press',
   description: 'A practical, provider-neutral manual for finding where a 5G home internet problem begins, testing one variable at a time, and choosing the next useful step.',
-  cover: '/images/books/5g-home-internet-troubleshooting-manual-cover.webp',
+  cover: '/images/books/5G_Home_Internet_Front_Cover.jpg',
   coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0HK2743CQ'
 }] as const;

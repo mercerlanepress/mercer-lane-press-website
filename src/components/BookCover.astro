@@ -3,8 +3,8 @@ const { book, large = false } = Astro.props;
 ---
 <div class:list={['cover-shell', large && 'cover-large']}>
   {book.coverReady
-    ? <img src={book.cover} alt={`Cover of ${book.title} by ${book.author}`} loading={large ? 'eager' : 'lazy'} />
-    : <div class="cover-placeholder" role="img" aria-label={`Placeholder cover for ${book.title}`}>
-        <small>MERCER LANE PRESS</small><h2>{book.title}</h2><p>Provider-neutral troubleshooting</p><strong>{book.author}</strong>
+    ? <img src={book.cover} alt={'Cover of ' + book.title + ' by ' + book.author} loading={large ? 'eager' : 'lazy'} />
+    : <div class="cover-placeholder" role="img" aria-label={'Placeholder cover for ' + book.title}>
+        <small>MERCER LANE PRESS</small><h2>{book.title}</h2><p>{book.topics?.[0] ?? 'Practical guide'}</p><strong>{book.author}</strong>
       </div>}
 </div>

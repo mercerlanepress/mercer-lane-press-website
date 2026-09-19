@@ -1,0 +1,13 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+const guides=(await getCollection('localBusinessAiGuides')).sort((a,b)=>a.data.order-b.data.order);
+---
+<BaseLayout title="AI Visibility for Local Businesses" description="Practical guides for making a local service business easier for search and AI systems to discover, understand, corroborate, and evaluate.">
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Guides',href:'/guides/'},{name:'Local Business AI'}]}/>
+  <header class="page-head wrap"><p class="eyebrow">LOCAL BUSINESS AI VISIBILITY</p><h1>Make the public evidence clearer</h1><p class="lede">There is no single secret AI ranking score. Improve the facts and evidence systems can retrieve, then test what actually changes.</p></header>
+  <section class="section section-tint"><div class="wrap"><div class="section-head"><h2>The evidence stack</h2><p>Use five practical lenses: identity, relevance, proof, corroboration, and access/freshness. This is a diagnostic model, not a published platform formula.</p></div><div class="hub-steps"><article><h3>Identity</h3><p>Keep core business facts consistent.</p></article><article><h3>Relevance</h3><p>State services, customers, and locations clearly.</p></article><article><h3>Proof</h3><p>Publish legitimate evidence customers can evaluate.</p></article><article><h3>Corroboration</h3><p>Strengthen reputable third-party confirmation and keep important pages accessible.</p></article></div></div></section>
+  <section class="section"><div class="wrap"><div class="section-head"><p class="eyebrow">PRACTICAL GUIDES</p><h2>Work on one evidence problem at a time</h2></div><div class="grid-3">{guides.map(g=><article class="card"><p class="eyebrow">LOCAL BUSINESS AI</p><h3><a href={'/local-business-ai/' + g.id + '/'}>{g.data.title}</a></h3><p>{g.data.summary}</p><a class="text-link" href={'/local-business-ai/' + g.id + '/'}>Read the guide →</a></article>)}</div></div></section>
+  <section class="section section-tint"><div class="wrap prose"><h2>Keep the goal realistic</h2><p>No method can guarantee a mention, citation, ranking, or recommendation. Query wording, location, available sources, eligibility, freshness, competition, and model behavior all affect answers. The useful job is to make the business easier to discover, understand, corroborate, and evaluate, then keep a repeatable test log.</p><p>For the complete 30-day workflow, see <a href="/books/get-your-local-business-recommended-by-ai/"><em>Get Your Local Business Recommended by AI</em></a>.</p></div></section>
+</BaseLayout>

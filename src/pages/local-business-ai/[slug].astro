@@ -1,0 +1,12 @@
+---
+import { getCollection, render } from 'astro:content';
+import LocalBusinessAiArticleLayout from '../../layouts/LocalBusinessAiArticleLayout.astro';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('localBusinessAiGuides');
+  return guides.map(entry => ({ params: { slug: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<LocalBusinessAiArticleLayout entry={entry}><Content /></LocalBusinessAiArticleLayout>

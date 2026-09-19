@@ -16,4 +16,9 @@ const localBusinessAiGuides = defineCollection({
   schema: guideSchema
 });
 
-export const collections = { guides, localBusinessAiGuides };
+const aiScamDefenceGuides = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/ai-scam-defence' }),
+  schema: guideSchema
+});
+
+export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides };

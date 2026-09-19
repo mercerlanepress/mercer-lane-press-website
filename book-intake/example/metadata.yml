@@ -1,0 +1,13 @@
+# Required unless the title can be read from the manuscript's first short line.
+title: Example Book Title
+subtitle: An Optional Subtitle
+# Required.
+author: Example Author
+# Required. Paste the exact, verified amazon.com product URL.
+amazonUrl: https://www.amazon.com/dp/B012345678
+# Recommended. Use a short phrase grounded in the manuscript.
+category: home organization
+# Optional. Instructions for Codex/owner review; never published automatically.
+optionalNotes:
+# Optional. If omitted for a new author, a neutral one-sentence description is used.
+authorBio:

@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import { books, type Book } from '../../data/books';
+export function getStaticPaths() {
+  return books.filter(({ slug }) => slug !== 'the-5g-home-internet-troubleshooting-manual').map(book => ({ params: { slug: book.slug }, props: { book } }));
+}
+const { book } = Astro.props as { book: Book };
+const authorUrl = `https://mercerlanepress.com/authors/${book.authorSlug}/`;
+const schema = {'@context':'https://schema.org','@type':'Book',name:book.title,alternativeHeadline:book.subtitle || undefined,author:{'@type':'Person',name:book.author,url:authorUrl},publisher:{'@type':'Organization',name:book.publisher},description:book.description,image:new URL(book.cover, Astro.site).href,url:`https://mercerlanepress.com/books/${book.slug}/`,offers:{'@type':'Offer',url:book.purchaseUrl}};
+const topics = book.topics?.length ? book.topics : book.themes ?? [];
+---
+<BaseLayout title={book.title} description={book.description} image={book.cover} type="book" schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout"><BookCover book={book} large/><div><p class="eyebrow">A MERCER LANE PRESS BOOK</p><h1>{book.title}</h1>{book.subtitle && <p class="lede">{book.subtitle}</p>}<p>By <a href={`/authors/${book.authorSlug}/`}>{book.author}</a> · Published by {book.publisher}</p><p>{book.description}</p><div class="actions"><a class="button" href={book.purchaseUrl}>Buy on Amazon</a><a class="button button-secondary" href="#inside">See what’s inside</a></div></div></section>
+  <section class="section section-tint" id="inside"><div class="wrap prose"><p class="eyebrow">ABOUT THE BOOK</p><h2>Who this book is for</h2><p>{book.intendedReader || `Readers looking for a clear introduction to ${book.title}.`}</p>{book.problems?.length && <><h2>Problems it addresses</h2><ul>{book.problems.map(item => <li>{item}</li>)}</ul></>}{topics.length > 0 && <><h2>Main topics</h2><ul>{topics.map(item => <li>{item}</li>)}</ul></>}{book.outcomes?.length && <><h2>What readers can take away</h2><ul>{book.outcomes.map(item => <li>{item}</li>)}</ul></>}</div></section>
+</BaseLayout>

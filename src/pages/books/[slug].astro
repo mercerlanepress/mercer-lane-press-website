@@ -6,7 +6,7 @@ import { books } from '../../data/books';
 
 export function getStaticPaths() {
   return books
-    .filter(book => !['the-5g-home-internet-troubleshooting-manual','ai-scam-defence-for-families'].includes(book.slug))
+    .filter(book => !['the-5g-home-internet-troubleshooting-manual','ai-scam-defence-for-families','the-reactive-dog-walking-playbook'].includes(book.slug))
     .map(book => ({ params: { slug: book.slug }, props: { book } }));
 }
 

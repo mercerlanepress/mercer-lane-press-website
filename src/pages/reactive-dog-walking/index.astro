@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('reactiveDogWalkingGuides')).sort((a,b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Reactive Dog Walking Guides" description="Practical, reward-based guides for working distance, early warning signs, clean exits, route planning, recovery, and safer real-world walks with a reactive dog.">
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Reactive Dog Walking'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">REACTIVE DOG WALKING HUB</p>
+    <h1>Reactive Dog Walking</h1>
+    <p class="lede">Notice earlier, make space sooner, keep a small set of skills available, and measure progress by flexibility and recovery rather than by forcing close passes.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><h2>A simple decision pattern for real walks</h2><p>The first question is not “Can my dog get closer?” It is “Does my dog still have enough flexibility to learn here?”</p></div>
+      <div class="hub-steps">
+        <article><h3>Notice</h3><p>Watch for the first change from your dog's normal walking baseline: stillness, hard staring, pace changes, a closed mouth, scanning, or another reliable early sign.</p></article>
+        <article><h3>Make space</h3><p>Cross, arc away, turn, retreat, or use a visual barrier before attention becomes locked on.</p></article>
+        <article><h3>Choose</h3><p>If the dog can move, sniff, eat, and disengage, a few calm repetitions may be workable. If not, leave.</p></article>
+        <article><h3>Recover</h3><p>After a difficult encounter, simplify the rest of the walk and track how long normal walking behavior takes to return.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">PRACTICAL GUIDES</p><h2>Start with the problem on today's walk</h2></div>
+      <div class="grid-3">{guides.map(g => <GuideCard guide={g} base="/reactive-dog-walking/" label="REACTIVE DOG WALKING"/>)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap prose">
+      <h2>Go deeper with the full walking system</h2>
+      <p><a href="/books/the-reactive-dog-walking-playbook/"><em>The Reactive Dog Walking Playbook</em></a> brings the ideas together in a 14-day reset, an eight-week progression, scenario labs, quick-reference pages, logs, and situation-specific walk cards.</p>
+      <p>The material is educational, not individualized veterinary or behavior treatment. When safe physical control is uncertain, or there has been biting, attempted biting, redirected aggression, escape, severe panic, or a sudden marked behavior change, prioritize management and obtain appropriate professional help.</p>
+    </div>
+  </section>
+</BaseLayout>

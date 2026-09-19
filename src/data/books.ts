@@ -38,6 +38,37 @@ export const books: Book[] = [{
   hubSlug: 'ai-scam-defence',
   hubLabel: 'AI scam defence guides'
 },{
+  slug: 'the-reactive-dog-walking-playbook',
+  title: 'The Reactive Dog Walking Playbook',
+  subtitle: 'A Practical, Reward-Based System for Calmer Walks, Safer Trigger Management, and Real-World Progress',
+  author: 'Sophie Ardenwood', authorSlug: 'sophie-ardenwood',
+  publisher: 'Mercer Lane Press',
+  description: 'A practical, reward-based guide to making reactive-dog walks more manageable by spotting early warning signs, creating distance sooner, rehearsing exits, planning routes, and tracking recovery and progress.',
+  cover: '/images/books/the-reactive-dog-walking-playbook-front-cover.jpg',
+  coverReady: true,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HK9VMH7B',
+  intendedReader: 'Dog owners and handlers dealing with barking, lunging, freezing, hard staring, or other reactive behavior on walks who want a structured, reward-based way to make safer decisions.',
+  problems: [
+    'Walks that become difficult because triggers are noticed too late',
+    'Uncertainty about how much distance a dog needs in order to stay flexible',
+    'Surprise encounters, narrow spaces, and other situations where a clean exit matters'
+  ],
+  topics: [
+    'Early warning signs and the yellow zone',
+    'Trigger maps and working distance',
+    'Four rehearsed walking skills',
+    'Emergency exits and visual barriers',
+    'The 14-day walk reset',
+    'Eight-week progression, scenario labs, and walk cards'
+  ],
+  outcomes: [
+    'Earlier, cleaner decisions around triggers',
+    'More predictable route and exit planning',
+    'Progress measured by distance, recovery, reactions, and route flexibility'
+  ],
+  hubSlug: 'reactive-dog-walking',
+  hubLabel: 'Reactive dog walking guides'
+},{
   slug: 'get-your-local-business-recommended-by-ai',
   title: 'Get Your Local Business Recommended by AI',
   subtitle: "The 30-Day Owner's System for Visibility in ChatGPT, Google AI, Gemini, and Perplexity - for Local Service Businesses",

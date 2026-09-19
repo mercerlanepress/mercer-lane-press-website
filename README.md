@@ -42,6 +42,8 @@ Astro checks and generates the site in `dist/`. A successful build is the versio
 
 ## Add or update a book
 
+For a new book, use the intake automation rather than editing source files. See [`ADD_A_NEW_BOOK.md`](ADD_A_NEW_BOOK.md), place the manuscript, original cover, and completed metadata template in `book-intake/incoming/`, then run `npm run add-book`. The older manual notes below remain useful when maintaining the existing first book.
+
 1. Open `src/data/books.ts`.
 2. Copy an existing book object inside the `books` list.
 3. Give every field accurate content and a unique lowercase `slug` with words separated by hyphens.

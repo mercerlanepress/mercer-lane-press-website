@@ -4,9 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "add-book": "node scripts/add-book.mjs",
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "check": "node scripts/check-site.mjs"
   },
   "dependencies": {
     "astro": "^7.3.3"

@@ -1,4 +1,4 @@
 ---
-const { guide } = Astro.props;
+const { guide, base = '/5g-home-internet/', label = '5G HOME INTERNET' } = Astro.props;
 ---
-<article class="card guide-card"><p class="eyebrow">5G HOME INTERNET</p><h3><a href={`/5g-home-internet/${guide.id}/`}>{guide.data.title}</a></h3><p>{guide.data.summary}</p><a class="text-link" href={`/5g-home-internet/${guide.id}/`}>Read the guide <span aria-hidden="true">→</span></a></article>
+<article class="card guide-card"><p class="eyebrow">{label}</p><h3><a href={`${base}${guide.id}/`}>{guide.data.title}</a></h3><p>{guide.data.summary}</p><a class="text-link" href={`${base}${guide.id}/`}>Read the guide <span aria-hidden="true">→</span></a></article>

@@ -24,8 +24,8 @@ export const books: Book[] = [{
   author: 'Mercer Lane', authorSlug: 'mercer-lane',
   publisher: 'Mercer Lane Press',
   description: 'A practical 30-day system for local service businesses to improve the public evidence that AI and search systems can discover, understand, corroborate, and evaluate.',
-  cover: '/images/books/get-your-local-business-recommended-by-ai-cover.jpg',
-  coverReady: false,
+  cover: '/images/books/Get_Your_Local_Business_Recommended_by_AI_front_cover.jpg',
+  coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0HJSRBQYF',
   intendedReader: 'Owners and marketing leads at local service businesses who want a practical way to improve and measure AI-assisted visibility without relying on hype or guaranteed-ranking claims.',
   problems: [

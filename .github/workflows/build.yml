@@ -1,6 +1,7 @@
 name: Production build
 
 on:
+  workflow_dispatch:
   pull_request:
   push:
     branches:
@@ -28,3 +29,10 @@ jobs:
 
       - name: Build production site
         run: npm run build
+
+      - name: Upload built site artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mercer-lane-press-dist
+          path: dist
+          if-no-files-found: error

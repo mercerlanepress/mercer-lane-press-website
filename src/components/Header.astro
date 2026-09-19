@@ -6,7 +6,12 @@ const links = [['/books/','Books'],['/5g-home-internet/','Guides'],['/authors/',
 <header class="site-header">
   <div class="wrap nav-wrap">
     <a class="brand" href="/" aria-label="Mercer Lane Press home"><span aria-hidden="true">ML</span><strong>Mercer Lane Press</strong></a>
-    <nav aria-label="Primary navigation">
+
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <ul>{links.map(([href,label]) => <li><a href={href} aria-current={path.startsWith(href) ? 'page' : undefined}>{label}</a></li>)}</ul>
+    </nav>
+
+    <nav class="mobile-nav" aria-label="Mobile navigation">
       <details>
         <summary>Menu</summary>
         <ul>{links.map(([href,label]) => <li><a href={href} aria-current={path.startsWith(href) ? 'page' : undefined}>{label}</a></li>)}</ul>

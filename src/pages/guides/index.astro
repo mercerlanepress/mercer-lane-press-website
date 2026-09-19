@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+---
+<BaseLayout title="Practical Guides" description="Free practical guides from Mercer Lane Press, organized by the problems our books help readers solve.">
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Guides'}]}/>
+  <header class="page-head wrap"><p class="eyebrow">FREE RESOURCES</p><h1>Practical Guides</h1><p class="lede">Start with the problem you are trying to solve, then follow a focused set of checks and decisions.</p></header>
+  <section class="section section-tint"><div class="wrap"><div class="grid-3">
+    <article class="card"><p class="eyebrow">HOME INTERNET</p><h2><a href="/5g-home-internet/">5G Home Internet</a></h2><p>Signal, speed, disconnects, gateway placement, Wi-Fi, and provider-side troubleshooting.</p><a class="text-link" href="/5g-home-internet/">Browse 5G guides →</a></article>
+    <article class="card"><p class="eyebrow">LOCAL BUSINESS</p><h2><a href="/local-business-ai/">AI Visibility for Local Businesses</a></h2><p>Business facts, service-page clarity, corroboration, crawlability, testing, and measurement.</p><a class="text-link" href="/local-business-ai/">Browse AI visibility guides →</a></article>
+  </div></div></section>
+</BaseLayout>

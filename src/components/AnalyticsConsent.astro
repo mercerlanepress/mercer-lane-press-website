@@ -28,9 +28,9 @@ const measurementId = 'G-CK9SW6VRS9';
     };
 
     const loadAnalytics = () => {
+      setGaDisabled(false);
       if (window.__mlpAnalyticsLoaded) return;
       window.__mlpAnalyticsLoaded = true;
-      setGaDisabled(false);
 
       window.dataLayer = window.dataLayer || [];
       window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };

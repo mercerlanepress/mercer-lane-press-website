@@ -131,6 +131,38 @@ export const books: Book[] = [{
   ],
   hubSlug: 'dog-enrichment',
   hubLabel: 'Dog enrichment guides'
+ ,{
+  slug: 'dog-enrichment-for-apartments-and-busy-owners',
+  title: 'Dog Enrichment for Apartments & Busy Owners',
+  subtitle: '60 Low-Cost Indoor Games and Quick Routines for Bored, Restless Dogs in Small Spaces',
+  author: 'Sophie Ardenwood', authorSlug: 'sophie-ardenwood',
+  publisher: 'Mercer Lane Press',
+  description: 'A practical library of 60 short indoor dog enrichment activities for small homes and busy schedules, organized by time, noise, food use, space, and type of engagement, with quick routines, safety checks, and ways to adapt activities to the individual dog.',
+  cover: '/images/books/dog-enrichment-for-apartments-and-busy-owners-front-cover.jpg',
+  coverReady: true,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HKG7BJQ3',
+  intendedReader: 'Dog owners living in apartments or other small homes, and busy owners who want short, repeatable indoor enrichment options that fit limited time, space, noise tolerance, food needs, and ordinary household routines.',
+  problems: [
+    'Choosing an activity that fits the minutes, floor space, noise limits, food use, and interaction available today',
+    'Giving a restless or bored dog something useful to do indoors without turning the home into an exercise course',
+    'Using food, toys, fabric, cardboard, chews, and household objects in ways that match the individual dog and can be stopped or simplified safely'
+  ],
+  topics: [
+    'Quiet scent and search',
+    'Food and forage',
+    'Training and problem solving',
+    'Low-impact movement',
+    'Calm and decompression',
+    'Choice and novelty'
+  ],
+  outcomes: [
+    'A small set of dependable default activities for busy days',
+    'A 60-activity library that can be filtered by time, noise, food, and space',
+    'A repeatable way to watch the dog, adjust one variable, and keep only the activities that work in the home'
+  ],
+  hubSlug: 'dog-enrichment',
+  hubLabel: 'Dog enrichment guides'
+}
 }];
 
 export const featuredBook = books[0];

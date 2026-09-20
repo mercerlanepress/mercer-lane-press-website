@@ -131,7 +131,7 @@ export const books: Book[] = [{
   ],
   hubSlug: 'dog-enrichment',
   hubLabel: 'Dog enrichment guides'
- ,{
+},{
   slug: 'dog-enrichment-for-apartments-and-busy-owners',
   title: 'Dog Enrichment for Apartments & Busy Owners',
   subtitle: '60 Low-Cost Indoor Games and Quick Routines for Bored, Restless Dogs in Small Spaces',
@@ -162,7 +162,6 @@ export const books: Book[] = [{
   ],
   hubSlug: 'dog-enrichment',
   hubLabel: 'Dog enrichment guides'
-}
 }];
 
 export const featuredBook = books[0];

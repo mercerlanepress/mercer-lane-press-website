@@ -138,7 +138,7 @@ export const books: Book[] = [{
   author: 'Sophie Ardenwood', authorSlug: 'sophie-ardenwood',
   publisher: 'Mercer Lane Press',
   description: 'A practical library of 60 short indoor dog enrichment activities for small homes and busy schedules, organized by time, noise, food use, space, and type of engagement, with quick routines, safety checks, and ways to adapt activities to the individual dog.',
-  cover: '/images/books/dog-enrichment-for-apartments-and-busy-owners-front-cover.jpg',
+  cover: '/images/books/Dog_Enrichment_for_Apartments_and_Busy_Owners_Front_Cover.jpg',
   coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0HKG7BJQ3',
   intendedReader: 'Dog owners living in apartments or other small homes, and busy owners who want short, repeatable indoor enrichment options that fit limited time, space, noise tolerance, food needs, and ordinary household routines.',

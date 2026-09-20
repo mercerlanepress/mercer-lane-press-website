@@ -21,6 +21,7 @@ const org = {
   name: 'Mercer Lane Press',
   url: 'https://mercerlanepress.com/'
 };
+const measurementId = 'G-CK9SW6VRS9';
 ---
 <!doctype html>
 <html lang="en-US">
@@ -41,6 +42,31 @@ const org = {
     <meta name="twitter:description" content={description}>
     <meta name="theme-color" content="#10233f">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+    <script is:inline define:vars={{ measurementId }}>
+      (() => {
+        const storageKey = 'mlp-analytics-consent';
+        const savedChoice = localStorage.getItem(storageKey);
+
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+
+        window.gtag('consent', 'default', {
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+          analytics_storage: savedChoice === 'granted' ? 'granted' : 'denied',
+          wait_for_update: 500
+        });
+
+        window.gtag('js', new Date());
+        window.gtag('config', measurementId, {
+          anonymize_ip: true
+        });
+      })();
+    </script>
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-CK9SW6VRS9"></script>
+
     <script type="application/ld+json" set:html={JSON.stringify(org)} />
     {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
   </head>

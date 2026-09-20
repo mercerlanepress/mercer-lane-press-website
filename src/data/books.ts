@@ -100,6 +100,37 @@ export const books: Book[] = [{
   themes: ['identity','relevance','proof','corroboration','access and freshness'],
   hubSlug: 'local-business-ai',
   hubLabel: 'Local business AI visibility guides'
+},{
+  slug: 'busy-dog-better-day',
+  title: 'Busy Dog, Better Day',
+  subtitle: '60 Easy Dog Enrichment Games Using Everyday Things - 5- to 15-Minute Activities for Sniffing, Thinking, Playing & Bonding',
+  author: 'Sophie Ardenwood', authorSlug: 'sophie-ardenwood',
+  publisher: 'Mercer Lane Press',
+  description: 'A repeat-use library of 60 short dog enrichment games built around sniffing, foraging, thinking, low-impact movement, play, and everyday household items, with 5-, 10-, and 15-minute options and safety-focused ways to adjust difficulty.',
+  cover: '/images/books/Busy_Dog_Better_Day_Kindle_Cover.jpg',
+  coverReady: true,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HJ8V8HWZ',
+  intendedReader: 'Dog owners who want practical enrichment ideas that can fit busy days, small spaces, rainy weather, no-food sessions, or ordinary household routines without needing elaborate setups.',
+  problems: [
+    'Choosing an enrichment activity that fits the time, space, food, and preparation available today',
+    'Keeping familiar games useful without constantly buying new puzzle toys or inventing new setups',
+    'Using household materials conservatively and knowing when to simplify, stop, or switch activities'
+  ],
+  topics: [
+    'Sniff & Search',
+    'Food & Foraging',
+    'Thinking Games',
+    'Movement & Coordination',
+    'Training Through Play',
+    'No-Food & Rainy-Day Games'
+  ],
+  outcomes: [
+    'A dependable menu of short enrichment activities',
+    'A simple safety check for everyday materials and setups',
+    'A one-variable method for making activities easier or harder while tracking what the dog actually enjoys'
+  ],
+  hubSlug: 'dog-enrichment',
+  hubLabel: 'Dog enrichment guides'
 }];
 
 export const featuredBook = books[0];

@@ -1,0 +1,36 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+const { entry } = Astro.props;
+const { title, description, published, related } = entry.data;
+const url = new URL('/dog-enrichment/' + entry.id + '/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Article',
+  headline:title,
+  description,
+  datePublished:published.toISOString().slice(0,10),
+  author:{'@type':'Person',name:'Sophie Ardenwood',url:'https://mercerlanepress.com/authors/sophie-ardenwood/'},
+  publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  mainEntityOfPage:url
+};
+---
+<BaseLayout title={title} description={description} type="article" schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Dog Enrichment',href:'/dog-enrichment/'},{name:title}]}/>
+  <article class="article wrap narrow">
+    <header>
+      <p class="eyebrow">DOG ENRICHMENT GUIDE</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="byline">By <a href="/authors/sophie-ardenwood/">Sophie Ardenwood</a> · Published <time datetime={published.toISOString()}>{published.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'})}</time></p>
+    </header>
+    <div class="article-body"><slot /></div>
+    <aside class="book-note">
+      <p class="eyebrow">BUILD YOUR ACTIVITY LIBRARY</p>
+      <h2>60 games for ordinary days</h2>
+      <p><em>Busy Dog, Better Day</em> organizes short enrichment activities by time, preparation, clean-up, space, food, and difficulty, then shows how to make each setup easier or harder.</p>
+      <a class="button" href="/books/busy-dog-better-day/">Explore the book</a>
+    </aside>
+    <nav class="related" aria-label="Related guides"><h2>Related dog enrichment guides</h2><ul>{related.map((slug:string) => <li><a href={'/dog-enrichment/' + slug + '/'}>{slug.replaceAll('-',' ')}</a></li>)}</ul></nav>
+  </article>
+</BaseLayout>

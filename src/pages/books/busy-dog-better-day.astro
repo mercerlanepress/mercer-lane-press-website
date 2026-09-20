@@ -1,0 +1,100 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'busy-dog-better-day')!;
+const guides = (await getCollection('dogEnrichmentGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/sophie-ardenwood/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  image:new URL(book.cover,Astro.site).href,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.cover} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">DOG ENRICHMENT ACTIVITY GUIDE</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/sophie-ardenwood/">Sophie Ardenwood</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/dog-enrichment/">Read free guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>Pick an activity for the day you actually have</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">60 ACTIVITIES</p>
+        <h2>Six practical ways to add variety</h2>
+        <p>The book is designed as a repeat-use activity library rather than a course that must be read from front to back. Each activity uses the same filters for time, preparation, clean-up, space, food, and starting difficulty.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>Sniff & Search</h3><p>Towel searches, room scatters, toy searches, person searches, and other nose-led games that can start visibly and become harder gradually.</p></article>
+        <article class="card"><h3>Food & Foraging</h3><p>Use part of an ordinary meal in simple searches, bowls, towels, trays, and familiar feeding stations without needing to increase the food quantity.</p></article>
+        <article class="card"><h3>Thinking Games</h3><p>Short choices, object relationships, familiar cues, toy names, and small problems where an incorrect response is information rather than a reason for correction.</p></article>
+        <article class="card"><h3>Movement & Coordination</h3><p>Low-impact, walking-pace activities built around stable surfaces, broad turns, clear paths, and deliberate foot placement.</p></article>
+        <article class="card"><h3>Training Through Play</h3><p>Use known cues as a gateway into tug, rolling toys, recall games, mat work, and other short social activities.</p></article>
+        <article class="card"><h3>No-Food & Rainy-Day Games</h3><p>Indoor and food-free options using toys, observation, scent, safe textures, familiar people, and simple household spaces.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">REPEATABLE SYSTEM</p><h2>Offer, observe, adjust, end</h2><p>The Engagement Loop keeps the focus on the individual dog rather than on completing a printed difficulty level.</p></div>
+      <div class="grid-3">
+        <article class="card"><h3>Choose by constraint</h3><p>Use the 5 / 10 / 15 Minute Activity Chooser when time, food, space, weather, preparation, gentle movement, or thinking demand is the main constraint.</p></article>
+        <article class="card"><h3>Change one variable</h3><p>Adjust visibility, distance, number of objects, scent strength, space, delay, choice load, or movement demand one at a time so you can see what changed the experience.</p></article>
+        <article class="card"><h3>Check household materials</h3><p>Run four checks before a DIY setup: size, structure, surface, and swallow risk. Remove the setup if chewing or ingestion replaces the intended activity.</p></article>
+      </div>
+      <div class="notice"><strong>Safety first.</strong> The book is educational and informational and does not replace veterinary diagnosis, treatment, individualized exercise advice, or qualified behavior support. Household-item activities require active supervision, and movement and feeding activities should be adapted to the dog's size, health, age, mobility, temperament, and dietary needs.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">QUICK-USE TOOLS</p><h2>Turn a large activity library into a small dependable menu</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>30-Day Enrichment Challenge</h3><p>A low-pressure sampler that rotates through different activity types while allowing an activity to be repeated instead of forced harder.</p></article>
+        <article class="card"><h3>Trackers and quick references</h3><p>Record what the dog actually engaged with, then use five-minute, no-food, small-space, rainy-day, and gentle-day references to narrow the next choice.</p></article>
+        <article class="card"><h3>Build your own weekly menu</h3><p>Choose default and backup activities for busy days, no-food days, indoor days, sniffing, play, gentle movement, and thinking challenges.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE DOG ENRICHMENT GUIDES</p><h2>Start with one useful problem</h2></div>
+      <div class="grid-3">{guides.slice(0,3).map(g => <GuideCard guide={g} base="/dog-enrichment/" label="DOG ENRICHMENT"/>)}</div>
+      <div class="actions"><a class="button button-secondary" href="/dog-enrichment/">Explore all dog enrichment guides</a></div>
+    </div>
+  </section>
+</BaseLayout>

@@ -26,4 +26,9 @@ const reactiveDogWalkingGuides = defineCollection({
   schema: guideSchema
 });
 
-export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides };
+const dogEnrichmentGuides = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/dog-enrichment' }),
+  schema: guideSchema
+});
+
+export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides };

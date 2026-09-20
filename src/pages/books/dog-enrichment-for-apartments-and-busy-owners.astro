@@ -1,0 +1,110 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'dog-enrichment-for-apartments-and-busy-owners')!;
+const guides = (await getCollection('dogEnrichmentGuides')).sort((a,b) => a.data.order - b.data.order);
+const featuredGuideIds = [
+  'quiet-dog-enrichment-apartments',
+  'choose-dog-enrichment-small-spaces',
+  'dog-enrichment-without-overfeeding',
+  'dog-enrichment-strong-chewers-material-eaters'
+];
+const featuredGuides = guides.filter(g => featuredGuideIds.includes(g.id));
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/sophie-ardenwood/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  image:new URL(book.cover,Astro.site).href,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.cover} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">SMALL-SPACE DOG ENRICHMENT GUIDE</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/sophie-ardenwood/">Sophie Ardenwood</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/dog-enrichment/">Read free guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>Enrichment that fits the home and schedule you actually have</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">60 INDOOR ACTIVITIES</p>
+        <h2>Six categories, each designed to start easy</h2>
+        <p>The activity library repeats the same practical fields so owners can compare time, noise, food use, space, safety, and adaptations without relearning the format each time.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>Quiet scent & search</h3><p>Short searches using measured food, familiar toys, rooms, mats, boxes, cups, and household routes, with quiet options for apartment life.</p></article>
+        <article class="card"><h3>Food & forage</h3><p>Use part of the normal ration in trays, bowls, mats, easy food toys, and simple foraging setups while keeping the total feeding plan in view.</p></article>
+        <article class="card"><h3>Training & problem solving</h3><p>Hand targets, object targets, toy names, mat stations, simple choices, shaping, and other short tasks built around clear first successes.</p></article>
+        <article class="card"><h3>Low-impact movement</h3><p>Walking-pace routes, targets, broad turns, controlled body-awareness tasks, and short social movement without making the apartment an endurance course.</p></article>
+        <article class="card"><h3>Calm & decompression</h3><p>Easy searches, settling, chewing, licking, observation, grooming choice, and low-key routines judged by the individual dog's response.</p></article>
+        <article class="card"><h3>Choice & novelty</h3><p>Toy choices, resting-place choices, safe new objects, household sensory changes, route choices, and rotation rather than constant purchasing.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FAST DECISION TOOLS</p><h2>Choose quickly, then adjust from what the dog actually does</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>90-second suitability check</h3><p>Check materials, movement, supervision, the easy first version, and whether the dog can opt out before starting a new activity.</p></article>
+        <article class="card"><h3>Quick selector</h3><p>Narrow the choice by time, noise, food, space, and preference instead of searching for a perfect activity while the dog is already restless.</p></article>
+        <article class="card"><h3>One-variable progression rule</h3><p>Change visibility, distance, number of stations, duration, or reward type one at a time so difficulty remains understandable.</p></article>
+        <article class="card"><h3>Five-minute rescue routine</h3><p>Use one quiet familiar activity, an easy first step, a short two-to-five-minute session, and a clear all-done cue when time is tight.</p></article>
+        <article class="card"><h3>One-week starter plan</h3><p>A modest seven-day menu mixes searches, targeting, choices, food toys, movement, and repeats without making novelty a daily requirement.</p></article>
+        <article class="card"><h3>Three-default method</h3><p>Choose three dependable activities for two weeks: one under five minutes, one food-free, and one quiet supervised option for busy moments.</p></article>
+      </div>
+      <div class="notice"><strong>Safety and scope.</strong> The book provides general educational ideas for everyday canine enrichment. It does not replace appropriate exercise, veterinary care, nutrition advice, rehabilitation, or individualized behavior support. Activities should be stopped or changed if they create fear, frustration, pain, unsafe chewing, guarding, escalating arousal, or another safety concern.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">BUILT FOR REAL CONSTRAINTS</p><h2>Small space does not have to mean complicated equipment</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Quiet and neighbor-aware</h3><p>The library includes many quiet options and avoids relying on repeated jumping, high-speed chasing, tight turns, or deliberate exhaustion indoors.</p></article>
+        <article class="card"><h3>Food and no-food routes</h3><p>Food can come from the normal ration, while toy search, social search, choice, observation, targeting, and controlled movement provide alternatives.</p></article>
+        <article class="card"><h3>Adaptations and troubleshooting</h3><p>Later sections cover puppies, senior dogs, temporary exercise restrictions, food drive, strong chewers, multi-dog homes, sensitive dogs, frustration, arousal, mess, guarding, and prop ingestion.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Start with the apartment constraint that matters today</h2></div>
+      <div class="grid-3">{featuredGuides.map(g => <GuideCard guide={g} base="/dog-enrichment/" label="DOG ENRICHMENT"/>)}</div>
+      <div class="actions"><a class="button button-secondary" href="/dog-enrichment/">Explore all dog enrichment guides</a></div>
+    </div>
+  </section>
+</BaseLayout>

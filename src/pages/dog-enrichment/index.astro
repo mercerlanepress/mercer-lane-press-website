@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('dogEnrichmentGuides')).sort((a,b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Dog Enrichment Guides" description="Practical dog enrichment guides for short sniffing, searching, thinking, play, no-food, indoor, and household-item activities with simple safety and difficulty checks.">
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Dog Enrichment'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">DOG ENRICHMENT HUB</p>
+    <h1>Dog Enrichment</h1>
+    <p class="lede">Choose an activity that fits today's time, space, food, energy, and materials, then adjust it to the dog in front of you.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><h2>A simple loop for repeatable enrichment</h2><p>You do not need a new puzzle every day. A familiar activity can stay useful when the first round is easy, the dog is observed closely, and only one variable changes at a time.</p></div>
+      <div class="hub-steps">
+        <article><h3>Offer</h3><p>Set up one clear opportunity and let the dog notice it. Make the first success easier than you think it needs to be.</p></article>
+        <article><h3>Observe</h3><p>Watch how the dog solves the problem: steady sniffing, deliberate investigation, willingness to return, and the ability to pause are more useful than maximum excitement.</p></article>
+        <article><h3>Adjust</h3><p>If the dog stalls or becomes frantic, simplify one variable. If the game is solved instantly and the dog wants more, add one small challenge.</p></article>
+        <article><h3>End</h3><p>Finish while the activity is still working, put materials away, and use a short note if it will help you choose the next setup.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">PRACTICAL GUIDES</p><h2>Start with the constraint that matters today</h2></div>
+      <div class="grid-3">{guides.map(g => <GuideCard guide={g} base="/dog-enrichment/" label="DOG ENRICHMENT"/>)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap prose">
+      <h2>Go deeper with 60 activities</h2>
+      <p><a href="/books/busy-dog-better-day/"><em>Busy Dog, Better Day</em></a> brings together 60 activities across sniffing and searching, food and foraging, thinking games, low-impact movement, training through play, and no-food or rainy-day options. It also includes quick-reference lists, a 30-day challenge, trackers, a weekly menu, and a one-week starter plan.</p>
+      <p>The material is educational and informational. Choose activities appropriate to the individual dog's size, health, age, mobility, temperament, and dietary needs, supervise household-item setups actively, and use veterinary or qualified behavior guidance when the situation calls for individualized support.</p>
+      <p>If the main difficulty is barking, lunging, freezing, or hard staring around triggers on walks, use the separate <a href="/reactive-dog-walking/">Reactive Dog Walking hub</a>.</p>
+    </div>
+  </section>
+</BaseLayout>

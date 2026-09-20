@@ -1,4 +1,34 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro'; import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 ---
-<BaseLayout title="Privacy" description="How the Mercer Lane Press website handles information and third-party services."><Breadcrumbs items={[{name:'Home',href:'/'},{name:'Privacy'}]}/><article class="page-head wrap prose"><p class="eyebrow">PRIVACY</p><h1>Privacy</h1><p><strong>Last updated: September 19, 2026</strong></p><p>This page describes the current privacy practices for mercerlanepress.com. It will be updated if the website’s features or data practices change.</p><h2>Information you provide</h2><p>This website currently has no user accounts, contact forms, comments, or newsletter sign-up. If you choose to contact Mercer Lane Press by email, the information you include in that email will be received and used to respond to your enquiry.</p><h2>Cookies and analytics</h2><p>At launch, the site does not set advertising or analytics cookies and does not include advertising trackers or analytics scripts. The hosting provider may process basic technical information—such as an IP address, request time, requested page, and browser details—to deliver and secure the site. Its practices are governed by its own terms and privacy materials.</p><h2>External links</h2><p>The site may link to other websites. Those sites control their own privacy practices. Visiting a retailer or using an email provider is subject to that third party’s policies.</p><h2>Contact</h2><p>For privacy questions or other enquiries, email <a href="mailto:mercerlanepress@gmail.com">mercerlanepress@gmail.com</a>.</p><h2>Changes</h2><p>If analytics, forms, embedded media, or other features are introduced, this page should be revised to explain them before or when they go live.</p></article></BaseLayout>
+<BaseLayout title="Privacy" description="How the Mercer Lane Press website handles information, analytics, and third-party services.">
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Privacy'}]}/>
+  <article class="page-head wrap prose">
+    <p class="eyebrow">PRIVACY</p>
+    <h1>Privacy</h1>
+    <p><strong>Last updated: September 20, 2026</strong></p>
+    <p>This page describes the current privacy practices for mercerlanepress.com. It will be updated if the website’s features or data practices change.</p>
+
+    <h2>Information you provide</h2>
+    <p>This website currently has no user accounts, contact forms, comments, or newsletter sign-up. If you choose to contact Mercer Lane Press by email, the information you include in that email will be received and used to respond to your enquiry.</p>
+
+    <h2>Analytics and cookies</h2>
+    <p>Mercer Lane Press uses Google Analytics 4 to understand how visitors find and use the website. Google Analytics is loaded only after you choose <strong>Accept analytics</strong> in the site’s consent notice.</p>
+    <p>If you consent, Google Analytics may collect information such as pages viewed, referral source, browser and device information, approximate geographic information, and interactions such as scrolling and outbound-link clicks. Google Analytics may set cookies such as <code>_ga</code> and related identifiers. The site does not intentionally send names, email addresses, or manuscript content to Google Analytics.</p>
+    <p>Your analytics preference is stored in your browser so the site can remember your choice. You can reopen the consent notice at any time using <strong>Cookie settings</strong> in the footer and change that choice.</p>
+    <p>Google processes Analytics information under its own privacy terms. You can read <a href="https://policies.google.com/privacy">Google’s Privacy Policy</a>.</p>
+
+    <h2>Hosting and technical information</h2>
+    <p>The hosting provider may process basic technical information—such as an IP address, request time, requested page, and browser details—to deliver and secure the site. Its practices are governed by its own terms and privacy materials.</p>
+
+    <h2>External links</h2>
+    <p>The site may link to other websites, including retailers such as Amazon. Those sites control their own privacy practices. Visiting a retailer or using an email provider is subject to that third party’s policies.</p>
+
+    <h2>Contact</h2>
+    <p>For privacy questions or other enquiries, email <a href="mailto:mercerlanepress@gmail.com">mercerlanepress@gmail.com</a>.</p>
+
+    <h2>Changes</h2>
+    <p>If forms, embedded media, advertising services, or other features are introduced, this page will be revised to explain the relevant data practices.</p>
+  </article>
+</BaseLayout>

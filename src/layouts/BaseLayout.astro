@@ -1,9 +1,53 @@
 ---
-import Header from '../components/Header.astro'; import Footer from '../components/Footer.astro'; import '../styles/global.css';
-interface Props { title: string; description: string; image?: string; type?: string; schema?: object | object[] }
-const { title, description, image='/social-card.svg', type='website', schema } = Astro.props;
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import AnalyticsConsent from '../components/AnalyticsConsent.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  type?: string;
+  schema?: object | object[];
+}
+
+const { title, description, image = '/social-card.svg', type = 'website', schema } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const fullTitle = title.includes('Mercer Lane Press') ? title : `${title} | Mercer Lane Press`;
-const org = {'@context':'https://schema.org','@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'};
+const org = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Mercer Lane Press',
+  url: 'https://mercerlanepress.com/'
+};
 ---
-<!doctype html><html lang="en-US"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="generator" content={Astro.generator}><title>{fullTitle}</title><meta name="description" content={description}><link rel="canonical" href={canonical}><meta property="og:type" content={type}><meta property="og:title" content={fullTitle}><meta property="og:description" content={description}><meta property="og:url" content={canonical}><meta property="og:image" content={new URL(image, Astro.site)}><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content={fullTitle}><meta name="twitter:description" content={description}><meta name="theme-color" content="#10233f"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><script type="application/ld+json" set:html={JSON.stringify(org)} />{schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}</head><body><Header/><main id="main-content"><slot /></main><Footer/></body></html>
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content={Astro.generator}>
+    <title>{fullTitle}</title>
+    <meta name="description" content={description}>
+    <link rel="canonical" href={canonical}>
+    <meta property="og:type" content={type}>
+    <meta property="og:title" content={fullTitle}>
+    <meta property="og:description" content={description}>
+    <meta property="og:url" content={canonical}>
+    <meta property="og:image" content={new URL(image, Astro.site)}>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content={fullTitle}>
+    <meta name="twitter:description" content={description}>
+    <meta name="theme-color" content="#10233f">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <script type="application/ld+json" set:html={JSON.stringify(org)} />
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+  </head>
+  <body>
+    <Header/>
+    <main id="main-content"><slot /></main>
+    <Footer/>
+    <AnalyticsConsent/>
+  </body>
+</html>

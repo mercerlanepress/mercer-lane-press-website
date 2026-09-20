@@ -1,0 +1,81 @@
+---
+const measurementId = 'G-CK9SW6VRS9';
+---
+
+<div id="analytics-consent" class="consent-banner" hidden role="dialog" aria-modal="false" aria-labelledby="analytics-consent-title" aria-describedby="analytics-consent-copy">
+  <div class="wrap consent-inner">
+    <div>
+      <strong id="analytics-consent-title">Analytics cookies</strong>
+      <p id="analytics-consent-copy">We use Google Analytics only if you choose to allow it. It helps us understand which pages are useful and how visitors find the site. <a href="/privacy/">Privacy details</a>.</p>
+    </div>
+    <div class="consent-actions">
+      <button type="button" class="button" data-consent-accept>Accept analytics</button>
+      <button type="button" class="button button-secondary consent-reject" data-consent-reject>Reject analytics</button>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ measurementId }}>
+  (() => {
+    const storageKey = 'mlp-analytics-consent';
+    const banner = document.getElementById('analytics-consent');
+    const acceptButton = document.querySelector('[data-consent-accept]');
+    const rejectButton = document.querySelector('[data-consent-reject]');
+    const settingsButtons = document.querySelectorAll('[data-open-cookie-settings]');
+
+    const setGaDisabled = (disabled) => {
+      window['ga-disable-' + measurementId] = disabled;
+    };
+
+    const loadAnalytics = () => {
+      setGaDisabled(false);
+      if (window.__mlpAnalyticsLoaded) return;
+      window.__mlpAnalyticsLoaded = true;
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', measurementId, {
+        anonymize_ip: true
+      });
+
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
+      document.head.appendChild(script);
+    };
+
+    const showBanner = () => {
+      if (banner) banner.hidden = false;
+    };
+
+    const hideBanner = () => {
+      if (banner) banner.hidden = true;
+    };
+
+    const acceptAnalytics = () => {
+      localStorage.setItem(storageKey, 'granted');
+      loadAnalytics();
+      hideBanner();
+    };
+
+    const rejectAnalytics = () => {
+      localStorage.setItem(storageKey, 'denied');
+      setGaDisabled(true);
+      hideBanner();
+    };
+
+    acceptButton?.addEventListener('click', acceptAnalytics);
+    rejectButton?.addEventListener('click', rejectAnalytics);
+    settingsButtons.forEach((button) => button.addEventListener('click', showBanner));
+
+    const savedChoice = localStorage.getItem(storageKey);
+    if (savedChoice === 'granted') {
+      loadAnalytics();
+    } else if (savedChoice === 'denied') {
+      setGaDisabled(true);
+    } else {
+      showBanner();
+    }
+  })();
+</script>

@@ -107,7 +107,7 @@ export const books: Book[] = [{
   author: 'Sophie Ardenwood', authorSlug: 'sophie-ardenwood',
   publisher: 'Mercer Lane Press',
   description: 'A repeat-use library of 60 short dog enrichment games built around sniffing, foraging, thinking, low-impact movement, play, and everyday household items, with 5-, 10-, and 15-minute options and safety-focused ways to adjust difficulty.',
-  cover: '/images/books/busy-dog-better-day-front-cover.jpg',
+  cover: '/images/books/Busy_Dog_Better_Day_Kindle_Cover.jpg',
   coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0HJ8V8HWZ',
   intendedReader: 'Dog owners who want practical enrichment ideas that can fit busy days, small spaces, rainy weather, no-food sessions, or ordinary household routines without needing elaborate setups.',

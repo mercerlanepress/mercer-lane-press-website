@@ -1,0 +1,36 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+const { entry } = Astro.props;
+const { title, description, published, related } = entry.data;
+const url = new URL('/heat-pump-owners/' + entry.id + '/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Article',
+  headline:title,
+  description,
+  datePublished:published.toISOString().slice(0,10),
+  author:{'@type':'Person',name:'Gareth Fenwick',url:'https://mercerlanepress.com/authors/gareth-fenwick/'},
+  publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  mainEntityOfPage:url
+};
+---
+<BaseLayout title={title} description={description} type="article" schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Heat Pump Owners',href:'/heat-pump-owners/'},{name:title}]}/>
+  <article class="article wrap narrow">
+    <header>
+      <p class="eyebrow">UK HEAT PUMP OWNER GUIDE</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="byline">By <a href="/authors/gareth-fenwick/">Gareth Fenwick</a> · Published <time datetime={published.toISOString()}>{published.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'})}</time></p>
+    </header>
+    <div class="article-body"><slot /></div>
+    <aside class="book-note">
+      <p class="eyebrow">THE COMPLETE OWNER SYSTEM</p>
+      <h2>Understand the system before you start changing it</h2>
+      <p><em>The New Heat Pump Owner's Operating Manual</em> brings the controls, comfort checks, weather compensation, hot water, electricity-use investigation, fault recording, and owner-to-installer boundaries into one UK-focused operating method.</p>
+      <a class="button" href="/books/the-new-heat-pump-owners-operating-manual/">Explore the book</a>
+    </aside>
+    <nav class="related" aria-label="Related heat pump owner guides"><h2>Related heat pump owner guides</h2><ul>{related.map((slug:string) => <li><a href={'/heat-pump-owners/' + slug + '/'}>{slug.replaceAll('-',' ')}</a></li>)}</ul></nav>
+  </article>
+</BaseLayout>

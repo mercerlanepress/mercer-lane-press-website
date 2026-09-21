@@ -10,8 +10,9 @@ export const GET: APIRoute = async () => {
   const reactiveDogWalkingGuides = await getCollection('reactiveDogWalkingGuides');
   const dogEnrichmentGuides = await getCollection('dogEnrichmentGuides');
   const heatPumpOwnerGuides = await getCollection('heatPumpOwnerGuides');
+  const powerAutomateGuides = await getCollection('powerAutomateGuides');
   const paths = [
-    '/', '/books/', '/authors/', '/guides/', '/5g-home-internet/', '/local-business-ai/', '/ai-scam-defence/', '/reactive-dog-walking/', '/dog-enrichment/', '/heat-pump-owners/', '/about/', '/contact/', '/privacy/',
+    '/', '/books/', '/authors/', '/guides/', '/5g-home-internet/', '/local-business-ai/', '/ai-scam-defence/', '/reactive-dog-walking/', '/dog-enrichment/', '/heat-pump-owners/', '/power-automate/', '/about/', '/contact/', '/privacy/',
     ...books.map(({ slug }) => '/books/' + slug + '/'),
     ...authors.map(({ slug }) => '/authors/' + slug + '/'),
     ...guides.map(({ id }) => '/5g-home-internet/' + id + '/'),
@@ -19,7 +20,8 @@ export const GET: APIRoute = async () => {
     ...aiScamDefenceGuides.map(({ id }) => '/ai-scam-defence/' + id + '/'),
     ...reactiveDogWalkingGuides.map(({ id }) => '/reactive-dog-walking/' + id + '/'),
     ...dogEnrichmentGuides.map(({ id }) => '/dog-enrichment/' + id + '/'),
-    ...heatPumpOwnerGuides.map(({ id }) => '/heat-pump-owners/' + id + '/')
+    ...heatPumpOwnerGuides.map(({ id }) => '/heat-pump-owners/' + id + '/'),
+    ...powerAutomateGuides.map(({ id }) => '/power-automate/' + id + '/')
   ];
   const body = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + paths.map(path => '\n  <url><loc>https://mercerlanepress.com' + path + '</loc></url>').join('') + '\n</urlset>\n';
   return new Response(body, { headers: { 'Content-Type': 'application/xml' } });

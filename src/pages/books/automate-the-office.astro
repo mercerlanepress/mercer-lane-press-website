@@ -1,0 +1,87 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'automate-the-office')!;
+const guides = (await getCollection('powerAutomateGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/mercer-lane/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">MICROSOFT POWER AUTOMATE WORKFLOW GUIDE</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/mercer-lane/">Mercer Lane</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/power-automate/">Read free guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>For Microsoft 365 users who need repeatable office work to become reliable workflows</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">30 PRACTICAL WORKFLOWS</p>
+        <h2>The book follows real office work from trigger to maintenance</h2>
+        <p>The examples are organized around seven areas: deciding what to automate; emails, attachments, and files; Forms and SharePoint; approvals and overdue work; Excel automation; Teams, requests, and reporting; and diagnosing automation when it goes wrong.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>Emails, attachments, and files</h3><p>Save Outlook attachments, filter the files you actually want, route them to the correct folder, create folders, rename files, and confirm receipt only after the required work succeeds.</p></article>
+        <article class="card"><h3>Forms and SharePoint</h3><p>Create tracked requests, handle uploaded files, generate readable references, update the correct record, and send confirmation from authoritative process state.</p></article>
+        <article class="card"><h3>Approvals and overdue work</h3><p>Build single and multi-stage approvals, record outcomes, send reminders, and escalate overdue work without sending the same notification forever.</p></article>
+        <article class="card"><h3>Excel automation</h3><p>Process table rows, send personalized emails, transfer records to SharePoint, process uploaded workbooks, prevent duplicate row processing, and build recurring reports.</p></article>
+        <article class="card"><h3>Teams and reporting</h3><p>Notify channels only when something significant happens, route requests through maintained mappings, build a central action tracker, and produce repeatable status and executive-summary workflows.</p></article>
+        <article class="card"><h3>Troubleshooting and maintenance</h3><p>Read run history, distinguish connection from permission problems, diagnose loops, preserve ownership and handover information, and know when a process should stay manual.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">HOW THE METHOD WORKS</p><h2>Build the smallest version, then prove the business result</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Start with a controlled test flow</h3><p>Create an instant flow with a manual trigger and one simple action, then inspect run history so the basic cycle of trigger, action, evidence, and result is familiar before adding complexity.</p></article>
+        <article class="card"><h3>Design the second run</h3><p>A first successful run is not enough. Decide what should happen if the same event arrives twice, if an earlier action succeeded before a later action failed, or if the flow is rerun.</p></article>
+        <article class="card"><h3>Separate facts from interpretation</h3><p>Use deterministic source data for counts, status, identity, and routing. Where judgement or generated narrative is involved, keep the source facts visible and preserve human review where it matters.</p></article>
+      </div>
+      <div class="notice"><strong>Scope.</strong> The book focuses on everyday Microsoft 365 office work involving Outlook, Excel, Microsoft Forms, SharePoint, Teams, approvals, reminders, and reporting. It does not try to cover Power Automate Desktop/RPA, PL-500 certification, advanced Dataverse architecture, custom connectors, or unattended desktop automation.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Use the web guides for focused build and troubleshooting questions</h2></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/power-automate/" label="POWER AUTOMATE GUIDE" />)}</div>
+    </div>
+  </section>
+</BaseLayout>

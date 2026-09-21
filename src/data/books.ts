@@ -163,6 +163,40 @@ export const books: Book[] = [{
   hubSlug: 'dog-enrichment',
   hubLabel: 'Dog enrichment guides'
 },{
+  slug: 'cooperative-care-for-dog-owners',
+  title: 'Cooperative Care for Dog Owners',
+  subtitle: 'A Step-by-Step System for Calmer Nail Trims, Grooming, Medication, Handling, and Vet Visits',
+  author: 'Sophie Ardenwood', authorSlug: 'sophie-ardenwood',
+  publisher: 'Mercer Lane Press',
+  description: 'A practical, reward-based guide to preparing dogs for routine handling and care by reading stress early, using predictable start and release behaviors, splitting tasks into small trainable steps, and knowing when pain, urgency, or bite risk requires professional help instead of more home training.',
+  cover: '/images/books/Cooperative_Care_for_Dog_Owners_Front_Cover.jpg',
+  coverReady: true,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HKJ62JRG',
+  intendedReader: 'Dog owners who want nail trims, grooming, medication handling, examinations, and veterinary visits to involve less conflict and more predictable participation, including owners of dogs that pull away, freeze, avoid equipment, or have a difficult handling history.',
+  problems: [
+    'Routine care becoming a struggle because the dog is already worried before the difficult part begins',
+    'Uncertainty about whether stillness is relaxed cooperation, freezing, or another early stress signal',
+    'Clippers, grinders, brushes, medication bottles, rooms, or handling positions becoming predictors of restraint',
+    'Not knowing how to split a care task into steps small enough for the dog to practice comfortably',
+    'Knowing when training should stop because pain, urgent care, severe fear, or bite risk needs veterinary or qualified behavior support'
+  ],
+  topics: [
+    'Green, amber, and red handling signals',
+    'Start-button behaviors and reliable release cues',
+    'Micro-step ladders and one-variable progression',
+    'Paw handling, nail tools, grooming, bathing, and medication preparation',
+    'Veterinary visits, examination handling, groomer handoffs, and context changes',
+    'The 14-day foundation, 30-day procedure plan, session cards, and handling profile'
+  ],
+  outcomes: [
+    'A repeatable observe → choose → split → participate → reinforce → release → review → adjust loop',
+    'A personal handling profile with early stress signals, current skills, and practical safety information',
+    'A structured way to prepare one care task at a time without treating task completion as the only measure of progress',
+    'Clear decision points for pausing home training and involving the veterinary team or qualified behavior support'
+  ],
+  hubSlug: 'cooperative-care',
+  hubLabel: 'Cooperative care for dogs'
+},{
   slug: 'the-new-heat-pump-owners-operating-manual',
   title: "The New Heat Pump Owner's Operating Manual",
   subtitle: "How to Run Your Air-to-Water Heat Pump Comfortably and Efficiently, Understand the Controls and Know When Something Isn't Right",

@@ -1,0 +1,36 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+const { entry } = Astro.props;
+const { title, description, published, related } = entry.data;
+const url = new URL('/cooperative-care/' + entry.id + '/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Article',
+  headline:title,
+  description,
+  datePublished:published.toISOString().slice(0,10),
+  author:{'@type':'Person',name:'Sophie Ardenwood',url:'https://mercerlanepress.com/authors/sophie-ardenwood/'},
+  publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  mainEntityOfPage:url
+};
+---
+<BaseLayout title={title} description={description} type="article" schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Cooperative Care',href:'/cooperative-care/'},{name:title}]}/>
+  <article class="article wrap narrow">
+    <header>
+      <p class="eyebrow">COOPERATIVE CARE FOR DOGS</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="byline">By <a href="/authors/sophie-ardenwood/">Sophie Ardenwood</a> · Published <time datetime={published.toISOString()}>{published.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'})}</time></p>
+    </header>
+    <div class="article-body"><slot /></div>
+    <aside class="book-note">
+      <p class="eyebrow">BUILD THE FULL CARE SYSTEM</p>
+      <h2>Turn one difficult procedure into trainable pieces</h2>
+      <p><em>Cooperative Care for Dog Owners</em> brings together stress-reading, start buttons, micro-step training, nail and grooming preparation, medication handling, vet-visit planning, troubleshooting, and repeat-use checklists.</p>
+      <a class="button" href="/books/cooperative-care-for-dog-owners/">Explore the book</a>
+    </aside>
+    <nav class="related" aria-label="Related cooperative care guides"><h2>Related cooperative care guides</h2><ul>{related.map((slug:string) => <li><a href={'/cooperative-care/' + slug + '/'}>{slug.replaceAll('-',' ')}</a></li>)}</ul></nav>
+  </article>
+</BaseLayout>

@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('cooperativeCareGuides')).sort((a,b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Cooperative Care for Dogs" description="Practical guides for calmer dog handling, nail and grooming preparation, start buttons, stress signals, vet visits, and knowing when necessary care takes priority over training.">
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Cooperative Care'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">DOG HANDLING & CARE HUB</p>
+    <h1>Cooperative Care for Dogs</h1>
+    <p class="lede">Make routine care more predictable by noticing stress early, splitting one procedure into smaller pieces, and giving the dog a clear way to start, pause, and recover during training.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><h2>A practical decision pattern for handling and care</h2><p>Cooperative care is not about making a dog endure more. It is about making the next training step smaller while keeping medical need and safety separate from the training plan.</p></div>
+      <div class="hub-steps">
+        <article><h3>Check first</h3><p>Ask whether pain, illness, urgency, or bite risk changes the plan before treating the reaction as a training problem.</p></article>
+        <article><h3>Read early</h3><p>Use the whole dog, not food-taking or stillness alone. Green, amber, and red signals help you decide whether to continue, reduce difficulty, or stop.</p></article>
+        <article><h3>Split the task</h3><p>Identify the first point where behavior changes, name the variable, and make only that variable easier.</p></article>
+        <article><h3>Start and release</h3><p>Use a chin rest, mat, paw presentation, or another comfortable start behavior with a reliable release and a meaningful opt-out.</p></article>
+        <article><h3>Build one layer</h3><p>Train body location, duration, pressure, equipment, sound, person, and environment as separate variables before combining them.</p></article>
+        <article><h3>Escalate appropriately</h3><p>When care cannot wait, or fear and safety exceed an ordinary home-training setup, involve the veterinary team and qualified behavior support as appropriate.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">PRACTICAL GUIDES</p><h2>Start with the part of care that is difficult now</h2></div>
+      <div class="grid-3">{guides.map(g => <GuideCard guide={g} base="/cooperative-care/" label="COOPERATIVE CARE"/>)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap prose">
+      <h2>Go deeper with the full cooperative-care system</h2>
+      <p><a href="/books/cooperative-care-for-dog-owners/"><em>Cooperative Care for Dog Owners</em></a> covers paws and nails, ears, mouth and face handling, brushing, bathing, medication handling, basket-muzzle preparation, veterinary visits, examination positions, groomer coordination, urgent care, troubleshooting, a 14-day foundation, a 30-day procedure plan, session cards, and a personal handling profile.</p>
+      <p>The material is educational and does not replace veterinary care, diagnose disease, prescribe medication, or teach owners to perform veterinary procedures. Pain, illness, sudden behavior change, urgent treatment needs, severe fear, or a credible bite risk can move the situation out of ordinary home training.</p>
+      <p>If the main problem is barking, lunging, freezing, or hard staring around triggers on walks, visit the <a href="/reactive-dog-walking/">Reactive Dog Walking hub</a>. For short at-home sniffing, thinking, and activity ideas, visit the <a href="/dog-enrichment/">Dog Enrichment hub</a>.</p>
+    </div>
+  </section>
+</BaseLayout>

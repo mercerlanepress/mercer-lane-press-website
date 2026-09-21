@@ -33,7 +33,7 @@ const guides = (await getCollection('heatPumpOwnerGuides')).sort((a,b) => a.data
   <section class="section">
     <div class="wrap">
       <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Common questions for new and existing owners</h2></div>
-      <div class="grid-3">{guides.map(guide => <GuideCard entry={guide} base="/heat-pump-owners/" />)}</div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/heat-pump-owners/" label="HEAT PUMP OWNER GUIDE" />)}</div>
     </div>
   </section>
 

@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('powerAutomateGuides')).sort((a,b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Microsoft Power Automate Office Workflow Guides" description="Practical Microsoft Power Automate guides for Outlook, SharePoint, Forms, Excel, Teams, approvals, reminders, troubleshooting, reruns, and maintainable office workflows.">
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Power Automate'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">MICROSOFT 365 OFFICE AUTOMATION</p>
+    <h1>Power Automate Office Workflow Guides</h1>
+    <p class="lede">Build the smallest useful flow, test the business result, diagnose the first failure with run history, and design reruns and handover before other people depend on the automation.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>A repeatable operating sequence</h2>
+        <p>The workflow method used across these guides is simple: choose the task, map the process, build the flow, test it, fix it, and maintain it.</p>
+      </div>
+      <div class="hub-steps">
+        <article><h3>Choose</h3><p>Start with work that is repetitive, predictable, structured enough to define, and safe to recover if something goes wrong.</p></article>
+        <article><h3>Map</h3><p>Write the trigger, inputs, business rules, collection behaviour, success condition, and exception paths before clicking through the designer.</p></article>
+        <article><h3>Build</h3><p>Create the smallest version that proves the process. Add routing, notifications, exception handling, and reporting only after the core path works.</p></article>
+        <article><h3>Test</h3><p>Test the business result, not just the green run. Include normal, negative, missing-data, boundary, duplicate, and rerun cases where they matter.</p></article>
+        <article><h3>Diagnose</h3><p>Use run history from the trigger downward. Find the first failed or wrong action, then inspect its inputs, outputs, conditions, connections, and data.</p></article>
+        <article><h3>Maintain</h3><p>Record ownership, connections, permissions, business rules, failure visibility, test cases, and review dates so the flow remains operable.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Start with a workflow problem you have today</h2></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/power-automate/" label="POWER AUTOMATE GUIDE" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">30 COMPLETE WORKFLOWS</p><h2>From attachment handling to executive summaries</h2></div>
+      <p><em>Automate the Office</em> covers email attachments and files, Forms and SharePoint, approvals and overdue work, Excel automation, Teams notifications, request routing, recurring reporting, troubleshooting, permissions, ownership, handover, and maintenance.</p>
+      <p><a class="button" href="/books/automate-the-office/">Explore Automate the Office</a></p>
+    </div>
+  </section>
+</BaseLayout>

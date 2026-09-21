@@ -1,0 +1,82 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'the-new-heat-pump-owners-operating-manual')!;
+const guides = (await getCollection('heatPumpOwnerGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/gareth-fenwick/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">PRACTICAL UK HEAT PUMP GUIDE</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/gareth-fenwick/">Gareth Fenwick</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/heat-pump-owners/">Read free guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>For owners who want a clear operating method, not an engineering course</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">THE OWNER'S METHOD</p>
+        <h2>Baseline → Observe → Adjust → Check → Escalate</h2>
+        <p>The book starts by preserving the system's current state before any attempt to optimise it. That same five-stage method is then reused for comfort, weather compensation, hot water, electricity use, and faults.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>Understand the controls</h3><p>Separate room targets, schedules, the main controller, flow or leaving-water temperature, weather compensation, hot-water controls, and installer-only settings.</p></article>
+        <article class="card"><h3>Establish normal first</h3><p>Use the first seven days to learn how the house, heating, domestic hot water, outdoor unit, and electricity information normally behave.</p></article>
+        <article class="card"><h3>Fix comfort before efficiency</h3><p>Distinguish whole-house problems from a single room or zone before changing a whole-system setting.</p></article>
+        <article class="card"><h3>Recognise normal strange behaviour</h3><p>Defrost, frost, vapour, condensate, lukewarm radiators, long runs, pauses, and changing sounds are put into a Normal / Watch / Call framework.</p></article>
+        <article class="card"><h3>Investigate electricity with context</h3><p>Separate whole-house use from heat-pump use and compare weather, comfort targets, setback recovery, hot water, auxiliary heat, settings, and other electrical loads.</p></article>
+        <article class="card"><h3>Stop at the right boundary</h3><p>Record fault information, preserve evidence, and escalate when the next step requires protected settings, internal work, repair, or specialist knowledge.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">OWNER'S OPERATING PACK</p><h2>Fifteen working tools for the system you actually own</h2><p>The manual includes records for equipment and baseline settings, a seven-day baseline, schedule audit, controlled-change log, comfort and electricity investigations, fault information, installer handoff, professional changes, seasonal checks, and annual review.</p></div>
+      <div class="notice"><strong>Scope and safety.</strong> This is an owner's guide, not an installation or repair manual. Manufacturer terminology and menu structures vary. Use the documentation for the exact model before changing a system-specific setting, and leave internal electrical, refrigerant, safety-device, repair, and commissioning work to appropriately competent professionals.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Start with the problem you have today</h2></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard entry={guide} base="/heat-pump-owners/" />)}</div>
+    </div>
+  </section>
+</BaseLayout>

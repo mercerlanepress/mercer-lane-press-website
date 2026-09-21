@@ -162,6 +162,40 @@ export const books: Book[] = [{
   ],
   hubSlug: 'dog-enrichment',
   hubLabel: 'Dog enrichment guides'
+},{
+  slug: 'the-new-heat-pump-owners-operating-manual',
+  title: "The New Heat Pump Owner's Operating Manual",
+  subtitle: "How to Run Your Air-to-Water Heat Pump Comfortably and Efficiently, Understand the Controls and Know When Something Isn't Right",
+  author: 'Gareth Fenwick', authorSlug: 'gareth-fenwick',
+  publisher: 'Mercer Lane Press',
+  description: 'A practical UK owner\'s guide to domestic air-to-water heat pumps, covering the controls that matter, normal operating behaviour, comfort problems, electricity use, fault information, and the point where owner troubleshooting should stop.',
+  cover: '/images/books/The_New_Heat_Pump_Owners_Operating_Manual_GARETH_FENWICK_Front_Cover.jpg',
+  coverReady: true,
+  purchaseUrl: 'https://www.amazon.co.uk/dp/B0HF51WQ1F',
+  intendedReader: 'UK householders with a domestic air-to-water heat pump who want to understand what the system is doing, preserve the commissioned starting point, make sensible owner-level adjustments, and know when to involve the installer or another competent professional.',
+  problems: [
+    'Uncertainty about which controls matter and what settings the installer left behind',
+    'A whole house, zone, or individual room that feels too cold or too warm',
+    'Frost, steam, long run times, lukewarm radiators, pauses, or other behaviour that looks unfamiliar',
+    'Electricity use that appears high without enough context to know why',
+    'Warnings, fault codes, or a sudden change where the safe next step is unclear'
+  ],
+  topics: [
+    "The Owner's Method: Baseline, Observe, Adjust, Check, Escalate",
+    'Room targets, schedules, flow temperature, and weather compensation',
+    'Domestic hot water and auxiliary heating',
+    'Whole-house and room-specific comfort troubleshooting',
+    'Defrost and other strange things that may be normal',
+    'Electricity-use investigation, fault recording, and professional handoff'
+  ],
+  outcomes: [
+    'A recorded baseline of the system, controls, and starting settings',
+    'A one-change-at-a-time method for testing ordinary owner adjustments',
+    'A clearer distinction between normal behaviour, something to watch, and a reason to call',
+    'A useful evidence pack for installer or service conversations'
+  ],
+  hubSlug: 'heat-pump-owners',
+  hubLabel: 'Heat pump owner guides'
 }];
 
 export const featuredBook = books[0];

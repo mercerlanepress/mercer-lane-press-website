@@ -162,7 +162,7 @@ export const books: Book[] = [{
   ],
   hubSlug: 'dog-enrichment',
   hubLabel: 'Dog enrichment guides'
-,{
+},{
   slug: 'the-new-heat-pump-owners-operating-manual',
   title: "The New Heat Pump Owner's Operating Manual",
   subtitle: "How to Run Your Air-to-Water Heat Pump Comfortably and Efficiently, Understand the Controls and Know When Something Isn't Right",
@@ -196,7 +196,6 @@ export const books: Book[] = [{
   ],
   hubSlug: 'heat-pump-owners',
   hubLabel: 'Heat pump owner guides'
-}
 }];
 
 export const featuredBook = books[0];

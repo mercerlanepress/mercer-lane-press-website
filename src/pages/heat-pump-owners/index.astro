@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('heatPumpOwnerGuides')).sort((a,b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Heat Pump Owner Guides" description="Practical UK guides for domestic air-to-water heat pump owners: controls, weather compensation, defrost, comfort, electricity use, faults, and knowing when to call the installer.">
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Heat Pump Owners'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">UK AIR-TO-WATER HEAT PUMPS</p>
+    <h1>Heat Pump Owner Guides</h1>
+    <p class="lede">Start with what the system is doing now, make one deliberate owner-level change at a time, and stop when the next useful step belongs with a competent professional.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>The owner's method</h2>
+        <p>The practical sequence used across these guides is <strong>Baseline → Observe → Adjust → Check → Escalate</strong>. It is designed to preserve the commissioned starting point and avoid changing several settings at once.</p>
+      </div>
+      <div class="hub-steps">
+        <article><h3>Baseline</h3><p>Record the equipment, normal targets, schedules, visible settings, and what the house currently does.</p></article>
+        <article><h3>Observe</h3><p>Separate the thing you can actually see from the explanation you think may be causing it.</p></article>
+        <article><h3>Adjust</h3><p>If the exact control is intended for household use, change one thing for a clear reason.</p></article>
+        <article><h3>Check</h3><p>Give the building and system enough time to show whether the change helped.</p></article>
+        <article><h3>Escalate</h3><p>When the next step needs installer-only settings, internal work, repair, or specialist expertise, stop changing things and hand over useful evidence.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Common questions for new and existing owners</h2></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard entry={guide} base="/heat-pump-owners/" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">OWNER BOUNDARIES</p><h2>Know which category the next step belongs in</h2></div>
+      <p><strong>Green:</strong> ordinary owner observation and normal user controls such as reading the display, checking a schedule, recording a fault code, or looking for an obvious external obstruction.</p>
+      <p><strong>Amber:</strong> system-specific settings whose effect depends on the installation and manufacturer guidance, including many weather-compensation, leaving-water-temperature, domestic-hot-water, and backup-heater settings.</p>
+      <p><strong>Red:</strong> internal electrical work, refrigerant work, dismantling, bypassing safety devices, pressure or safety-component changes, and repair or commissioning work.</p>
+      <div class="actions"><a class="button" href="/books/the-new-heat-pump-owners-operating-manual/">Explore the full operating manual</a></div>
+    </div>
+  </section>
+</BaseLayout>

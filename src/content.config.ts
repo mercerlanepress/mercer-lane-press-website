@@ -31,6 +31,11 @@ const dogEnrichmentGuides = defineCollection({
   schema: guideSchema
 });
 
+const cooperativeCareGuides = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/cooperative-care' }),
+  schema: guideSchema
+});
+
 const heatPumpOwnerGuides = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/heat-pump-owners' }),
   schema: guideSchema
@@ -41,4 +46,4 @@ const powerAutomateGuides = defineCollection({
   schema: guideSchema
 });
 
-export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides, heatPumpOwnerGuides, powerAutomateGuides };
+export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides, cooperativeCareGuides, heatPumpOwnerGuides, powerAutomateGuides };

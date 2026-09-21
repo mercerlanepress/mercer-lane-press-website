@@ -196,6 +196,40 @@ export const books: Book[] = [{
   ],
   hubSlug: 'heat-pump-owners',
   hubLabel: 'Heat pump owner guides'
+},{
+  slug: 'automate-the-office',
+  title: 'Automate the Office',
+  subtitle: '30 Practical Workflows Using Microsoft Power Automate for Outlook, Excel, Forms, SharePoint and Teams',
+  author: 'Mercer Lane', authorSlug: 'mercer-lane',
+  publisher: 'Mercer Lane Press',
+  description: 'A practical Microsoft 365 workflow guide built around 30 Power Automate examples for email attachments and files, Forms and SharePoint requests, approvals, overdue work, Excel processing, Teams notifications, reporting, troubleshooting, and maintenance.',
+  cover: '/images/books/Automate_the_Office_Mercer_Lane_Front_Cover.jpg',
+  coverReady: false,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HF5NRXXH',
+  intendedReader: 'Microsoft 365 users who handle repeatable office administration and want to turn defined processes into maintainable Power Automate flows without treating automation as a black box.',
+  problems: [
+    'Repetitive email, attachment, file, request, approval, reminder, spreadsheet, and reporting work',
+    'Flows that run but do not produce the intended business result',
+    'Duplicate processing or unsafe reruns after a partial failure',
+    'Confusion about triggers, actions, dynamic content, conditions, loops, connections, permissions, and run history',
+    'Automations that work for one person but are difficult to hand over or maintain'
+  ],
+  topics: [
+    'Choosing work that is actually worth automating',
+    'Outlook attachments, file handling, folders, and naming',
+    'Forms submissions and SharePoint request tracking',
+    'Approvals, reminders, escalation, and overdue work',
+    'Excel row processing, transfers, duplicate prevention, and reporting',
+    'Teams notifications, run-history diagnosis, permissions, ownership, and maintenance'
+  ],
+  outcomes: [
+    'A repeatable Build → Test → Diagnose approach for new flows',
+    'Safer workflow patterns for reruns, partial failures, stable record identities, and duplicate prevention',
+    'A practical run-history method for finding the first failed action and inspecting its inputs and outputs',
+    'A maintenance and handover checklist for flows other people may depend on'
+  ],
+  hubSlug: 'power-automate',
+  hubLabel: 'Power Automate office workflow guides'
 }];
 
 export const featuredBook = books[0];

@@ -169,8 +169,8 @@ export const books: Book[] = [{
   author: 'Gareth Fenwick', authorSlug: 'gareth-fenwick',
   publisher: 'Mercer Lane Press',
   description: 'A practical UK owner\'s guide to domestic air-to-water heat pumps, covering the controls that matter, normal operating behaviour, comfort problems, electricity use, fault information, and the point where owner troubleshooting should stop.',
-  cover: '/social-card.svg',
-  coverReady: false,
+  cover: '/images/books/The_New_Heat_Pump_Owners_Operating_Manual_GARETH_FENWICK_Front_Cover.jpg',
+  coverReady: true,
   purchaseUrl: 'https://www.amazon.co.uk/dp/B0HF51WQ1F',
   intendedReader: 'UK householders with a domestic air-to-water heat pump who want to understand what the system is doing, preserve the commissioned starting point, make sensible owner-level adjustments, and know when to involve the installer or another competent professional.',
   problems: [

@@ -1,0 +1,37 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+const { entry } = Astro.props;
+const { title, description, published, related } = entry.data;
+const url = new URL('/power-automate/' + entry.id + '/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Article',
+  headline:title,
+  description,
+  datePublished:published.toISOString().slice(0,10),
+  author:{'@type':'Person',name:'Mercer Lane',url:'https://mercerlanepress.com/authors/mercer-lane/'},
+  publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  mainEntityOfPage:url
+};
+---
+<BaseLayout title={title} description={description} type="article" schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Power Automate',href:'/power-automate/'},{name:title}]}/>
+  <article class="article wrap narrow">
+    <header>
+      <p class="eyebrow">MICROSOFT POWER AUTOMATE GUIDE</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="byline">By <a href="/authors/mercer-lane/">Mercer Lane</a> · Published <time datetime={published.toISOString()}>{published.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'})}</time></p>
+    </header>
+    <div class="article-body"><slot /></div>
+    <aside class="book-note">
+      <p class="eyebrow">THE COMPLETE WORKFLOW SYSTEM</p>
+      <h2>Build, test, diagnose, and maintain the whole flow</h2>
+      <p><em>Automate the Office</em> contains 30 practical Power Automate workflows using Outlook, Excel, Forms, SharePoint, Teams, and approvals, followed by troubleshooting, ownership, handover, and maintenance guidance.</p>
+      <a class="button" href="/books/automate-the-office/">Explore the book</a>
+    </aside>
+    <nav class="related" aria-label="Related Power Automate guides"><h2>Related Power Automate guides</h2><ul>{related.map((slug:string) => <li><a href={'/power-automate/' + slug + '/'}>{slug.replaceAll('-',' ')}</a></li>)}</ul></nav>
+    <div class="notice"><strong>Product note.</strong> Microsoft 365, Power Automate, connector capabilities, limits, licensing, and Copilot behaviour can change. Confirm current action names, fields, permissions, and connector behaviour in your own environment before relying on a workflow.</div>
+  </article>
+</BaseLayout>

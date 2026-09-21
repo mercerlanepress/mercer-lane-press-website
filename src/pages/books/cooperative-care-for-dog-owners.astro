@@ -1,0 +1,103 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'cooperative-care-for-dog-owners')!;
+const guides = (await getCollection('cooperativeCareGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/sophie-ardenwood/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  image:new URL(book.cover,Astro.site).href,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.cover} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">DOG HANDLING & COOPERATIVE CARE</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/sophie-ardenwood/">Sophie Ardenwood</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/cooperative-care/">Read free guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>For care tasks that are becoming a struggle</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">THE CORE OPERATING LOOP</p>
+        <h2>Observe → choose one task → split it → invite participation → reinforce → release → review → adjust</h2>
+        <p>The book uses the same logic across different care tasks: identify the first point of concern, change one variable at a time, keep sessions short enough to repeat, and judge progress by comfort, recovery, and voluntary re-engagement rather than by how much care was completed in one session.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>Read green, amber, and red</h3><p>Use body tension, movement, food-taking quality, recovery, and the dog's whole response instead of assuming stillness means cooperation.</p></article>
+        <article class="card"><h3>Build a start button</h3><p>Teach a chin rest, mat station, paw presentation, or another comfortable behavior that gives the training repetition a clear beginning.</p></article>
+        <article class="card"><h3>Make the step smaller</h3><p>Reduce distance, duration, pressure, body location difficulty, sound, motion, person, environment, equipment, or repetition count.</p></article>
+        <article class="card"><h3>Keep release meaningful</h3><p>End repetitions cleanly and respond when the dog opts out instead of turning a voluntary behavior into another restraint system.</p></article>
+        <article class="card"><h3>Separate training from necessary care</h3><p>When medication, injury, infection, severe matting, or another welfare need cannot wait, follow the professional care plan rather than making treatment depend on a perfect training repetition.</p></article>
+        <article class="card"><h3>Transfer the skill carefully</h3><p>Prepare for new people, clinic rooms, grooming equipment, surfaces, transport, and other context changes without assuming a home skill will transfer automatically.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">CARE AREAS</p><h2>One system, applied to the handling dogs need across life</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Paws, clippers, and grinders</h3><p>Build paw handling before tools, then separate tool sight, movement, sound, vibration, toe support, and the first real nail.</p></article>
+        <article class="card"><h3>Ears, mouth, and face</h3><p>Work from lower-intensity proximity and touch toward ear-flap handling, lip lifts, tooth-brushing preparation, and medication-related equipment.</p></article>
+        <article class="card"><h3>Brushing, bathing, and drying</h3><p>Separate equipment, body zones, pressure, duration, footing, water, towels, airflow, and grooming context.</p></article>
+        <article class="card"><h3>Medication handling</h3><p>Identify the route and the actual handling problem, preserve ordinary food trust, and hand unsafe administration problems back to the veterinary team.</p></article>
+        <article class="card"><h3>Vet visits and examinations</h3><p>Prepare transport, arrival, waiting, surfaces, people, positions, touch, and non-invasive examination components as separate layers.</p></article>
+        <article class="card"><h3>Groomer and household handoffs</h3><p>Use concise, factual profiles so other caregivers know the dog's trained start behavior, early stress signals, current skills, and safety history.</p></article>
+      </div>
+      <div class="notice"><strong>Safety and scope.</strong> This book is for education and training support. It does not diagnose disease, replace veterinary care, prescribe medication, or teach owners to perform veterinary procedures. Pain, illness, sudden behavior change, urgent care needs, severe fear, or credible bite risk can require a veterinary or qualified behavior plan instead of continued home training.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">PLANS & REFERENCE TOOLS</p><h2>Built for repeat use, not one perfect session</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>14-day cooperative-care foundation</h3><p>A sequence for observation, stationing, release, start behavior, easy touch, opt-outs, context changes, and first tool exposure.</p></article>
+        <article class="card"><h3>30-day procedure plan</h3><p>A flexible structure for one target procedure at a time, from foundation through body location, tool work, first real repetition, and maintenance.</p></article>
+        <article class="card"><h3>Session card and handling profile</h3><p>Record the exact criterion, stop rules, recovery, preferred setup, communication signals, current skills, and factual safety history.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Start with the next handling problem, not the hardest end point</h2></div>
+      <div class="grid-3">{guides.map(g => <GuideCard guide={g} base="/cooperative-care/" label="COOPERATIVE CARE"/>)}</div>
+      <div class="actions"><a class="button button-secondary" href="/cooperative-care/">Explore the cooperative care hub</a></div>
+    </div>
+  </section>
+</BaseLayout>

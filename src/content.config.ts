@@ -36,4 +36,9 @@ const heatPumpOwnerGuides = defineCollection({
   schema: guideSchema
 });
 
-export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides, heatPumpOwnerGuides };
+const powerAutomateGuides = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/power-automate' }),
+  schema: guideSchema
+});
+
+export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides, heatPumpOwnerGuides, powerAutomateGuides };

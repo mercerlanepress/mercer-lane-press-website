@@ -1,0 +1,11 @@
+---
+import { getCollection, render } from 'astro:content';
+import PowerAutomateArticleLayout from '../../layouts/PowerAutomateArticleLayout.astro';
+
+export async function getStaticPaths(){
+  return (await getCollection('powerAutomateGuides')).map(entry => ({params:{slug:entry.id},props:{entry}}));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<PowerAutomateArticleLayout entry={entry}><Content /></PowerAutomateArticleLayout>

@@ -170,7 +170,7 @@ export const books: Book[] = [{
   publisher: 'Mercer Lane Press',
   description: 'A practical, reward-based guide to preparing dogs for routine handling and care by reading stress early, using predictable start and release behaviors, splitting tasks into small trainable steps, and knowing when pain, urgency, or bite risk requires professional help instead of more home training.',
   cover: '/images/books/Cooperative_Care_for_Dog_Owners_Front_Cover.jpg',
-  coverReady: true,
+  coverReady: false,
   purchaseUrl: 'https://www.amazon.com/dp/B0HKJ62JRG',
   intendedReader: 'Dog owners who want nail trims, grooming, medication handling, examinations, and veterinary visits to involve less conflict and more predictable participation, including owners of dogs that pull away, freeze, avoid equipment, or have a difficult handling history.',
   problems: [

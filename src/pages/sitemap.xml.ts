@@ -10,10 +10,11 @@ export const GET: APIRoute = async () => {
   const reactiveDogWalkingGuides = await getCollection('reactiveDogWalkingGuides');
   const dogEnrichmentGuides = await getCollection('dogEnrichmentGuides');
   const cooperativeCareGuides = await getCollection('cooperativeCareGuides');
+  const rescueDogFirst90DaysGuides = await getCollection('rescueDogFirst90DaysGuides');
   const heatPumpOwnerGuides = await getCollection('heatPumpOwnerGuides');
   const powerAutomateGuides = await getCollection('powerAutomateGuides');
   const paths = [
-    '/', '/books/', '/authors/', '/guides/', '/5g-home-internet/', '/local-business-ai/', '/ai-scam-defence/', '/reactive-dog-walking/', '/dog-enrichment/', '/cooperative-care/', '/heat-pump-owners/', '/power-automate/', '/about/', '/contact/', '/privacy/',
+    '/', '/books/', '/authors/', '/guides/', '/5g-home-internet/', '/local-business-ai/', '/ai-scam-defence/', '/reactive-dog-walking/', '/dog-enrichment/', '/cooperative-care/', '/rescue-dog-first-90-days/', '/heat-pump-owners/', '/power-automate/', '/about/', '/contact/', '/privacy/',
     ...books.map(({ slug }) => '/books/' + slug + '/'),
     ...authors.map(({ slug }) => '/authors/' + slug + '/'),
     ...guides.map(({ id }) => '/5g-home-internet/' + id + '/'),
@@ -22,6 +23,7 @@ export const GET: APIRoute = async () => {
     ...reactiveDogWalkingGuides.map(({ id }) => '/reactive-dog-walking/' + id + '/'),
     ...dogEnrichmentGuides.map(({ id }) => '/dog-enrichment/' + id + '/'),
     ...cooperativeCareGuides.map(({ id }) => '/cooperative-care/' + id + '/'),
+    ...rescueDogFirst90DaysGuides.map(({ id }) => '/rescue-dog-first-90-days/' + id + '/'),
     ...heatPumpOwnerGuides.map(({ id }) => '/heat-pump-owners/' + id + '/'),
     ...powerAutomateGuides.map(({ id }) => '/power-automate/' + id + '/')
   ];

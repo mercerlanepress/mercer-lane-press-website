@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('rescueDogFirst90DaysGuides')).sort((a,b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Rescue Dog First 90 Days Guides" description="Practical guides for the first night and first weeks with a rescue dog: routines, stress and recovery signs, safe introductions, alone time, and deciding when to slow down or get professional help.">
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Rescue Dog First 90 Days'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">RESCUE DOG SETTLING HUB</p>
+    <h1>Rescue Dog First 90 Days</h1>
+    <p class="lede">Use the calendar as a decision aid, not a deadline: stabilize first, observe what the dog can handle, teach useful skills in easy situations, and expand one variable at a time.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><h2>A practical operating pattern for a newly adopted dog</h2><p>The goal is not to complete ninety days of tasks on schedule. It is to make safer, clearer decisions as the dog learns the home and the household learns the dog.</p></div>
+      <div class="hub-steps">
+        <article><h3>Stabilize</h3><p>Reduce avoidable pressure and make safety, sleep, food, toileting, movement, and the basic household routine more predictable.</p></article>
+        <article><h3>Observe</h3><p>Record what the dog approaches, avoids, recovers from, and struggles with instead of relying on labels or guessed backstories.</p></article>
+        <article><h3>Teach</h3><p>Use short reward-based sessions for check-ins, hand targets, mat work, door pauses, turns, drop, leave, and other daily-life skills.</p></article>
+        <article><h3>Expand</h3><p>Add places, people, animals, duration, freedom, or difficulty one important variable at a time, then review recovery before adding more.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">PRACTICAL GUIDES</p><h2>Start with the next decision you need to make</h2></div>
+      <div class="grid-3">{guides.map(g => <GuideCard guide={g} base="/rescue-dog-first-90-days/" label="RESCUE DOG FIRST 90 DAYS"/>)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap prose">
+      <h2>Go deeper with the full 13-week operating plan</h2>
+      <p><a href="/books/the-rescue-dog-first-90-days/"><em>The Rescue Dog First 90 Days</em></a> covers preparation before arrival, day zero, the first week, body language and thresholds, foundation training, walking, alone time, visitors, children, resident dogs and cats, handling, veterinary visits, enrichment, setbacks, real-life skills, service fit, the day-90 review, and quick-reference worksheets.</p>
+      <p>The material is educational and does not replace veterinary diagnosis, treatment, or individualized behavior advice. Sudden behavior change, illness or pain, serious fear, persistent panic, aggression, biting, unsafe pet conflict, or an immediate safety problem can require veterinary and appropriately qualified behavior support.</p>
+      <p>For walking-specific trigger work, visit the <a href="/reactive-dog-walking/">Reactive Dog Walking hub</a>. For nail trims, grooming, medication handling, and vet-care preparation, visit <a href="/cooperative-care/">Cooperative Care for Dogs</a>. For short at-home activities, visit the <a href="/dog-enrichment/">Dog Enrichment hub</a>.</p>
+    </div>
+  </section>
+</BaseLayout>

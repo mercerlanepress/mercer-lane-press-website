@@ -1,0 +1,89 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'the-rescue-dog-first-90-days')!;
+const guides = (await getCollection('rescueDogFirst90DaysGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/sophie-ardenwood/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  image:new URL(book.cover,Astro.site).href,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.cover} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">RESCUE DOG SETTLING GUIDE</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/sophie-ardenwood/">Sophie Ardenwood</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/rescue-dog-first-90-days/">Read free guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>A first-90-days system that follows the dog, not a rigid timetable</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">THE OPERATING SYSTEM</p>
+        <h2>Stabilize, observe, teach, then expand</h2>
+        <p>The book treats ninety days as a useful review horizon rather than a deadline. Progress is based on whether the dog can cope, recover, and function safely enough for the next small step.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>Make the first days deliberately boring</h3><p>Prepare a calm base, secure doors and fences, keep food familiar, protect sleep, and make toilet trips and early outings simple.</p></article>
+        <article class="card"><h3>Read green, amber, and red</h3><p>Use the whole dog, the context, and recovery time to decide whether to continue, reduce pressure, create distance, or stop.</p></article>
+        <article class="card"><h3>Change one important variable</h3><p>When expanding walks, visitors, handling, alone time, or other challenges, change one thing at a time so the dog's response gives useful information.</p></article>
+        <article class="card"><h3>Build six practical foundation skills</h3><p>Practice name/check-in, hand target, mat, an emergency turn, a door pause, and drop/leave where the dog can still learn.</p></article>
+        <article class="card"><h3>Manage introductions before shared freedom</h3><p>Use distance, barriers, parallel movement, protected visual access, separate resources, and planned breaks with children and other animals.</p></article>
+        <article class="card"><h3>Know when the plan has left home-training territory</h3><p>Possible pain or illness, severe fear, persistent panic, biting, serious aggression, or unsafe conflict are reasons to involve veterinary or appropriately qualified behavior support.</p></article>
+      </div>
+      <div class="notice"><strong>Important safety note.</strong> The book provides general education about helping a newly adopted dog settle into a home. It is not veterinary diagnosis or treatment and does not replace advice from a veterinarian or qualified behavior professional.</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">13-WEEK PLAN & QUICK-REFERENCE TOOLS</p><h2>Turn observation into a system the household can use</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Weekly operating plan</h3><p>Move from safety and routine through early-warning signs, household skills, social challenges, walking expansion, handling, alone time, greetings, activity balance, services, recall, and review.</p></article>
+        <article class="card"><h3>Logs and decision sheets</h3><p>Use the seven-day baseline tracker, trigger-threshold-recovery log, visitor protocol, resident-dog and dog-cat checklists, and “what do I do right now?” sheets.</p></article>
+        <article class="card"><h3>One-page rescue dog operating manual</h3><p>Record daily anchors, equipment, early stress signs, rewards, workable walking conditions, visitor and pet procedures, alone-time ability, handling needs, health contacts, and current priorities.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Start with the problem in front of you</h2></div>
+      <div class="grid-3">{guides.map(g => <GuideCard guide={g} base="/rescue-dog-first-90-days/" label="RESCUE DOG FIRST 90 DAYS"/>)}</div>
+      <div class="actions"><a class="button button-secondary" href="/rescue-dog-first-90-days/">Explore the rescue dog first 90 days hub</a></div>
+    </div>
+  </section>
+</BaseLayout>

@@ -7,7 +7,7 @@ import GuideCard from '../../components/GuideCard.astro';
 const guides = (await getCollection('rescueDogFirst90DaysGuides')).sort((a,b) => a.data.order - b.data.order);
 ---
 <BaseLayout title="Rescue Dog First 90 Days Guides" description="Practical guides for the first night and first weeks with a rescue dog: routines, stress and recovery signs, safe introductions, alone time, and deciding when to slow down or get professional help.">
-  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Rescue Dog First 90 Days'}]}/>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Dog Guides',href:'/dog-guides/'},{name:'Rescue Dog First 90 Days'}]}/>
   <header class="page-head wrap">
     <p class="eyebrow">RESCUE DOG SETTLING HUB</p>
     <h1>Rescue Dog First 90 Days</h1>

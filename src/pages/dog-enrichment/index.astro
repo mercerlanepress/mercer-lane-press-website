@@ -7,7 +7,7 @@ import GuideCard from '../../components/GuideCard.astro';
 const guides = (await getCollection('dogEnrichmentGuides')).sort((a,b) => a.data.order - b.data.order);
 ---
 <BaseLayout title="Dog Enrichment Guides" description="Practical dog enrichment guides for short sniffing, searching, thinking, play, no-food, indoor, and household-item activities with simple safety and difficulty checks.">
-  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Dog Enrichment'}]}/>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Dog Guides',href:'/dog-guides/'},{name:'Dog Enrichment'}]}/>
   <header class="page-head wrap">
     <p class="eyebrow">DOG ENRICHMENT HUB</p>
     <h1>Dog Enrichment</h1>
@@ -39,7 +39,8 @@ const guides = (await getCollection('dogEnrichmentGuides')).sort((a,b) => a.data
       <p><a href="/books/dog-enrichment-for-apartments-and-busy-owners/"><em>Dog Enrichment for Apartments & Busy Owners</em></a> is built around small-space constraints: time, noise, food use, floor space, supervision, and the dog's response. It includes 60 indoor activities, a quick selector, short busy-day routines, a one-week starter plan, adaptations, troubleshooting, and quick-reference indexes.</p>
       <p><a href="/books/busy-dog-better-day/"><em>Busy Dog, Better Day</em></a> is a broader repeat-use library of 60 short enrichment games across sniffing, foraging, thinking, movement, play, and no-food or rainy-day options, with safety checks and simple difficulty adjustments.</p>
       <p>The material is educational and informational. Choose activities appropriate to the individual dog's size, health, age, mobility, temperament, and dietary needs, supervise household-item setups actively, and use veterinary or qualified behavior guidance when the situation calls for individualized support.</p>
-      <p>If the main difficulty is barking, lunging, freezing, or hard staring around triggers on walks, use the separate <a href="/reactive-dog-walking/">Reactive Dog Walking hub</a>.</p>\n      <p>If the challenge is nail care, grooming, routine handling, medication preparation, or veterinary visits, use the <a href="/cooperative-care/">Cooperative Care for Dogs hub</a>.</p>
+      <p>If the main difficulty is barking, lunging, freezing, or hard staring around triggers on walks, use the separate <a href="/reactive-dog-walking/">Reactive Dog Walking hub</a>.</p>
+      <p>If the challenge is nail care, grooming, routine handling, medication preparation, or veterinary visits, use the <a href="/cooperative-care/">Cooperative Care for Dogs hub</a>.</p>
     </div>
   </section>
 </BaseLayout>

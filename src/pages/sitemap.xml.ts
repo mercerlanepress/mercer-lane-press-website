@@ -11,7 +11,6 @@ export const GET: APIRoute = async () => {
   const dogEnrichmentGuides = await getCollection('dogEnrichmentGuides');
   const cooperativeCareGuides = await getCollection('cooperativeCareGuides');
   const rescueDogFirst90DaysGuides = await getCollection('rescueDogFirst90DaysGuides');
-  const rescueDogFirst90DaysGuides = await getCollection('rescueDogFirst90DaysGuides');
   const heatPumpOwnerGuides = await getCollection('heatPumpOwnerGuides');
   const powerAutomateGuides = await getCollection('powerAutomateGuides');
   const paths = [

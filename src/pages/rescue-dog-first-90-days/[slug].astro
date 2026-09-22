@@ -1,0 +1,11 @@
+---
+import { getCollection, render } from 'astro:content';
+import RescueDogArticleLayout from '../../layouts/RescueDogArticleLayout.astro';
+
+export async function getStaticPaths(){
+  return (await getCollection('rescueDogFirst90DaysGuides')).map(entry => ({params:{slug:entry.id},props:{entry}}));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<RescueDogArticleLayout entry={entry}><Content /></RescueDogArticleLayout>

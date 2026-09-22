@@ -7,7 +7,7 @@ import GuideCard from '../../components/GuideCard.astro';
 const guides = (await getCollection('cooperativeCareGuides')).sort((a,b) => a.data.order - b.data.order);
 ---
 <BaseLayout title="Cooperative Care for Dogs" description="Practical guides for calmer dog handling, nail and grooming preparation, start buttons, stress signals, vet visits, and knowing when necessary care takes priority over training.">
-  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Cooperative Care'}]}/>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Dog Guides',href:'/dog-guides/'},{name:'Cooperative Care'}]}/>
   <header class="page-head wrap">
     <p class="eyebrow">DOG HANDLING & CARE HUB</p>
     <h1>Cooperative Care for Dogs</h1>

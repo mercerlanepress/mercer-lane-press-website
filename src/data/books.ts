@@ -197,6 +197,40 @@ export const books: Book[] = [{
   hubSlug: 'cooperative-care',
   hubLabel: 'Cooperative care for dogs'
 },{
+  slug: 'the-rescue-dog-first-90-days',
+  title: 'The Rescue Dog First 90 Days',
+  subtitle: 'A Week-by-Week Operating System for Settling In, Building Trust, Solving Early Problems, and Knowing What to Do Next',
+  author: 'Sophie Ardenwood', authorSlug: 'sophie-ardenwood',
+  publisher: 'Mercer Lane Press',
+  description: 'A practical week-by-week operating system for helping a newly adopted rescue dog settle in safely, with low-pressure first days, predictable routines, reward-based foundation skills, careful introductions, gradual expansion, and clear decision points for veterinary or qualified behavior help.',
+  cover: '/images/books/The_Rescue_Dog_First_90_Days_Front_Cover.jpg',
+  coverReady: true,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HKLNZH6F',
+  intendedReader: 'People bringing a rescue or shelter dog into the home who want a structured first-90-days plan without treating a calendar as a deadline, including households managing unknown histories, visitors, children, resident pets, alone time, handling, or early behavior concerns.',
+  problems: [
+    'Trying to do too much before the dog has enough predictability and recovery capacity',
+    'Uncertainty about whether body language and behavior are green, amber, or red and what to change next',
+    'Early difficulties with walking, toileting, visitors, alone time, doors, handling, or household routines',
+    'Introducing a new dog to children, resident dogs, cats, or other small animals without rushing shared freedom',
+    'Knowing when a setback needs an easier plan, a veterinary check, or qualified behavior support'
+  ],
+  topics: [
+    'Stabilize → Observe → Teach → Expand',
+    'Days 0–7: safety, decompression, sleep, food, toileting, and routine',
+    'Body language, thresholds, trigger-and-recovery logging, and one-variable progression',
+    'Reward-based skills for doors, walking, recall, mat work, drop, leave, and emergency turns',
+    'Alone time, visitors, children, resident dogs, cats, handling, veterinary visits, and setbacks',
+    'A 13-week operating plan, quick-reference checklists, and a one-page rescue-dog operating manual'
+  ],
+  outcomes: [
+    'A calmer, more predictable starting routine built around safety and recovery',
+    'A practical record of early stress signs, workable distances, routines, and recovery patterns',
+    'A written operating manual another competent caregiver can follow',
+    'A day-90 review that identifies what to maintain, improve, explore, and escalate for professional support'
+  ],
+  hubSlug: 'rescue-dog-first-90-days',
+  hubLabel: 'Rescue dog first 90 days guides'
+},{
   slug: 'the-new-heat-pump-owners-operating-manual',
   title: "The New Heat Pump Owner's Operating Manual",
   subtitle: "How to Run Your Air-to-Water Heat Pump Comfortably and Efficiently, Understand the Controls and Know When Something Isn't Right",

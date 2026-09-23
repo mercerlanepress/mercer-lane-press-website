@@ -1,0 +1,116 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'landscape-contractor-estimating-and-pricing')!;
+const guides = (await getCollection('landscapeContractorEstimatingGuides')).sort((a,b) => a.data.order - b.data.order);
+const sixPasses = [
+  ['Scope','Define exactly what the customer is buying, including exclusions and visible unknowns.'],
+  ['Quantify','Measure the work and distinguish measured quantities from what must actually be purchased.'],
+  ['Time','Estimate operations in labor-hours and make production assumptions visible.'],
+  ['Cost','Build direct labor, materials, equipment, subcontractors, delivery, disposal, and other job costs.'],
+  ['Price','Recover overhead and profit under a defined pricing model with markup and margin used correctly.'],
+  ['Check & Learn','Review the estimate before submission, then compare estimate with actual performance after the job.']
+];
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/warren-holtby/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">LANDSCAPE CONTRACTOR ESTIMATING</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/warren-holtby/">Warren Holtby</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/landscape-contractor-estimating/">Read free guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>For contractors who need the price to come from the work</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">THE SIX-PASS ESTIMATE</p>
+        <h2>Scope → Quantify → Time → Cost → Price → Check &amp; Learn</h2>
+        <p>The same sequence connects the customer's request to the company-specific estimate and then connects the finished job back to the next estimate.</p>
+      </div>
+      <div class="grid-3">{sixPasses.map(([name,body]) => <article class="card"><h3>{name}</h3><p>{body}</p></article>)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">WHAT THE BOOK COVERS</p><h2>Make the cost base visible before applying the pricing rule</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Scope and quantities</h3><p>Site conditions, included and excluded work, design versus measured versus purchase quantities, material-specific overage, supplier units, landed material cost, and takeoff checks.</p></article>
+        <article class="card"><h3>Labor and equipment</h3><p>Labor-hours, production rates, paid versus productive time, crew bottlenecks, owned and rented equipment, truck and trailer resources, and consistent tool recovery.</p></article>
+        <article class="card"><h3>Other direct costs</h3><p>Delivery, material collection, disposal, travel, mobilization, subcontractor coordination, and other costs that can disappear when only the visible installation is priced.</p></article>
+        <article class="card"><h3>Overhead and pricing</h3><p>Overhead recovery methods, denominator risk, fully loaded and direct-cost pricing architectures, the arithmetic difference between markup and margin, and the annual test.</p></article>
+        <article class="card"><h3>Risk and bid review</h3><p>Quantity, productivity, and scope uncertainty; named treatments for unknowns; a five-minute review of scope, quantity, labor, materials, equipment, other costs, overhead, pricing, and risk.</p></article>
+        <article class="card"><h3>Learning from finished jobs</h3><p>Estimate-versus-actual review, clean variance diagnosis, production-rate libraries, repeatable assemblies, dated price-book entries, and seven categories for investigating an estimate that missed.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">SIXTEEN COMPLETE WORKED ESTIMATES</p><h2>See the same estimating structure applied to different landscape jobs</h2></div>
+      <p>The worked section covers mulch installation, existing-bed renovation, shrub and mixed planting, sod work, a gravel path, a paver patio, landscape edging and fence, drainage installation from an approved design, cleanup and haul-away, shrub replacement, a retaining wall from an approved specification, and larger front-yard and backyard installations.</p>
+      <div class="notice"><strong>Teaching examples, not market rates.</strong> The worked costs, wages, production rates, equipment rates, quantities, durations, markups, margins, and prices are fictional inputs used to demonstrate the estimating method. They should not be copied as current market recommendations.</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FIELD TOOLKIT</p><h2>Reusable records for the estimating cycle</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Build the estimate</h3><p>Job Scope Sheet, Quantity Take-Off Sheet, Crew-Hour Estimate, Equipment Cost Sheet, and Overhead Recovery Worksheet.</p></article>
+        <article class="card"><h3>Review and hand off</h3><p>Bid Review Checklist, Master Estimate Sheet, and Estimate-to-Quote Handoff Checklist.</p></article>
+        <article class="card"><h3>Improve the next one</h3><p>Estimate-versus-Actual Sheet, Production Rate Log, Job Cost History, Price-Book Builder, and the One-Page Six-Pass Estimate.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Use a focused guide when one estimating layer needs work</h2></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/landscape-contractor-estimating/" label="LANDSCAPE ESTIMATING" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">EDUCATIONAL SCOPE</p><h2>Build real estimates from real company information</h2></div>
+      <p>This book is an educational guide to estimating and pricing landscape installation work. It does not provide accounting, tax, legal, engineering, architectural, employment, insurance, or other regulated professional advice. Real estimates should use current company records, supplier quotes, payroll and insurance information, tax information, project requirements, local rules, and qualified professional advice where appropriate.</p>
+    </div>
+  </section>
+</BaseLayout>

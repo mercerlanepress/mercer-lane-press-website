@@ -591,7 +591,7 @@ export const books: Book[] = [{
   author: 'Grant Ellwood', authorSlug: 'grant-ellwood',
   publisher: 'Mercer Lane Press',
   description: 'A practical first-season playbook for volunteer parent coaches running recreational youth soccer teams for ages 6–12, covering team setup, practice planning, parent communication, match-day preparation, playing-time rotations, common disruptions, and the boundary between coaching decisions and league or safety escalation.',
-  cover: '/images/books/So_Youve_Volunteered_to_Coach_Soccer_Front_Cover.jpg',
+  cover: '/images/books/soc - DIGITAL_BOOK_COVER.jpg',
   coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0HFB88CVH',
   intendedReader: 'Volunteer parent coaches taking responsibility for a recreational youth soccer team, primarily players ages 6–12, who need a practical first-season system for organizing practices, parents, match days, participation, and team administration without pretending to be a professional coach.',

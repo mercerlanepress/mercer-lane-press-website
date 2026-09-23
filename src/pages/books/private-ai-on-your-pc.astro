@@ -1,0 +1,87 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'private-ai-on-your-pc')!;
+const guides = (await getCollection('localAiGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/mercer-lane/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">LOCAL AI FOR HOME & WORK</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/mercer-lane/">Mercer Lane</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/local-ai/">Read free guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>For people who want useful local AI without turning the PC into a machine-learning project</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">THE OPERATING PRINCIPLE</p>
+        <h2>FIT → INSTALL → VERIFY → USE → TIGHTEN → REVIEW</h2>
+        <p>The method begins with the machine you already own and treats privacy, capability, speed, and maintenance as separate questions that need separate checks.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>Fit the model to the PC</h3><p>Record RAM, GPU and VRAM, storage, and normal background use. Start with a model class and context that leave the computer responsive rather than choosing the largest file that can technically load.</p></article>
+        <article class="card"><h3>Choose one starting route</h3><p>The main path uses a graphical desktop application, with LM Studio as the worked example, while Jan and Ollama are presented as alternatives for readers with different preferences or integration needs.</p></article>
+        <article class="card"><h3>Verify the privacy boundary</h3><p>Local inference is only one part of the path. Check the active model, app data folder, cloud sync, backups, web tools, plug-ins, remote access, and who else can use the computer.</p></article>
+        <article class="card"><h3>Use bounded everyday tasks</h3><p>Drafting from supplied facts, extraction, rewriting, transformation, and source-only document questions are treated as repeatable jobs with explicit rules for missing information and human review.</p></article>
+        <article class="card"><h3>Troubleshoot in the cheapest order</h3><p>Close unnecessary apps, start a fresh chat, reduce context, adjust GPU offload where relevant, try a smaller quantisation or model, and only then consider hardware.</p></article>
+        <article class="card"><h3>Keep a benchmark and change log</h3><p>Use the same small test pack when comparing models or after significant updates so a working setup changes because it improves real work, not because a new model is fashionable.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">PRIVATE DOCUMENTS</p><h2>Local document chat still needs source discipline</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Know what retrieval does</h3><p>Long files may be split into chunks and only selected passages may be sent to the model for a particular answer. The model may not be considering every page every time.</p></article>
+        <article class="card"><h3>Use source-only instructions</h3><p>Tell the model to answer only from the attached document, preserve numbers and dates, and say NOT FOUND when the source does not support an answer.</p></article>
+        <article class="card"><h3>Test navigation, absence, and conflict</h3><p>Ask for facts you know are present, facts that are absent, and—where appropriate—conflicting values across controlled test documents before trusting the workflow broadly.</p></article>
+      </div>
+      <div class="notice"><strong>Important boundary.</strong> Local AI can reduce one exposure route by keeping model inference on your computer, but it does not automatically make the whole workflow private, secure, offline, or compliant. For confidential, regulated, legally privileged, or safety-critical material, follow the applicable organizational policies and approved systems.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Focused help for setup, privacy, documents, and troubleshooting</h2></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/local-ai/" label="LOCAL AI GUIDE" />)}</div>
+    </div>
+  </section>
+</BaseLayout>

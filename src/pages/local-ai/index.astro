@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('localAiGuides')).sort((a,b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Local AI on Your PC Guides" description="Practical guides to running local AI on a Windows PC: hardware fit, LM Studio setup, privacy boundaries, private documents, troubleshooting, offline checks, and upgrade decisions.">
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Local AI'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">PRIVATE & LOCAL AI</p>
+    <h1>Local AI on Your PC Guides</h1>
+    <p class="lede">Start with the computer you already own, choose a model that fits comfortably, prove the workflow works, and judge privacy by the path your data actually takes.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>A practical local-first sequence</h2>
+        <p>Useful local AI is not about loading the largest model possible. It is about matching the tool to the task, keeping enough memory headroom, and understanding which parts of the workflow are local and which are not.</p>
+      </div>
+      <div class="hub-steps">
+        <article><h3>Fit</h3><p>Record RAM, GPU and dedicated VRAM, free storage, and normal background memory use before choosing a model.</p></article>
+        <article><h3>Install</h3><p>Use one mainstream desktop route first, download one model that fits comfortably, and keep the setup deliberately narrow.</p></article>
+        <article><h3>Verify</h3><p>Confirm the selected model is local, learn where chats and files are stored, and test the intended workflow while disconnected if offline operation matters.</p></article>
+        <article><h3>Use</h3><p>Build repeatable jobs such as drafting, extraction, controlled rewriting, document questions, and format transformation.</p></article>
+        <article><h3>Tighten</h3><p>Reduce unnecessary online features, control sync and backups, separate user accounts where needed, and keep the boundary explainable.</p></article>
+        <article><h3>Review</h3><p>Re-run a small benchmark after meaningful changes and upgrade hardware only when a measured bottleneck justifies it.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Start with the problem you have today</h2></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/local-ai/" label="LOCAL AI GUIDE" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">PLAIN-ENGLISH BOOK</p><h2>Private AI on Your PC</h2></div>
+      <p>The book covers local-versus-cloud decisions, RAM and VRAM, model size and quantisation, LM Studio, Jan and Ollama, private document chat, privacy checks, troubleshooting, small-business use, model provenance, network exposure, personal benchmarking, update strategy, worksheets, prompt templates, and an offline verification test.</p>
+      <p><a class="button" href="/books/private-ai-on-your-pc/">Explore Private AI on Your PC</a></p>
+    </div>
+  </section>
+</BaseLayout>

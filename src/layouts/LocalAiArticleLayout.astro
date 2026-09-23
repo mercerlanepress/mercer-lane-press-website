@@ -1,0 +1,37 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+const { entry } = Astro.props;
+const { title, description, published, related } = entry.data;
+const url = new URL('/local-ai/' + entry.id + '/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Article',
+  headline:title,
+  description,
+  datePublished:published.toISOString().slice(0,10),
+  author:{'@type':'Person',name:'Mercer Lane',url:'https://mercerlanepress.com/authors/mercer-lane/'},
+  publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  mainEntityOfPage:url
+};
+---
+<BaseLayout title={title} description={description} type="article" schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Local AI',href:'/local-ai/'},{name:title}]}/>
+  <article class="article wrap narrow">
+    <header>
+      <p class="eyebrow">LOCAL AI ON YOUR PC GUIDE</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="byline">By <a href="/authors/mercer-lane/">Mercer Lane</a> · Published <time datetime={published.toISOString()}>{published.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'})}</time></p>
+    </header>
+    <div class="article-body"><slot /></div>
+    <aside class="book-note">
+      <p class="eyebrow">THE COMPLETE LOCAL-AI SYSTEM</p>
+      <h2>Fit the model to the machine, then verify the privacy boundary</h2>
+      <p><em>Private AI on Your PC</em> brings hardware fit, local-model setup, private document workflows, troubleshooting, offline verification, maintenance, benchmarking, and small-business operating rules into one plain-English guide.</p>
+      <a class="button" href="/books/private-ai-on-your-pc/">Explore the book</a>
+    </aside>
+    <nav class="related" aria-label="Related local AI guides"><h2>Related local AI guides</h2><ul>{related.map((slug:string) => <li><a href={'/local-ai/' + slug + '/'}>{slug.replaceAll('-',' ')}</a></li>)}</ul></nav>
+    <div class="notice"><strong>Privacy and product note.</strong> Running model inference locally can reduce how often prompts and documents are sent to remote AI services, but it does not make a computer automatically private, secure, or compliant. App features, backups, sync, web tools, plug-ins, remote access, and software updates can change the boundary. Product interfaces and requirements also change, so check current vendor documentation before relying on a specific control or requirement.</div>
+  </article>
+</BaseLayout>

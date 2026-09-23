@@ -46,9 +46,15 @@ const heatPumpOwnerGuides = defineCollection({
   schema: guideSchema
 });
 
+
+const localAiGuides = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/local-ai' }),
+  schema: guideSchema
+});
+
 const powerAutomateGuides = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/power-automate' }),
   schema: guideSchema
 });
 
-export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides, cooperativeCareGuides, rescueDogFirst90DaysGuides, heatPumpOwnerGuides, powerAutomateGuides };
+export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides, cooperativeCareGuides, rescueDogFirst90DaysGuides, heatPumpOwnerGuides, localAiGuides, powerAutomateGuides };

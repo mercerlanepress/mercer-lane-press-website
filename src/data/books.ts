@@ -306,7 +306,7 @@ export const books: Book[] = [{
   publisher: 'Mercer Lane Press',
   description: 'A plain-English guide to running useful local AI on a Windows PC, choosing models that fit the hardware, understanding what stays local, working with private documents, troubleshooting slow or unstable setups, and deciding when the cloud is still the better tool.',
   cover: '/images/books/Private_AI_on_Your_PC_Front_Cover.jpg',
-  coverReady: false,
+  coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0HK7N2YCJ',
   intendedReader: 'Home users, independent professionals, and small-business readers who want practical local AI for drafting, summarizing, extraction, document questions, and other everyday work while making deliberate choices about privacy, hardware limits, and when cloud AI is more appropriate.',
   problems: [

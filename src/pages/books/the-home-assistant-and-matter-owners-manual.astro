@@ -1,0 +1,134 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'the-home-assistant-and-matter-owners-manual')!;
+const guides = (await getCollection('homeAssistantMatterThreadGuides')).sort((a,b) => a.data.order - b.data.order);
+const operatingLoop = [
+  ['Foundation','Stabilize Home Assistant, the local network, accounts, backups, and the basic recovery path before adding complexity.'],
+  ['Connect','Choose devices by their real control path, then commission one known-good device at a time.'],
+  ['Organise','Use floors, areas, labels, human-readable names, and clear primary ownership so the system stays intelligible.'],
+  ['Automate','Build small rules around household jobs rather than chains of clever events or unnecessary code.'],
+  ['Verify','Check that triggers, conditions, actions, and physical outcomes actually happened instead of assuming a command succeeded.'],
+  ['Maintain','Back up, update, replace devices, review dependencies, and rehearse recovery like any other household system.']
+];
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/lewis-hartfield/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">HOME ASSISTANT · MATTER · THREAD</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/lewis-hartfield/">Lewis Hartfield</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/home-assistant-matter-thread/">Read free guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>For homeowners who want the smart home to become boringly reliable</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">THE OPERATING MODEL</p>
+        <h2>Foundation → Connect → Organise → Automate → Verify → Maintain</h2>
+        <p>The book treats a dependable smart home as an operating system for the household rather than a collection of gadgets. Each new layer is proved before the next one is added.</p>
+      </div>
+      <div class="grid-3">{operatingLoop.map(([name,body]) => <article class="card"><h3>{name}</h3><p>{body}</p></article>)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">DIAGNOSE BY LAYER</p><h2>Separate the physical device from the network, controller, and automation</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Physical device</h3><p>Power, battery, firmware, reset state, sleeping behavior, and the physical function come first.</p></article>
+        <article class="card"><h3>Network transport</h3><p>Wi-Fi, Ethernet, Thread, Zigbee, Z-Wave, Bluetooth, or a vendor bridge provide the path. Matter does not replace this layer.</p></article>
+        <article class="card"><h3>Discovery &amp; addressing</h3><p>Local IP, IPv6, multicast, phone reachability, and network isolation can decide whether a healthy device can be found and commissioned.</p></article>
+        <article class="card"><h3>Integration or controller</h3><p>Home Assistant integrations, Matter controllers, fabrics, and bridges determine how the platform sees and controls the endpoint.</p></article>
+        <article class="card"><h3>Automation &amp; interface</h3><p>Only after manual control is reliable should triggers, conditions, actions, dashboards, and traces become the main suspects.</p></article>
+        <article class="card"><h3>One variable at a time</h3><p>Preserve diagnostics, identify the first uncertain layer, make one change, then verify the result before resetting anything else.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">MATTER &amp; THREAD WITHOUT THE MYTHOLOGY</p><h2>Controller, fabric, Border Router, and transport are different roles</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Matter controller</h3><p>Home Assistant can commission and control Matter devices through its Matter controller path. A controller is not automatically a Thread Border Router.</p></article>
+        <article class="card"><h3>Matter fabric</h3><p>A fabric is the trust and administration relationship between controller and commissioned devices. Multi-admin can place one device on more than one fabric when supported.</p></article>
+        <article class="card"><h3>Thread Border Router</h3><p>A Border Router connects a Thread mesh to the home IP network. Matter-over-Thread needs that route; Matter-over-Wi-Fi does not.</p></article>
+        <article class="card"><h3>Native integration or Matter?</h3><p>The book compares local native integrations, Matter paths, and mature bridges instead of assuming the newest standard always exposes the best feature set.</p></article>
+        <article class="card"><h3>Multiple Thread networks</h3><p>Several Border-Router-capable products do not automatically mean one understandable mesh. Credentials and actual network membership matter.</p></article>
+        <article class="card"><h3>Commission one, then scale</h3><p>The first Matter device is treated as an acceptance test: name it, assign it, prove manual control, restart relevant infrastructure, and live with it before adding a fleet.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">AUTOMATE WITHOUT TURNING THE HOUSE INTO SOFTWARE</p><h2>Detect → Decide → Act → Verify</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Start from a household sentence</h3><p>Describe what should happen in ordinary language before opening the automation editor. If the rule cannot be explained clearly, more logic rarely helps.</p></article>
+        <article class="card"><h3>Keep manual controls useful</h3><p>Wall switches, thermostats, locks, and ordinary physical controls remain part of the system. Good automation should degrade toward a usable ordinary home.</p></article>
+        <article class="card"><h3>Verify where consequences matter</h3><p>For actions that can fail silently, trustworthy device state can confirm the result and trigger an escalation instead of claiming success too early.</p></article>
+        <article class="card"><h3>Treat unavailable as real</h3><p>Consequential rules should decide what missing data means rather than silently converting an unavailable sensor into a convenient assumption.</p></article>
+        <article class="card"><h3>Use traces instead of guessing</h3><p>Ask whether the rule triggered, which condition passed or blocked it, which action ran, and what state the target reported afterwards.</p></article>
+        <article class="card"><h3>Separate household and maintainer views</h3><p>Household members need clear controls and states; the maintainer needs batteries, updates, diagnostics, logs, and fault evidence.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">OPERATE IT LIKE A HOUSEHOLD APPLIANCE</p><h2>Backups, controlled updates, replacement plans, and recovery</h2></div>
+      <p>The maintenance sections cover off-device backups, recovery credentials, change-boundary backups, update checklists, firmware and infrastructure changes, device replacement cards, local-versus-cloud dependencies, privacy and security, and a 30-day reliability build. The worked household patterns apply the same ideas to lighting, climate and energy, leak and door alerts, migration decisions, and failure tests.</p>
+      <div class="notice"><strong>Version-sensitive information.</strong> Home Assistant, Matter, Thread, product firmware, and platform support change quickly. The book prioritizes durable roles and diagnostic methods; for exact current menu paths, supported hardware, compatibility details, or security procedures, use the current official documentation.</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Use the guide that matches the failing layer</h2></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/home-assistant-matter-thread/" label="HOME ASSISTANT · MATTER · THREAD" />)}</div>
+      <div class="actions"><a class="button button-secondary" href="/home-assistant-matter-thread/">Explore the smart-home guide hub</a></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">SAFETY BOUNDARY</p><h2>Automation supplements safety systems; it does not replace them</h2></div>
+      <p>Smart-home devices can affect mains electricity, heating, access, alarms, water, and appliances. Follow manufacturer instructions and applicable electrical and building rules, use qualified professionals where required, preserve independent safety controls, and do not make a hobby automation the sole control for a life-safety function.</p>
+    </div>
+  </section>
+</BaseLayout>

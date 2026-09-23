@@ -513,6 +513,42 @@ export const books: Book[] = [{
   ],
   hubSlug: 'home-assistant-matter-thread',
   hubLabel: 'Home Assistant, Matter & Thread guides'
+},
+{
+  slug: 'break-through-your-genealogy-brick-wall',
+  title: 'Break Through Your Genealogy Brick Wall',
+  subtitle: 'A Step-by-Step Case-Solving System for Missing Ancestors, Conflicting Records, and Family Tree Dead Ends',
+  author: 'Daniel Mercer', authorSlug: 'daniel-mercer',
+  publisher: 'Mercer Lane Press',
+  description: 'A practical case-solving system for difficult family-history research that turns repeated searching into a structured investigation: define one question, verify the evidence, trace provenance, build a timeline, preserve contradictions, expand names and jurisdictions, research associates, test competing hypotheses, correlate the evidence, and record a defensible conclusion.',
+  cover: '/images/books/break-through-your-genealogy-brick-wall-front-cover.jpg',
+  coverReady: false,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HFSBTVC7',
+  intendedReader: 'Family historians who already have a tree, records, or inherited claims but are stuck on a missing ancestor, uncertain parentage, conflicting dates or places, same-name identities, migration gaps, or a record that seems to have disappeared.',
+  problems: [
+    'Repeating broad database searches without knowing why the previous searches failed',
+    'Facts in the family tree that look certain but cannot be traced back to a reliable source',
+    'Conflicting names, ages, birthplaces, parent names, residences, or identities',
+    'Historical boundary changes, record loss, incomplete indexing, or the wrong record custodian',
+    'A target ancestor whose own records do not contain the decisive evidence',
+    'Several plausible explanations with no clear way to decide what to search next'
+  ],
+  topics: [
+    'The 12-stage Brick Wall Case Cycle: DEFINE → VERIFY → TRACE → ORDER → CHALLENGE → EXPAND → LOCATE → CONNECT → HYPOTHESISE → TEST → CORRELATE → CONCLUDE',
+    'Research questions, known-facts ledgers, provenance audits, timelines, and contradiction matrices',
+    'Name variants, indexing errors, same-name identities, and historical jurisdictions',
+    'Associate and family-cluster research using relatives, neighbours, witnesses, sponsors, and other recurring connections',
+    'Competing hypotheses, discriminating searches, negative evidence, and source substitution when the ideal record is missing',
+    'Case conclusions recorded as SOLVED, WORKING CONCLUSION, or OPEN CASE, with remaining uncertainty made explicit'
+  ],
+  outcomes: [
+    'A case file that separates supported facts from assumptions and inherited claims',
+    'A documented research trail that shows what was searched, what failed, and why the next action matters',
+    'Competing explanations tested against evidence instead of a single preferred story',
+    'A conclusion recorded at the strength the surviving evidence actually supports'
+  ],
+  hubSlug: 'genealogy-brick-walls',
+  hubLabel: 'Genealogy brick-wall research guides'
 }
 ];
 

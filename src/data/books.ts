@@ -549,6 +549,40 @@ export const books: Book[] = [{
   ],
   hubSlug: 'genealogy-brick-walls',
   hubLabel: 'Genealogy brick-wall research guides'
+},
+{
+  slug: 'pickleball-doubles-decisions',
+  title: 'Pickleball Doubles Decisions',
+  subtitle: 'Read the Rally, Choose the Shot, Move as a Pair and Repair the Point - A Courtside Strategy Guide for Intermediate Players',
+  author: 'Julian Rooke', authorSlug: 'julian-rooke',
+  publisher: 'Mercer Lane Press',
+  description: 'A practical doubles strategy guide for intermediate pickleball players who already know the basic shots and want a clearer system for reading rally state, choosing the next job, moving with a partner, and repairing points when the normal pattern breaks.',
+  cover: '/images/books/Pickleball_Doubles_Decisions_Front_Cover.jpg',
+  coverReady: false,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HFR2K9Z9',
+  intendedReader: 'Intermediate doubles players around the recreational 3.0-3.5 level who can sustain rallies and produce the basic shots but do not yet make consistently strong doubles decisions, including players who regularly change partners.',
+  problems: [
+    'Knowing which shot serves the team when several technically playable options are available',
+    'Moving forward, holding, resetting, or attacking at the wrong moment because the rally state was misread',
+    'Partners becoming disconnected in transition, leaving the middle unclear, or reacting differently to the same ball',
+    'Recovering when a short return, high third shot, lob, failed speed-up, broken stack, or one-up/one-back formation disrupts the planned pattern'
+  ],
+  topics: [
+    'Advantage, Neutral, and Pressure rally states',
+    'Position → Read → Choose → Move → Reassess',
+    'Serve, return, third-shot, and fifth-shot decisions',
+    'Transition-zone movement, resets, and arriving together',
+    'Dinking, targeting, speed-ups, middle-ball responsibility, and countering',
+    'Partner communication, stacking, opponent patterns, decision cards, and rally repair'
+  ],
+  outcomes: [
+    'A repeatable way to identify what the team needs before choosing a stroke',
+    'More deliberate movement based on shot quality and opponent contact rather than automatic rules',
+    'Clearer partner responsibilities for middle balls, attacks, transition, and disrupted formations',
+    'A courtside reference for diagnosing recurring situations and choosing the next useful action'
+  ],
+  hubSlug: 'pickleball-doubles',
+  hubLabel: 'Pickleball doubles strategy guides'
 }
 ];
 

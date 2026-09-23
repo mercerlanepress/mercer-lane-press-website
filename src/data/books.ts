@@ -370,7 +370,7 @@ export const books: Book[] = [{
   ],
   hubSlug: 'beginner-telescope-observing',
   hubLabel: 'Beginner telescope observing guides'
-
+}
 ];
 
 export const featuredBook = books[0];

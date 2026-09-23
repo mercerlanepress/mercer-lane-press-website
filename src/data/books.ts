@@ -441,6 +441,42 @@ export const books: Book[] = [{
   ],
   hubSlug: 'construction-estimating',
   hubLabel: 'Construction estimating guides'
+},
+{
+  slug: 'landscape-contractor-estimating-and-pricing',
+  title: 'Landscape Contractor Estimating & Pricing',
+  subtitle: 'A Practical System for Labor, Materials, Equipment, Overhead, Markup, Margin, and Profitable Bids',
+  author: 'Warren Holtby', authorSlug: 'warren-holtby',
+  publisher: 'Mercer Lane Press',
+  description: 'A practical landscape-installation estimating system that moves from scope and quantities through labor-hours, materials, equipment, other direct costs, overhead, pricing, bid review, and estimate-versus-actual learning.',
+  cover: '/images/books/Landscape_Contractor_Estimating_and_Pricing_Front_Cover.jpg',
+  coverReady: false,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HGR5L94V',
+  intendedReader: 'Landscape contractors, owner-operators, and estimators who understand the field work but want a repeatable company-specific system for building estimates from scope, quantities, labor-hours, equipment, overhead, and defined pricing rules.',
+  problems: [
+    'A busy schedule that still does not show whether individual jobs are covering their real costs',
+    'Rule-of-thumb pricing that copies another contractor, doubles material cost, or starts with a target price instead of the work required',
+    'Measured quantities that are confused with purchase quantities, waste, pack sizes, delivery, or other landed material costs',
+    'Labor estimated from calendar days instead of operations, labor-hours, production assumptions, and productive capacity',
+    'Owned equipment, travel, disposal, mobilization, and other real job costs disappearing from the estimate',
+    'Markup, margin, overhead recovery, and profit being mixed together or applied to an unclear cost base'
+  ],
+  topics: [
+    'The Six-Pass Estimate: Scope → Quantify → Time → Cost → Price → Check & Learn',
+    'Scope sheets, quantity takeoffs, purchase quantities, landed material cost, and supplier records',
+    'Labor-hours, production rates, productive capacity, crew constraints, and bottom-up labor plans',
+    'Owned and rented equipment, delivery, travel, disposal, mobilization, and other direct costs',
+    'Overhead recovery, markup versus margin, pricing architectures, risk review, and bid checking',
+    'Sixteen worked landscape estimates, estimate-versus-actual review, production-rate libraries, assemblies, price books, and field worksheets'
+  ],
+  outcomes: [
+    'A traceable estimating process built from the company’s own costs, records, supplier information, and production evidence',
+    'Visible assumptions for quantities, labor, equipment, overhead, uncertainty, and pricing instead of hidden rule-of-thumb percentages',
+    'A repeatable pre-bid review that checks scope, units, labor, materials, equipment, other costs, overhead, pricing, and risk',
+    'An estimate-versus-actual learning loop that improves future production rates, assemblies, and price-book entries'
+  ],
+  hubSlug: 'landscape-contractor-estimating',
+  hubLabel: 'Landscape contractor estimating guides'
 }
 ];
 

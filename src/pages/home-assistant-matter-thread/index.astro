@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('homeAssistantMatterThreadGuides')).sort((a,b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Home Assistant, Matter & Thread Guides" description="Practical homeowner guides to Home Assistant, Matter controllers and fabrics, Thread Border Routers, commissioning, local networking, reliable automations, backups, and layered troubleshooting.">
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Home Assistant, Matter & Thread'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">SMART-HOME RELIABILITY</p>
+    <h1>Home Assistant, Matter &amp; Thread Guides</h1>
+    <p class="lede">Start with the role or layer that is actually failing. Keep the physical device, network transport, discovery, controller, and automation separate so one problem does not become five simultaneous resets.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><h2>Five layers before guesswork</h2><p>A Matter or Home Assistant failure becomes easier to reason about when the control path is visible.</p></div>
+      <div class="hub-steps">
+        <article><h3>1 · Device</h3><p>Power, battery, firmware, reset state, sleeping behavior, and the physical function.</p></article>
+        <article><h3>2 · Transport</h3><p>Ethernet, Wi-Fi, Thread, Zigbee, Z-Wave, Bluetooth, or a bridge carries traffic.</p></article>
+        <article><h3>3 · Discovery</h3><p>Local reachability, IPv6, multicast, credentials, and network isolation decide whether devices can find controllers.</p></article>
+        <article><h3>4 · Controller</h3><p>Integrations, Matter fabrics, bridges, and primary ownership determine how the endpoint appears and is controlled.</p></article>
+        <article><h3>5 · Automation</h3><p>Triggers, conditions, actions, traces, dashboards, and notifications come after manual control is dependable.</p></article>
+        <article><h3>Change one layer</h3><p>Preserve evidence, identify the first uncertain layer, make one controlled change, and verify before changing another.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Choose the guide that matches the job</h2><p>The guides below focus on common homeowner decisions: which Matter transport you are buying, what each Thread role does, how to commission and diagnose devices, how to make automations explainable, and how to maintain a recoverable system.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/home-assistant-matter-thread/" label="HOME ASSISTANT · MATTER · THREAD" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">THE FULL BOOK</p><h2>The Home Assistant &amp; Matter Owner's Manual</h2></div>
+      <p>The book develops the method across a dependable Home Assistant foundation, device control paths, Matter controllers and fabrics, Thread networks and Border Routers, commissioning, diagnostic matrices, explainable automations, alerts and dashboards, backups, updates, device replacement, privacy and security, a 30-day reliability build, worked household patterns, migration scenarios, and quick-reference worksheets.</p>
+      <p><a class="button" href="/books/the-home-assistant-and-matter-owners-manual/">Explore the book</a></p>
+      <div class="notice"><strong>Safety and version scope.</strong> Use current official documentation for exact current platform procedures and manufacturer instructions for model-specific installation, firmware, reset, electrical, heating, access, alarm, water, and appliance safety requirements. Automation should not replace required independent life-safety controls.</div>
+    </div>
+  </section>
+</BaseLayout>

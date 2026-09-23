@@ -1,0 +1,11 @@
+---
+import { getCollection, render } from 'astro:content';
+import HomeAssistantMatterThreadArticleLayout from '../../layouts/HomeAssistantMatterThreadArticleLayout.astro';
+
+export async function getStaticPaths(){
+  return (await getCollection('homeAssistantMatterThreadGuides')).map(entry => ({params:{slug:entry.id},props:{entry}}));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<HomeAssistantMatterThreadArticleLayout entry={entry}><Content /></HomeAssistantMatterThreadArticleLayout>

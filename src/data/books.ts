@@ -477,6 +477,42 @@ export const books: Book[] = [{
   ],
   hubSlug: 'landscape-contractor-estimating',
   hubLabel: 'Landscape contractor estimating guides'
+},
+{
+  slug: 'the-home-assistant-and-matter-owners-manual',
+  title: "The Home Assistant & Matter Owner's Manual",
+  subtitle: "A Homeowner’s Guide to Reliable Devices, Thread Networks, Private Automations, and Smart-Home Troubleshooting - Without Becoming a Programmer",
+  author: 'Lewis Hartfield', authorSlug: 'lewis-hartfield',
+  publisher: 'Mercer Lane Press',
+  description: 'A practical homeowner-focused operating manual for building and maintaining a reliable Home Assistant smart home, with Matter and Thread treated as separate layers, local-first control paths, conservative automation design, and structured troubleshooting.',
+  cover: '/images/books/home - DIGITAL_BOOK_COVER.jpg',
+  coverReady: true,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HJMK44DJ',
+  intendedReader: 'Homeowners who want Home Assistant, Matter, Thread, and mixed smart-home ecosystems to work reliably without turning the house into a permanent software project or requiring advanced YAML, MQTT, Node-RED, custom front-end development, or advanced network engineering.',
+  problems: [
+    'Smart-home failures that are difficult to locate because device, network, discovery, controller, and automation problems are treated as one issue',
+    'Confusion between Matter controllers and fabrics, Thread networks and Border Routers, and the different infrastructure required by Matter-over-Wi-Fi and Matter-over-Thread',
+    'Commissioning failures caused by unclear ownership, multiple ecosystems, Thread credentials, local IPv6, multicast, or network isolation',
+    'Automations that become difficult to explain, fight manual control, or assume that sending a command means the physical result happened',
+    'Updates, device replacement, and hardware failures that become risky because backups, recovery steps, and dependencies were not documented first',
+    'Privacy or security changes that accidentally break local discovery and control'
+  ],
+  topics: [
+    'Five-layer smart-home troubleshooting: physical device → network transport → discovery/addressing → integration/controller → automation/interface',
+    'A dependable Home Assistant foundation, simple local networking, device control paths, naming, areas, floors, labels, and a minimum reliable build',
+    'Matter controllers, fabrics, commissioning, multi-admin, feature-parity trade-offs, and Matter-over-Wi-Fi versus Matter-over-Thread',
+    'Thread end devices, routers, Border Routers, credentials, multiple Thread networks, radio coverage, and 2.4 GHz coexistence',
+    'Explainable automations built around Detect → Decide → Act → Verify, manual overrides, failure-safe behavior, traces, dashboards, and useful notifications',
+    'Backups, updates, replacement planning, privacy and security, a 30-day reliability build, worked household patterns, diagnostic matrices, logs, and quick-reference sheets'
+  ],
+  outcomes: [
+    'A smart-home architecture whose important control paths and dependencies can be described without guessing',
+    'A repeatable commissioning and troubleshooting method that changes one layer at a time and preserves evidence before destructive resets',
+    'Automations that remain understandable, keep manual controls useful, and verify consequential actions where trustworthy state is available',
+    'A maintenance routine built around backups, controlled updates, documented replacement paths, recovery rehearsals, and deliberate local-versus-cloud choices'
+  ],
+  hubSlug: 'home-assistant-matter-thread',
+  hubLabel: 'Home Assistant, Matter & Thread guides'
 }
 ];
 

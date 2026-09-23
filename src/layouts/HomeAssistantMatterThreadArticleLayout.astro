@@ -1,0 +1,37 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+const { entry } = Astro.props;
+const { title, description, published, related } = entry.data;
+const url = new URL('/home-assistant-matter-thread/' + entry.id + '/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Article',
+  headline:title,
+  description,
+  datePublished:published.toISOString().slice(0,10),
+  author:{'@type':'Person',name:'Lewis Hartfield',url:'https://mercerlanepress.com/authors/lewis-hartfield/'},
+  publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  mainEntityOfPage:url
+};
+---
+<BaseLayout title={title} description={description} type="article" schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Home Assistant, Matter & Thread',href:'/home-assistant-matter-thread/'},{name:title}]}/>
+  <article class="article wrap narrow">
+    <header>
+      <p class="eyebrow">HOME ASSISTANT · MATTER · THREAD</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="byline">By <a href="/authors/lewis-hartfield/">Lewis Hartfield</a> · Published <time datetime={published.toISOString()}>{published.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'})}</time></p>
+    </header>
+    <div class="article-body"><slot /></div>
+    <aside class="book-note">
+      <p class="eyebrow">THE COMPLETE HOMEOWNER OPERATING MANUAL</p>
+      <h2>Build a smart home you can diagnose, recover, and live with</h2>
+      <p><em>The Home Assistant &amp; Matter Owner's Manual</em> connects Home Assistant foundations, Matter and Thread roles, commissioning, layered troubleshooting, explainable automations, dashboards, alerts, backups, updates, device replacement, privacy, security, and worked household reliability patterns.</p>
+      <a class="button" href="/books/the-home-assistant-and-matter-owners-manual/">Explore the book</a>
+    </aside>
+    <nav class="related" aria-label="Related Home Assistant, Matter and Thread guides"><h2>Related smart-home guides</h2><ul>{related.map((slug:string) => <li><a href={'/home-assistant-matter-thread/' + slug + '/'}>{slug.replaceAll('-',' ')}</a></li>)}</ul></nav>
+    <div class="notice"><strong>Keep version-sensitive details current.</strong> Home Assistant interfaces, Matter and Thread capabilities, firmware, and product support change. Use current official documentation for exact setup screens, supported hardware, security procedures, and model-specific reset or installation instructions.</div>
+  </article>
+</BaseLayout>

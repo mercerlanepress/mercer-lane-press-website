@@ -1,0 +1,99 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'pickleball-doubles-decisions')!;
+const guides = (await getCollection('pickleballDoublesGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/julian-rooke/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">PICKLEBALL DOUBLES STRATEGY</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/julian-rooke/">Julian Rooke</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/pickleball-doubles/">Read free guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>For players who can hit the shots but still lose the decision</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">THE CORE DECISION SYSTEM</p>
+        <h2>See the state first, then choose the job</h2>
+        <p>The book separates tactical decisions from stroke labels. A rally can be in Advantage, Neutral, or Pressure, and the job changes with the state.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>Advantage</h3><p>Use useful position, height, balance, time, or opponent vulnerability without giving the advantage away through impatience.</p></article>
+        <article class="card"><h3>Neutral</h3><p>Maintain an unattackable ball or create something: movement, discomfort, a gap, or a weaker next contact.</p></article>
+        <article class="card"><h3>Pressure</h3><p>Survive, neutralize, and rebuild before trying to dominate the exchange again.</p></article>
+      </div>
+      <div class="section-head">
+        <h2>Position → Read → Choose → Move → Reassess</h2>
+        <p>The Rally Decision Loop starts with all four players and the incoming ball, asks what job the team needs, then makes movement depend on what the shot actually earned. The opponents' next contact starts the loop again.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FROM OPENING BALL TO BROKEN PATTERN</p><h2>A doubles plan for the point you actually have</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>The first five shots</h3><p>Connect the serve, return, third shot, fourth ball, and fifth shot instead of treating the third-shot drop or drive as an isolated command.</p></article>
+        <article class="card"><h3>Transition with evidence</h3><p>Take the ground your ball earns, stop when the opponent's contact takes time away, reset when pressure demands it, and arrive balanced with your partner.</p></article>
+        <article class="card"><h3>Win the line with purpose</h3><p>Dink to hold, move, jam, or create; test attackability before a speed-up; choose a target; and expect the counter rather than admiring the first attack.</p></article>
+        <article class="card"><h3>Make the middle a team decision</h3><p>Agree a default, let position override theory, call early, and recover after taking a ball that changes the team's shape.</p></article>
+        <article class="card"><h3>Move as a pair</h3><p>Stay connected without blindly copying each other's feet. One player's shot and position change what the other player needs to cover next.</p></article>
+        <article class="card"><h3>Repair the rally</h3><p>Recognize the break, reclassify the state, simplify the next job, stabilize, reconnect, and resume normal strategy only when the rally allows it.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Use one decision at a time</h2><p>These focused guides turn recurring doubles situations into a practical sequence you can review before or after play.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/pickleball-doubles/" label="PICKLEBALL DOUBLES" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">COURTSIDE REFERENCE</p><h2>Decision cards and rally repair for the situations that keep repeating</h2></div>
+      <p>The final reference section is organized around court situations such as a high third-shot drop, one partner reaching the kitchen first, balls at the feet in transition, middle-ball conflicts, repeated pace, lobs, broken stacking, a targeted partner, and uncertainty about whether to attack, reset, or wait.</p>
+      <p>The objective is not to memorize a fixed script. It is to recognize the current state quickly enough to choose a useful next job for both partners.</p>
+      <div class="notice"><strong>Rules and safety.</strong> This is a strategy guide, not an officiating manual or medical advice. Rules-dependent material in the book was checked against the 2026 USA Pickleball Official Rulebook; rules and event regulations can change, so tournament players should consult the current official sources. The book is independent and is not affiliated with, sponsored by, or endorsed by USA Pickleball.</div>
+    </div>
+  </section>
+</BaseLayout>

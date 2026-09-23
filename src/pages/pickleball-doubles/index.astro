@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('pickleballDoublesGuides')).sort((a,b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Pickleball Doubles Strategy Guides" description="Practical pickleball doubles guides for third-shot choices, transition movement, attack timing, middle-ball responsibility, partner positioning, and rally repair.">
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Pickleball Doubles'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">PICKLEBALL DOUBLES</p>
+    <h1>Pickleball Doubles Strategy Guides</h1>
+    <p class="lede">For intermediate players who already know the basic shots and want clearer decisions about what the team should do next.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><h2>Read the rally before choosing the stroke</h2><p>A useful doubles decision starts with the state of the point, the positions of all four players, the quality of the incoming ball, and what both partners will need after contact.</p></div>
+      <div class="hub-steps">
+        <article><h3>Position</h3><p>See where you, your partner, and both opponents are before treating a favorite shot as the answer.</p></article>
+        <article><h3>Read</h3><p>Use height, depth, pace, trajectory, balance, timing, and opponent readiness to judge the ball you actually received.</p></article>
+        <article><h3>Choose</h3><p>Decide the job first: hold, move, buy time, reset, attack, create the next ball, or repair the team shape.</p></article>
+        <article><h3>Move and reassess</h3><p>Let shot quality determine movement, then read the opponent's next contact and run the decision again.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Start with the decision that keeps costing points</h2><p>Each guide isolates one recurring doubles problem and keeps the focus on rally state, team position, and the likely next ball.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/pickleball-doubles/" label="PICKLEBALL DOUBLES" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">FULL COURTSIDE SYSTEM</p><h2>Pickleball Doubles Decisions</h2></div>
+      <p><em>Pickleball Doubles Decisions</em> by Julian Rooke connects opening-ball choices, transition, NVZ play, partner responsibility, opponent patterns, rally repair, and quick-reference decision cards into one doubles framework.</p>
+      <p><a class="button" href="/books/pickleball-doubles-decisions/">Explore the book</a></p>
+      <div class="notice"><strong>Strategy, not officiating.</strong> Rules-dependent material in the book was checked against the 2026 USA Pickleball Official Rulebook. Rules can change, so use current official rules and event regulations for competition.</div>
+    </div>
+  </section>
+</BaseLayout>

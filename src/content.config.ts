@@ -78,9 +78,14 @@ const homeAssistantMatterThreadGuides = defineCollection({
   schema: guideSchema
 });
 
+const genealogyBrickWallGuides = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/genealogy-brick-walls' }),
+  schema: guideSchema
+});
+
 const powerAutomateGuides = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/power-automate' }),
   schema: guideSchema
 });
 
-export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides, cooperativeCareGuides, rescueDogFirst90DaysGuides, heatPumpOwnerGuides, localAiGuides, beginnerTelescopeObservingGuides, deepSkyAstrophotographyGuides, constructionEstimatingGuides, landscapeContractorEstimatingGuides, homeAssistantMatterThreadGuides, powerAutomateGuides };
+export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides, cooperativeCareGuides, rescueDogFirst90DaysGuides, heatPumpOwnerGuides, localAiGuides, beginnerTelescopeObservingGuides, deepSkyAstrophotographyGuides, constructionEstimatingGuides, landscapeContractorEstimatingGuides, homeAssistantMatterThreadGuides, genealogyBrickWallGuides, powerAutomateGuides };

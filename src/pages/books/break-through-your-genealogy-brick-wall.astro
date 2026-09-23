@@ -1,0 +1,116 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'break-through-your-genealogy-brick-wall')!;
+const guides = (await getCollection('genealogyBrickWallGuides')).sort((a,b) => a.data.order - b.data.order);
+const cycle = [
+  ['DEFINE','State one exact research question.'],
+  ['VERIFY','Separate supported facts from assumptions and inherited claims.'],
+  ['TRACE','Identify where each important statement came from and who supplied it.'],
+  ['ORDER','Build a chronological timeline and expose gaps or impossible sequences.'],
+  ['CHALLENGE','Preserve contradictions instead of choosing the version you prefer.'],
+  ['EXPAND','Treat names, ages, birthplaces, and identities as variables.'],
+  ['LOCATE','Reconstruct the historical jurisdiction and record-creation system.'],
+  ['CONNECT','Research relatives, neighbours, witnesses, and other useful associates.'],
+  ['HYPOTHESISE','Create more than one plausible explanation.'],
+  ['TEST','Choose evidence that can distinguish, support, or weaken those explanations.'],
+  ['CORRELATE','Evaluate the evidence together rather than counting records.'],
+  ['CONCLUDE','Record the case as SOLVED, WORKING CONCLUSION, or OPEN CASE.']
+];
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/daniel-mercer/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">GENEALOGY RESEARCH</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/daniel-mercer/">Daniel Mercer</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/genealogy-brick-walls/">Read free guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>For the point where another broad search is no longer enough</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">THE BRICK WALL CASE CYCLE</p>
+        <h2>Twelve stages from a vague dead end to an inspectable research case</h2>
+        <p>The method keeps the same labels from the first diagnostic through the final conclusion so that every search has a reason and every conclusion can be traced back to evidence.</p>
+      </div>
+      <div class="grid-3">{cycle.map(([name,body]) => <article class="card"><h3>{name}</h3><p>{body}</p></article>)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">CASE FILE TOOLS</p><h2>Make uncertainty, contradictions, and next actions visible</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Rebuild the evidence base</h3><p>Use a Brick Wall Question Sheet, Known-Facts Ledger, Provenance Audit, and Evidence Timeline to separate what the evidence actually supports from what the tree merely displays.</p></article>
+        <article class="card"><h3>Find where the case breaks</h3><p>Use a Contradiction Matrix, Name Variant Matrix, and Locality Reconstruction Sheet to preserve disagreements, test identity, and locate the record-creation system that applied at the time.</p></article>
+        <article class="card"><h3>Search sideways</h3><p>Use an Associate Network Map and family reconstruction to investigate siblings, children, neighbours, witnesses, sponsors, migration companions, and other people who may preserve indirect evidence.</p></article>
+        <article class="card"><h3>Turn clues into tests</h3><p>Build competing hypotheses, rank useful next searches, write the predicted evidence before searching, and keep negative results precise enough to matter later.</p></article>
+        <article class="card"><h3>Correlate before concluding</h3><p>Evaluate evidence streams together, resolve conflicts where the surviving evidence allows it, and test whether a competing explanation fits just as well.</p></article>
+        <article class="card"><h3>Record the real status</h3><p>Close the current round as SOLVED, WORKING CONCLUSION, or OPEN CASE, including the remaining uncertainty and the next evidence that could change the decision.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FIVE WORKED PLAYBOOKS</p><h2>See the same method applied to different kinds of brick wall</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>An ancestor vanishes between censuses</h3><p>Narrow the disappearance window, test migration and identity, then change record type instead of repeating the same census search.</p></article>
+        <article class="card"><h3>An immigrant has no identifiable birthplace</h3><p>Use recurring associates and family connections to move from a broad country label toward a locality that can be tested without forcing a conclusion.</p></article>
+        <article class="card"><h3>A woman's maiden name is uncertain</h3><p>Build a surname chronology and ask whether apparently conflicting names describe different stages of the same life.</p></article>
+        <article class="card"><h3>Two same-named people have been merged</h3><p>Separate identity clusters and timelines, then test whether the records can physically belong to one person.</p></article>
+        <article class="card"><h3>Dates, names, and locations all conflict</h3><p>Decompose one large mystery into identity, date, name, place, and relationship questions that can be investigated separately.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Use a focused guide when one part of the case needs rebuilding</h2></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/genealogy-brick-walls/" label="GENEALOGY" />)}</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">RESEARCH LIMITS</p><h2>A method for better reasoning, not a promise that every case can be solved</h2></div>
+      <p>Historical evidence can be incomplete, inaccurate, contradictory, destroyed, never created, or held somewhere unexpected. The book is educational family-history guidance, not legal, citizenship, immigration, tax, medical, or other regulated advice. Research involving living people, private correspondence, parentage, adoption, or DNA requires particular care with privacy, consent, and the rules of the services and jurisdictions involved.</p>
+    </div>
+  </section>
+</BaseLayout>

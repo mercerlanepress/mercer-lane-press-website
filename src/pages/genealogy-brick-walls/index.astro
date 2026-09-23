@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('genealogyBrickWallGuides')).sort((a,b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Genealogy Brick Wall Research Guides" description="Practical genealogy guides for defining research questions, checking provenance, building timelines, preserving contradictions, testing name variants, reconstructing historical jurisdictions, researching associates, and testing competing hypotheses.">
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Genealogy Brick Walls'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">GENEALOGY RESEARCH</p>
+    <h1>Genealogy Brick Wall Research Guides</h1>
+    <p class="lede">When repeated name searches stop producing progress, rebuild the problem as a case: define the question, verify what is actually supported, preserve what does not fit, and choose evidence that can distinguish competing explanations.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Move from searching harder to investigating better</h2>
+        <p>A difficult family-history problem may come from a weak assumption, an indexing error, a boundary change, a merged identity, a missing record series, or decisive evidence preserved in somebody else's records. The useful next step depends on diagnosing which problem you actually have.</p>
+      </div>
+      <div class="hub-steps">
+        <article><h3>Rebuild</h3><p>State one exact question, identify the strongest facts, trace where each claim came from, and put the known events into chronological order.</p></article>
+        <article><h3>Challenge</h3><p>Keep conflicting names, dates, places, and identities visible. Treat precision as something to verify, not proof of reliability.</p></article>
+        <article><h3>Expand</h3><p>Test plausible name variants, historical jurisdictions, record substitutes, relatives, neighbours, witnesses, and other recurring associates.</p></article>
+        <article><h3>Test</h3><p>Write more than one explanation, predict what evidence each would produce, search deliberately, then correlate the results before recording a conclusion.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Start with the part of the case that is currently blocking progress</h2><p>Each guide stands alone, but all six follow the same evidence-first case-solving method used in the book.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/genealogy-brick-walls/" label="GENEALOGY" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">FULL CASE-SOLVING SYSTEM</p><h2>Break Through Your Genealogy Brick Wall</h2></div>
+      <p>The book develops a 12-stage Brick Wall Case Cycle, a thirteen-tool case pack, and five worked playbooks covering disappearance between censuses, immigrant origins, uncertain maiden names, same-name identity problems, and cases where names, dates, and locations conflict.</p>
+      <p><a class="button" href="/books/break-through-your-genealogy-brick-wall/">Explore the book</a></p>
+      <div class="notice"><strong>Evidence can remain incomplete.</strong> A disciplined investigation may end with a working conclusion or a clearly defined open case rather than a forced answer.</div>
+    </div>
+  </section>
+</BaseLayout>

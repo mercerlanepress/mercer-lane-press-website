@@ -88,4 +88,10 @@ const powerAutomateGuides = defineCollection({
   schema: guideSchema
 });
 
-export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides, cooperativeCareGuides, rescueDogFirst90DaysGuides, heatPumpOwnerGuides, localAiGuides, beginnerTelescopeObservingGuides, deepSkyAstrophotographyGuides, constructionEstimatingGuides, landscapeContractorEstimatingGuides, homeAssistantMatterThreadGuides, genealogyBrickWallGuides, powerAutomateGuides };
+
+const pickleballDoublesGuides = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/pickleball-doubles' }),
+  schema: guideSchema
+});
+
+export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides, cooperativeCareGuides, rescueDogFirst90DaysGuides, heatPumpOwnerGuides, localAiGuides, beginnerTelescopeObservingGuides, deepSkyAstrophotographyGuides, constructionEstimatingGuides, landscapeContractorEstimatingGuides, homeAssistantMatterThreadGuides, genealogyBrickWallGuides, powerAutomateGuides, pickleballDoublesGuides };

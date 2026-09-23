@@ -6,4 +6,5 @@ export const authors: Author[] = [
   { slug: 'gareth-fenwick', name: 'Gareth Fenwick', bio: "Gareth Fenwick is the author of The New Heat Pump Owner's Operating Manual, a practical UK guide to understanding and operating domestic air-to-water heat-pump systems." },
   { slug: 'evan-hargreaves', name: 'Evan Hargreaves', bio: 'Evan Hargreaves writes practical astronomy guides for Mercer Lane Press. His books cover beginner visual telescope observing and symptom-to-cause troubleshooting for deep-sky astrophotography systems.' },
   { slug: 'warren-holtby', name: 'Warren Holtby', bio: 'Warren Holtby writes practical estimating guides for Mercer Lane Press. His books cover beginner construction estimating and landscape contractor estimating and pricing.' }
+  { slug: 'lewis-hartfield', name: 'Lewis Hartfield', bio: "Lewis Hartfield is the author of The Home Assistant & Matter Owner's Manual, published by Mercer Lane Press." }
 ];

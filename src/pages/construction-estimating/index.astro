@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('constructionEstimatingGuides')).sort((a,b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Construction Estimating Guides for Your First Jobs" description="Practical beginner construction estimating guides for scope, quantity takeoff, material purchasing, labor hours, subcontract quotes, markup and margin, and pre-bid review.">
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Construction Estimating'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">CONSTRUCTION ESTIMATING</p>
+    <h1>Construction Estimating Guides for Your First Jobs</h1>
+    <p class="lede">Build the estimate in a deliberate order: define the scope, structure the cost record, measure traceable quantities, price current inputs, load the business's chosen cost-recovery method, review the result, submit a defined offer, and learn from what happens.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Make the number traceable before trying to make it precise</h2>
+        <p>A spreadsheet can calculate exactly and still represent an incomplete job. These guides focus on the assumptions, responsibilities, quantities, hours, quotations, and review checks behind the final price.</p>
+      </div>
+      <div class="hub-steps">
+        <article><h3>Scope</h3><p>Define included work, exclusions, items to clarify, work by others, and responsibility at trade and supply/install interfaces before detailed measurement.</p></article>
+        <article><h3>Measure</h3><p>Keep the source, calculation, unit, gross and net quantities, and controlling dimensions visible so takeoff can be checked and revised.</p></article>
+        <article><h3>Price</h3><p>Separate measured quantity from purchasing quantity, build labor from person-hours, and compare subcontract quotations on comparable scope.</p></article>
+        <article><h3>Review</h3><p>Challenge scope, quantities, labor, quotations, commercial calculations, documents, and fragile assumptions before the price leaves the business.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Work through the parts of an estimate that most often hide assumptions</h2><p>Each guide is designed to stand alone while fitting the same scope-to-learning workflow used in the book.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/construction-estimating/" label="CONSTRUCTION ESTIMATING" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">FULL WORKED EXAMPLE</p><h2>Construction Estimating for Your First Jobs</h2></div>
+      <p>The book follows the fictional Oakridge Workshop from project information and drawings through takeoff, purchasing quantities, labor, subcontract quotations, company-level treatment, red-team bid review, a customer-facing proposal, and post-job learning. The project figures are teaching inputs rather than current market prices or recommended rates.</p>
+      <p><a class="button" href="/books/construction-estimating-for-your-first-jobs/">Explore the book</a></p>
+      <div class="notice"><strong>Training example only.</strong> The Oakridge Workshop is fictional and is used to demonstrate estimating methods. It is not a construction design, price guide, or source of recommended rates.</div>
+    </div>
+  </section>
+</BaseLayout>

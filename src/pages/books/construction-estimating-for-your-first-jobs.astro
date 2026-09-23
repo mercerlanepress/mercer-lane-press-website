@@ -1,0 +1,111 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'construction-estimating-for-your-first-jobs')!;
+const guides = (await getCollection('constructionEstimatingGuides')).sort((a,b) => a.data.order - b.data.order);
+const steps = [
+  ['SCOPE','Define what you believe you are pricing and make open questions visible.'],
+  ['STRUCTURE','Build the estimate shell before detailed costs are entered.'],
+  ['MEASURE','Develop quantities that retain their units, calculations, and source documents.'],
+  ['PRICE','Turn quantities and work into material, labor, subcontract, and project-specific cost.'],
+  ['LOAD',"Apply the company's deliberate overhead and commercial treatment without double counting."],
+  ['REVIEW','Look deliberately for omissions, stale inputs, wrong assumptions, and document mismatches.'],
+  ['SUBMIT','Translate the internal estimate into a customer-facing offer with a defined scope.'],
+  ['LEARN','Compare estimate and actual performance where possible and update the system for a justified reason.']
+];
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/warren-holtby/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">CONSTRUCTION ESTIMATING</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/warren-holtby/">Warren Holtby</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/construction-estimating/">Read free guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>For the point where knowing the work is not the same as knowing how to price it</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">THE ESTIMATING SEQUENCE</p>
+        <h2>Scope → Structure → Measure → Price → Load → Review → Submit → Learn</h2>
+        <p>The book keeps the same process visible from the first scope question to the post-job review so that the final number can be traced back to the information and assumptions that created it.</p>
+      </div>
+      <div class="grid-3">{steps.map(([name,body]) => <article class="card"><h3>{name}</h3><p>{body}</p></article>)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">ONE FICTIONAL PROJECT, END TO END</p><h2>The Oakridge Workshop keeps the estimating chain connected</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Drawings and scope</h3><p>A fictional 24 ft × 30 ft workshop provides a consistent training project for scope mapping, control quantities, marked-up takeoff, work packages, and question logs.</p></article>
+        <article class="card"><h3>Takeoff and cost</h3><p>The worked example keeps measured quantities separate from purchasing quantities, builds labor from activities and person-hours, and makes supplier and subcontract sources visible.</p></article>
+        <article class="card"><h3>Bid review and learning</h3><p>The first calculated estimate is deliberately incomplete. A structured review catches omitted trim work and an expired quotation before the commercial calculation is rebuilt, then the example continues into proposal and post-job comparison.</p></article>
+      </div>
+      <div class="notice"><strong>Fictional training inputs.</strong> Oakridge dimensions, quantities, prices, labor hours, productivity assumptions, quotations, overhead allocation, and margin target exist to demonstrate estimating methods. They are not construction specifications, current market prices, national averages, or recommended contractor rates.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">WHAT THE BOOK BUILDS</p><h2>A record another estimator can challenge instead of a total they have to trust</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Scope and estimate shell</h3><p>Included, excluded, clarify, and by-others buckets; question logs; work-package structure; source fields; revision control; and clear unresolved statuses.</p></article>
+        <article class="card"><h3>Quantity and purchasing logic</h3><p>Control quantities, gross and net takeoff, units, calculations, stock lengths, sheets, packs, layout effects, and a visible reason for the difference between measured and purchased quantity.</p></article>
+        <article class="card"><h3>Labor and specialist quotations</h3><p>Activity → crew → time → person-hours → labor cost, plus horizontal subcontract scope comparison, interfaces, validity, exclusions, allowances, and gap checks.</p></article>
+        <article class="card"><h3>Project cost and commercial treatment</h3><p>Materials, labor, subcontract, and job-specific costs remain distinct from company overhead; markup and margin are treated as different calculations with different denominators.</p></article>
+        <article class="card"><h3>Seven-pass bid review</h3><p>Scope, quantities, labor, quotations, commercial math, documents, and sanity are challenged before the estimate becomes a customer-facing offer.</p></article>
+        <article class="card"><h3>Post-job feedback</h3><p>Estimate and actual records are compared by useful work packages, with variances classified before the estimating system is changed.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Use a focused guide when one part of the estimate needs work</h2></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/construction-estimating/" label="CONSTRUCTION ESTIMATING" />)}</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">SCOPE & SAFETY</p><h2>Estimating process, not professional design</h2></div>
+      <p>The book provides educational information about construction estimating processes. It does not provide engineering, architectural, legal, tax, accounting, insurance, electrical, gas, code-compliance, or other licensed professional advice. Real estimates should use current project-specific documents and suitable information from suppliers, subcontractors, company records, regulatory sources, and qualified professionals.</p>
+    </div>
+  </section>
+</BaseLayout>

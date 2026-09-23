@@ -405,6 +405,42 @@ export const books: Book[] = [{
   ],
   hubSlug: 'deep-sky-astrophotography',
   hubLabel: 'Deep-sky astrophotography troubleshooting guides'
+},
+{
+  slug: 'construction-estimating-for-your-first-jobs',
+  title: 'Construction Estimating for Your First Jobs',
+  subtitle: "A Beginner's Worked-Example Guide to Quantity Takeoffs, Labor, Waste, Overhead, Markup, Bid Review, and Avoiding Costly Estimating Mistakes",
+  author: 'Warren Holtby', authorSlug: 'warren-holtby',
+  publisher: 'Mercer Lane Press',
+  description: 'A beginner-focused worked-example guide to construction estimating that follows one fictional workshop from scope and quantity takeoff through material purchasing, labor hours, subcontract quotes, overhead and margin, bid review, proposal, and post-job learning.',
+  cover: '/images/books/con DIGITAL_BOOK_COVER.jpg',
+  coverReady: true,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HG77QFH7',
+  intendedReader: 'Contractors and estimators pricing their first jobs who understand how construction work goes together but want a repeatable process for making scope, quantities, assumptions, labor, quotations, cost recovery, and final bid review visible and traceable.',
+  problems: [
+    'Starting detailed takeoff before the scope and responsibility boundaries are clear',
+    'Mixing measured quantity, purchasing quantity, material price, and unexplained waste assumptions',
+    'Estimating labor without a documented activity, crew, time, and person-hour basis',
+    'Comparing subcontract quotations by headline price before the scopes are genuinely comparable',
+    'Confusing project cost, company overhead, markup, margin, and selling price',
+    'Submitting a price without a deliberate review for omitted work, stale quotations, wrong revisions, and fragile assumptions'
+  ],
+  topics: [
+    'Scope maps, question logs, and estimate structure',
+    'Traceable quantity takeoff and control quantities',
+    'Measured, purchasing, and actual material quantities',
+    'Activity-to-person-hour labor build-up',
+    'Subcontract quote normalization and project-specific costs',
+    'Overhead, markup, margin, red-team bid review, proposal handoff, and post-job learning'
+  ],
+  outcomes: [
+    'A repeatable SCOPE → STRUCTURE → MEASURE → PRICE → LOAD → REVIEW → SUBMIT → LEARN sequence',
+    'An estimate whose important quantities, prices, labor assumptions, and quotations retain a visible source or basis',
+    'Clearer separation between measured and purchasing quantities, project cost and selling price, and markup and margin',
+    'A review-and-learning loop that can turn omissions, expired inputs, and actual job results into process improvements'
+  ],
+  hubSlug: 'construction-estimating',
+  hubLabel: 'Construction estimating guides'
 }
 ];
 

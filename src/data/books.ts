@@ -378,7 +378,7 @@ export const books: Book[] = [{
   publisher: 'Mercer Lane Press',
   description: 'A symptom-to-cause diagnostic manual for deep-sky imagers who need to separate guiding, tracking, focus, plate-solving, calibration, communication, optical, and automation failures using controlled tests instead of speculative setting changes.',
   cover: '/images/books/Deep-Sky_Astrophotography_Troubleshooting_Front_Cover.jpg',
-  coverReady: false,
+  coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0HH9VDK7X',
   intendedReader: 'Astrophotographers who already understand the basic language of deep-sky imaging and want a structured way to make a complete imaging rig work reliably when several different faults can produce the same symptom.',
   problems: [

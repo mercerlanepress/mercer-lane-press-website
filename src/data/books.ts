@@ -557,8 +557,8 @@ export const books: Book[] = [{
   author: 'Julian Rooke', authorSlug: 'julian-rooke',
   publisher: 'Mercer Lane Press',
   description: 'A practical doubles strategy guide for intermediate pickleball players who already know the basic shots and want a clearer system for reading rally state, choosing the next job, moving with a partner, and repairing points when the normal pattern breaks.',
-  cover: '/images/books/Pickleball_Doubles_Decisions_Front_Cover.jpg',
-  coverReady: false,
+  cover: '/images/books/PB - DIGITAL_BOOK_COVER.jpg',
+  coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0HFR2K9Z9',
   intendedReader: 'Intermediate doubles players around the recreational 3.0-3.5 level who can sustain rallies and produce the basic shots but do not yet make consistently strong doubles decisions, including players who regularly change partners.',
   problems: [

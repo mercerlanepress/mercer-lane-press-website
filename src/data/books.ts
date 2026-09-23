@@ -485,8 +485,8 @@ export const books: Book[] = [{
   author: 'Lewis Hartfield', authorSlug: 'lewis-hartfield',
   publisher: 'Mercer Lane Press',
   description: 'A practical homeowner-focused operating manual for building and maintaining a reliable Home Assistant smart home, with Matter and Thread treated as separate layers, local-first control paths, conservative automation design, and structured troubleshooting.',
-  cover: '/images/books/home-assistant-matter-owners-manual-front-cover.jpg',
-  coverReady: false,
+  cover: '/images/books/home - DIGITAL_BOOK_COVER.jpg',
+  coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0HJMK44DJ',
   intendedReader: 'Homeowners who want Home Assistant, Matter, Thread, and mixed smart-home ecosystems to work reliably without turning the house into a permanent software project or requiring advanced YAML, MQTT, Node-RED, custom front-end development, or advanced network engineering.',
   problems: [

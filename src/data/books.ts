@@ -521,8 +521,8 @@ export const books: Book[] = [{
   author: 'Daniel Mercer', authorSlug: 'daniel-mercer',
   publisher: 'Mercer Lane Press',
   description: 'A practical case-solving system for difficult family-history research that turns repeated searching into a structured investigation: define one question, verify the evidence, trace provenance, build a timeline, preserve contradictions, expand names and jurisdictions, research associates, test competing hypotheses, correlate the evidence, and record a defensible conclusion.',
-  cover: '/images/books/break-through-your-genealogy-brick-wall-front-cover.jpg',
-  coverReady: false,
+  cover: '/images/books/gene - DIGITAL_BOOK_COVER.jpg',
+  coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0HFSBTVC7',
   intendedReader: 'Family historians who already have a tree, records, or inherited claims but are stuck on a missing ancestor, uncertain parentage, conflicting dates or places, same-name identities, migration gaps, or a record that seems to have disappeared.',
   problems: [

@@ -298,6 +298,43 @@ export const books: Book[] = [{
   ],
   hubSlug: 'power-automate',
   hubLabel: 'Power Automate office workflow guides'
-}];
+},{
+  slug: 'private-ai-on-your-pc',
+  title: 'Private AI on Your PC',
+  subtitle: 'A Plain-English Guide to Running Useful Local AI at Home or Work Without Sending Every Prompt and Document to the Cloud',
+  author: 'Mercer Lane', authorSlug: 'mercer-lane',
+  publisher: 'Mercer Lane Press',
+  description: 'A plain-English guide to running useful local AI on a Windows PC, choosing models that fit the hardware, understanding what stays local, working with private documents, troubleshooting slow or unstable setups, and deciding when the cloud is still the better tool.',
+  cover: '/images/books/Private_AI_on_Your_PC_Front_Cover.jpg',
+  coverReady: false,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HK7N2YCJ',
+  intendedReader: 'Home users, independent professionals, and small-business readers who want practical local AI for drafting, summarizing, extraction, document questions, and other everyday work while making deliberate choices about privacy, hardware limits, and when cloud AI is more appropriate.',
+  problems: [
+    'Not knowing whether an existing PC has enough RAM, VRAM, and storage for a useful local model',
+    'Confusion about the difference between local inference, offline operation, cloud sync, backups, online tools, and genuine privacy boundaries',
+    'Choosing models that are too large, too slow, or unstable for the computer',
+    'Wanting to work with private documents locally without assuming document chat has read every page perfectly',
+    'Slow answers, crashes, memory pressure, long-chat degradation, and uncertainty about whether a hardware upgrade is actually justified',
+    'Small-business use where local processing still needs clear rules for allowed data, retention, human review, updates, and network exposure'
+  ],
+  topics: [
+    'Local AI versus cloud AI and the privacy boundary',
+    'RAM, VRAM, storage, model size, quantisation, and context',
+    'LM Studio, Jan, and Ollama starting routes',
+    'Private document chat, retrieval, and source-only prompting',
+    'Troubleshooting slow, frozen, and out-of-memory setups',
+    'Offline verification, maintenance, benchmarking, and sensible hardware upgrades'
+  ],
+  outcomes: [
+    'A local-AI setup sized to the computer rather than to benchmark hype',
+    'A clear description of what data stays on the PC and what features can change that boundary',
+    'One tested default model, one fallback model, and a repeatable benchmark for future changes',
+    'A practical method for private drafting, extraction, document questions, and small-business workflows with human verification',
+    'A troubleshooting and upgrade decision process that changes the cheapest variable first'
+  ],
+  hubSlug: 'local-ai',
+  hubLabel: 'Local AI on your PC guides'
+}
+];
 
 export const featuredBook = books[0];

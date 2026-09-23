@@ -12,9 +12,10 @@ export const GET: APIRoute = async () => {
   const cooperativeCareGuides = await getCollection('cooperativeCareGuides');
   const rescueDogFirst90DaysGuides = await getCollection('rescueDogFirst90DaysGuides');
   const heatPumpOwnerGuides = await getCollection('heatPumpOwnerGuides');
+  const localAiGuides = await getCollection('localAiGuides');
   const powerAutomateGuides = await getCollection('powerAutomateGuides');
   const paths = [
-    '/', '/books/', '/authors/', '/guides/', '/dog-guides/', '/5g-home-internet/', '/local-business-ai/', '/ai-scam-defence/', '/reactive-dog-walking/', '/dog-enrichment/', '/cooperative-care/', '/rescue-dog-first-90-days/', '/heat-pump-owners/', '/power-automate/', '/about/', '/contact/', '/privacy/',
+    '/', '/books/', '/authors/', '/guides/', '/dog-guides/', '/5g-home-internet/', '/local-business-ai/', '/ai-scam-defence/', '/reactive-dog-walking/', '/dog-enrichment/', '/cooperative-care/', '/rescue-dog-first-90-days/', '/heat-pump-owners/', '/local-ai/', '/power-automate/', '/about/', '/contact/', '/privacy/',
     ...books.map(({ slug }) => '/books/' + slug + '/'),
     ...authors.map(({ slug }) => '/authors/' + slug + '/'),
     ...guides.map(({ id }) => '/5g-home-internet/' + id + '/'),
@@ -25,6 +26,7 @@ export const GET: APIRoute = async () => {
     ...cooperativeCareGuides.map(({ id }) => '/cooperative-care/' + id + '/'),
     ...rescueDogFirst90DaysGuides.map(({ id }) => '/rescue-dog-first-90-days/' + id + '/'),
     ...heatPumpOwnerGuides.map(({ id }) => '/heat-pump-owners/' + id + '/'),
+    ...localAiGuides.map(({ id }) => '/local-ai/' + id + '/'),
     ...powerAutomateGuides.map(({ id }) => '/power-automate/' + id + '/')
   ];
   const body = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + paths.map(path => '\n  <url><loc>https://mercerlanepress.com' + path + '</loc></url>').join('') + '\n</urlset>\n';

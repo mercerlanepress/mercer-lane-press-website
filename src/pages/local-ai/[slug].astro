@@ -1,0 +1,11 @@
+---
+import { getCollection, render } from 'astro:content';
+import LocalAiArticleLayout from '../../layouts/LocalAiArticleLayout.astro';
+
+export async function getStaticPaths(){
+  return (await getCollection('localAiGuides')).map(entry => ({params:{slug:entry.id},props:{entry}}));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<LocalAiArticleLayout entry={entry}><Content /></LocalAiArticleLayout>

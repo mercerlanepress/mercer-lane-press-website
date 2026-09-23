@@ -342,7 +342,7 @@ export const books: Book[] = [{
   publisher: 'Mercer Lane Press',
   description: 'A practical twenty-session beginner program for learning visual telescope observing: set up and control the instrument, find and confirm targets, build observing technique, read conditions, troubleshoot problems, and plan independent sessions.',
   cover: '/images/books/Your_First_20_Nights_With_a_Telescope_Front_Cover.jpg',
-  coverReady: false,
+  coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0HH49ZBH4',
   intendedReader: 'New telescope owners and beginner visual observers who want a structured sequence of real observing sessions instead of trying to learn equipment, sky navigation, target choice, and observing technique all at once.',
   problems: [

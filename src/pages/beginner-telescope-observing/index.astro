@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('beginnerTelescopeObservingGuides')).sort((a,b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Beginner Telescope Observing Guides" description="Practical telescope guides for beginners: focus, finder alignment, eyepiece magnification, star hopping, target confirmation, observing conditions, and troubleshooting.">
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Beginner Telescope Observing'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">BEGINNER ASTRONOMY</p>
+    <h1>Beginner Telescope Observing Guides</h1>
+    <p class="lede">Learn the small skills that make a first telescope easier to use: get a sharp image, make the finder agree with the telescope, choose magnification deliberately, navigate by star patterns, and diagnose problems without changing everything at once.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>A useful order for the first sessions</h2>
+        <p>Start with the instrument, then navigation, then observing technique. The goal is not to memorize the whole sky; it is to build a repeatable method you can use on changing targets and changing nights.</p>
+      </div>
+      <div class="hub-steps">
+        <article><h3>Control</h3><p>Learn focus, small mount movements, low versus higher power, finder alignment, and basic sky orientation.</p></article>
+        <article><h3>Find</h3><p>Move from a naked-eye landmark into the finder, confirm each step, and return to the last known position when a route stops matching.</p></article>
+        <article><h3>Observe</h3><p>Spend time at the eyepiece, refocus when needed, judge seeing and transparency, and use techniques such as averted vision for faint objects.</p></article>
+        <article><h3>Decide</h3><p>Match targets to moonlight and light pollution, make a short session plan, and troubleshoot from the symptom instead of guessing.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Start with the problem you have at the telescope</h2></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/beginner-telescope-observing/" label="TELESCOPE OBSERVING" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">20 OBSERVING SESSIONS</p><h2>Your First 20 Nights With a Telescope</h2></div>
+      <p>The book turns these skills into twenty observing sessions. Early nights concentrate on controlling the telescope. Later nights add star hopping, the Moon and planets, clusters, nebulae and galaxies, observing conditions, light pollution, planning, and a final independent session.</p>
+      <p>The sessions are not meant to be twenty consecutive calendar nights. Weather, Moon phase, season, work, and target visibility can interrupt the sequence, so the program is built around skills rather than dates.</p>
+      <p><a class="button" href="/books/your-first-20-nights-with-a-telescope/">Explore the book</a></p>
+    </div>
+  </section>
+</BaseLayout>

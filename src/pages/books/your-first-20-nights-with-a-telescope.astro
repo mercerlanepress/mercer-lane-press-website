@@ -1,0 +1,94 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'your-first-20-nights-with-a-telescope')!;
+const guides = (await getCollection('beginnerTelescopeObservingGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/evan-hargreaves/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">BEGINNER TELESCOPE OBSERVING</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/evan-hargreaves/">Evan Hargreaves</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/beginner-telescope-observing/">Read free guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>For a new observer who needs a sequence, not another pile of terminology</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">THE TWENTY-SESSION PROGRESSION</p>
+        <h2>Control → Find → Observe → Decide</h2>
+        <p>The program adds one principal skill at a time, moving from guided equipment practice toward an observing session you can plan and run for yourself.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>Nights 1–5: Control</h3><p>Practise focus, small mount movements, eyepiece choices, finder alignment, and naked-eye orientation before asking the telescope to do harder work.</p></article>
+        <article class="card"><h3>Nights 6–10: Find</h3><p>Make a first star hop, split a double star, find an open cluster, study the Moon, and observe a planet with realistic expectations.</p></article>
+        <article class="card"><h3>Nights 11–15: Observe</h3><p>Learn the difference between seeing and transparency, protect dark adaptation, use averted vision, and compare nebulae, clusters, galaxies, and planetary nebulae.</p></article>
+        <article class="card"><h3>Nights 16–20: Decide</h3><p>Adapt to light pollution, compare a darker site, plan a three-object session, rescue a bad night, and finish with a session that is not dictated target by target.</p></article>
+        <article class="card"><h3>Reference tools</h3><p>Use the troubleshooting reference, magnification notes, condition checks, target pack, finder plates, session planner, field checks, observing logs, key terms, and final field card after the program.</p></article>
+        <article class="card"><h3>After Night 20</h3><p>Choose a next 90-day project such as the Moon, double stars, clusters, galaxies, planets, or another structured observing program, then build depth through repeated observation.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FIELD METHOD</p><h2>Start simple when an observation goes wrong</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Return to low power</h3><p>A wide field makes it easier to recover a target, check the finder, and separate an aiming problem from a magnification problem.</p></article>
+        <article class="card"><h3>Prove the system on a bright target</h3><p>Confirm focus, finder agreement, and normal mount movement before blaming a difficult faint object or changing several settings.</p></article>
+        <article class="card"><h3>Assess the night</h3><p>Seeing, transparency, moonlight, sky brightness, dew, target altitude, and local obstructions can change what a working telescope can show.</p></article>
+      </div>
+      <div class="notice"><strong>Safety first.</strong> Never look at the Sun through an ordinary telescope, finder, binoculars, camera viewfinder, or other magnifying optical device. Solar observing is not part of the twenty-session program. Model-specific telescope and mount instructions take priority over general guidance.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Focused help for the most common early telescope skills</h2></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/beginner-telescope-observing/" label="TELESCOPE OBSERVING" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">SKY & SEASON SCOPE</p><h2>Use the book for method and a current sky tool for tonight's geometry</h2></div>
+      <p>The seasonal examples and finder routes are mainly written for mid-northern latitudes. Exact object altitude and visibility change with latitude, date, time, local horizon, Moon, and weather. When a named target is poorly placed, choose a current equivalent that practises the same skill.</p>
+    </div>
+  </section>
+</BaseLayout>

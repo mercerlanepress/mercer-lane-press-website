@@ -334,6 +334,42 @@ export const books: Book[] = [{
   ],
   hubSlug: 'local-ai',
   hubLabel: 'Local AI on your PC guides'
+},{
+  slug: 'your-first-20-nights-with-a-telescope',
+  title: 'Your First 20 Nights With a Telescope',
+  subtitle: 'A 20-Session Beginner Plan for Setting Up, Finding Targets, Reading the Sky and Learning to Observe',
+  author: 'Evan Hargreaves', authorSlug: 'evan-hargreaves',
+  publisher: 'Mercer Lane Press',
+  description: 'A practical twenty-session beginner program for learning visual telescope observing: set up and control the instrument, find and confirm targets, build observing technique, read conditions, troubleshoot problems, and plan independent sessions.',
+  cover: '/images/books/Your_First_20_Nights_With_a_Telescope_Front_Cover.jpg',
+  coverReady: true,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HH49ZBH4',
+  intendedReader: 'New telescope owners and beginner visual observers who want a structured sequence of real observing sessions instead of trying to learn equipment, sky navigation, target choice, and observing technique all at once.',
+  problems: [
+    'Stars, planets, or the Moon that look wrong because focus, aiming, or magnification is not yet under control',
+    'A finder that does not agree with the main telescope, making easy targets frustrating to acquire',
+    'Uncertainty about which eyepiece to start with and when more magnification helps or hurts',
+    'Getting lost while trying to find a deep-sky object or not knowing how to confirm the final field',
+    'Confusing poor seeing, transparency, moonlight, light pollution, dew, or target choice with an equipment fault',
+    'Reaching the point where the telescope works but the next observing session still has no clear plan'
+  ],
+  topics: [
+    'Control the telescope: focus, movement, eyepieces, finder, and orientation',
+    'Find things: star hopping, double stars, clusters, the Moon, and planets',
+    'Learn to observe: seeing, faint objects, averted vision, and realistic expectations',
+    'Become independent: light pollution, darker skies, planning, and troubleshooting',
+    'Seasonal target routes and beginner finder plates for mid-northern skies',
+    'Field references, observing logs, a 90-day next-step plan, and equipment-buying checks'
+  ],
+  outcomes: [
+    'A repeatable setup and low-power starting routine',
+    'A deliberate way to find and confirm targets rather than sweep at random',
+    'Better decisions about focus, magnification, conditions, and faint-object technique',
+    'A troubleshooting reset that returns to a bright easy target before changing multiple variables',
+    'The ability to plan and run a complete observing session with less step-by-step instruction'
+  ],
+  hubSlug: 'beginner-telescope-observing',
+  hubLabel: 'Beginner telescope observing guides'
 }
 ];
 

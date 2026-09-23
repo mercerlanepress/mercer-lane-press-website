@@ -52,9 +52,14 @@ const localAiGuides = defineCollection({
   schema: guideSchema
 });
 
+const beginnerTelescopeObservingGuides = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/beginner-telescope-observing' }),
+  schema: guideSchema
+});
+
 const powerAutomateGuides = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/power-automate' }),
   schema: guideSchema
 });
 
-export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides, cooperativeCareGuides, rescueDogFirst90DaysGuides, heatPumpOwnerGuides, localAiGuides, powerAutomateGuides };
+export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides, cooperativeCareGuides, rescueDogFirst90DaysGuides, heatPumpOwnerGuides, localAiGuides, beginnerTelescopeObservingGuides, powerAutomateGuides };

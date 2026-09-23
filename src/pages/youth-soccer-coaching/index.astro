@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('youthSoccerCoachingGuides')).sort((a,b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Volunteer Youth Soccer Coaching Guides" description="Practical guides for first-time parent coaches: first practices, ten-minute planning, match-day preparation, playing-time rotations, parent communication, and team administration.">
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Youth Soccer Coaching'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">VOLUNTEER YOUTH SOCCER</p>
+    <h1>Volunteer Youth Soccer Coaching Guides</h1>
+    <p class="lede">Practical first-season help for parent coaches of recreational youth teams, focused on what to do next rather than on building a professional coaching operation.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><h2>Use a repeatable weekly loop</h2><p>Most first-season work repeats. Organize it once, keep the practice simple, prepare match day before emotions are high, and make one short review create the next plan.</p></div>
+      <div class="hub-steps">
+        <article><h3>Plan</h3><p>Start with one thing you saw last time and decide what you want players to do more often.</p></article>
+        <article><h3>Practice</h3><p>Get children playing quickly, keep explanations short, reduce waiting, and change the environment when an activity is not working.</p></article>
+        <article><h3>Match</h3><p>Confirm the fixture, attendance and current rules, then make participation and the first rotation visible before kickoff.</p></article>
+        <article><h3>Review</h3><p>Keep one thing, change one thing, and choose one thing to try next week.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Start with the next coaching job</h2><p>Each guide isolates one recurring task and keeps the advice within the role of a volunteer coach.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/youth-soccer-coaching/" label="YOUTH SOCCER COACHING" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">THE COMPLETE FIRST-SEASON SYSTEM</p><h2>So You've Volunteered to Coach Soccer</h2></div>
+      <p>Grant Ellwood's first-season playbook brings team setup, a six-practice starter sequence, weekly planning, match-day preparation, playing-time rotations, parent communication, common exceptions, season review and a field-side toolkit into one operating system for volunteer parent coaches.</p>
+      <p><a class="button" href="/books/so-youve-volunteered-to-coach-soccer/">Explore the book</a></p>
+      <div class="notice"><strong>Scope.</strong> These guides provide general coaching and organizational information. Use the current rules, safeguarding requirements, injury and concussion procedures, weather policies, training and escalation routes that apply to your club, league, association and jurisdiction.</div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,37 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+const { entry } = Astro.props;
+const { title, description, published, related } = entry.data;
+const url = new URL('/beginner-telescope-observing/' + entry.id + '/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Article',
+  headline:title,
+  description,
+  datePublished:published.toISOString().slice(0,10),
+  author:{'@type':'Person',name:'Evan Hargreaves',url:'https://mercerlanepress.com/authors/evan-hargreaves/'},
+  publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  mainEntityOfPage:url
+};
+---
+<BaseLayout title={title} description={description} type="article" schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Beginner Telescope Observing',href:'/beginner-telescope-observing/'},{name:title}]}/>
+  <article class="article wrap narrow">
+    <header>
+      <p class="eyebrow">BEGINNER TELESCOPE OBSERVING GUIDE</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="byline">By <a href="/authors/evan-hargreaves/">Evan Hargreaves</a> · Published <time datetime={published.toISOString()}>{published.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'})}</time></p>
+    </header>
+    <div class="article-body"><slot /></div>
+    <aside class="book-note">
+      <p class="eyebrow">THE COMPLETE 20-SESSION PROGRAM</p>
+      <h2>Build telescope skills in a deliberate order</h2>
+      <p><em>Your First 20 Nights With a Telescope</em> moves from focus, mount control, eyepieces, finder alignment, and sky orientation into star hopping, lunar and planetary observing, deep-sky technique, conditions, troubleshooting, and independent session planning.</p>
+      <a class="button" href="/books/your-first-20-nights-with-a-telescope/">Explore the book</a>
+    </aside>
+    <nav class="related" aria-label="Related beginner telescope observing guides"><h2>Related telescope guides</h2><ul>{related.map((slug:string) => <li><a href={'/beginner-telescope-observing/' + slug + '/'}>{slug.replaceAll('-',' ')}</a></li>)}</ul></nav>
+    <div class="notice"><strong>Safety and sky note.</strong> Never look at the Sun through an ordinary telescope, finder scope, binoculars, or other magnifying optical device. Solar observing is not part of this beginner program. Follow the manufacturer instructions for your telescope and mount. Target visibility changes with latitude, date, time, horizon, weather, and Moon, so use a current planetarium app or chart for the sky you actually have.</div>
+  </article>
+</BaseLayout>

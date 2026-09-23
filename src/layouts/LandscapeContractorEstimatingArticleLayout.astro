@@ -1,0 +1,37 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+const { entry } = Astro.props;
+const { title, description, published, related } = entry.data;
+const url = new URL('/landscape-contractor-estimating/' + entry.id + '/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Article',
+  headline:title,
+  description,
+  datePublished:published.toISOString().slice(0,10),
+  author:{'@type':'Person',name:'Warren Holtby',url:'https://mercerlanepress.com/authors/warren-holtby/'},
+  publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  mainEntityOfPage:url
+};
+---
+<BaseLayout title={title} description={description} type="article" schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Landscape Contractor Estimating',href:'/landscape-contractor-estimating/'},{name:title}]}/>
+  <article class="article wrap narrow">
+    <header>
+      <p class="eyebrow">LANDSCAPE CONTRACTOR ESTIMATING</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="byline">By <a href="/authors/warren-holtby/">Warren Holtby</a> · Published <time datetime={published.toISOString()}>{published.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'})}</time></p>
+    </header>
+    <div class="article-body"><slot /></div>
+    <aside class="book-note">
+      <p class="eyebrow">THE COMPLETE LANDSCAPE ESTIMATING SYSTEM</p>
+      <h2>Build the estimate from scope to post-job learning</h2>
+      <p><em>Landscape Contractor Estimating &amp; Pricing</em> develops the Six-Pass Estimate across labor, materials, equipment, overhead, markup, margin, risk, sixteen complete worked estimates, estimate-versus-actual review, and a field toolkit.</p>
+      <a class="button" href="/books/landscape-contractor-estimating-and-pricing/">Explore the book</a>
+    </aside>
+    <nav class="related" aria-label="Related landscape contractor estimating guides"><h2>Related landscape estimating guides</h2><ul>{related.map((slug:string) => <li><a href={'/landscape-contractor-estimating/' + slug + '/'}>{slug.replaceAll('-',' ')}</a></li>)}</ul></nav>
+    <div class="notice"><strong>Educational scope.</strong> These guides explain estimating and pricing methods. They do not provide accounting, tax, legal, engineering, architectural, employment, insurance, code-compliance, or other regulated professional advice. Use current company records, supplier and subcontractor information, local requirements, and qualified professional advice where appropriate.</div>
+  </article>
+</BaseLayout>

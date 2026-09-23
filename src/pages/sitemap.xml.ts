@@ -15,9 +15,10 @@ export const GET: APIRoute = async () => {
   const localAiGuides = await getCollection('localAiGuides');
   const beginnerTelescopeObservingGuides = await getCollection('beginnerTelescopeObservingGuides');
   const deepSkyAstrophotographyGuides = await getCollection('deepSkyAstrophotographyGuides');
+  const constructionEstimatingGuides = await getCollection('constructionEstimatingGuides');
   const powerAutomateGuides = await getCollection('powerAutomateGuides');
   const paths = [
-    '/', '/books/', '/authors/', '/guides/', '/dog-guides/', '/5g-home-internet/', '/local-business-ai/', '/ai-scam-defence/', '/reactive-dog-walking/', '/dog-enrichment/', '/cooperative-care/', '/rescue-dog-first-90-days/', '/heat-pump-owners/', '/local-ai/', '/beginner-telescope-observing/', '/deep-sky-astrophotography/', '/power-automate/', '/about/', '/contact/', '/privacy/',
+    '/', '/books/', '/authors/', '/guides/', '/dog-guides/', '/5g-home-internet/', '/local-business-ai/', '/ai-scam-defence/', '/reactive-dog-walking/', '/dog-enrichment/', '/cooperative-care/', '/rescue-dog-first-90-days/', '/heat-pump-owners/', '/local-ai/', '/beginner-telescope-observing/', '/deep-sky-astrophotography/', '/construction-estimating/', '/power-automate/', '/about/', '/contact/', '/privacy/',
     ...books.map(({ slug }) => '/books/' + slug + '/'),
     ...authors.map(({ slug }) => '/authors/' + slug + '/'),
     ...guides.map(({ id }) => '/5g-home-internet/' + id + '/'),
@@ -31,6 +32,7 @@ export const GET: APIRoute = async () => {
     ...localAiGuides.map(({ id }) => '/local-ai/' + id + '/'),
     ...beginnerTelescopeObservingGuides.map(({ id }) => '/beginner-telescope-observing/' + id + '/'),
     ...deepSkyAstrophotographyGuides.map(({ id }) => '/deep-sky-astrophotography/' + id + '/'),
+    ...constructionEstimatingGuides.map(({ id }) => '/construction-estimating/' + id + '/'),
     ...powerAutomateGuides.map(({ id }) => '/power-automate/' + id + '/')
   ];
   const body = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + paths.map(path => '\n  <url><loc>https://mercerlanepress.com' + path + '</loc></url>').join('') + '\n</urlset>\n';

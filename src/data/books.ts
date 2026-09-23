@@ -583,6 +583,42 @@ export const books: Book[] = [{
   ],
   hubSlug: 'pickleball-doubles',
   hubLabel: 'Pickleball doubles strategy guides'
+},
+{
+  slug: 'so-youve-volunteered-to-coach-soccer',
+  title: "So You've Volunteered to Coach Soccer",
+  subtitle: 'A First-Season Playbook for Parent Coaches of Kids 6–12 — Practices, Parents, Match Days and Team Admin',
+  author: 'Grant Ellwood', authorSlug: 'grant-ellwood',
+  publisher: 'Mercer Lane Press',
+  description: 'A practical first-season playbook for volunteer parent coaches running recreational youth soccer teams for ages 6–12, covering team setup, practice planning, parent communication, match-day preparation, playing-time rotations, common disruptions, and the boundary between coaching decisions and league or safety escalation.',
+  cover: '/images/books/soc - DIGITAL_BOOK_COVER.jpg',
+  coverReady: true,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HFB88CVH',
+  intendedReader: 'Volunteer parent coaches taking responsibility for a recreational youth soccer team, primarily players ages 6–12, who need a practical first-season system for organizing practices, parents, match days, participation, and team administration without pretending to be a professional coach.',
+  problems: [
+    'The first practice or first match is close and the coach needs a simple, workable starting plan',
+    'Practice planning takes too long or produces activities with too much waiting and too little soccer',
+    'Attendance changes make a carefully planned session or match rotation difficult to run',
+    'Parent communication, playing-time questions, sideline coaching, or repeated lateness create avoidable friction',
+    'Match-day preparation and player rotations are being managed from memory instead of a repeatable checklist',
+    'Injuries, weather, safeguarding concerns, conflict, or other exceptions make it unclear what belongs to the coach and what must be escalated'
+  ],
+  topics: [
+    'Season setup, team information, communication, roles, equipment, and current league rules',
+    'The Ten-Minute Practice Builder and six ready-to-run starter practices',
+    'Small-sided play, short coaching cues, observation, attendance changes, and keeping children active',
+    'The 24-hour match-day plan, playing-time rules, written rotations, and calmer in-game coaching',
+    'Parent communication, difficult conversations, coaching your own child, confidence, behavior, and inclusion',
+    'Injury, suspected concussion, weather, safeguarding, practice breakdowns, conflict, season review, and a 24-tool coaching toolkit'
+  ],
+  outcomes: [
+    'A repeatable Plan → Message → Practice → Confirm → Match → Review weekly coaching loop',
+    'A six-practice starting runway that can later be replaced by observation-led practice planning',
+    'A written match-day and participation system that reduces reliance on memory under pressure',
+    'Clearer boundaries for when to simplify, adapt, follow the organization’s procedure, or hand a problem to the appropriate qualified person or authority'
+  ],
+  hubSlug: 'youth-soccer-coaching',
+  hubLabel: 'Volunteer youth soccer coaching guides'
 }
 ];
 

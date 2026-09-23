@@ -1,0 +1,11 @@
+---
+import { getCollection, render } from 'astro:content';
+import YouthSoccerCoachingArticleLayout from '../../layouts/YouthSoccerCoachingArticleLayout.astro';
+
+export async function getStaticPaths(){
+  return (await getCollection('youthSoccerCoachingGuides')).map(entry => ({params:{slug:entry.id},props:{entry}}));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<YouthSoccerCoachingArticleLayout entry={entry}><Content /></YouthSoccerCoachingArticleLayout>

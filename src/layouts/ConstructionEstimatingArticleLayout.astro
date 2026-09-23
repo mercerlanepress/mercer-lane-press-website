@@ -1,0 +1,37 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+const { entry } = Astro.props;
+const { title, description, published, related } = entry.data;
+const url = new URL('/construction-estimating/' + entry.id + '/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Article',
+  headline:title,
+  description,
+  datePublished:published.toISOString().slice(0,10),
+  author:{'@type':'Person',name:'Warren Holtby',url:'https://mercerlanepress.com/authors/warren-holtby/'},
+  publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  mainEntityOfPage:url
+};
+---
+<BaseLayout title={title} description={description} type="article" schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Construction Estimating',href:'/construction-estimating/'},{name:title}]}/>
+  <article class="article wrap narrow">
+    <header>
+      <p class="eyebrow">CONSTRUCTION ESTIMATING</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="byline">By <a href="/authors/warren-holtby/">Warren Holtby</a> · Published <time datetime={published.toISOString()}>{published.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'})}</time></p>
+    </header>
+    <div class="article-body"><slot /></div>
+    <aside class="book-note">
+      <p class="eyebrow">THE COMPLETE WORKED-EXAMPLE GUIDE</p>
+      <h2>Follow one estimate from scope to post-job learning</h2>
+      <p><em>Construction Estimating for Your First Jobs</em> develops the same process through a fictional workshop: scope, estimate structure, takeoff, materials, labor, quotations, commercial calculation, bid review, proposal, and feedback from actual performance.</p>
+      <a class="button" href="/books/construction-estimating-for-your-first-jobs/">Explore the book</a>
+    </aside>
+    <nav class="related" aria-label="Related construction estimating guides"><h2>Related estimating guides</h2><ul>{related.map((slug:string) => <li><a href={'/construction-estimating/' + slug + '/'}>{slug.replaceAll('-',' ')}</a></li>)}</ul></nav>
+    <div class="notice"><strong>Educational scope.</strong> These guides explain estimating processes, not engineering, architectural, legal, tax, accounting, insurance, code-compliance, or other licensed professional work. Use current project-specific documents and suitable information from suppliers, subcontractors, company records, regulatory sources, and qualified professionals where appropriate.</div>
+  </article>
+</BaseLayout>

@@ -449,8 +449,8 @@ export const books: Book[] = [{
   author: 'Warren Holtby', authorSlug: 'warren-holtby',
   publisher: 'Mercer Lane Press',
   description: 'A practical landscape-installation estimating system that moves from scope and quantities through labor-hours, materials, equipment, other direct costs, overhead, pricing, bid review, and estimate-versus-actual learning.',
-  cover: '/images/books/Landscape_Contractor_Estimating_and_Pricing_Front_Cover.jpg',
-  coverReady: false,
+  cover: '/images/books/garden - DIGITAL_BOOK_COVER.jpg',
+  coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0HGR5L94V',
   intendedReader: 'Landscape contractors, owner-operators, and estimators who understand the field work but want a repeatable company-specific system for building estimates from scope, quantities, labor-hours, equipment, overhead, and defined pricing rules.',
   problems: [

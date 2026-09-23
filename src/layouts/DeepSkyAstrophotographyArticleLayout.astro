@@ -1,0 +1,37 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+const { entry } = Astro.props;
+const { title, description, published, related } = entry.data;
+const url = new URL('/deep-sky-astrophotography/' + entry.id + '/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Article',
+  headline:title,
+  description,
+  datePublished:published.toISOString().slice(0,10),
+  author:{'@type':'Person',name:'Evan Hargreaves',url:'https://mercerlanepress.com/authors/evan-hargreaves/'},
+  publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  mainEntityOfPage:url
+};
+---
+<BaseLayout title={title} description={description} type="article" schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Deep-Sky Astrophotography',href:'/deep-sky-astrophotography/'},{name:title}]}/>
+  <article class="article wrap narrow">
+    <header>
+      <p class="eyebrow">DEEP-SKY ASTROPHOTOGRAPHY TROUBLESHOOTING</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="byline">By <a href="/authors/evan-hargreaves/">Evan Hargreaves</a> · Published <time datetime={published.toISOString()}>{published.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'})}</time></p>
+    </header>
+    <div class="article-body"><slot /></div>
+    <aside class="book-note">
+      <p class="eyebrow">THE COMPLETE DIAGNOSTIC MANUAL</p>
+      <h2>Troubleshoot the rig from symptom to verified fix</h2>
+      <p><em>Deep-Sky Astrophotography Troubleshooting</em> applies the same observation → test → cause → fix → verify method across guiding, tracking, plate solving, focus, calibration, communications, and automation failures.</p>
+      <a class="button" href="/books/deep-sky-astrophotography-troubleshooting/">Explore the book</a>
+    </aside>
+    <nav class="related" aria-label="Related deep-sky astrophotography guides"><h2>Related troubleshooting guides</h2><ul>{related.map((slug:string) => <li><a href={'/deep-sky-astrophotography/' + slug + '/'}>{slug.replaceAll('-',' ')}</a></li>)}</ul></nav>
+    <div class="notice"><strong>Safety and scope.</strong> Moving mounts, powered equipment, optics, and automated sequences can create physical risks. Keep clearances, cables, power, moisture, and mount limits in view; stop automation if movement is unpredictable. Follow the manufacturer instructions for the exact equipment involved. Software interfaces and defaults can change, so use current official documentation when an application behaves differently from the examples.</div>
+  </article>
+</BaseLayout>

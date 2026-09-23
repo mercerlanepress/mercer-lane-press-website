@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('deepSkyAstrophotographyGuides')).sort((a,b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Deep-Sky Astrophotography Troubleshooting Guides" description="Practical symptom-first guides for trailing stars, plate solving, autofocus, meridian flips, calibration frames, and other deep-sky imaging failures.">
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Deep-Sky Astrophotography'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">DEEP-SKY ASTROPHOTOGRAPHY</p>
+    <h1>Deep-Sky Astrophotography Troubleshooting Guides</h1>
+    <p class="lede">Start with what the rig actually did, choose a test that separates possible causes, then change the smallest relevant part of the system and verify the result.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Troubleshoot the symptom, not the setting</h2>
+        <p>The same visible failure can come from several layers of an imaging system. Work from evidence toward a cause instead of changing several parameters at once.</p>
+      </div>
+      <div class="hub-steps">
+        <article><h3>Observe</h3><p>Describe the exact failure, preserve the image, log, error text, equipment state, and timing before a restart removes useful evidence.</p></article>
+        <article><h3>Test</h3><p>Choose one action that separates likely causes: compare exposure lengths, command the mount deliberately, inspect the failed solve image, or simplify a connection path.</p></article>
+        <article><h3>Isolate</h3><p>Work from physical setup and power through communication, device state, configuration, operation, automation, and the final result.</p></article>
+        <article><h3>Verify</h3><p>Repeat the operation that failed. A restart, a success message, or a better-looking graph is not proof until the representative result also works.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Start with the failure you can see</h2><p>These focused guides cover problems where a short discriminating test can remove several wrong explanations quickly.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/deep-sky-astrophotography/" label="ASTROPHOTOGRAPHY" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">FULL SYSTEM REFERENCE</p><h2>Deep-Sky Astrophotography Troubleshooting</h2></div>
+      <p>The book extends the same method across guiding and tracking, pointing and automation, focus and optical failures, calibration frames, device communication, clear-night recovery, known-good baselines, and a quick diagnostic reference.</p>
+      <p><a class="button" href="/books/deep-sky-astrophotography-troubleshooting/">Explore the book</a></p>
+      <div class="notice"><strong>Before unattended automation.</strong> Test the actual mount clearances, cable path, plate solving, guiding, autofocus, dithering, meridian-flip behavior, and safe park or shutdown behavior under supervision before relying on the complete sequence unattended.</div>
+    </div>
+  </section>
+</BaseLayout>

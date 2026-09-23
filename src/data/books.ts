@@ -370,6 +370,41 @@ export const books: Book[] = [{
   ],
   hubSlug: 'beginner-telescope-observing',
   hubLabel: 'Beginner telescope observing guides'
+},{
+  slug: 'deep-sky-astrophotography-troubleshooting',
+  title: 'Deep-Sky Astrophotography Troubleshooting',
+  subtitle: 'A Symptom-to-Cause Diagnostic Guide for Guiding, Tracking, Focus, Plate Solving, Calibration and Automation Failures',
+  author: 'Evan Hargreaves', authorSlug: 'evan-hargreaves',
+  publisher: 'Mercer Lane Press',
+  description: 'A symptom-to-cause diagnostic manual for deep-sky imagers who need to separate guiding, tracking, focus, plate-solving, calibration, communication, optical, and automation failures using controlled tests instead of speculative setting changes.',
+  cover: '/images/books/Deep-Sky_Astrophotography_Troubleshooting_Front_Cover.jpg',
+  coverReady: true,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HH9VDK7X',
+  intendedReader: 'Astrophotographers who already understand the basic language of deep-sky imaging and want a structured way to make a complete imaging rig work reliably when several different faults can produce the same symptom.',
+  problems: [
+    'Trailed or distorted stars where guiding, tracking, wind, flexure, cable drag, and optical geometry can look deceptively similar',
+    'Guiding calibration, RA or DEC behavior, dithering, spikes, oscillation, and lost-star problems that need a discriminating test before tuning',
+    'Plate-solving, slew-and-center, meridian-flip, and overnight automation failures where the final error may not be the original fault',
+    'Focus, autofocus, edge-star, dew, reflection, and optical-path problems that can be misdiagnosed from a guide graph alone',
+    'Flat, dark, bias, dark-flat, dust, vignetting, and calibration artifacts that make processed data worse instead of better',
+    'Intermittent device, USB, power, cable, driver, and shared-dependency failures that only appear under load or at certain mount positions'
+  ],
+  topics: [
+    'Observation → Test → Cause → Fix → Verify',
+    'Known-good baselines, change logs, images, exact errors, and chronological evidence',
+    'Tracking, guiding, RA, DEC, dithering, spikes, lost stars, and flexure',
+    'Plate solving, centering, meridian flips, device communication, and automation chains',
+    'Focus, autofocus, optical geometry, dew, frost, reflections, and unexpected light',
+    'Calibration-frame failures, the Ten-Minute Night Rescue, and building a reliable rig'
+  ],
+  outcomes: [
+    'A known-good configuration record that makes future failures easier to compare',
+    'A repeatable way to choose one useful diagnostic test before changing settings',
+    'Quick symptom-first routes for common failures when clear-sky time is limited',
+    'A reliability checklist for testing automation and safe failure states before unattended imaging'
+  ],
+  hubSlug: 'deep-sky-astrophotography',
+  hubLabel: 'Deep-sky astrophotography troubleshooting guides'
 }
 ];
 

@@ -57,9 +57,14 @@ const beginnerTelescopeObservingGuides = defineCollection({
   schema: guideSchema
 });
 
+const deepSkyAstrophotographyGuides = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/deep-sky-astrophotography' }),
+  schema: guideSchema
+});
+
 const powerAutomateGuides = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/power-automate' }),
   schema: guideSchema
 });
 
-export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides, cooperativeCareGuides, rescueDogFirst90DaysGuides, heatPumpOwnerGuides, localAiGuides, beginnerTelescopeObservingGuides, powerAutomateGuides };
+export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides, cooperativeCareGuides, rescueDogFirst90DaysGuides, heatPumpOwnerGuides, localAiGuides, beginnerTelescopeObservingGuides, deepSkyAstrophotographyGuides, powerAutomateGuides };

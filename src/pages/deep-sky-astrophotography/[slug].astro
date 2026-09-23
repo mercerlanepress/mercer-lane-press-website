@@ -1,0 +1,11 @@
+---
+import { getCollection, render } from 'astro:content';
+import DeepSkyAstrophotographyArticleLayout from '../../layouts/DeepSkyAstrophotographyArticleLayout.astro';
+
+export async function getStaticPaths(){
+  return (await getCollection('deepSkyAstrophotographyGuides')).map(entry => ({params:{slug:entry.id},props:{entry}}));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<DeepSkyAstrophotographyArticleLayout entry={entry}><Content /></DeepSkyAstrophotographyArticleLayout>

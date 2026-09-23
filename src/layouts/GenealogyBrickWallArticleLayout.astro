@@ -1,0 +1,37 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+const { entry } = Astro.props;
+const { title, description, published, related } = entry.data;
+const url = new URL('/genealogy-brick-walls/' + entry.id + '/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Article',
+  headline:title,
+  description,
+  datePublished:published.toISOString().slice(0,10),
+  author:{'@type':'Person',name:'Daniel Mercer',url:'https://mercerlanepress.com/authors/daniel-mercer/'},
+  publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  mainEntityOfPage:url
+};
+---
+<BaseLayout title={title} description={description} type="article" schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Genealogy Brick Walls',href:'/genealogy-brick-walls/'},{name:title}]}/>
+  <article class="article wrap narrow">
+    <header>
+      <p class="eyebrow">GENEALOGY BRICK WALLS</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="byline">By <a href="/authors/daniel-mercer/">Daniel Mercer</a> · Published <time datetime={published.toISOString()}>{published.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'})}</time></p>
+    </header>
+    <div class="article-body"><slot /></div>
+    <aside class="book-note">
+      <p class="eyebrow">THE COMPLETE CASE-SOLVING SYSTEM</p>
+      <h2>Turn the brick wall into a research case</h2>
+      <p><em>Break Through Your Genealogy Brick Wall</em> develops the same method through a 12-stage case cycle, thirteen reusable case-file tools, and five worked brick-wall playbooks.</p>
+      <a class="button" href="/books/break-through-your-genealogy-brick-wall/">Explore the book</a>
+    </aside>
+    <nav class="related" aria-label="Related genealogy brick wall guides"><h2>Related genealogy guides</h2><ul>{related.map((slug:string) => <li><a href={'/genealogy-brick-walls/' + slug + '/'}>{slug.replaceAll('-',' ')}</a></li>)}</ul></nav>
+    <div class="notice"><strong>Research scope.</strong> These guides explain historical and family-history research methods. They do not guarantee that every ancestry question can be resolved and are not a substitute for legal, citizenship, immigration, tax, medical, or other regulated advice. Treat information about living people, parentage, adoption, private correspondence, and DNA with appropriate privacy and consent.</div>
+  </article>
+</BaseLayout>

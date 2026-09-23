@@ -1,0 +1,11 @@
+---
+import { getCollection, render } from 'astro:content';
+import PickleballDoublesArticleLayout from '../../layouts/PickleballDoublesArticleLayout.astro';
+
+export async function getStaticPaths(){
+  return (await getCollection('pickleballDoublesGuides')).map(entry => ({params:{slug:entry.id},props:{entry}}));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<PickleballDoublesArticleLayout entry={entry}><Content /></PickleballDoublesArticleLayout>

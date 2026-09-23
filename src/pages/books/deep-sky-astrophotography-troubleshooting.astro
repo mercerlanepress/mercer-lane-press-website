@@ -1,0 +1,97 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'deep-sky-astrophotography-troubleshooting')!;
+const guides = (await getCollection('deepSkyAstrophotographyGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/evan-hargreaves/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">DEEP-SKY ASTROPHOTOGRAPHY</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/evan-hargreaves/">Evan Hargreaves</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/deep-sky-astrophotography/">Read free guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>For the imager whose individual components now have to behave as one system</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">THE DIAGNOSTIC METHOD</p>
+        <h2>Observation → Test → Cause → Fix → Verify</h2>
+        <p>A visible failure is the starting point, not an explanation. The method is designed to reduce uncertainty before settings, hardware, or workflow are changed.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>Observe precisely</h3><p>Record what was supposed to happen, what happened instead, the exact error, the failed image or log, and the first abnormal event you can identify.</p></article>
+        <article class="card"><h3>Choose a discriminating test</h3><p>Use a test that separates failure families: manual guide motion, a short-versus-long exposure comparison, a blind solve, a direct connection, or a supervised automation step.</p></article>
+        <article class="card"><h3>Identify the mechanism</h3><p>Prefer a cause that explains the evidence and predicts when the behavior should recur rather than a vague label such as “guiding” or “USB.”</p></article>
+        <article class="card"><h3>Make the smallest relevant fix</h3><p>Correct the identified physical, power, communication, configuration, optical, or automation mechanism without changing unrelated parameters at the same time.</p></article>
+        <article class="card"><h3>Verify the failed operation</h3><p>Repeat the representative operation and inspect the result. A successful software status or brief improvement is not enough on its own.</p></article>
+        <article class="card"><h3>Return to a known-good state</h3><p>Keep a baseline for the actual rig configuration so future failures can be compared with something already shown to work.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">SYSTEM-WIDE COVERAGE</p><h2>Follow the first layer that stopped behaving normally</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Tracking and guiding</h3><p>Trailing stars, calibration failures, changing guide performance, RA and DEC behavior, spikes, oscillation, lost stars, dithering, flexure, wind, and cable drag.</p></article>
+        <article class="card"><h3>Pointing and automation</h3><p>Plate solving, wrong target position, slew-and-center chains, meridian flips, overnight sequence stops, and the difference between the final abort and the first abnormal event.</p></article>
+        <article class="card"><h3>Focus and optics</h3><p>Reaching focus, failed autofocus, focus drift, asymmetric or corner star shapes, spacing, tilt, dew, frost, reflections, and unexpected light.</p></article>
+        <article class="card"><h3>Calibration frames</h3><p>Flats that over-correct, dark mismatch, camera-specific bias or dark-flat choices, dust donuts, vignetting, and finding the first calibration stage that introduces an artifact.</p></article>
+        <article class="card"><h3>Connections and power</h3><p>Devices that never connect or disconnect later, shared hubs and power dependencies, load-related faults, cable paths, and minimal direct-connection tests.</p></article>
+        <article class="card"><h3>Clear-night recovery</h3><p>The Ten-Minute Night Rescue separates a simple recoverable fault from a safe workaround or a reason to stop and preserve the evidence for later diagnosis.</p></article>
+      </div>
+      <div class="notice"><strong>Safety outranks data.</strong> Stop automation if mount movement is unpredictable, a cable is becoming tight, collision clearance is uncertain, power is unstable, or equipment conditions are unsafe. Manufacturer limits and equipment-specific procedures take priority over general troubleshooting guidance.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Focused diagnostic routes for recurring failure patterns</h2></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/deep-sky-astrophotography/" label="ASTROPHOTOGRAPHY" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">SOFTWARE & EQUIPMENT SCOPE</p><h2>Use examples as implementations of the diagnostic principle</h2></div>
+      <p>The book discusses common astrophotography software and control frameworks as examples, but the method is not tied to one application. Drivers, firmware, menus, defaults, and device capabilities change, so current official documentation remains the reference when a specific interface behaves differently.</p>
+    </div>
+  </section>
+</BaseLayout>

@@ -413,8 +413,8 @@ export const books: Book[] = [{
   author: 'Warren Holtby', authorSlug: 'warren-holtby',
   publisher: 'Mercer Lane Press',
   description: 'A beginner-focused worked-example guide to construction estimating that follows one fictional workshop from scope and quantity takeoff through material purchasing, labor hours, subcontract quotes, overhead and margin, bid review, proposal, and post-job learning.',
-  cover: '/images/books/Construction_Estimating_for_Your_First_Jobs_Front_Cover.jpg',
-  coverReady: false,
+  cover: '/images/books/con DIGITAL_BOOK_COVER.jpg',
+  coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0HG77QFH7',
   intendedReader: 'Contractors and estimators pricing their first jobs who understand how construction work goes together but want a repeatable process for making scope, quantities, assumptions, labor, quotations, cost recovery, and final bid review visible and traceable.',
   problems: [

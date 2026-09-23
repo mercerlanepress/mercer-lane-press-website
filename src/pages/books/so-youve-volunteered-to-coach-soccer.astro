@@ -1,0 +1,98 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'so-youve-volunteered-to-coach-soccer')!;
+const guides = (await getCollection('youthSoccerCoachingGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/grant-ellwood/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">VOLUNTEER YOUTH SOCCER COACHING</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/grant-ellwood/">Grant Ellwood</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/youth-soccer-coaching/">Read free guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>A first-season operating system for the parent who raised a hand</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">THE WEEKLY COACHING LOOP</p>
+        <h2>Plan → Message → Practice → Confirm → Match → Review</h2>
+        <p>The book turns recurring coaching work into a loop so each week does not start from zero. One observation feeds the next practice, the match carries one or two useful focuses, and a short review creates the next action.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>Set the team up once</h3><p>Find the current rules, roster and communication route, clarify who owns which jobs, organize basic equipment, and create one source of truth for changing information.</p></article>
+        <article class="card"><h3>Build practices from what you see</h3><p>Use a ten-minute planning method, short explanations, small-sided play, one main problem, and an attendance contingency instead of collecting endless drills.</p></article>
+        <article class="card"><h3>Prepare match day before the sideline</h3><p>Confirm the fixture and availability, check the participation rules, plan the opening arrangement and first rotation, pack from a checklist, and send one concise reminder.</p></article>
+        <article class="card"><h3>Track participation</h3><p>Use a written rotation plan rather than memory, then adapt it to the players who actually arrive and the rules that apply to the competition.</p></article>
+        <article class="card"><h3>Keep communication predictable</h3><p>Separate team announcements from individual concerns, keep routine messages short, use facts for difficult conversations, and avoid trying to settle disputes in the group chat.</p></article>
+        <article class="card"><h3>Know when not to improvise</h3><p>Injuries, suspected concussion, safeguarding concerns, weather decisions, formal disputes, and other exceptions may require the organization’s current procedure or an appropriate qualified person rather than a coaching guess.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">THE FIRST SIX PRACTICES</p><h2>A ready-to-run starting runway</h2><p>The starter sequence moves from learning the team to ball control and space, passing choices, supporting the ball, reacting to possession changes, and creating chances. It is presented as a starting point to adapt, not a rigid curriculum.</p></div>
+      <div class="grid-3">
+        <article class="card"><h3>1. Meet the team</h3><p>Get players active, learn names, watch confidence and spacing, and establish a simple practice routine.</p></article>
+        <article class="card"><h3>2. Control and space</h3><p>Keep the ball close enough to change direction while looking for somewhere useful to go.</p></article>
+        <article class="card"><h3>3. Pass or dribble?</h3><p>Help players recognize when a teammate gives a better option instead of passing only because an adult shouted for it.</p></article>
+        <article class="card"><h3>4. Support the ball</h3><p>Give players without possession a useful job by creating passing options as the ball moves.</p></article>
+        <article class="card"><h3>5. React to transition</h3><p>Build the habit of noticing immediately when possession changes and choosing the next useful action.</p></article>
+        <article class="card"><h3>6. Create a better chance</h3><p>Connect space, control, passing, support and transition to the decision that creates a useful scoring opportunity.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Start with the problem that is closest</h2><p>These focused guides cover the recurring first-season tasks most likely to need a quick answer before practice or match day.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/youth-soccer-coaching/" label="YOUTH SOCCER COACHING" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">FIELD-SIDE TOOLKIT</p><h2>Checklists, cards and worksheets for the jobs that repeat</h2></div>
+      <p>The book closes with practical tools for practice planning, attendance changes, equipment, assistant roles, match-day preparation, player rotations, post-match review, parent conversations, incident notes, end-of-season review, and a one-page weekly coach card.</p>
+      <p>The overall standard is practical rather than theatrical: create a safe, organized, active, fair and enjoyable environment, then improve the system from the evidence the team gives you.</p>
+      <div class="notice"><strong>Use current local requirements.</strong> Youth soccer rules, safeguarding requirements, concussion procedures, weather policies and other operating requirements vary by organization and jurisdiction and can change. Follow the current procedures, training and rules that apply to your team. This site does not replace medical, safeguarding, legal, league or governing-body guidance.</div>
+    </div>
+  </section>
+</BaseLayout>

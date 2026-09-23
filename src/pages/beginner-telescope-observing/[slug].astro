@@ -1,0 +1,11 @@
+---
+import { getCollection, render } from 'astro:content';
+import BeginnerTelescopeObservingArticleLayout from '../../layouts/BeginnerTelescopeObservingArticleLayout.astro';
+
+export async function getStaticPaths(){
+  return (await getCollection('beginnerTelescopeObservingGuides')).map(entry => ({params:{slug:entry.id},props:{entry}}));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<BeginnerTelescopeObservingArticleLayout entry={entry}><Content /></BeginnerTelescopeObservingArticleLayout>

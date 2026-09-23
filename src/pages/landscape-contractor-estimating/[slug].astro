@@ -1,0 +1,11 @@
+---
+import { getCollection, render } from 'astro:content';
+import LandscapeContractorEstimatingArticleLayout from '../../layouts/LandscapeContractorEstimatingArticleLayout.astro';
+
+export async function getStaticPaths(){
+  return (await getCollection('landscapeContractorEstimatingGuides')).map(entry => ({params:{slug:entry.id},props:{entry}}));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<LandscapeContractorEstimatingArticleLayout entry={entry}><Content /></LandscapeContractorEstimatingArticleLayout>

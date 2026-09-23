@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('landscapeContractorEstimatingGuides')).sort((a,b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Landscape Contractor Estimating & Pricing Guides" description="Practical guides for landscape contractors covering scope, material quantities, labor-hours, equipment, overhead, markup and margin, bid review, and estimate-versus-actual learning.">
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Landscape Contractor Estimating'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">LANDSCAPE CONTRACTOR ESTIMATING</p>
+    <h1>Landscape Contractor Estimating &amp; Pricing Guides</h1>
+    <p class="lede">Build a landscape estimate in a deliberate order: define the work, measure it, estimate the labor-hours, identify the costs, apply the company's pricing model, then check the result and learn from the finished job.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>The Six-Pass Estimate</h2>
+        <p>A selling price is easier to defend when the scope, quantities, time, costs, pricing method, and post-job evidence remain visible instead of being compressed into one rule-of-thumb number.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>1 · Scope</h3><p>Define exactly what the customer is buying, what is excluded, and which unknown conditions still need treatment.</p></article>
+        <article class="card"><h3>2 · Quantify</h3><p>Measure the physical work and keep design, measured, purchase, and installed quantities distinct where they differ.</p></article>
+        <article class="card"><h3>3 · Time</h3><p>Break the job into operations and estimate labor-hours using company evidence and visible assumptions.</p></article>
+        <article class="card"><h3>4 · Cost</h3><p>Build labor, materials, equipment, subcontractor, delivery, disposal, travel, and other direct costs without letting real resources disappear.</p></article>
+        <article class="card"><h3>5 · Price</h3><p>Recover overhead and profit under a defined company model, with markup and margin labelled correctly.</p></article>
+        <article class="card"><h3>6 · Check &amp; Learn</h3><p>Review the bid before it leaves, preserve the sold estimate, and compare it with actual results after the work.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Work on one part of the estimate at a time</h2><p>These guides expand the parts of the estimating chain that most benefit from a defined process and clean company records.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/landscape-contractor-estimating/" label="LANDSCAPE ESTIMATING" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">THE FULL BOOK</p><h2>Landscape Contractor Estimating &amp; Pricing</h2></div>
+      <p>The book connects the method across scope, materials, labor, equipment, delivery and disposal, overhead, risk, pricing, a five-minute bid review, sixteen complete landscape estimating examples, estimate-versus-actual learning, production-rate libraries, assemblies, price books, and reusable field worksheets.</p>
+      <p><a class="button" href="/books/landscape-contractor-estimating-and-pricing/">Explore the book</a></p>
+      <div class="notice"><strong>Worked figures are teaching inputs.</strong> Costs, wages, production rates, equipment rates, quantities, durations, markups, margins, and prices shown in worked examples are fictional and are not market-rate recommendations. Real estimates should use the company's own current information.</div>
+    </div>
+  </section>
+</BaseLayout>

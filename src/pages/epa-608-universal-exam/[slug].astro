@@ -1,0 +1,11 @@
+---
+import { getCollection, render } from 'astro:content';
+import Epa608UniversalExamArticleLayout from '../../layouts/Epa608UniversalExamArticleLayout.astro';
+
+export async function getStaticPaths(){
+  return (await getCollection('epa608UniversalExamGuides')).map(entry => ({params:{slug:entry.id},props:{entry}}));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<Epa608UniversalExamArticleLayout entry={entry}><Content /></Epa608UniversalExamArticleLayout>

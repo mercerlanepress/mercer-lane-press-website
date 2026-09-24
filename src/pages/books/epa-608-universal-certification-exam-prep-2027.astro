@@ -1,0 +1,95 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'epa-608-universal-certification-exam-prep-2027')!;
+const guides = (await getCollection('epa608UniversalExamGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/warren-holtby/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">EPA SECTION 608 · UNIVERSAL EXAM PREP</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/warren-holtby/">Warren Holtby</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/epa-608-universal-exam/">Read free exam guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>One study system for all four Universal sections</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">HOW THE BOOK IS ORGANIZED</p>
+        <h2>Diagnose → study → drill → mock → repair</h2>
+        <p>The book starts with a 40-question diagnostic, then works through Core, Type I, Type II, and Type III fact maps and detailed practice before moving into a number-collision reference and two full mock exams.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>Diagnostic first</h3><p>Use the 40-question diagnostic to identify the weakest section before spending equal time on material you already know.</p></article>
+        <article class="card"><h3>Four section fact maps</h3><p>Core, Type I, Type II, and Type III are kept separate so equipment classes, pressure units, recovery rules, and regulatory facts do not blur together.</p></article>
+        <article class="card"><h3>Detailed section practice</h3><p>Each section includes original practice questions with rationales explaining the correct answer and the misconception or nearby rule that can make a distractor look plausible.</p></article>
+        <article class="card"><h3>Number Collision Matrix</h3><p>High-confusion dates, charge sizes, percentages, evacuation endpoints, pressure values, and timelines are paired with the rule and condition they belong to.</p></article>
+        <article class="card"><h3>Two 100-question mocks</h3><p>Each full mock is divided into 25-question Core, Type I, Type II, and Type III sections, with a score tracker for finding the next weak area to repair.</p></article>
+        <article class="card"><h3>Final-day tools</h3><p>A quick review, glossary, provider-logistics checklist, source notes, and freshness notice support a final check before the exam.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">STUDY PLANS & READINESS</p><h2>Use the shorter route or the slower route</h2><p>The book includes both 14-day and 21-day schedules. Its practice target is to reach at least 21/25 in each section on both full mocks before relying on your readiness. That is a study target used by the book, not a guarantee of passing.</p></div>
+      <div class="grid-3">
+        <article class="card"><h3>14-day plan</h3><p>Moves from diagnosis through Core, Type I, Type II, Type III, section drills, the Number Collision Matrix, two full mocks, and a final logistics check.</p></article>
+        <article class="card"><h3>21-day plan</h3><p>Spreads the same work across a longer runway, with more time for the Core foundation, Type II recovery and leak rules, mixed recall, and weak-area repair.</p></article>
+        <article class="card"><h3>Repair the weakest section</h3><p>After a mock, start with the section furthest below the book's readiness target and record the number, date, pressure unit, appliance class, or rule condition that caused each miss.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Use a focused reference for the part you are studying now</h2><p>The free guides below cover the Universal exam structure, a 14-day plan, the highest-confusion numbers, the differences between Type I, Type II, and Type III, and a final-day checklist.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/epa-608-universal-exam/" label="EPA 608 UNIVERSAL EXAM" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">INDEPENDENT STUDY-AID NOTICE</p><h2>Check current requirements before the exam and before field work</h2></div>
+      <p>This is independent exam-preparation material. It is not affiliated with, sponsored by, approved by, or endorsed by the U.S. Environmental Protection Agency, Mainstream Engineering, ESCO Institute, or any other testing organization.</p>
+      <p>The book states that its regulatory facts were checked against current sources on September 10, 2026. Rules and provider procedures can change.</p>
+      <div class="notice"><strong>Verify current information.</strong> Before an exam, confirm the current EPA requirements and the rules, identification process, question count, timing, retest policy, fees, and scoring used by the organization that will actually administer your exam. Field work must also follow current regulations, manufacturer instructions, employer procedures, codes, and appropriate safety practices.</div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('epa608UniversalExamGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'CollectionPage',
+  name:'EPA 608 Universal Exam Guides',
+  description:'Practical EPA Section 608 Universal exam-preparation guides covering the four exam sections, a 14-day study plan, number collisions, Type I/II/III differences, and a final-day checklist.',
+  url:'https://mercerlanepress.com/epa-608-universal-exam/',
+  hasPart:guides.map(guide => ({
+    '@type':'Article',
+    name:guide.data.title,
+    url:'https://mercerlanepress.com/epa-608-universal-exam/' + guide.id + '/'
+  }))
+};
+---
+<BaseLayout title="EPA 608 Universal Exam Guides" description="Practical EPA Section 608 Universal exam-preparation guides covering the four exam sections, a 14-day study plan, number collisions, Type I/II/III differences, and a final-day checklist." schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Guides',href:'/guides/'},{name:'EPA 608 Universal Exam'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">EPA SECTION 608 · UNIVERSAL EXAM PREP</p>
+    <h1>EPA 608 Universal Exam Guides</h1>
+    <p class="lede">Keep Core, Type I, Type II, and Type III separate, attach every number to the rule it belongs to, and use practice results to decide what to study next.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><h2>Study by section, then test under mixed conditions</h2><p>Universal preparation is easier to manage when the four sections stay distinct during learning and are only mixed after the underlying rules, equipment classes, pressure units, and common number collisions are clear.</p></div>
+      <div class="hub-steps">
+        <article><h3>Diagnose</h3><p>Start with a short mixed diagnostic and identify the weakest section.</p></article>
+        <article><h3>Separate</h3><p>Study Core, Type I, Type II, and Type III as different rule-and-equipment maps.</p></article>
+        <article><h3>Retrieve</h3><p>Use section drills without looking back, then read every rationale for the misses.</p></article>
+        <article><h3>Repair</h3><p>Use full mock scores and the exact number, date, pressure unit, appliance class, or condition behind each miss to choose the next review.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Start with the part of Universal preparation that needs structure</h2><p>These guides turn the book's exam structure, study plans, number-collision method, section distinctions, and final-day checks into focused references.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/epa-608-universal-exam/" label="EPA 608 UNIVERSAL EXAM" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">THE COMPLETE STUDY SYSTEM</p><h2>EPA 608 Universal Certification Exam Prep 2027</h2></div>
+      <p>Warren Holtby's study guide combines a 40-question diagnostic, Core/Type I/Type II/Type III fact maps, section drills with rationales, a Number Collision Matrix, two full 100-question mock exams, section score trackers, a final-day review, glossary, booking checklist, and source freshness notes.</p>
+      <p><a class="button" href="/books/epa-608-universal-certification-exam-prep-2027/">Explore the book</a></p>
+      <div class="notice"><strong>Independent study material.</strong> The book is not affiliated with, sponsored by, approved by, or endorsed by the EPA or a testing organization. It states that regulatory facts in this edition were checked on September 10, 2026. Verify current EPA requirements and your provider's current procedures before an exam or field work.</div>
+    </div>
+  </section>
+</BaseLayout>

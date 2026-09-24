@@ -655,6 +655,42 @@ export const books: Book[] = [{
   ],
   hubSlug: 'ham-radio-technician-exam',
   hubLabel: 'Ham Radio Technician exam guides'
+},
+{
+  slug: 'epa-608-universal-certification-exam-prep-2027',
+  title: 'EPA 608 Universal Certification Exam Prep 2027',
+  subtitle: 'Core, Type I, Type II & Type III Study Guide',
+  author: 'Warren Holtby', authorSlug: 'warren-holtby',
+  publisher: 'Mercer Lane Press',
+  description: 'A structured Section 608 Universal exam-preparation guide built around Core, Type I, Type II, and Type III fact maps, a diagnostic test, section drills with rationales, a number-collision reference, two full 100-question mock exams, and final-day review tools.',
+  cover: '/images/books/608 - DIGITAL_BOOK_COVER.jpg',
+  coverReady: true,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HJHPSS89',
+  intendedReader: 'Candidates preparing for Section 608 Universal certification who want one organized study system for Core, Type I, Type II, and Type III, especially readers who need help keeping similar numbers, pressure units, equipment categories, current rules, legacy values, and provider-specific exam conventions separate.',
+  problems: [
+    'Keeping Core, Type I, Type II, and Type III rules attached to the correct appliance class and exam section',
+    'Separating current values from legacy study-guide numbers and provider-specific exam conventions',
+    'Remembering similar thresholds, percentages, dates, evacuation levels, pressure units, and repair timelines without mixing them together',
+    'Finding the weak section after a diagnostic or mock exam instead of repeatedly reviewing everything',
+    'Turning a large body of regulatory and technical material into a practical 14-day or 21-day study plan',
+    'Checking current EPA requirements and exam-provider logistics before booking or sitting the exam'
+  ],
+  topics: [
+    '40-question diagnostic and section-by-section weak-area review',
+    'Core, Type I, Type II, and Type III exam fact maps',
+    'Section drills with original practice questions and detailed rationales',
+    'Number Collision Matrix for dates, pounds, percentages, pressure units, and timelines',
+    'Two full 100-question mock exams with separate section score tracking',
+    'Final-day review, glossary, booking checklist, and source freshness notes'
+  ],
+  outcomes: [
+    'A repeatable diagnostic → targeted review → section drill → mock exam study loop',
+    'Clearer separation of current regulatory values, legacy numbers, and provider-specific conventions',
+    'Section-by-section mock scores that point directly to the next area to repair',
+    'A concise final review and logistics checklist before exam day'
+  ],
+  hubSlug: 'epa-608-universal-exam',
+  hubLabel: 'EPA 608 Universal exam guides'
 }
 ];
 

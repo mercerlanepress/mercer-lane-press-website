@@ -1,0 +1,37 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+const { entry } = Astro.props;
+const { title, description, published, related } = entry.data;
+const url = new URL('/ham-radio-technician-exam/' + entry.id + '/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Article',
+  headline:title,
+  description,
+  datePublished:published.toISOString().slice(0,10),
+  author:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  mainEntityOfPage:url
+};
+---
+<BaseLayout title={title} description={description} type="article" schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Ham Radio Technician Exam',href:'/ham-radio-technician-exam/'},{name:title}]}/>
+  <article class="article wrap narrow">
+    <header>
+      <p class="eyebrow">HAM RADIO TECHNICIAN EXAM · 2026–2030</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="byline">By Mercer Lane Press · Published <time datetime={published.toISOString()}>{published.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'})}</time></p>
+    </header>
+    <div class="article-body"><slot /></div>
+    <aside class="book-note">
+      <p class="eyebrow">THE COMPLETE STUDY SYSTEM</p>
+      <h2>Study all 35 Technician exam groups in one sequence</h2>
+      <p><em>Ham Radio Technician Exam Prep 2026–2030</em> by Aaron Bellcroft combines plain-English concept lessons, exam traps, six-question group drills, six full 35-question mock exams, quick-reference pages, a cram map, a score tracker, and an exam-day checklist.</p>
+      <a class="button" href="/books/ham-radio-technician-exam-prep-2026-2030/">Explore the book</a>
+    </aside>
+    <nav class="related" aria-label="Related Ham Radio Technician exam guides"><h2>Related Technician exam guides</h2><ul>{related.map((slug:string) => <li><a href={'/ham-radio-technician-exam/' + slug + '/'}>{slug.replaceAll('-',' ')}</a></li>)}</ul></nav>
+    <div class="notice"><strong>Check current official information.</strong> These pages are independent exam-study material, not FCC, NCVEC, ARRL, or VEC guidance. The book is based on the February 19, 2026 Technician pool revision effective July 1, 2026 through June 30, 2030. Check the current NCVEC pool and current FCC rules before an exam or operating decision.</div>
+  </article>
+</BaseLayout>

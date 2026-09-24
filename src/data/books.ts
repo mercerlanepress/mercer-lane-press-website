@@ -12,8 +12,8 @@ export const books: Book[] = [{
   author: 'Miles Northcott', authorSlug: 'miles-northcott',
   publisher: 'Mercer Lane Press',
   description: 'A beginner-focused freshwater aquarium troubleshooting guide built around an observe, test, triage, correct, and verify method. It helps owners investigate cloudy or green water, fish stress, cycling and water-quality problems, filter and temperature failures, water-change problems, recurring algae, feeding and stocking pressure, and decide when specialist or aquatic-veterinary help is appropriate.',
-  cover: '/images/books/Whats_Wrong_With_My_Aquarium_Front_Cover.jpg',
-  coverReady: false,
+  cover: '/images/books/fish - DIGITAL_BOOK_COVER.jpg',
+  coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0HH8XKPMZ',
   intendedReader: 'Beginner freshwater aquarium owners who already have a tank and need a practical way to work out what changed, what to check first, which measurements matter, how urgent the problem may be, and whether to correct, observe, or escalate.',
   problems: [

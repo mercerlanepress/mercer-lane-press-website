@@ -1,0 +1,122 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'whats-wrong-with-my-aquarium')!;
+const guides = (await getCollection('aquariumTroubleshootingGuides')).sort((a,b) => a.data.order - b.data.order);
+const method = [
+  ['OBSERVE','Describe what changed without deciding why: water appearance, fish behavior, equipment, or another visible difference.'],
+  ['TEST','Measure what can reduce uncertainty, especially actual temperature, ammonia, nitrite, and other parameters relevant to the aquarium.'],
+  ['TRIAGE','Decide whether the issue is cosmetic, important, or potentially urgent before choosing a response.'],
+  ['CORRECT','Take the smallest justified action that addresses the evidence instead of changing several variables at once.'],
+  ['VERIFY','Check whether the fish, water, equipment, or measurement actually improved after the intervention.']
+];
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/miles-northcott/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  ...(book.coverReady ? {image:new URL(book.cover,Astro.site).href} : {}),
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">FRESHWATER AQUARIUM TROUBLESHOOTING</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/miles-northcott/">Miles Northcott</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/aquarium-troubleshooting/">Read free guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>For the moment when you already have an aquarium and something no longer looks right</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">THE TROUBLESHOOTING METHOD</p>
+        <h2>OBSERVE → TEST → TRIAGE → CORRECT → VERIFY</h2>
+        <p>The book is designed to prevent the common beginner mistake of changing several things before establishing what actually changed and what evidence supports the next step.</p>
+      </div>
+      <div class="grid-3">{method.map(([name,body]) => <article class="card"><h3>{name}</h3><p>{body}</p></article>)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">THE CORE FIVE</p><h2>Five checks before you reach for a treatment or start rebuilding the tank</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>1. Fish</h3><p>Ask whether one fish is affected or several. Compare breathing, swimming, balance, position in the tank, appetite, and responsiveness.</p></article>
+        <article class="card"><h3>2. Temperature</h3><p>Use an actual thermometer. A heater setting is not proof of the water temperature.</p></article>
+        <article class="card"><h3>3. Filter &amp; circulation</h3><p>Check normal flow, surface movement, intakes, pumps, outages, and whether recent filter work changed the system.</p></article>
+        <article class="card"><h3>4. Ammonia &amp; nitrite</h3><p>Use the test results as evidence. An occupied aquarium with detectable ammonia or nitrite deserves investigation in context.</p></article>
+        <article class="card"><h3>5. Recent change</h3><p>Reconstruct the last 48 hours and then the last seven days: water changes, filter cleaning, new fish, feeding, products, lighting, substrate disturbance, power loss, or source-water changes.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">SYMPTOM-FIRST CHAPTERS</p><h2>Start where the problem is visible</h2><p>The book is intentionally non-linear. Readers can begin with the symptom finder, then move to the relevant chapter and back to the Core Five Checks.</p></div>
+      <div class="grid-3">
+        <article class="card"><h3>The water looks wrong</h3><p>White or cloudy water, green water, yellow or tea-colored water, surface film, foam, unusual smell, and floating debris.</p></article>
+        <article class="card"><h3>The fish behave differently</h3><p>Surface gasping, hiding, unusual inactivity, appetite loss, flashing, clamped fins, physical warning signs, and an unexplained death.</p></article>
+        <article class="card"><h3>The system changed</h3><p>Reduced or stopped filter flow, temperature errors, problems after a water change, and problems after adding fish.</p></article>
+        <article class="card"><h3>The problem keeps returning</h3><p>Recurring algae, moving water-test results, instability after cleaning, and the combined pressure of feeding and stocking.</p></article>
+        <article class="card"><h3>The owner keeps intervening</h3><p>Learn when a controlled observation period is safer and more informative than adding another unrelated change.</p></article>
+        <article class="card"><h3>The next step is professional</h3><p>Recognize continuing deaths, severe breathing problems, significant physical abnormalities, suspected toxic exposure, and other situations that exceed home troubleshooting.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">BUILD A TANK THAT IS EASIER TO DIAGNOSE</p><h2>Use a ten-minute weekly check and a useful tank record</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Know the baseline</h3><p>Learn normal fish behavior, usual temperature, filter flow, water-test pattern, and the tank's response to ordinary maintenance.</p></article>
+        <article class="card"><h3>Record meaningful changes</h3><p>Keep tank profile, source water, livestock, maintenance, and water-test records simple enough that they still help when a problem appears.</p></article>
+        <article class="card"><h3>Record the reason for an action</h3><p>“Added clarifier” is less useful than recording what you saw, what the tests showed, why the action made sense, and what happened afterward.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Five focused starting points for common aquarium problems</h2></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/aquarium-troubleshooting/" label="AQUARIUM TROUBLESHOOTING" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">IMPORTANT LIMITS</p><h2>A troubleshooting guide, not a veterinary diagnosis</h2></div>
+      <p>The book provides general educational and informational guidance. Aquarium conditions and fish requirements vary by species, water source, system design, and individual circumstances. It does not diagnose disease from a single behavior or photograph and it does not replace examination, diagnosis, or treatment by a qualified aquatic veterinarian.</p>
+      <p>Seek appropriate specialist or veterinary assistance when fish are severely distressed, deteriorating rapidly, experiencing repeated unexplained deaths, showing significant physical abnormalities, or when serious contamination or an equipment hazard is suspected.</p>
+    </div>
+  </section>
+</BaseLayout>

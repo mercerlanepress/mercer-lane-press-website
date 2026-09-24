@@ -1,0 +1,95 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'ham-radio-technician-exam-prep-2026-2030')!;
+const guides = (await getCollection('hamRadioTechnicianExamGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/aaron-bellcroft/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">HAM RADIO TECHNICIAN EXAM · 2026–2030</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/aaron-bellcroft/">Aaron Bellcroft</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/ham-radio-technician-exam/">Read free exam guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>Concept-focused preparation for the 2026–2030 Technician pool</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">THE 35-GROUP SYSTEM</p>
+        <h2>One learning unit for every group that can appear on the exam</h2>
+        <p>A Technician exam contains 35 questions, with one question drawn from each of the 35 official groups. The book uses that blueprint as its organizing system instead of treating the 409-question pool as one undifferentiated list.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>Rules & operating procedures</h3><p>FCC responsibilities, privileges, licensing, identification, control operators, repeaters, simplex, nets, emergency communication, ARES, RACES, and traffic.</p></article>
+        <article class="card"><h3>Propagation, antennas & feed lines</h3><p>Line of sight, multipath, wavelength, radio horizon, special propagation, antenna types, resonance, feed lines, connectors, tuners, and SWR.</p></article>
+        <article class="card"><h3>Electrical principles</h3><p>Voltage, current, resistance, power, metric conversions, decibels, capacitance, inductance, impedance, Ohm's Law, series, and parallel.</p></article>
+        <article class="card"><h3>Components & schematics</h3><p>Passive components, switches, batteries, diodes, transistors, official schematic figures, rectifiers, relays, regulators, transformers, and tuned circuits.</p></article>
+        <article class="card"><h3>Practical circuits & signals</h3><p>Transceiver blocks, troubleshooting, instruments, soldering, modulation, bandwidth, satellites, Doppler shift, direction finding, linking, and digital modes.</p></article>
+        <article class="card"><h3>Safety</h3><p>Electrical and battery safety, antenna and tower hazards, power-line safety, RF exposure, and the point where study material does not replace current rules, codes, or appropriate professional training.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">HOW THE STUDY LOOP WORKS</p><h2>Learn → distinguish → retrieve → diagnose</h2><p>Each group starts with a big-picture explanation, works through high-yield concepts, isolates common exam traps, and finishes with a six-question drill. Misses are marked by group code so mixed mock exams point back to a precise weakness.</p></div>
+      <div class="grid-3">
+        <article class="card"><h3>Six full mock exams</h3><p>Each mock contains 35 questions, with one question from each official group, so practice follows the same blueprint rather than concentrating only on familiar topics.</p></article>
+        <article class="card"><h3>A higher study target</h3><p>The real exam pass mark is 26/35. The book recommends reaching at least three consecutive mixed mock scores of 30/35 with no recurring rules or safety weakness. That is a study recommendation, not an FCC requirement or a guarantee.</p></article>
+        <article class="card"><h3>Quick-reference finish</h3><p>The back matter includes a formula sheet, Technician privilege landmarks, a first-seven-days checklist, rapid glossary, final 35-group cram map, score tracker, and exam-day checklist.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Use a focused reference for the part you are working on now</h2><p>The free guides below cover the exam blueprint, a two-week study schedule, formula and unit work, privilege landmarks, and a simple first week after passing.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/ham-radio-technician-exam/" label="HAM RADIO TECHNICIAN EXAM" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">POOL & INDEPENDENCE NOTE</p><h2>Built around the current 2026–2030 Technician pool used by this edition</h2></div>
+      <p>The edition identifies its pool control as the February 19, 2026 revision, effective July 1, 2026 through June 30, 2030. It is concept-focused rather than a line-by-line reproduction of all 409 official question stems.</p>
+      <p>The book is independent study material and is not endorsed by, affiliated with, or sponsored by the FCC, NCVEC, ARRL, or any Volunteer Examiner Coordinator.</p>
+      <div class="notice"><strong>Check current official information.</strong> Readers should check the current NCVEC pool shortly before an exam for later errata or withdrawn questions. The book is not a substitute for current FCC rules, official exam-administration instructions, local electrical codes, professional tower-climbing training, or an RF exposure evaluation when one is required.</div>
+    </div>
+  </section>
+</BaseLayout>

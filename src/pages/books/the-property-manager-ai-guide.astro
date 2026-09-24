@@ -1,0 +1,144 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'the-property-manager-ai-guide')!;
+const guides = (await getCollection('propertyManagerAiGuides')).sort((a,b) => a.data.order - b.data.order);
+const categories = [
+  ['Tenant communication','Reminders, welcomes, renewals, complaint responses, service recovery, and other recurring resident messages.'],
+  ['Maintenance & vendors','Acknowledgments, work orders, triage, owner approvals, delay updates, inspections, and vendor follow-up.'],
+  ['Leasing & marketing','Listing copy, showing confirmations, applicant communication, waitlists, open houses, and rental-comparison summaries.'],
+  ['Rent collection & financial','Tiered late-rent communication, payment-plan drafts, deposit explanations, rent-roll summaries, and owner-facing analysis.'],
+  ['Documentation & compliance support','Structured drafts and internal records that still require the property manager to apply the correct local policy, law, and review process.'],
+  ['Owner & investor reporting','Monthly updates, capital-expenditure summaries, portfolio reporting, budget variances, and year-end communication.'],
+  ['Planning & organization','Daily priorities, weekly schedules, turnover calendars, SOP drafts, meeting agendas, delegation, and wrap-up logs.'],
+  ['Conflict resolution','Preparation and follow-up for difficult conversations, tenant disputes, vendor disagreements, and de-escalation.']
+];
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/mercer-lane/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">AI FOR PROPERTY MANAGEMENT</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/mercer-lane/">Mercer Lane</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/property-manager-ai/">Read free property-manager AI guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>For property managers who want repeatable drafting and workflow support</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">THE FOUR-STEP WORKING METHOD</p>
+        <h2>Copy → Paste → Edit variables → Apply</h2>
+        <p>The book treats prompts as reusable working tools rather than one-off questions. Start with a prepared prompt, place it in the AI tool you use, replace the bracketed placeholders with the facts of the situation, then review the draft before using it.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>1. Copy the prompt</h3><p>Begin from a structured prompt for the job instead of rebuilding the instruction from scratch each time.</p></article>
+        <article class="card"><h3>2. Paste into your AI tool</h3><p>The prompt structure is designed to work across major general-purpose AI chat tools rather than depending on one proprietary workflow.</p></article>
+        <article class="card"><h3>3. Edit the variables</h3><p>Replace placeholders with the relevant names, unit, dates, amounts, issue details, tone, and other facts needed for that particular task.</p></article>
+        <article class="card"><h3>4. Apply the output</h3><p>Read the draft, correct anything that is inaccurate or unsuitable, adjust the tone if needed, and only then move it into the email, text, property-management system, or document where it belongs.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">PROMPT STRUCTURE</p>
+        <h2>Role + Task + Context + Output</h2>
+        <p>One prompt formula runs through the book. It tells the AI who it should act as, what it needs to do, the facts it needs to work from, and the format the answer should take.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>Role</h3><p>Set the working perspective, such as a property manager preparing a resident update or an operations assistant organizing a process.</p></article>
+        <article class="card"><h3>Task</h3><p>State the exact job: draft the email, summarize the report, build the checklist, prepare the agenda, or organize the notes.</p></article>
+        <article class="card"><h3>Context</h3><p>Provide only the facts needed to do the job well, including dates, amounts, relevant history, constraints, and tone.</p></article>
+        <article class="card"><h3>Output</h3><p>Specify whether you need a short text, email, table, script, checklist, memo, or another usable format.</p></article>
+      </div>
+      <div class="actions"><a class="button button-secondary" href="/property-manager-ai/property-manager-ai-prompt-formula/">See the prompt formula guide</a></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">THE PROMPT LIBRARY</p><h2>Eight recurring areas of property-management work</h2><p>The manuscript groups the working prompts around the communication and operations tasks that recur across residential property management.</p></div>
+      <div class="grid-3">{categories.map(([name,body]) => <article class="card"><h3>{name}</h3><p>{body}</p></article>)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FOUR COMPLETE WORKFLOW SYSTEMS</p><h2>Chain individual prompts into a process</h2><p>Single prompts handle one drafting task. The workflow chapters show how several of those tasks connect so a recurring process can be handled in a consistent order.</p></div>
+      <div class="grid-3">
+        <article class="card"><h3>Maintenance request → resolution</h3><p>Acknowledge the request, triage urgency, dispatch the vendor, obtain owner approval when needed, communicate delays, confirm resolution, and document significant events.</p><a class="text-link" href="/property-manager-ai/maintenance-request-ai-workflow/">Read the maintenance workflow →</a></article>
+        <article class="card"><h3>Tenant onboarding</h3><p>Move from application approval through lease-signing coordination, welcome communication, move-in preparation, and a tenant-file completeness check.</p></article>
+        <article class="card"><h3>Rent delinquency follow-up</h3><p>Use a staged communication sequence, document each step, and keep formal notices and jurisdiction-specific action inside the appropriate legal/compliance review process.</p><a class="text-link" href="/property-manager-ai/rent-delinquency-ai-workflow/">Read the rent follow-up guide →</a></article>
+        <article class="card"><h3>Vacancy → lease signed</h3><p>Connect pricing review, listing creation, multi-channel promotion, showing confirmations, applicant communication, and the handoff into tenant onboarding.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">PRIVACY, ACCURACY &amp; REVIEW</p><h2>Use AI as a drafting assistant, not as the final authority</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Minimize personal data</h3><p>Most routine drafting does not require full legal identities, complete addresses, financial-account details, screening reports, medical information, or other highly sensitive records. Use the smallest amount of information that still supports the task.</p><a class="text-link" href="/property-manager-ai/tenant-data-privacy-for-ai-prompts/">Read the privacy guide →</a></article>
+        <article class="card"><h3>Review every output</h3><p>AI can produce inaccurate or unsuitable wording. Read the result before sending it, correct factual errors, and keep the property manager responsible for the final communication.</p></article>
+        <article class="card"><h3>Escalate legal-adjacent work</h3><p>Notices, eviction steps, Fair Housing matters, accommodation decisions, deposit rules, fees, and other jurisdiction-dependent issues need the correct local process and appropriate legal or compliance review.</p></article>
+      </div>
+      <div class="notice"><strong>Scope boundary.</strong> This book is an educational and productivity resource. It does not replace legal, financial, compliance, or other professional advice, and AI-generated drafts are not final legal documents.</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">IMPLEMENTATION</p><h2>Move from individual prompts to repeatable workflows over 90 days</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Days 1–30: Foundation</h3><p>Choose a primary tool, use the highest-frequency prompt categories regularly, and put one complete maintenance workflow into practice.</p></article>
+        <article class="card"><h3>Days 31–60: Integration</h3><p>Run a full vacancy workflow, begin saving your customized prompts, and bring structured AI assistance into owner reporting.</p></article>
+        <article class="card"><h3>Days 61–90: Optimization</h3><p>Add prompt chaining and tone presets, build owner reference sheets where relevant, compare selected operating metrics with your baseline, and fill gaps in the personal prompt library.</p></article>
+      </div>
+      <div class="actions"><a class="button button-secondary" href="/property-manager-ai/property-management-ai-30-60-90-roadmap/">Read the 30-60-90 day guide</a></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Use the guide that matches the task in front of you</h2><p>These companion articles turn five high-value parts of the book into focused reference pages without reproducing the prompt library itself.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/property-manager-ai/" label="PROPERTY MANAGER AI" />)}</div>
+      <div class="actions"><a class="button button-secondary" href="/property-manager-ai/">Explore the property manager AI hub</a></div>
+    </div>
+  </section>
+</BaseLayout>

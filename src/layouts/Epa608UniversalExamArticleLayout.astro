@@ -1,0 +1,37 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+const { entry } = Astro.props;
+const { title, description, published, related } = entry.data;
+const url = new URL('/epa-608-universal-exam/' + entry.id + '/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Article',
+  headline:title,
+  description,
+  datePublished:published.toISOString().slice(0,10),
+  author:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  mainEntityOfPage:url
+};
+---
+<BaseLayout title={title} description={description} type="article" schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'EPA 608 Universal Exam',href:'/epa-608-universal-exam/'},{name:title}]}/>
+  <article class="article wrap narrow">
+    <header>
+      <p class="eyebrow">EPA SECTION 608 · UNIVERSAL EXAM PREP</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="byline">By Mercer Lane Press · Published <time datetime={published.toISOString()}>{published.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'})}</time></p>
+    </header>
+    <div class="article-body"><slot /></div>
+    <aside class="book-note">
+      <p class="eyebrow">THE COMPLETE STUDY SYSTEM</p>
+      <h2>Prepare Core, Type I, Type II, and Type III in one sequence</h2>
+      <p><em>EPA 608 Universal Certification Exam Prep 2027</em> by Warren Holtby combines a diagnostic, section fact maps, original practice questions with rationales, a Number Collision Matrix, two full 100-question mock exams, final-day review tools, and provider-logistics checks.</p>
+      <a class="button" href="/books/epa-608-universal-certification-exam-prep-2027/">Explore the book</a>
+    </aside>
+    <nav class="related" aria-label="Related EPA 608 Universal exam guides"><h2>Related EPA 608 Universal exam guides</h2><ul>{related.map((slug:string) => <li><a href={'/epa-608-universal-exam/' + slug + '/'}>{slug.replaceAll('-',' ')}</a></li>)}</ul></nav>
+    <div class="notice"><strong>Check current official information.</strong> These pages are independent study material, not EPA or testing-provider guidance. The book states that regulatory facts in this edition were checked on September 10, 2026. Verify current EPA requirements and current provider procedures before an exam or field work.</div>
+  </article>
+</BaseLayout>

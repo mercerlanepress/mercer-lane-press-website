@@ -6,6 +6,45 @@ export interface Book {
 }
 
 export const books: Book[] = [{
+  slug: 'the-property-manager-ai-guide',
+  title: 'The Property Manager AI Guide',
+  subtitle: 'Practical AI Prompts, Workflows and Systems for Better Communication, Maintenance, Leasing, Compliance and Property Operations',
+  author: 'Mercer Lane', authorSlug: 'mercer-lane',
+  publisher: 'Mercer Lane Press',
+  description: 'A practical guide to using AI for recurring property-management communication and operations, with structured prompt methods, workflow systems, action plans, privacy precautions, and implementation routines across tenant communication, maintenance, leasing, rent collection, documentation, owner reporting, planning, and conflict resolution.',
+  cover: '/images/books/Property_Manager_AI_Guide_Front_Cover.jpg',
+  coverReady: false,
+  purchaseUrl: 'https://www.amazon.com/dp/B0H9HHDTD7',
+  intendedReader: 'Independent property managers, small property-management companies, and in-house residential managers who want a repeatable way to use AI for routine drafting, coordination, reporting, documentation, and planning while keeping human review and local requirements in the loop.',
+  problems: [
+    'Recurring tenant, owner, vendor, and applicant messages that are repeatedly drafted from a blank page',
+    'Maintenance, leasing, rent follow-up, and reporting processes that depend on memory instead of a consistent sequence',
+    'AI drafts that become too generic because the role, task, context, or output format was not specified clearly',
+    'Sensitive tenant or owner information being shared more broadly than a drafting task actually requires',
+    'Legal- or compliance-adjacent communication that needs a clear boundary between AI-assisted drafting and professional review'
+  ],
+  topics: [
+    'Role + Task + Context + Output prompt structure',
+    'Tenant communication',
+    'Maintenance and vendor management',
+    'Leasing and marketing',
+    'Rent collection and financial communication',
+    'Documentation and compliance support',
+    'Owner and investor reporting',
+    'Planning, organization, and conflict resolution',
+    'Workflow chaining and personal prompt libraries',
+    '30-60-90 day implementation and ROI measurement'
+  ],
+  outcomes: [
+    'A repeatable four-step way to copy, personalize, review, and apply AI-assisted drafts',
+    'Structured workflows for maintenance requests, tenant onboarding, rent delinquency follow-up, and vacancy marketing',
+    'A clearer privacy routine for minimizing sensitive information before prompting',
+    'A staged implementation plan for moving from individual prompts to repeatable operating workflows'
+  ],
+  themes: ['prompt structure','workflow systems','privacy','human review','implementation'],
+  hubSlug: 'property-manager-ai',
+  hubLabel: 'AI for property managers'
+},{
   slug: 'the-5g-home-internet-troubleshooting-manual',
   title: 'The 5G Home Internet Troubleshooting Manual',
   subtitle: 'A Provider-Neutral System for Diagnosing Weak Signal, Unstable Speeds, Wi-Fi Dead Zones, Latency, and Gateway Problems',

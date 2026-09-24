@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('propertyManagerAiGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'CollectionPage',
+  name:'AI for Property Managers Guides',
+  description:'Practical guides to structuring property-management AI prompts, coordinating maintenance communication, minimizing tenant data, managing rent follow-up drafts, and rolling AI workflows out deliberately.',
+  url:new URL('/property-manager-ai/',Astro.site).href,
+  publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'}
+};
+---
+<BaseLayout title="AI for Property Managers Guides" description="Practical guides to property-management AI prompts, maintenance workflows, tenant-data privacy, rent follow-up boundaries, and a staged 30-60-90 day rollout." schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'AI for Property Managers'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">PROPERTY MANAGEMENT AI</p>
+    <h1>AI for Property Managers Guides</h1>
+    <p class="lede">Use AI for the repeatable drafting and organization work around property management while keeping facts, privacy, judgment, local requirements, and final review in human hands.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><h2>A practical working sequence</h2><p>Good output starts before the AI writes anything. Define the job, supply only the context it needs, request a usable format, then review the draft in the real operational and legal context.</p></div>
+      <div class="hub-steps">
+        <article><h3>Structure</h3><p>Frame the instruction with Role + Task + Context + Output so the model is not forced to guess what job you are actually asking it to perform.</p></article>
+        <article><h3>Minimize</h3><p>Use only the tenant, owner, vendor, property, and financial details needed for the task. Anonymize or generalize where specific identity is unnecessary.</p></article>
+        <article><h3>Draft</h3><p>Use AI to create the first usable version of a message, report, checklist, summary, script, or internal record.</p></article>
+        <article><h3>Review</h3><p>Check names, dates, amounts, tone, missing facts, unsupported statements, and whether the task has crossed into an area that requires formal compliance or legal review.</p></article>
+        <article><h3>Connect</h3><p>Turn recurring one-off prompts into sequences for maintenance, onboarding, rent follow-up, vacancy marketing, reporting, and other repeatable processes.</p></article>
+        <article><h3>Measure</h3><p>Track a small number of useful before-and-after measures, refine the prompts you actually use, and build a personal library around the work that repeats.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Start with one recurring task</h2><p>The five guides below cover prompt structure, maintenance coordination, data minimization, rent follow-up drafting, and a staged implementation roadmap.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/property-manager-ai/" label="PROPERTY MANAGER AI" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">THE COMPLETE BOOK</p><h2>The Property Manager AI Guide</h2></div>
+      <p>The book expands these ideas into a structured prompt library across eight property-management categories, four connected workflow systems, mini action plans, advanced prompting strategies, property-management scenarios, bonus prompts, a quick-reference section, and a 30-60-90 day implementation roadmap.</p>
+      <p><a class="button" href="/books/the-property-manager-ai-guide/">Explore the book</a></p>
+      <div class="notice"><strong>Legal and compliance boundary.</strong> Property-management law varies by state, province, locality, property type, and program. AI can assist with drafting and organization, but jurisdiction-specific notices, compliance decisions, accommodation matters, eviction steps, deposits, fees, and similar legal-adjacent work require the correct current process and appropriate professional review.</div>
+    </div>
+  </section>
+</BaseLayout>

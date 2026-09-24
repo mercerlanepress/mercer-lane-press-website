@@ -1,0 +1,37 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+const { entry } = Astro.props;
+const { title, description, published, related } = entry.data;
+const url = new URL('/property-manager-ai/' + entry.id + '/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Article',
+  headline:title,
+  description,
+  datePublished:published.toISOString().slice(0,10),
+  author:{'@type':'Person',name:'Mercer Lane',url:'https://mercerlanepress.com/authors/mercer-lane/'},
+  publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  mainEntityOfPage:url
+};
+---
+<BaseLayout title={title} description={description} type="article" schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'AI for Property Managers',href:'/property-manager-ai/'},{name:title}]}/>
+  <article class="article wrap narrow">
+    <header>
+      <p class="eyebrow">AI FOR PROPERTY MANAGERS</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="byline">By <a href="/authors/mercer-lane/">Mercer Lane</a> · Published <time datetime={published.toISOString()}>{published.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'})}</time></p>
+    </header>
+    <div class="article-body"><slot /></div>
+    <aside class="book-note">
+      <p class="eyebrow">THE COMPLETE WORKING SYSTEM</p>
+      <h2>Build a reusable AI workflow around recurring property-management tasks</h2>
+      <p><em>The Property Manager AI Guide</em> by Mercer Lane expands these ideas into a structured prompt library, four workflow systems, action plans, advanced prompting strategies, scenario-based examples, privacy guidance, implementation steps, and measurement routines for residential property-management work.</p>
+      <a class="button" href="/books/the-property-manager-ai-guide/">Explore the book</a>
+    </aside>
+    <nav class="related" aria-label="Related AI for property managers guides"><h2>Related property manager AI guides</h2><ul>{related.map((slug:string) => <li><a href={'/property-manager-ai/' + slug + '/'}>{slug.replaceAll('-',' ')}</a></li>)}</ul></nav>
+    <div class="notice"><strong>Use the correct current requirements.</strong> These pages are educational and productivity resources, not legal, financial, or compliance advice. Property-management rules vary by jurisdiction and program. Review every AI output, follow company policy and the applicable law, and route legal- or compliance-sensitive decisions and documents through the appropriate qualified reviewer.</div>
+  </article>
+</BaseLayout>

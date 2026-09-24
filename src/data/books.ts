@@ -664,7 +664,7 @@ export const books: Book[] = [{
   publisher: 'Mercer Lane Press',
   description: 'A structured Section 608 Universal exam-preparation guide built around Core, Type I, Type II, and Type III fact maps, a diagnostic test, section drills with rationales, a number-collision reference, two full 100-question mock exams, and final-day review tools.',
   cover: '/images/books/608 - DIGITAL_BOOK_COVER.jpg',
-  coverReady: false,
+  coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0HJHPSS89',
   intendedReader: 'Candidates preparing for Section 608 Universal certification who want one organized study system for Core, Type I, Type II, and Type III, especially readers who need help keeping similar numbers, pressure units, equipment categories, current rules, legacy values, and provider-specific exam conventions separate.',
   problems: [

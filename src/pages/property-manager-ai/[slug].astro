@@ -1,0 +1,11 @@
+---
+import { getCollection, render } from 'astro:content';
+import PropertyManagerAiArticleLayout from '../../layouts/PropertyManagerAiArticleLayout.astro';
+
+export async function getStaticPaths(){
+  return (await getCollection('propertyManagerAiGuides')).map(entry => ({params:{slug:entry.id},props:{entry}}));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<PropertyManagerAiArticleLayout entry={entry}><Content /></PropertyManagerAiArticleLayout>

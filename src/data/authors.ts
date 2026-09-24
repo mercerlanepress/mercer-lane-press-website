@@ -9,5 +9,6 @@ export const authors: Author[] = [
   { slug: 'lewis-hartfield', name: 'Lewis Hartfield', bio: "Lewis Hartfield is the author of The Home Assistant & Matter Owner's Manual, published by Mercer Lane Press." },
   { slug: 'daniel-mercer', name: 'Daniel Mercer', bio: 'Daniel Mercer is the author of Break Through Your Genealogy Brick Wall, a practical family-history research guide published by Mercer Lane Press.', sameAs: 'https://www.amazon.com/s/ref=dp_byline_sr_book_1?ie=UTF8&field-author=Daniel+Mercer&text=Daniel+Mercer&sort=relevancerank&search-alias=books' },
   { slug: 'julian-rooke', name: 'Julian Rooke', bio: 'Julian Rooke is the author of Pickleball Doubles Decisions, a practical guide to decision-making, positioning, partner movement, and rally repair in intermediate doubles pickleball.' },
-  { slug: 'grant-ellwood', name: 'Grant Ellwood', bio: "Grant Ellwood is the author of So You've Volunteered to Coach Soccer, a practical first-season guide for volunteer parent coaches of recreational youth soccer teams." }
+  { slug: 'grant-ellwood', name: 'Grant Ellwood', bio: "Grant Ellwood is the author of So You've Volunteered to Coach Soccer, a practical first-season guide for volunteer parent coaches of recreational youth soccer teams." },
+  { slug: 'aaron-bellcroft', name: 'Aaron Bellcroft', bio: 'Aaron Bellcroft is the author of Ham Radio Technician Exam Prep 2026–2030, a concept-focused Technician Class study guide published by Mercer Lane Press.' }
 ];

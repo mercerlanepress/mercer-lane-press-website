@@ -11,6 +11,6 @@ export const authors: Author[] = [
   { slug: 'julian-rooke', name: 'Julian Rooke', bio: 'Julian Rooke is the author of Pickleball Doubles Decisions, a practical guide to decision-making, positioning, partner movement, and rally repair in intermediate doubles pickleball.' },
   { slug: 'grant-ellwood', name: 'Grant Ellwood', bio: "Grant Ellwood is the author of So You've Volunteered to Coach Soccer, a practical first-season guide for volunteer parent coaches of recreational youth soccer teams." },
   { slug: 'aaron-bellcroft', name: 'Aaron Bellcroft', bio: 'Aaron Bellcroft is the author of Ham Radio Technician Exam Prep 2026–2030, a concept-focused Technician Class study guide published by Mercer Lane Press.' },
-  { slug: 'james-carter', name: 'James Carter', bio: 'James Carter is the author of Your First Year as a Homeowner, a practical U.S.-focused home-maintenance guide published by Mercer Lane Press.' }
+  { slug: 'james-carter', name: 'James Carter', bio: 'James Carter is the author of Your First Year as a Homeowner, a practical U.S.-focused home-maintenance guide published by Mercer Lane Press.' },
   { slug: 'miles-northcott', name: 'Miles Northcott', bio: "Miles Northcott is the author of What's Wrong With My Aquarium?, a practical beginner's guide to troubleshooting freshwater aquarium problems published by Mercer Lane Press." }
 ];

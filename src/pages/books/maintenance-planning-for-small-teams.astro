@@ -1,0 +1,126 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'maintenance-planning-for-small-teams')!;
+const guides = (await getCollection('maintenancePlanningGuides')).sort((a,b) => a.data.order - b.data.order);
+const loop = [
+  ['CAPTURE','Make every legitimate maintenance demand visible in one controlled work system.'],
+  ['TRIAGE','Decide consequence and urgency before pressure becomes priority.'],
+  ['PLAN','Define the scope, labor, material, access, support, and information the job will need.'],
+  ['READY','Confirm enough uncertainty has been removed to make assignment reasonable.'],
+  ['COMMIT','Select work that fits real people, skills, PM demand, access, and weekly capacity.'],
+  ['EXECUTE','Protect the agreed plan while making genuine break-ins and displacement visible.'],
+  ['CLOSE','Record what happened, what changed, and what the next person should know.'],
+  ['REVIEW','Use schedule loss, waiting reasons, actual labor, and feedback to improve the next cycle.']
+];
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/daniel-mercer/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  ...(book.coverReady ? {image:new URL(book.cover,Astro.site).href} : {}),
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">MAINTENANCE WORK MANAGEMENT</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/daniel-mercer/">Daniel Mercer</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/maintenance-planning/">Read free guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>For small teams where planning, supervision, stores, and scheduling overlap</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">THE OPERATING LOOP</p>
+        <h2>Keep eight decisions separate so the weekly plan does not collapse into one list</h2>
+        <p>The book uses a repeating operating loop from work capture through review. The purpose is not more administration. It is to stop importance, readiness, scheduling, execution, and closeout from being treated as if they were the same decision.</p>
+      </div>
+      <div class="grid-3">{loop.map(([name,body]) => <article class="card"><h3>{name}</h3><p>{body}</p></article>)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">THE READY GATE</p><h2>Six checks before a job becomes a scheduling option</h2><p>A high-priority work order can still be impossible to execute. The Ready Gate gives the team a compact way to distinguish important work from work that is prepared well enough to commit.</p></div>
+      <div class="grid-3">
+        <article class="card"><h3>Scope</h3><p>Is the asset correct, the intended work clear enough, and the finish condition understandable?</p></article>
+        <article class="card"><h3>People</h3><p>Are the required skills, number of people, competence needs, and usable labor estimate understood?</p></article>
+        <article class="card"><h3>Material</h3><p>Are important parts and consumables identified, physically available or otherwise controlled, and reserved where the job needs that protection?</p></article>
+        <article class="card"><h3>Access</h3><p>Is the equipment-release window credible, is production preparation known, and can the crew physically reach the work?</p></article>
+        <article class="card"><h3>Support</h3><p>Are special tools, drawings, other trades, contractors, access equipment, lifting, or technical support arranged where required?</p></article>
+        <article class="card"><h3>Control</h3><p>Have relevant site isolation, permit, authorization, specialist-control, and return-to-service dependencies been identified without inventing technical procedures?</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">BUILD THE WEEK FROM CAPACITY</p><h2>Schedule what the team can realistically commit, then keep ready candidates available</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Start with usable labor</h3><p>Gross paid hours are reduced by known leave, training, meetings, standing duties, skill constraints, and other real commitments before planned work is loaded.</p></article>
+        <article class="card"><h3>Allow for reactive demand</h3><p>Use recent local evidence to reserve capacity for normal uncertainty instead of filling every available hour and hoping nothing breaks.</p></article>
+        <article class="card"><h3>Load PM and fixed windows</h3><p>Preventive maintenance, contractor visits, shutdown work, and agreed production windows consume the same people and access as corrective work.</p></article>
+        <article class="card"><h3>Select from ready work</h3><p>Choose executable work by consequence, access, skill, labor, and opportunity rather than by age, requester pressure, or work-order count alone.</p></article>
+        <article class="card"><h3>Keep candidate work ready</h3><p>If a job finishes early or reactive demand is lower than expected, pull from an already prepared candidate list instead of improvising from the whole backlog.</p></article>
+        <article class="card"><h3>Record displacement</h3><p>When the week changes, make the reason visible: emergency, access, parts, staffing, overrun, readiness, contractor support, or management reprioritization.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">PRACTICAL TOOL PACK</p><h2>Compact tools for the work-management system you already have</h2><p>The book closes with a 14-part tool pack designed to support the operating rhythm without creating a second maintenance system.</p></div>
+      <div class="grid-3">
+        <article class="card"><h3>Front-end control</h3><p>Work-Request Standard, Priority Decision Matrix, Backlog-State Reference, and Ready / Not-Ready Gate.</p></article>
+        <article class="card"><h3>Planning and material</h3><p>Planning-Depth Decision Tool, Standard Job-Plan Template, and Parts-Readiness Check.</p></article>
+        <article class="card"><h3>Weekly scheduling</h3><p>Weekly Capacity Calculator, Weekly Scheduling Board, and Schedule Change / Displacement Record.</p></article>
+        <article class="card"><h3>Close and learn</h3><p>Work-Order Closeout Standard, Schedule-Loss Reason Codes, Weekly Maintenance Review, and 30-Day Implementation Checklist.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Use a focused guide for the part of the weekly system that is currently failing</h2></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/maintenance-planning/" label="MAINTENANCE PLANNING" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">SAFETY AND PROFESSIONAL SCOPE</p><h2>A planning guide, not a technical repair manual</h2></div>
+      <p>The book helps teams identify planning dependencies such as equipment access, permits, isolation requirements, specialist competence, contractor support, and return-to-service needs. It does not replace site procedures, risk assessment, manufacturer instructions, competent technical judgment, approved safety systems, engineering design, or applicable legal and regulatory requirements.</p>
+    </div>
+  </section>
+</BaseLayout>

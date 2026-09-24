@@ -1,0 +1,37 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+const { entry } = Astro.props;
+const { title, description, published, related } = entry.data;
+const url = new URL('/maintenance-planning/' + entry.id + '/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Article',
+  headline:title,
+  description,
+  datePublished:published.toISOString().slice(0,10),
+  author:{'@type':'Person',name:'Daniel Mercer',url:'https://mercerlanepress.com/authors/daniel-mercer/'},
+  publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  mainEntityOfPage:url
+};
+---
+<BaseLayout title={title} description={description} type="article" schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Maintenance Planning',href:'/maintenance-planning/'},{name:title}]}/>
+  <article class="article wrap narrow">
+    <header>
+      <p class="eyebrow">MAINTENANCE PLANNING</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="byline">By <a href="/authors/daniel-mercer/">Daniel Mercer</a> · Published <time datetime={published.toISOString()}>{published.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'})}</time></p>
+    </header>
+    <div class="article-body"><slot /></div>
+    <aside class="book-note">
+      <p class="eyebrow">THE COMPLETE WEEKLY SYSTEM</p>
+      <h2>Build control without building a planning bureaucracy</h2>
+      <p><em>Maintenance Planning for Small Teams</em> connects work capture, backlog control, readiness, weekly capacity, scheduling, execution, closeout, review, and a 30-day reset into one operating system for small maintenance departments.</p>
+      <a class="button" href="/books/maintenance-planning-for-small-teams/">Explore the book</a>
+    </aside>
+    <nav class="related" aria-label="Related maintenance planning guides"><h2>Related maintenance planning guides</h2><ul>{related.map((slug:string) => <li><a href={'/maintenance-planning/' + slug + '/'}>{slug.replaceAll('-',' ')}</a></li>)}</ul></nav>
+    <div class="notice"><strong>Safety and professional scope.</strong> These guides address work management and planning. They do not replace approved site procedures, competent technical judgment, risk assessment, equipment-specific instructions, manufacturer requirements, isolation or energy-control procedures, permits, specialist controls, engineering approval, or applicable law.</div>
+  </article>
+</BaseLayout>

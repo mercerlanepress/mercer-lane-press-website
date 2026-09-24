@@ -1,0 +1,11 @@
+---
+import { getCollection, render } from 'astro:content';
+import MaintenancePlanningArticleLayout from '../../layouts/MaintenancePlanningArticleLayout.astro';
+
+export async function getStaticPaths(){
+  return (await getCollection('maintenancePlanningGuides')).map(entry => ({params:{slug:entry.id},props:{entry}}));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<MaintenancePlanningArticleLayout entry={entry}><Content /></MaintenancePlanningArticleLayout>

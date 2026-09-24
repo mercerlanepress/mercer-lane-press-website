@@ -6,6 +6,44 @@ export interface Book {
 }
 
 export const books: Book[] = [{
+  slug: 'maintenance-planning-for-small-teams',
+  title: 'Maintenance Planning for Small Teams',
+  subtitle: 'A Weekly Operating System for Backlog Control, Better Work Orders, Parts Readiness, PM Scheduling, and Less Firefighting',
+  author: 'Daniel Mercer', authorSlug: 'daniel-mercer',
+  publisher: 'Mercer Lane Press',
+  description: 'A practical small-team maintenance planning system that separates work capture, triage, planning, readiness, weekly commitment, execution, closeout, and review so supervisors can control backlog, prepare executable work, coordinate parts and production access, schedule against realistic labor capacity, and learn from schedule changes without building a large-company bureaucracy.',
+  cover: '/images/books/MP-DIGITAL_BOOK_COVER.jpg',
+  coverReady: true,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HHTT8HYG',
+  intendedReader: 'Maintenance supervisors, planners, managers, lead technicians, and small industrial maintenance teams where one person may cover several planning, scheduling, coordination, stores, and supervisory responsibilities.',
+  problems: [
+    'Maintenance demand arriving through CMMS requests, email, whiteboards, verbal requests, PM findings, and technician memory without one controlled view of known work',
+    'Priority inflation and open-work lists that do not distinguish incoming, planned, waiting, ready, scheduled, and completed work',
+    'Jobs being placed on the weekly schedule before scope, parts, skills, access, support, or site-control dependencies are sufficiently prepared',
+    'Weekly schedules loaded from paid hours or work-order count instead of usable labor capacity, skill constraints, PM demand, and a realistic allowance for reactive work',
+    'Production access changes, breakdowns, overruns, and parts problems silently eroding the schedule without a visible displacement decision',
+    'Weak closeout and review routines that fail to improve estimates, job plans, parts information, backlog quality, and next week\'s schedule'
+  ],
+  topics: [
+    'CAPTURE → TRIAGE → PLAN → READY → COMMIT → EXECUTE → CLOSE → REVIEW',
+    'One controlled system of record, useful work requests, consequence-based priority, and trustworthy backlog states',
+    'The Ready Gate: scope, people, material, access, support, and control',
+    'Quick, Standard, and Controlled planning depths matched to job uncertainty and coordination needs',
+    'Labor estimating, parts readiness, tools, drawings, contractor support, production access, and permit dependencies',
+    'Weekly capacity, preventive maintenance demand, ready-backlog selection, production coordination, and candidate work',
+    'Daily handoffs, breakdown break-ins, overruns, blocked work, work-order closeout, and schedule-loss learning',
+    'Small-team operation without a dedicated planner, weak-CMMS workarounds, parts control, maintenance days, and a 30-day reactive-to-controlled reset'
+  ],
+  outcomes: [
+    'One visible maintenance-work system in which legitimate demand has a state, priority, owner or next action, and an honest reason when it is blocked',
+    'A ready backlog that separates important work from executable work and protects technician time from avoidable waiting',
+    'A weekly commitment built from realistic labor capacity, skill availability, PM demand, equipment access, and controlled candidate work',
+    'A repeatable review loop that makes schedule changes, recurring constraints, planning errors, and useful technician feedback visible'
+  ],
+  themes: ['maintenance planning','backlog control','work readiness','weekly scheduling','small maintenance teams'],
+  hubSlug: 'maintenance-planning',
+  hubLabel: 'Maintenance planning for small teams'
+},{
   slug: 'the-property-manager-ai-guide',
   title: 'The Property Manager AI Guide',
   subtitle: 'Practical AI Prompts, Workflows and Systems for Better Communication, Maintenance, Leasing, Compliance and Property Operations',

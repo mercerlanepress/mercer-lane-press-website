@@ -619,6 +619,42 @@ export const books: Book[] = [{
   ],
   hubSlug: 'youth-soccer-coaching',
   hubLabel: 'Volunteer youth soccer coaching guides'
+},
+{
+  slug: 'ham-radio-technician-exam-prep-2026-2030',
+  title: 'Ham Radio Technician Exam Prep 2026–2030',
+  subtitle: 'Plain-English Lessons • Exam Traps • Practice Sets • Six Full 35-Question Mock Exams',
+  author: 'Aaron Bellcroft', authorSlug: 'aaron-bellcroft',
+  publisher: 'Mercer Lane Press',
+  description: 'A concept-focused study guide for the 2026–2030 Technician Class exam, organized around all 35 official exam groups with plain-English lessons, exam traps, six-question drills, six full 35-question mock exams, and quick-reference review tools.',
+  cover: '/images/books/ham - DIGITAL_BOOK_COVER.jpg',
+  coverReady: true,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HJSZ39ZJ',
+  intendedReader: 'Candidates preparing for the 2026–2030 Technician Class Element 2 exam who want a structured way to understand the concepts behind all 35 official groups, practise recall, identify weak group codes, and use mixed mock exams rather than relying only on memorized answer patterns.',
+  problems: [
+    'Turning a 409-question pool into a manageable study plan built around the 35 groups that actually make up a normal exam',
+    'Keeping rules, operating procedures, propagation, electrical principles, components, practical circuits, signals, antennas, feed lines, and safety organized',
+    'Recognizing similar terms, numbers, components, and operating situations that become common exam traps',
+    'Finding the exact weak group after a practice miss instead of repeatedly retaking one fixed test',
+    'Remembering the small set of formulas, unit conversions, decibel landmarks, and Technician privilege anchors used throughout the pool',
+    'Moving from topic study to six mixed 35-question mock exams, quick-reference review, a score tracker, and an exam-day checklist'
+  ],
+  topics: [
+    'One concept-focused learning unit for each of the 35 official exam groups',
+    'Commission rules, licensing, privileges, identification, repeaters, simplex, nets, and emergency communication',
+    'Propagation, wavelength, antennas, feed lines, connectors, tuners, and SWR',
+    'Electrical quantities, metric conversions, decibels, DC power, Ohm\'s Law, components, and schematics',
+    'Practical circuits, troubleshooting, test instruments, signals, emissions, satellites, and digital communication',
+    'Safety, six full mock exams, formula and privilege quick references, glossary, cram map, score tracker, and exam-day checklist'
+  ],
+  outcomes: [
+    'A repeatable big-picture → concept → exam-trap → retrieval-drill study loop for every official group',
+    'A group-code review method that points practice misses back to a specific area for correction',
+    'Six mixed 35-question mock exams structured with one question from each official group',
+    'Compact reference pages for formulas, privilege landmarks, post-pass first steps, glossary terms, final review, scores, and exam day'
+  ],
+  hubSlug: 'ham-radio-technician-exam',
+  hubLabel: 'Ham Radio Technician exam guides'
 }
 ];
 

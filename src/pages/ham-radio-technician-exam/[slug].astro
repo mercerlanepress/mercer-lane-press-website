@@ -1,0 +1,11 @@
+---
+import { getCollection, render } from 'astro:content';
+import HamRadioTechnicianExamArticleLayout from '../../layouts/HamRadioTechnicianExamArticleLayout.astro';
+
+export async function getStaticPaths(){
+  return (await getCollection('hamRadioTechnicianExamGuides')).map(entry => ({params:{slug:entry.id},props:{entry}}));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<HamRadioTechnicianExamArticleLayout entry={entry}><Content /></HamRadioTechnicianExamArticleLayout>

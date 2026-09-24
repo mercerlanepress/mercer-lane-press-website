@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('hamRadioTechnicianExamGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'CollectionPage',
+  name:'Ham Radio Technician Exam Guides',
+  description:'Practical 2026–2030 Technician Class exam guides covering the 35-group blueprint, a 14-day study plan, electrical formulas, privilege landmarks, and first steps after passing.',
+  url:'https://mercerlanepress.com/ham-radio-technician-exam/',
+  hasPart:guides.map(guide => ({
+    '@type':'Article',
+    name:guide.data.title,
+    url:'https://mercerlanepress.com/ham-radio-technician-exam/' + guide.id + '/'
+  }))
+};
+---
+<BaseLayout title="Ham Radio Technician Exam Guides | 2026–2030" description="Practical 2026–2030 Technician Class exam guides covering the 35-group blueprint, a 14-day study plan, electrical formulas, privilege landmarks, and first steps after passing." schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Guides',href:'/guides/'},{name:'Ham Radio Technician Exam'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">HAM RADIO TECHNICIAN EXAM · 2026–2030</p>
+    <h1>Ham Radio Technician Exam Guides</h1>
+    <p class="lede">Study the current Technician blueprint as 35 connected groups: learn the concept, recognize the trap, test recall, then use mixed mock results to decide what needs another pass.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><h2>Use the exam blueprint as the study map</h2><p>A normal Technician exam has 35 questions, one from each of 35 official groups. The current pool used by this material contains 409 questions, so the useful unit of review is the group rather than a memorized question number.</p></div>
+      <div class="hub-steps">
+        <article><h3>Learn</h3><p>Start with the big picture and the high-yield concepts behind one official group.</p></article>
+        <article><h3>Distinguish</h3><p>Separate similar terms, numbers, components and operating situations before they become exam traps.</p></article>
+        <article><h3>Retrieve</h3><p>Answer a short drill without looking back and mark misses by group code.</p></article>
+        <article><h3>Mix</h3><p>Use full 35-question mocks to find recurring weaknesses, then return to the exact group that caused them.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Start with the part of preparation that needs structure</h2><p>These guides turn the book's exam blueprint, study schedule, formula sheet, privilege landmarks, and post-pass checklist into focused references.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/ham-radio-technician-exam/" label="HAM RADIO TECHNICIAN EXAM" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">THE COMPLETE STUDY SYSTEM</p><h2>Ham Radio Technician Exam Prep 2026–2030</h2></div>
+      <p>Aaron Bellcroft's study guide organizes the Technician Class Element 2 pool into one learning unit for every official group, then adds exam traps, six-question drills, six full 35-question mock exams, formula and privilege quick-reference pages, a glossary, a final 35-group cram map, score tracker, and exam-day checklist.</p>
+      <p><a class="button" href="/books/ham-radio-technician-exam-prep-2026-2030/">Explore the book</a></p>
+      <div class="notice"><strong>Independent study material.</strong> The guide is not endorsed by, affiliated with, or sponsored by the FCC, NCVEC, ARRL, or any Volunteer Examiner Coordinator. It is based on the February 19, 2026 pool revision effective July 1, 2026 through June 30, 2030. Check the current NCVEC pool shortly before an exam for later errata or withdrawals, and use current FCC rules for operating decisions.</div>
+    </div>
+  </section>
+</BaseLayout>

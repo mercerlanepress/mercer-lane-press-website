@@ -44,7 +44,7 @@ jobs:
 
       - name: Deploy to Cloudflare
         if: ${{ env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != '' }}
-        run: npx wrangler@4 deploy --env "$CLOUDFLARE_ENV"
+        run: npx wrangler@4.138.0 deploy --env "$CLOUDFLARE_ENV"
 
       - name: Cloudflare deployment not configured yet
         if: ${{ env.CLOUDFLARE_API_TOKEN == '' || env.CLOUDFLARE_ACCOUNT_ID == '' }}

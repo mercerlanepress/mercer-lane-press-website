@@ -1,0 +1,70 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('aquariumTroubleshootingGuides')).sort((a,b) => a.data.order - b.data.order);
+const url = new URL('/aquarium-troubleshooting/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'CollectionPage',
+  name:'Freshwater Aquarium Troubleshooting Guides',
+  description:'Beginner-friendly freshwater aquarium troubleshooting guides for cloudy water, fish gasping at the surface, cycling and ammonia or nitrite problems, filter cleaning, and recurring algae.',
+  url,
+  isPartOf:{'@type':'WebSite',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'}
+};
+---
+<BaseLayout title="Freshwater Aquarium Troubleshooting Guides" description="Beginner-friendly freshwater aquarium troubleshooting guides for cloudy water, fish gasping at the surface, cycling and ammonia or nitrite problems, filter cleaning, and recurring algae." schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Aquarium Troubleshooting'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">FRESHWATER AQUARIUMS</p>
+    <h1>Freshwater Aquarium Troubleshooting Guides</h1>
+    <p class="lede">When a tank changes, separate what you can actually observe from what you think caused it. Check the shared environment first, make the smallest justified correction, and verify what happens next.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>A five-step method for a tank that suddenly looks or behaves differently</h2>
+        <p>The same reasoning sequence works across cloudy water, unusual fish behavior, cycling problems, equipment failures, and recurring maintenance issues.</p>
+      </div>
+      <div class="hub-steps">
+        <article><h3>Observe</h3><p>Describe exactly what changed: one fish or several, water appearance, breathing, swimming, feeding, filter flow, temperature, or another visible difference.</p></article>
+        <article><h3>Test</h3><p>Use measurements that reduce uncertainty. For many beginner problems this means actual temperature plus ammonia and nitrite, with other routine tests added when relevant.</p></article>
+        <article><h3>Triage</h3><p>Decide whether the issue appears cosmetic, important, or potentially urgent. Widespread gasping, major temperature errors, abnormal ammonia or nitrite with distress, contamination, or repeated deaths change the priority.</p></article>
+        <article><h3>Correct</h3><p>Address the strongest evidence-supported cause rather than changing water, filter media, chemicals, feeding, lighting, and medication all at once.</p></article>
+        <article><h3>Verify</h3><p>Recheck the fish, relevant measurements, equipment, and original symptom. If the expected improvement does not appear, return to observation instead of adding an unrelated fix.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Start with the symptom or recent change that is easiest to define</h2><p>These guides focus on five common beginner problems and keep the same evidence-first method throughout.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/aquarium-troubleshooting/" label="AQUARIUM TROUBLESHOOTING" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">THE CORE FIVE CHECKS</p><h2>Five questions that organize most first investigations</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Fish</h3><p>Is one fish affected or are several different fish behaving abnormally at the same time?</p></article>
+        <article class="card"><h3>Temperature</h3><p>What does an actual thermometer show, and is that normal for the livestock in this aquarium?</p></article>
+        <article class="card"><h3>Filter &amp; circulation</h3><p>Is normal flow present, is the surface moving as expected, and has there been a power or maintenance event?</p></article>
+        <article class="card"><h3>Ammonia &amp; nitrite</h3><p>What do the tests actually show? Repeat an unexpected result carefully before making a drastic change.</p></article>
+        <article class="card"><h3>Recent change</h3><p>What happened in the last 48 hours and the last seven days: water change, filter work, new fish, feeding, lighting, products, outage, or source-water change?</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">THE COMPLETE BEGINNER SYSTEM</p><h2>What's Wrong With My Aquarium?</h2></div>
+      <p>The book expands the five-step method into a symptom finder, water-quality and cycling checks, fish-behavior chapters, filter and temperature troubleshooting, water-change and new-fish problems, recurring algae and maintenance patterns, a ten-minute weekly check, tank records, and clear escalation boundaries.</p>
+      <p><a class="button" href="/books/whats-wrong-with-my-aquarium/">Explore the book</a></p>
+      <div class="notice"><strong>Important:</strong> clear water does not prove that water quality is safe, and one visible symptom does not diagnose a fish disease. Severe or persistent distress, multiple deaths, suspected contamination, or significant physical abnormalities warrant specialist assessment.</div>
+    </div>
+  </section>
+</BaseLayout>

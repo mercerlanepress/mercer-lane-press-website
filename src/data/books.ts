@@ -12,8 +12,8 @@ export const books: Book[] = [{
   author: 'Mercer Lane', authorSlug: 'mercer-lane',
   publisher: 'Mercer Lane Press',
   description: 'A practical guide to using AI for recurring property-management communication and operations, with structured prompt methods, workflow systems, action plans, privacy precautions, and implementation routines across tenant communication, maintenance, leasing, rent collection, documentation, owner reporting, planning, and conflict resolution.',
-  cover: '/images/books/Property_Manager_AI_Guide_Front_Cover.jpg',
-  coverReady: false,
+  cover: '/images/books/Prop - DIGITAL_BOOK_COVER.jpg',
+  coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0H9HHDTD7',
   intendedReader: 'Independent property managers, small property-management companies, and in-house residential managers who want a repeatable way to use AI for routine drafting, coordination, reporting, documentation, and planning while keeping human review and local requirements in the loop.',
   problems: [

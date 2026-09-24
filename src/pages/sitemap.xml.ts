@@ -22,8 +22,9 @@ export const GET: APIRoute = async () => {
   const powerAutomateGuides = await getCollection('powerAutomateGuides');
   const pickleballDoublesGuides = await getCollection('pickleballDoublesGuides');
   const youthSoccerCoachingGuides = await getCollection('youthSoccerCoachingGuides');
+  const hamRadioTechnicianExamGuides = await getCollection('hamRadioTechnicianExamGuides');
   const paths = [
-    '/', '/books/', '/authors/', '/guides/', '/dog-guides/', '/5g-home-internet/', '/local-business-ai/', '/ai-scam-defence/', '/reactive-dog-walking/', '/dog-enrichment/', '/cooperative-care/', '/rescue-dog-first-90-days/', '/heat-pump-owners/', '/local-ai/', '/beginner-telescope-observing/', '/deep-sky-astrophotography/', '/construction-estimating/', '/landscape-contractor-estimating/', '/home-assistant-matter-thread/', '/genealogy-brick-walls/', '/power-automate/', '/pickleball-doubles/', '/youth-soccer-coaching/', '/about/', '/contact/', '/privacy/',
+    '/', '/books/', '/authors/', '/guides/', '/dog-guides/', '/5g-home-internet/', '/local-business-ai/', '/ai-scam-defence/', '/reactive-dog-walking/', '/dog-enrichment/', '/cooperative-care/', '/rescue-dog-first-90-days/', '/heat-pump-owners/', '/local-ai/', '/beginner-telescope-observing/', '/deep-sky-astrophotography/', '/construction-estimating/', '/landscape-contractor-estimating/', '/home-assistant-matter-thread/', '/genealogy-brick-walls/', '/power-automate/', '/pickleball-doubles/', '/youth-soccer-coaching/', '/ham-radio-technician-exam/', '/about/', '/contact/', '/privacy/',
     ...books.map(({ slug }) => '/books/' + slug + '/'),
     ...authors.map(({ slug }) => '/authors/' + slug + '/'),
     ...guides.map(({ id }) => '/5g-home-internet/' + id + '/'),
@@ -43,7 +44,8 @@ export const GET: APIRoute = async () => {
     ...genealogyBrickWallGuides.map(({ id }) => '/genealogy-brick-walls/' + id + '/'),
     ...powerAutomateGuides.map(({ id }) => '/power-automate/' + id + '/'),
     ...pickleballDoublesGuides.map(({ id }) => '/pickleball-doubles/' + id + '/'),
-    ...youthSoccerCoachingGuides.map(({ id }) => '/youth-soccer-coaching/' + id + '/')
+    ...youthSoccerCoachingGuides.map(({ id }) => '/youth-soccer-coaching/' + id + '/'),
+    ...hamRadioTechnicianExamGuides.map(({ id }) => '/ham-radio-technician-exam/' + id + '/')
   ];
   const body = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + paths.map(path => '\n  <url><loc>https://mercerlanepress.com' + path + '</loc></url>').join('') + '\n</urlset>\n';
   return new Response(body, { headers: { 'Content-Type': 'application/xml' } });

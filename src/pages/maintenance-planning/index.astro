@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('maintenancePlanningGuides')).sort((a,b) => a.data.order - b.data.order);
+const url = new URL('/maintenance-planning/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'CollectionPage',
+  name:'Maintenance Planning for Small Teams Guides',
+  description:'Practical maintenance planning guides for work requests, ready backlog, weekly capacity, production access, schedule discipline, and a 30-day reset for small maintenance teams.',
+  url,
+  isPartOf:{'@type':'WebSite',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'}
+};
+---
+<BaseLayout title="Maintenance Planning for Small Teams Guides" description="Practical maintenance planning guides for work requests, ready backlog, weekly capacity, production access, schedule discipline, and a 30-day reset for small maintenance teams." schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Maintenance Planning'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">MAINTENANCE WORK MANAGEMENT</p>
+    <h1>Maintenance Planning for Small Teams Guides</h1>
+    <p class="lede">Build a weekly maintenance system around visible demand, clear priority, prepared work, realistic labor capacity, credible equipment access, and honest review of what changed.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Move work through the system instead of carrying it in people’s heads</h2>
+        <p>Small maintenance departments rarely have a separate person for every planning, scheduling, stores, reliability, and supervisory role. The controls therefore have to be simple enough to use while still making the important decisions visible.</p>
+      </div>
+      <div class="hub-steps">
+        <article><h3>Capture</h3><p>Bring legitimate work into one system of record and ask requesters for observable facts rather than unsupported diagnosis.</p></article>
+        <article><h3>Triage</h3><p>Use consequence to decide urgency, then give every open job a meaningful state and a next action.</p></article>
+        <article><h3>Prepare</h3><p>Define scope and planning depth, then control the people, material, access, support, and site dependencies that decide whether the job is really ready.</p></article>
+        <article><h3>Commit</h3><p>Build the weekly schedule from usable capacity, due PM work, skill constraints, agreed production windows, and the ready backlog.</p></article>
+        <article><h3>Protect</h3><p>Make break-ins, access withdrawal, overruns, parts problems, and other displacement visible instead of silently rewriting the week.</p></article>
+        <article><h3>Learn</h3><p>Close work orders with useful history, review schedule losses and waiting reasons, and improve the next job plan and next weekly commitment.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Start with the control that is causing the most friction</h2><p>These five guides cover the front end of the backlog, the ready gate, weekly capacity, production access, and a 30-day reset for a highly reactive team.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/maintenance-planning/" label="MAINTENANCE PLANNING" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">THE COMPLETE WEEKLY SYSTEM</p><h2>Maintenance Planning for Small Teams</h2></div>
+      <p>The book develops the full CAPTURE → TRIAGE → PLAN → READY → COMMIT → EXECUTE → CLOSE → REVIEW loop, three planning depths, backlog states, a six-part Ready Gate, weekly capacity and scheduling routines, execution and closeout practices, small-team operating adaptations, a 30-day reset, and a practical tool pack.</p>
+      <p><a class="button" href="/books/maintenance-planning-for-small-teams/">Explore the book</a></p>
+      <div class="notice"><strong>Scope.</strong> These guides address maintenance work management and planning. They do not replace approved site procedures, competent technical judgment, risk assessment, manufacturer instructions, permits, isolation or energy-control procedures, or applicable safety and regulatory requirements.</div>
+    </div>
+  </section>
+</BaseLayout>

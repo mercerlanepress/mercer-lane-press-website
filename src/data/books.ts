@@ -6,6 +6,44 @@ export interface Book {
 }
 
 export const books: Book[] = [{
+  slug: 'whats-wrong-with-my-aquarium',
+  title: "What's Wrong With My Aquarium?",
+  subtitle: "A Beginner's Troubleshooting Guide to Cloudy Water, Algae, Fish Stress, Cycling Problems, Filters and Water Quality",
+  author: 'Miles Northcott', authorSlug: 'miles-northcott',
+  publisher: 'Mercer Lane Press',
+  description: 'A beginner-focused freshwater aquarium troubleshooting guide built around an observe, test, triage, correct, and verify method. It helps owners investigate cloudy or green water, fish stress, cycling and water-quality problems, filter and temperature failures, water-change problems, recurring algae, feeding and stocking pressure, and decide when specialist or aquatic-veterinary help is appropriate.',
+  cover: '/images/books/Whats_Wrong_With_My_Aquarium_Front_Cover.jpg',
+  coverReady: false,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HH8XKPMZ',
+  intendedReader: 'Beginner freshwater aquarium owners who already have a tank and need a practical way to work out what changed, what to check first, which measurements matter, how urgent the problem may be, and whether to correct, observe, or escalate.',
+  problems: [
+    'Cloudy, green, yellow, or brown water where appearance alone does not identify the cause',
+    'Several fish gasping, hiding, refusing food, flashing, or otherwise behaving differently',
+    'New-tank cycling problems or detectable ammonia and nitrite after stocking or filter disruption',
+    'Filter flow, heater, circulation, or water-change problems that create a clear before-and-after change',
+    'Recurring algae, drifting test results, or instability after cleaning and maintenance',
+    'Uncertainty about when a problem can be investigated at home and when persistent distress, deaths, contamination, or physical abnormalities need specialist help'
+  ],
+  topics: [
+    'OBSERVE → TEST → TRIAGE → CORRECT → VERIFY',
+    'The Core Five Checks: fish, temperature, filter and circulation, ammonia and nitrite, and recent change',
+    'Cloudy water, green water, tannins, surface film, foam, smell, and floating debris',
+    'Surface gasping, hiding, appetite loss, flashing, clamped fins, physical warning signs, and unexplained deaths',
+    'Biological filtration, cycling, filter maintenance, temperature, water changes, and new-fish additions',
+    'Recurring algae, moving water-test results, cleaning-related instability, feeding, and stocking pressure',
+    'A ten-minute weekly check, tank records, troubleshooting logs, and post-fix verification',
+    'Clear boundaries for specialist or aquatic-veterinary assessment when home troubleshooting is no longer enough'
+  ],
+  outcomes: [
+    'A repeatable first-five-minutes routine for separating visible symptoms from plausible causes',
+    'A practical way to use water tests, equipment checks, and recent history as evidence rather than chasing isolated numbers',
+    'A calmer method for making the smallest justified correction and checking whether it actually worked',
+    'A useful record of normal conditions, changes, actions, and results that makes recurring problems easier to investigate'
+  ],
+  themes: ['freshwater aquarium troubleshooting','water quality','fish stress','cycling','filtration','algae'],
+  hubSlug: 'aquarium-troubleshooting',
+  hubLabel: 'Freshwater aquarium troubleshooting guides'
+},{
   slug: 'maintenance-planning-for-small-teams',
   title: 'Maintenance Planning for Small Teams',
   subtitle: 'A Weekly Operating System for Backlog Control, Better Work Orders, Parts Readiness, PM Scheduling, and Less Firefighting',

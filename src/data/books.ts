@@ -691,6 +691,41 @@ export const books: Book[] = [{
   ],
   hubSlug: 'epa-608-universal-exam',
   hubLabel: 'EPA 608 Universal exam guides'
+},
+{
+  slug: 'your-first-year-as-a-homeowner',
+  title: 'Your First Year as a Homeowner',
+  subtitle: 'A Month-by-Month Guide to Home Maintenance, Preventing Problems, and Knowing When to Call a Pro',
+  author: 'James Carter', authorSlug: 'james-carter',
+  publisher: 'Mercer Lane Press',
+  description: 'A practical first-year home-maintenance guide that helps new homeowners learn their property, build a useful home record, follow a month-by-month inspection and maintenance rhythm, notice meaningful changes, and recognize when a job belongs with a qualified professional.',
+  cover: '/images/books/your-first-year-as-a-homeowner-front-cover.jpg',
+  coverReady: true,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HDP5L5YR',
+  intendedReader: 'First-time U.S. homeowners who want a manageable system for understanding the house they actually own, keeping useful maintenance records, and making safer decisions about routine care, monitoring, and professional help.',
+  problems: [
+    'Not knowing which home systems, controls, and connections deserve attention first',
+    'Generic maintenance checklists that create noise instead of a property-specific plan',
+    'Uncertainty about whether a stain, crack, leak, sound, or operating change should be monitored, maintained, repaired, or professionally assessed',
+    'Forgetting service history, equipment information, warranties, inspection recommendations, and previous observations',
+    'Not knowing where sensible DIY ends and professional help should begin'
+  ],
+  topics: [
+    'Know → Check → Maintain → Record → Escalate',
+    'First-week homeowner setup and home systems map',
+    'A twelve-month maintenance and observation sequence',
+    'Water, HVAC, exterior, electrical, appliance, drainage, and hidden-space warning signs',
+    'Home records, warranties, contractors, and deferred work',
+    'Annual review and a shorter, property-specific Year Two calendar'
+  ],
+  outcomes: [
+    'A baseline record of the property, its systems, and normal conditions',
+    'A manageable monthly and seasonal maintenance routine adapted to the actual home',
+    'Clearer decisions about what to do, what to monitor, and when to involve a qualified professional',
+    'A Year Two calendar based on observed needs, manufacturer guidance, climate, and professional recommendations rather than a generic checklist'
+  ],
+  hubSlug: 'first-year-homeowner',
+  hubLabel: 'First-year homeowner maintenance guides'
 }
 ];
 

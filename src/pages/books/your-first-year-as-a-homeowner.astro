@@ -1,0 +1,137 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'your-first-year-as-a-homeowner')!;
+const guides = (await getCollection('firstYearHomeownerGuides')).sort((a,b) => a.data.order - b.data.order);
+const months = [
+  ['Month 1','Establish a baseline of what the house looks, sounds, and behaves like under ordinary conditions.'],
+  ['Month 2','Follow water routes through plumbing, drainage, rainwater management, and condensation.'],
+  ['Month 3','Identify heating, cooling, ventilation, filters, condensate, and the boundary between owner care and service work.'],
+  ['Month 4','Read the exterior as a weather-management system: roof, gutters, walls, openings, drainage, and vegetation.'],
+  ['Month 5','Review homeowner-visible electrical warning signs, alarms, escape routes, and life-safety records without turning the month into electrical repair.'],
+  ['Month 6','Compare the first six months with the baseline and close, schedule, monitor, or escalate unresolved items.'],
+  ['Month 7','Review appliances as connections to water, drainage, electricity, gas, and ventilation—not just isolated machines.'],
+  ['Month 8','Check how drainage, soil, vegetation, irrigation, trees, exterior equipment, and pest entry interact with the house.'],
+  ['Month 9','Use changes in doors, windows, floors, stairs, railings, and weather seals as evidence rather than instant diagnoses.'],
+  ['Month 10','Approach attics, basements, crawlspaces, sumps, and older-home materials with an explicit access and safety boundary.'],
+  ['Month 11','Organize contractor work, warranties, inspection follow-up, written scopes, and deliberately deferred work.'],
+  ['Month 12','Turn a year of observations into a smaller, property-specific Year Two calendar.']
+];
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/james-carter/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">FIRST-TIME HOMEOWNER · U.S. EDITION</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/james-carter/">James Carter</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/first-year-homeowner/">Read free homeowner guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>For a first-time owner who needs a system, not a giant checklist</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">THE HOMEOWNER OPERATING SYSTEM</p>
+        <h2>Know → Check → Maintain → Record → Escalate</h2>
+        <p>The book separates understanding the property from trying to repair everything yourself. The same five actions recur throughout the year so that observations become useful decisions rather than background worry.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>Know the house</h3><p>Map water supply and drainage, rainwater, heating and cooling, ventilation, electricity, life safety, the building envelope, the site, and any special systems that actually exist.</p></article>
+        <article class="card"><h3>Check for change</h3><p>Use repeatable observations and photographs to notice new staining, dampness, sounds, odors, airflow changes, cracks, drainage changes, wear, and pest evidence.</p></article>
+        <article class="card"><h3>Maintain appropriately</h3><p>Follow manufacturer-defined owner maintenance and schedule professional maintenance where specialist work, tools, access, or competence are required.</p></article>
+        <article class="card"><h3>Record what matters</h3><p>Keep equipment details, service history, warranties, inspection follow-up, contractor records, photographs, and monitored conditions in one Home Record.</p></article>
+        <article class="card"><h3>Escalate deliberately</h3><p>Move the next step to a professional when risk, uncertainty, licensing, height, hazardous materials, structure, electricity, gas, refrigerants, sewage, or consequences demand it.</p></article>
+        <article class="card"><h3>Use two calendars</h3><p>Your ownership month and your local climate run at the same time. Seasonal preparation moves forward when the actual weather requires it.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">THE FIRST WEEK</p><h2>Establish control before creating a long maintenance schedule</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Find the critical controls</h3><p>Locate the main water control, electrical panel, ordinary heating and cooling controls, alarms, and emergency information. Keep access clear and do not force unfamiliar or deteriorated equipment.</p></article>
+        <article class="card"><h3>Create a baseline</h3><p>Retrieve the purchase inspection, photograph equipment labels, record known cracks and stains, and take repeatable exterior and utility-area photographs.</p></article>
+        <article class="card"><h3>Give inherited issues a status</h3><p>Convert significant observations into ACT, SCHEDULE, or MONITOR. A monitoring item needs a defined condition, a baseline, a review date, and an escalation trigger.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">TWELVE MONTHS OF LEARNING THE PROPERTY</p><h2>One ownership sequence, adapted to the weather where you live</h2><p>The monthly chapters deliberately move from baseline knowledge to more specific systems, then finish by turning the year's evidence into a more useful second-year plan.</p></div>
+      <div class="grid-3">{months.map(([name,body]) => <article class="card"><h3>{name}</h3><p>{body}</p></article>)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">WHEN SOMETHING CHANGES</p><h2>Notice the symptom without pretending it is already a diagnosis</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Water &amp; moisture</h3><p>Use timing, location, weather, nearby systems, photographs, and change over time to distinguish evidence from assumptions about leaks, condensation, drainage, or other causes.</p></article>
+        <article class="card"><h3>Heating &amp; ventilation</h3><p>Record new noise, reduced airflow, water around equipment, burning odors, shutdowns, and alarm conditions without opening service compartments to investigate.</p></article>
+        <article class="card"><h3>Electrical warning signs</h3><p>Repeated breaker trips, heat, burning odors, sparking, shocks, buzzing, crackling, and other abnormalities have a low threshold for qualified electrical assessment.</p></article>
+        <article class="card"><h3>Exterior &amp; drainage</h3><p>Observe storm damage, gutter overflow, ponding, peeling, rot, and water routes from safe viewpoints and use the evidence to choose the next trade or assessment.</p></article>
+        <article class="card"><h3>Cracks &amp; movement</h3><p>Record location, size, orientation, photographs, and related changes. Progression and clusters of symptoms matter more than unsupported conclusions from one mark.</p></article>
+        <article class="card"><h3>Contractor conversations</h3><p>Start with the symptom and history, ask what evidence supports the conclusion, compare written scope rather than price alone, and record what should be monitored afterward.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">PRACTICAL RESOURCES</p><h2>Worksheets that give the house a memory</h2></div>
+      <p>The back of the book includes a Home Systems Map, First-Week Setup Checklist, Monthly Fifteen-Minute Walk, Home Observation Log, Service History, Appliance Register, Warranty Register, Contractor Contact Log, Repair Priority Matrix, DIY / Professional Decision Card, Professional Visit Question Sheet, Deferred Work Record, Seasonal Overlays, Annual Home Review, Year-Two Maintenance Calendar, and Home Maintenance Operating Plan.</p>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Use the guide that matches today's decision</h2></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/first-year-homeowner/" label="FIRST-YEAR HOMEOWNER" />)}</div>
+      <div class="actions"><a class="button button-secondary" href="/first-year-homeowner/">Explore the homeowner guide hub</a></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">SAFETY &amp; SCOPE</p><h2>Homeowner competence includes knowing when to stop</h2></div>
+      <p>This is a general educational and organizational guide, not a substitute for inspection, diagnosis, repair, or advice from an appropriately qualified professional. Conditions, equipment, climate, codes, permits, licensing requirements, and accepted practices vary by property and location. Follow current manufacturer instructions and the requirements that apply where you live.</p>
+      <p>Electricity, gas and combustion equipment, structural work, roofing and other work at height, hazardous materials, refrigerants, sewage, pressurized systems, and some plumbing work can create serious risks and may require qualified or licensed professionals.</p>
+    </div>
+  </section>
+</BaseLayout>

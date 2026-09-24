@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('firstYearHomeownerGuides')).sort((a,b) => a.data.order - b.data.order);
+---
+<BaseLayout title="First-Year Homeowner Maintenance Guides" description="Practical U.S.-oriented guides for the first week and first year of homeownership: home records, monthly maintenance walks, water and moisture clues, and deciding when a job needs professional help.">
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'First-Year Homeowner Maintenance'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">HOME MAINTENANCE FOR NEW OWNERS</p>
+    <h1>First-Year Homeowner Maintenance Guides</h1>
+    <p class="lede">Learn the house before trying to maintain an imaginary average one. Start with the systems and controls actually present, establish a baseline, then use short repeatable checks to notice what changes.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><h2>A practical operating loop</h2><p>The goal is not to become every trade. It is to understand enough to make the next decision well.</p></div>
+      <div class="hub-steps">
+        <article><h3>Know</h3><p>Identify the systems, equipment, controls, manuals, and inherited inspection issues that actually apply to the property.</p></article>
+        <article><h3>Check</h3><p>Look deliberately for condition and change: moisture, sounds, odors, airflow, cracking, drainage, wear, and other useful evidence.</p></article>
+        <article><h3>Maintain</h3><p>Complete appropriate routine care, including manufacturer-defined owner maintenance and professional service where the work belongs with a specialist.</p></article>
+        <article><h3>Record</h3><p>Give the house a memory with baseline photographs, equipment details, service history, warranties, and observation notes.</p></article>
+        <article><h3>Escalate</h3><p>Recognize when risk, uncertainty, access, licensing, tools, or consequences make qualified professional help the sensible next step.</p></article>
+        <article><h3>Use two calendars</h3><p>Follow the sequence of your first year while moving genuinely seasonal work forward when weather or climate makes it relevant.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Start with the job in front of you</h2><p>These guides focus on the highest-value first-year routines: getting control in the first week, building a home record, making a short monthly walk useful, following water clues, and setting a sensible DIY boundary.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/first-year-homeowner/" label="FIRST-YEAR HOMEOWNER" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">THE FULL BOOK</p><h2>Your First Year as a Homeowner</h2></div>
+      <p>The book turns these ideas into a month-by-month system. It begins with the first-week setup and a Home Record, then works through water, heating and cooling, the exterior, electricity and life safety, appliances, drainage and grounds, doors and windows, hidden spaces, contractors and warranties, an annual review, warning-sign reference chapters, and practical worksheets for Year Two.</p>
+      <p><a class="button" href="/books/your-first-year-as-a-homeowner/">Explore the book</a></p>
+      <div class="notice"><strong>Safety boundary.</strong> General homeowner observation is not professional inspection, diagnosis, or repair. Electricity, gas and combustion equipment, structural work, roofing and other work at height, hazardous materials, refrigerants, sewage, pressurized systems, and some plumbing work can create serious risks and may require qualified or licensed professionals.</div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,37 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+const { entry } = Astro.props;
+const { title, description, published, related } = entry.data;
+const url = new URL('/first-year-homeowner/' + entry.id + '/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Article',
+  headline:title,
+  description,
+  datePublished:published.toISOString().slice(0,10),
+  author:{'@type':'Person',name:'James Carter',url:'https://mercerlanepress.com/authors/james-carter/'},
+  publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  mainEntityOfPage:url
+};
+---
+<BaseLayout title={title} description={description} type="article" schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'First-Year Homeowner Maintenance',href:'/first-year-homeowner/'},{name:title}]}/>
+  <article class="article wrap narrow">
+    <header>
+      <p class="eyebrow">FIRST-YEAR HOMEOWNER MAINTENANCE</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="byline">By <a href="/authors/james-carter/">James Carter</a> · Published <time datetime={published.toISOString()}>{published.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'})}</time></p>
+    </header>
+    <div class="article-body"><slot /></div>
+    <aside class="book-note">
+      <p class="eyebrow">THE COMPLETE FIRST-YEAR SYSTEM</p>
+      <h2>Build a maintenance routine around the house you actually own</h2>
+      <p><em>Your First Year as a Homeowner</em> by James Carter expands these ideas into a twelve-month sequence for learning the property, keeping useful records, noticing change, handling routine maintenance, and recognizing when the next step belongs with a qualified professional.</p>
+      <a class="button" href="/books/your-first-year-as-a-homeowner/">Explore the book</a>
+    </aside>
+    <nav class="related" aria-label="Related first-year homeowner maintenance guides"><h2>Related homeowner guides</h2><ul>{related.map((slug:string) => <li><a href={'/first-year-homeowner/' + slug + '/'}>{slug.replaceAll('-',' ')}</a></li>)}</ul></nav>
+    <div class="notice"><strong>Use current property-specific requirements.</strong> These pages provide general U.S.-oriented educational and organizational information. Building conditions, manufacturer instructions, codes, permits, licensing requirements, and professional qualifications vary. Follow the current requirements that apply to your equipment, property, and location, and do not undertake work you do not understand or cannot perform safely.</div>
+  </article>
+</BaseLayout>

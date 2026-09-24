@@ -1,0 +1,38 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const { entry } = Astro.props;
+const { title, description, published, related } = entry.data;
+const url = new URL('/aquarium-troubleshooting/' + entry.id + '/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Article',
+  headline:title,
+  description,
+  datePublished:published.toISOString().slice(0,10),
+  author:{'@type':'Person',name:'Miles Northcott',url:'https://mercerlanepress.com/authors/miles-northcott/'},
+  publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  mainEntityOfPage:url
+};
+---
+<BaseLayout title={title} description={description} type="article" schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Aquarium Troubleshooting',href:'/aquarium-troubleshooting/'},{name:title}]}/>
+  <article class="article wrap narrow">
+    <header>
+      <p class="eyebrow">FRESHWATER AQUARIUM TROUBLESHOOTING</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="byline">By <a href="/authors/miles-northcott/">Miles Northcott</a> · Published <time datetime={published.toISOString()}>{published.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'})}</time></p>
+    </header>
+    <div class="article-body"><slot /></div>
+    <aside class="book-note">
+      <p class="eyebrow">THE COMPLETE TROUBLESHOOTING SYSTEM</p>
+      <h2>Start with what changed before you start trying to fix it</h2>
+      <p><em>What's Wrong With My Aquarium?</em> connects fish behavior, water tests, equipment checks, recent changes, recurring patterns, and post-fix verification into one beginner-friendly troubleshooting method for freshwater aquariums.</p>
+      <a class="button" href="/books/whats-wrong-with-my-aquarium/">Explore the book</a>
+    </aside>
+    <nav class="related" aria-label="Related aquarium troubleshooting guides"><h2>Related aquarium troubleshooting guides</h2><ul>{related.map((slug:string) => <li><a href={'/aquarium-troubleshooting/' + slug + '/'}>{slug.replaceAll('-',' ')}</a></li>)}</ul></nav>
+    <div class="notice"><strong>Health and safety boundary.</strong> These guides provide general educational information, not veterinary diagnosis or treatment. Species requirements vary. Seek appropriate specialist or aquatic-veterinary help when fish are severely distressed, deteriorating rapidly, dying repeatedly, showing significant physical abnormalities, or when a serious contaminant or equipment hazard is suspected.</div>
+  </article>
+</BaseLayout>

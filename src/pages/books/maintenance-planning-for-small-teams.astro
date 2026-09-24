@@ -27,11 +27,11 @@ const schema = {
   publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
   description:book.description,
   url:new URL('/books/' + book.slug + '/',Astro.site).href,
-  image:new URL(book.cover,Astro.site).href,
+  ...(book.coverReady ? {image:new URL(book.cover,Astro.site).href} : {}),
   sameAs:book.purchaseUrl
 };
 ---
-<BaseLayout title={book.title} description={book.description} image={book.cover} schema={schema}>
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
   <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
   <section class="wrap book-layout">
     <BookCover book={book} large/>

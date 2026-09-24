@@ -12,8 +12,8 @@ export const books: Book[] = [{
   author: 'Daniel Mercer', authorSlug: 'daniel-mercer',
   publisher: 'Mercer Lane Press',
   description: 'A practical small-team maintenance planning system that separates work capture, triage, planning, readiness, weekly commitment, execution, closeout, and review so supervisors can control backlog, prepare executable work, coordinate parts and production access, schedule against realistic labor capacity, and learn from schedule changes without building a large-company bureaucracy.',
-  cover: '/social-card.svg',
-  coverReady: false,
+  cover: '/images/books/MP-DIGITAL_BOOK_COVER.jpg',
+  coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0HHTT8HYG',
   intendedReader: 'Maintenance supervisors, planners, managers, lead technicians, and small industrial maintenance teams where one person may cover several planning, scheduling, coordination, stores, and supervisory responsibilities.',
   problems: [

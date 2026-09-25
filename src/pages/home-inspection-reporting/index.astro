@@ -1,0 +1,66 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('homeInspectionReportingGuides')).sort((a,b) => a.data.order - b.data.order);
+const url = new URL('/home-inspection-reporting/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'CollectionPage',
+  name:'Home Inspection Reporting Guides',
+  description:'Practical home inspection reporting guides for complete findings, narrative-library control, photo workflow, same-day report production, and final quality assurance.',
+  url,
+  isPartOf:{'@type':'WebSite',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  hasPart:guides.map(guide => ({'@type':'Article',name:guide.data.title,url:'https://mercerlanepress.com/home-inspection-reporting/' + guide.id + '/'}))
+};
+---
+<BaseLayout title="Home Inspection Reporting Guides" description="Practical home inspection reporting guides for complete findings, narrative-library control, photo workflow, same-day report production, and final quality assurance." schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Guides',href:'/guides/'},{name:'Home Inspection Reporting'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">RESIDENTIAL HOME INSPECTION</p>
+    <h1>Home Inspection Reporting Guides</h1>
+    <p class="lede">Reduce report-writing friction by controlling the information flow: capture property-specific facts early, use reusable structure carefully, preserve photographic context, verify variables, and finish with targeted QA.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><h2>One workflow from observation to delivery</h2><p>The reporting method is designed to standardize safe mechanics without standardizing the property itself.</p></div>
+      <div class="hub-steps">
+        <article><h3>Observe</h3><p>Capture location, condition, limitations, test results, and useful photographs while the property still supplies the context.</p></article>
+        <article><h3>Build</h3><p>Use Location → Condition → Significance → Next Action to check completeness without forcing every finding into the same length.</p></article>
+        <article><h3>Prioritize</h3><p>Apply defined urgency and summary criteria after the finding is understood rather than letting software defaults decide.</p></article>
+        <article><h3>Verify</h3><p>Check facts, reusable variables, photographs, uncertainty, recommendations, and body-summary consistency.</p></article>
+        <article><h3>Deliver</h3><p>Inspect the rendered report as a client-facing document and issue it only after final report-level quality control.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Start with the repeated reporting bottleneck that costs the most time</h2><p>These five guides cover the core finding, narrative-library design, photo handling, the same-day operating sequence, and targeted final-report QA.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/home-inspection-reporting/" label="HOME INSPECTION REPORTING" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">THE TWO CONTROL LOOPS</p><h2>Build the finding, then control the workflow around it</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Finding loop</h3><p>Location → Condition → Significance → Next Action. These are questions the finished finding should answer when relevant, not a requirement for four separate sentences.</p></article>
+        <article class="card"><h3>Operating loop</h3><p>Prepare → Capture → Close → Review → Deliver → Measure. Move cheap corrections earlier, protect the desk review, and use real reporting-time data to find the next friction point.</p></article>
+        <article class="card"><h3>Final control</h3><p>Standardize what can be standardized safely, then verify everything that belongs to the individual property. Professional judgment remains with the inspector.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">THE COMPLETE SYSTEM</p><h2>Write Better Home Inspection Reports Faster</h2></div>
+      <p>Warren Holtby's book expands the workflow into reporting-time measurement, complete-finding design, narrative-library architecture, photo selection, summary rules, field-to-report alignment, AI boundaries, same-day reporting, final QA, and long-term improvement for individual and multi-inspector businesses.</p>
+      <p><a class="button" href="/books/write-better-home-inspection-reports-faster/">Explore the book</a></p>
+      <div class="notice"><strong>Scope matters.</strong> Reporting requirements vary by jurisdiction and professional organization. Use these workflow principles inside the requirements, agreements, standards, and professional boundaries that apply to your own inspections.</div>
+    </div>
+  </section>
+</BaseLayout>

@@ -6,6 +6,49 @@ export interface Book {
 }
 
 export const books: Book[] = [{
+  slug: 'the-new-manufacturing-supervisors-playbook',
+  title: "The New Manufacturing Supervisor's Playbook",
+  subtitle: 'A Practical Guide to Leading Shifts, Managing Former Peers, Giving Feedback and Handling Difficult Conversations',
+  author: 'Daniel Mercer', authorSlug: 'daniel-mercer',
+  publisher: 'Mercer Lane Press',
+  description: 'A practical first-90-days operating guide for newly promoted manufacturing supervisors, covering role clarity, shift leadership, former-peer boundaries, delegation, feedback, difficult conversations, performance problems, experienced employees, managing up, recurring issues, and knowing when to escalate.',
+  cover: '/images/books/sup - DIGITAL_BOOK_COVER.jpg',
+  coverReady: true,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HDLLVJQ2',
+  intendedReader: 'New and newly promoted frontline manufacturing supervisors, especially skilled operators, technicians, and team members moving into responsibility for a shift, including internal promotions where former coworkers, experienced employees, production priorities, quality, safety, handovers, and people problems all have to be managed at the same time.',
+  problems: [
+    'Continuing to work mainly as the strongest operator instead of organising priorities, people, follow-up, and escalation across the whole shift',
+    'Guessing where supervisory authority begins and ends for staffing, overtime, attendance, quality, performance, safety, training, and other decisions',
+    'Managing former peers or friends without favouritism, overcorrection, confidentiality problems, or public authority contests',
+    'Correcting employees before the legitimate standard is clear, or allowing ordinary feedback and difficult conversations to become larger because they were postponed',
+    'Taking over delegated work, checking competent employees constantly, or becoming the answer to every routine technical decision',
+    'Treating a missed target, incomplete check, conflict, or repeated operational problem as a people problem before checking work conditions, clarity, authority, and evidence',
+    'Passing vague complaints upward instead of giving managers decision-ready information about the situation, evidence, impact, action already taken, and support needed'
+  ],
+  topics: [
+    'First 90 days as a manufacturing supervisor: Days 1–7, 8–30, 31–60, and 61–90',
+    'People Problem / Work Problem / Clarity Problem / Authority Problem diagnostic',
+    'Supervisor Authority Map, escalation boundaries, and Required / Agreed / Preferred / Habit distinctions',
+    'First-shift learning, Team Knowledge Map, and former-peer boundaries',
+    'Prepare → Brief → Observe → Respond → Follow Up → Handover → Review shift operating rhythm',
+    'Expectation clarity, delegation, oversight, and avoiding micromanagement',
+    'Prepare → Describe → Clarify → Listen → Respond → Confirm → Follow Up difficult-conversation structure',
+    'Facts before conclusions, performance gaps, feedback, conflict, and challenging behaviour',
+    'Experienced employees, managing up, recurring-issue review, Day-90 scorecard, and next-90-days planning',
+    'Manufacturing casebook, 13-week implementation plan, new-supervisor traps, conversation workshop, situational playbook, and reusable resource sheets'
+  ],
+  outcomes: [
+    'A clearer map of what the supervisor can decide, what sits within limits, what should be recommended, and what requires escalation',
+    'A repeatable operating rhythm for preparing, briefing, observing, responding, following up, handing over, and reviewing a shift',
+    'A fact-based way to prepare ordinary feedback and difficult conversations without assuming motive before checking what happened',
+    'More deliberate delegation and use of experienced employees so the team does not become unnecessarily dependent on supervisory rescue',
+    'More useful manager updates and a practical method for recognising recurring problems instead of repeatedly treating them as isolated emergencies',
+    'A first-90-days review that turns the initial transition into a small set of next-stage development priorities'
+  ],
+  themes: ['manufacturing supervisor','first 90 days','frontline supervision','former peers','shift leadership','delegation','difficult conversations','managing up'],
+  hubSlug: 'manufacturing-supervision',
+  hubLabel: 'Manufacturing supervision guides'
+},{
   slug: 'the-first-time-pool-owners-troubleshooting-guide',
   title: "The First-Time Pool Owner's Troubleshooting Guide",
   subtitle: 'A Symptom-First System for Green or Cloudy Water, Vanishing Chlorine, Filter-Pressure Changes, Air Bubbles, Stains, Scale and Circulation Problems',

@@ -1,0 +1,37 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+const { entry } = Astro.props;
+const { title, description, published, related } = entry.data;
+const url = new URL('/hr-ai/' + entry.id + '/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Article',
+  headline:title,
+  description,
+  datePublished:published.toISOString().slice(0,10),
+  author:{'@type':'Person',name:'Mercer Lane',url:'https://mercerlanepress.com/authors/mercer-lane/'},
+  publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  mainEntityOfPage:url
+};
+---
+<BaseLayout title={title} description={description} type="article" schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'AI for Bookkeepers',href:'/hr-ai/'},{name:title}]}/>
+  <article class="article wrap narrow">
+    <header>
+      <p class="eyebrow">AI FOR BOOKKEEPERS</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="byline">By <a href="/authors/mercer-lane/">Mercer Lane</a> · Published <time datetime={published.toISOString()}>{published.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'})}</time></p>
+    </header>
+    <div class="article-body"><slot /></div>
+    <aside class="book-note">
+      <p class="eyebrow">THE COMPLETE WORKING SYSTEM</p>
+      <h2>Build reusable AI support around recurring bookkeeping work</h2>
+      <p><em>AI Productivity for HR Professionals</em> by Mercer Lane expands these ideas into more than 100 customizable prompts, five workflow systems, action plans, advanced prompting methods, bookkeeper-specific examples, privacy guidance, bonus prompts, and a 30-day implementation checklist.</p>
+      <a class="button" href="/books/ai-productivity-for-hr-professionals/">Explore the book</a>
+    </aside>
+    <nav class="related" aria-label="Related AI for bookkeepers guides"><h2>Related HR AI guides</h2><ul>{related.map((slug:string) => <li><a href={'/hr-ai/' + slug + '/'}>{slug.replaceAll('-',' ')}</a></li>)}</ul></nav>
+    <div class="notice"><strong>Review before use.</strong> These pages are educational and productivity resources, not accounting, tax, financial, legal, privacy, or regulatory advice. Verify all figures and facts, protect client confidentiality, follow your practice policies and current jurisdictional requirements, and route professional or compliance-sensitive decisions through the appropriate qualified reviewer.</div>
+  </article>
+</BaseLayout>

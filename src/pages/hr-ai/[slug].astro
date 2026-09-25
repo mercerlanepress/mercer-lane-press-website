@@ -1,7 +1,11 @@
 ---
 import { getCollection, render } from 'astro:content';
-import GuideLayout from '../../layouts/GuideLayout.astro';
-export async function getStaticPaths(){const guides=await getCollection('hrAiGuides');return guides.map(guide=>({params:{slug:guide.id},props:{guide}}));}
-const {guide}=Astro.props; const {Content}=await render(guide);
+import HrAiArticleLayout from '../../layouts/HrAiArticleLayout.astro';
+
+export async function getStaticPaths(){
+  return (await getCollection('hrAiGuides')).map(entry => ({params:{slug:entry.id},props:{entry}}));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
 ---
-<GuideLayout guide={guide} base="/hr-ai/" hubLabel="AI for HR Professionals Guides"><Content /></GuideLayout>
+<HrAiArticleLayout entry={entry}><Content /></HrAiArticleLayout>

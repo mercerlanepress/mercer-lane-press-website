@@ -6,6 +6,46 @@ export interface Book {
 }
 
 export const books: Book[] = [{
+  slug: 'write-better-home-inspection-reports-faster',
+  title: 'Write Better Home Inspection Reports Faster',
+  subtitle: 'A Practical Workflow for Observations, Photos, Narratives, Defect Comments, Summaries and Faster Report Delivery',
+  author: 'Warren Holtby', authorSlug: 'warren-holtby',
+  publisher: 'Mercer Lane Press',
+  description: 'A practical, software-neutral system for residential home inspectors who want to reduce avoidable reporting friction while keeping observations, professional judgment, photographs, recommendations, summaries, limitations, and final quality control tied to the inspected property.',
+  cover: '/images/books/HS-DIGITAL_BOOK_COVER.jpg',
+  coverReady: false,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HHQSCZVM',
+  intendedReader: 'Residential home inspectors, newer inspectors whose reports still consume hours after the inspection, experienced inspectors with overgrown narrative libraries or photo bottlenecks, and multi-inspector teams that want a more controlled reporting workflow without handing professional judgment to software or AI.',
+  problems: [
+    'Reconstructing observations from memory after leaving the property',
+    'Searching, rewriting, and heavily editing an inconsistent comment or narrative library',
+    'Photographs that are difficult to match to the correct location, component, or finding',
+    'Summary items, priorities, limitations, and recommendations that drift out of sync with the report body',
+    'Copy-and-paste variables such as location, quantity, material, condition, certainty, action, urgency, or photo reference surviving from the wrong scenario',
+    'Final reviews that rely on rereading the report without a targeted quality-control sequence'
+  ],
+  topics: [
+    'OBSERVE → BUILD → PRIORITIZE → VERIFY → DELIVER',
+    'Location → Condition → Significance → Next Action',
+    'Reporting-time audits: retrieve, reconstruct, rewrite, repair, and redecide',
+    'Narrative families, naming, property-specific variables, copy/paste tests, retirement, and version control',
+    'Context → Component → Detail photography and photo-to-finding matching',
+    'Summary rules, body-summary consistency, and proportionate priority',
+    'PREPARE → CAPTURE → CLOSE → REVIEW → DELIVER → MEASURE',
+    'AI as a language and organization tool without outsourcing observation or professional judgment',
+    'Targeted final QA passes for identity, completeness, variables, photographs, summary, consistency, and rendered output'
+  ],
+  outcomes: [
+    'A repeatable structure for turning field observations into clear, property-specific findings',
+    'A narrative library that is faster to retrieve, easier to maintain, and less likely to carry wrong-property variables forward',
+    'A deliberate photo workflow that preserves context and reduces duplicate or mismatched report images',
+    'A same-day operating sequence that moves work earlier without treating report delivery as a speed contest',
+    'A reusable final-report QA process that checks the highest-consequence failure points before delivery'
+  ],
+  themes: ['home inspection reporting','report writing','narrative library','inspection photographs','same-day workflow','quality control'],
+  hubSlug: 'home-inspection-reporting',
+  hubLabel: 'Home inspection reporting guides'
+},{
   slug: 'whats-wrong-with-my-aquarium',
   title: "What's Wrong With My Aquarium?",
   subtitle: "A Beginner's Troubleshooting Guide to Cloudy Water, Algae, Fish Stress, Cycling Problems, Filters and Water Quality",

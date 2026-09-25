@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('bookkeeperAiGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'CollectionPage',
+  name:'AI for Bookkeepers Guides',
+  description:'Practical guides to bookkeeper AI prompts, client-data minimization, month-end workflows, client onboarding, overdue-invoice follow-up, and careful human review.',
+  url:new URL('/bookkeeper-ai/',Astro.site).href,
+  publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'}
+};
+---
+<BaseLayout title="AI for Bookkeepers Guides" description="Practical guides to bookkeeper AI prompts, client-data privacy, month-end close, client onboarding, overdue-invoice follow-up, and careful human review." schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'AI for Bookkeepers'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">BOOKKEEPER AI</p>
+    <h1>AI for Bookkeepers Guides</h1>
+    <p class="lede">Use AI for repeatable drafting, explanation, documentation, and workflow support while keeping client confidentiality, verified figures, professional judgment, and final review in human hands.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><h2>A practical working sequence</h2><p>Useful AI work begins with a defined task and ends with a reviewed output. The middle should contain only the context the draft genuinely needs.</p></div>
+      <div class="hub-steps">
+        <article><h3>Structure</h3><p>Frame the instruction with Role + Task + Context + Output so the model is not left to guess the job, the audience, or the format.</p></article>
+        <article><h3>Minimize</h3><p>Keep identifying and sensitive client information out of the prompt when the task can be completed with anonymized, generalized, or limited context.</p></article>
+        <article><h3>Draft</h3><p>Use AI for the first usable version of an email, explanation, checklist, SOP, proposal, summary, or internal note—not as an automatic final authority.</p></article>
+        <article><h3>Review</h3><p>Check figures, names, dates, assumptions, tone, missing information, and whether the output crosses into tax, accounting, financial, legal, privacy, or regulatory judgment.</p></article>
+        <article><h3>Connect</h3><p>When the same work repeats, turn useful prompts into a sequence for month-end, onboarding, receivables, reporting, proposals, or another recurring process.</p></article>
+        <article><h3>Refine</h3><p>Save the versions that actually work, keep the variables visible, remove unnecessary context, and build a personal prompt library around real recurring tasks.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Start with one recurring bookkeeping task</h2><p>The five guides below cover the prompt formula, client-data minimization, month-end close, new-client onboarding, and overdue-invoice follow-up.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/bookkeeper-ai/" label="BOOKKEEPER AI" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">THE COMPLETE BOOK</p><h2>The AI Productivity Guide for Bookkeepers</h2></div>
+      <p>The workbook expands these ideas into more than 100 customizable prompts across eight bookkeeping categories, five connected workflow systems, short action plans, advanced prompting techniques, bookkeeper-specific examples, bonus prompts, a quick prompt finder, and a 30-day implementation checklist.</p>
+      <p><a class="button" href="/books/the-ai-productivity-guide-for-bookkeepers/">Explore the book</a></p>
+      <div class="notice"><strong>Professional boundary.</strong> These pages are educational and productivity resources, not accounting, tax, financial, legal, privacy, or regulatory advice. Review every AI output, verify the underlying figures and facts, follow the applicable professional and jurisdictional requirements, and keep confidential client information within the systems and tools your practice is permitted to use.</div>
+    </div>
+  </section>
+</BaseLayout>

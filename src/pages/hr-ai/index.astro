@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+const guides=(await getCollection('hrAiGuides')).sort((a,b)=>a.data.order-b.data.order);
+const schema={'@context':'https://schema.org','@type':'CollectionPage',name:'AI for HR Professionals Guides',description:'Practical guides to HR AI prompts, employee-data minimization, performance-review drafting, employee-relations preparation, and repeatable HR workflows.',url:new URL('/hr-ai/',Astro.site).href,publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'}};
+---
+<BaseLayout title="AI for HR Professionals Guides" description="Practical guides to HR AI prompts, employee-data privacy, performance-review drafting, employee-relations preparation, and repeatable HR workflows." schema={schema}>
+<Breadcrumbs items={[{name:'Home',href:'/'},{name:'AI for HR Professionals'}]}/>
+<header class="page-head wrap"><p class="eyebrow">HR AI</p><h1>AI for HR Professionals Guides</h1><p class="lede">Use AI for repeatable HR drafting and workflow support while keeping employee confidentiality, verified facts, professional judgment, and appropriate legal or compliance review in human hands.</p></header>
+<section class="section section-tint"><div class="wrap"><div class="section-head"><h2>A safer working sequence</h2></div><div class="hub-steps">
+<article><h3>Define</h3><p>Use Role + Task + Context + Output so the model knows the job, relevant facts, and required format.</p></article>
+<article><h3>Minimize</h3><p>Give the tool only the information needed for the draft, using placeholders or generalized context where possible.</p></article>
+<article><h3>Draft</h3><p>Use AI to overcome the blank page for communication, documentation, reports, checklists, questions, and preparation.</p></article>
+<article><h3>Verify</h3><p>Check facts, figures, names, dates, policy references, tone, and assumptions against the real source material.</p></article>
+<article><h3>Review</h3><p>Apply HR judgment and the organization's legal, compliance, privacy, security, and approval requirements before use.</p></article>
+<article><h3>Reuse</h3><p>Save prompts and connected workflows that work so recurring HR tasks improve instead of restarting from zero.</p></article>
+</div></div></section>
+<section class="section"><div class="wrap"><div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Start with one recurring HR task</h2><p>These guides cover prompt structure, employee-data minimization, performance reviews, employee-relations preparation, and connected workflows.</p></div><div class="grid-3">{guides.map(guide=><GuideCard guide={guide} base="/hr-ai/" label="HR AI" />)}</div></div></section>
+<section class="section section-tint"><div class="wrap narrow"><div class="section-head"><p class="eyebrow">THE COMPLETE BOOK</p><h2>AI Productivity for HR Professionals</h2></div><p>The book expands these principles into 141 ready-to-use prompts across eight HR categories, five workflow systems, five mini action plans, advanced strategies, HR-specific scenarios, and bonus prompts.</p><p><a class="button" href="/books/ai-productivity-for-hr-professionals/">Explore the book</a></p><div class="notice"><strong>Professional boundary.</strong> These pages are educational productivity resources, not legal, compliance, employment-law, privacy, or information-security advice. Review and verify AI outputs and use the qualified review required for your organization, jurisdiction, and situation.</div></div></section>
+</BaseLayout>

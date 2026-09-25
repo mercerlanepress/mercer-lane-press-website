@@ -1,0 +1,11 @@
+---
+import { getCollection, render } from 'astro:content';
+import HomeInspectionReportingArticleLayout from '../../layouts/HomeInspectionReportingArticleLayout.astro';
+
+export async function getStaticPaths(){
+  return (await getCollection('homeInspectionReportingGuides')).map(entry => ({params:{slug:entry.id},props:{entry}}));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<HomeInspectionReportingArticleLayout entry={entry}><Content /></HomeInspectionReportingArticleLayout>

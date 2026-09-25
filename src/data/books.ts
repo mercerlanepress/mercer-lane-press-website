@@ -12,7 +12,7 @@ export const books: Book[] = [{
   author: 'Mercer Lane', authorSlug: 'mercer-lane',
   publisher: 'Mercer Lane Press',
   description: 'A practical working reference for HR professionals using AI for recurring drafting, communication, documentation, reporting, onboarding, performance management, employee relations, learning and development, and other everyday HR work, with 141 ready-to-use prompts, five connected workflows, five action plans, and a Role + Task + Context + Output framework.',
-  cover: '/images/books/ai-productivity-for-hr-professionals-cover.jpg',
+  cover: '/images/books/hr -DIGITAL_BOOK_COVER.jpg',
   coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0H9SDPMY3',
   intendedReader: 'HR generalists, recruiters, HR business partners, people operations staff, small HR teams, and other human-resources professionals who want repeatable AI-assisted drafting and workflow support while keeping human judgment, confidentiality, factual review, and appropriate legal or compliance review in the loop.',

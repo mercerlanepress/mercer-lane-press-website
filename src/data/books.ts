@@ -45,7 +45,7 @@ export const books: Book[] = [{
   themes: ['hotel housekeeping supervisor','room boards','room inspections','housekeeping call-outs','room status','front desk coordination','linen control','staff feedback'],
   hubSlug: 'hotel-housekeeping-supervision',
   hubLabel: 'Hotel housekeeping supervision guides'
-},
+},{
   slug: 'the-new-manufacturing-supervisors-playbook',
   title: "The New Manufacturing Supervisor's Playbook",
   subtitle: 'A Practical Guide to Leading Shifts, Managing Former Peers, Giving Feedback and Handling Difficult Conversations',

@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('manufacturingSupervisionGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'CollectionPage',
+  name:'Manufacturing Supervision Guides for New Supervisors',
+  description:'Practical guides for newly promoted manufacturing supervisors covering the first 90 days, former peers, shift briefings and handovers, delegation, difficult conversations, authority, and escalation.',
+  url:new URL('/manufacturing-supervision/',Astro.site).href,
+  hasPart:guides.map(guide => ({
+    '@type':'Article',
+    name:guide.data.title,
+    url:new URL('/manufacturing-supervision/' + guide.id + '/',Astro.site).href
+  }))
+};
+---
+<BaseLayout title="Manufacturing Supervision Guides for New Supervisors" description="Practical guides for newly promoted manufacturing supervisors covering the first 90 days, former peers, shift briefings and handovers, delegation, difficult conversations, authority, and escalation." schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Manufacturing Supervision'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">FRONTLINE MANUFACTURING LEADERSHIP</p>
+    <h1>Manufacturing Supervision Guides for New Supervisors</h1>
+    <p class="lede">Practical help for the transition from doing the work yourself to organising a shift, setting clear expectations, developing people, handling ordinary problems early, and knowing what should be escalated.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Build the role in stages</h2>
+        <p>A new supervisor does not need to change everything at once. The useful sequence is to understand the role and team first, build a repeatable shift rhythm, address people problems earlier, then become more consistent and less dependent on personal firefighting.</p>
+      </div>
+      <div class="hub-steps">
+        <article><h3>Days 1–7: understand</h3><p>Map authority, learn the team, observe before changing, track commitments, and identify where former-peer relationships may create pressure.</p></article>
+        <article><h3>Days 8–30: organise</h3><p>Use a pre-shift check, concise briefings, visible follow-up, deliberate delegation, and useful end-of-shift handovers.</p></article>
+        <article><h3>Days 31–60: address</h3><p>Prepare difficult conversations, start with facts, check the legitimate standard, listen for causes, and follow up instead of hoping problems disappear.</p></article>
+        <article><h3>Days 61–90: become consistent</h3><p>Use experienced employees well, improve manager updates, identify recurring problems, and review which decisions or tasks still depend too heavily on you.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Start with the supervisory problem in front of you</h2><p>These guides isolate common pressure points for newly promoted manufacturing supervisors and link them back to the same first-90-days operating system.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/manufacturing-supervision/" label="MANUFACTURING SUPERVISION" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">FULL SYSTEM REFERENCE</p><h2>The New Manufacturing Supervisor's Playbook</h2></div>
+      <p>The book extends the first-90-days approach across role clarity, team knowledge, former-peer boundaries, shift operating rhythm, expectations, delegation, micromanagement, difficult conversations, fact-based performance management, conflict, experienced employees, managing up, recurring issues, a manufacturing casebook, a 13-week implementation plan, conversation examples, a situational playbook, and reusable supervisor resources.</p>
+      <p><a class="button" href="/books/the-new-manufacturing-supervisors-playbook/">Explore the book</a></p>
+      <div class="notice"><strong>Use local procedures.</strong> Workplace policies, employment requirements, health and safety responsibilities, disciplinary processes, union arrangements, and supervisory authority vary by employer, industry, and jurisdiction. Use these guides as general educational material and follow the procedures, training, and specialist routes that apply to your workplace.</div>
+    </div>
+  </section>
+</BaseLayout>

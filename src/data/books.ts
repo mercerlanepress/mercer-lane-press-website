@@ -13,7 +13,7 @@ export const books: Book[] = [{
   publisher: 'Mercer Lane Press',
   description: 'A practical, software-neutral system for residential home inspectors who want to reduce avoidable reporting friction while keeping observations, professional judgment, photographs, recommendations, summaries, limitations, and final quality control tied to the inspected property.',
   cover: '/images/books/HS-DIGITAL_BOOK_COVER.jpg',
-  coverReady: false,
+  coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0HHQSCZVM',
   intendedReader: 'Residential home inspectors, newer inspectors whose reports still consume hours after the inspection, experienced inspectors with overgrown narrative libraries or photo bottlenecks, and multi-inspector teams that want a more controlled reporting workflow without handing professional judgment to software or AI.',
   problems: [

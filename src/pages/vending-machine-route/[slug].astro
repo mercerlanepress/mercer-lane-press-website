@@ -1,0 +1,11 @@
+---
+import { getCollection, render } from 'astro:content';
+import VendingMachineRouteArticleLayout from '../../layouts/VendingMachineRouteArticleLayout.astro';
+
+export async function getStaticPaths(){
+  return (await getCollection('vendingMachineRouteGuides')).map(entry => ({params:{slug:entry.id},props:{entry}}));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<VendingMachineRouteArticleLayout entry={entry}><Content /></VendingMachineRouteArticleLayout>

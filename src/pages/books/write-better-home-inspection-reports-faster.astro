@@ -1,0 +1,110 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'write-better-home-inspection-reports-faster')!;
+const guides = (await getCollection('homeInspectionReportingGuides')).sort((a,b) => a.data.order - b.data.order);
+const method = [
+  ['OBSERVE','Capture enough property-specific information to reconstruct the finding accurately, including location, condition, limitations, test results, and useful photographs.'],
+  ['BUILD','Turn the observation into a clear finding using Location → Condition → Significance → Next Action as invisible scaffolding, not a rigid sentence formula.'],
+  ['PRIORITIZE','Classify the completed finding deliberately. Keep urgency and summary inclusion governed by defined criteria rather than software color or a canned comment.'],
+  ['VERIFY','Check facts, variables, photographs, certainty, recommendation, and consistency against what was actually observed.'],
+  ['DELIVER','Review the rendered client-facing report as a whole before issuing it through the process appropriate to the business and applicable requirements.']
+];
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/warren-holtby/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  ...(book.coverReady ? {image:new URL(book.cover,Astro.site).href} : {}),
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">HOME INSPECTION · REPORTING WORKFLOW</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/warren-holtby/">Warren Holtby</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/home-inspection-reporting/">Read free reporting guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>For inspectors who want to remove reporting friction without removing judgment</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">THE REPORTING SYSTEM</p>
+        <h2>OBSERVE → BUILD → PRIORITIZE → VERIFY → DELIVER</h2>
+        <p>The book treats faster reporting as a system problem. The aim is to reduce retrieval, reconstruction, repeated composition, and avoidable correction while protecting the decisions that require professional judgment.</p>
+      </div>
+      <div class="grid-3">{method.map(([name,body]) => <article class="card"><h3>{name}</h3><p>{body}</p></article>)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">THE BASIC FINDING</p><h2>Location → Condition → Significance → Next Action</h2><p>The four elements are questions, not four mandatory sentences. A routine condition may need one concise sentence; an uncertain or complex condition may need several.</p></div>
+      <div class="grid-3">
+        <article class="card"><h3>Location</h3><p>Give enough information that the client, another inspector, or an appropriate professional can find the affected area or component without guessing.</p></article>
+        <article class="card"><h3>Condition</h3><p>Describe the visible state, measured result, or operating behavior rather than hiding the observation behind a broad label such as “issue” or “defective.”</p></article>
+        <article class="card"><h3>Significance</h3><p>Explain the relevant consequence when it is not self-evident, while keeping certainty and severity proportionate to the evidence.</p></article>
+        <article class="card"><h3>Next action</h3><p>Choose a recommendation that follows from the finding: correct, evaluate, monitor, maintain, or obtain information as appropriate.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FROM FIELD TO DELIVERY</p><h2>Move cheap decisions earlier, then slow down for review</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Narrative library control</h3><p>Build predictable families by system, component, and condition; expose property-specific variables; retire duplicates; and keep one approved active version.</p></article>
+        <article class="card"><h3>Photo hierarchy</h3><p>Use Context → Component → Detail when the finding needs it. Match every report image to the correct property, location, component, condition, and purpose.</p></article>
+        <article class="card"><h3>Summary discipline</h3><p>Treat the summary as navigation, not a second report. A compressed summary must not escalate the condition, certainty, recommendation, or priority found in the body.</p></article>
+        <article class="card"><h3>Same-day workflow</h3><p>PREPARE → CAPTURE → CLOSE → REVIEW → DELIVER → MEASURE. The sequence is designed to reduce desk-side reconstruction while preserving deliberate final review.</p></article>
+        <article class="card"><h3>Targeted QA</h3><p>Check identity, completeness, high-priority findings, variables, photographs, summary, consistency, and rendered output instead of relying on an unfocused reread.</p></article>
+        <article class="card"><h3>AI with a boundary</h3><p>Use AI for language and organization tasks such as shortening, grammar, naming, duplication checks, or drafting from inspector-supplied facts. Observation, significance, scope, cause, urgency, and final approval stay with the inspector.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Five focused references for the highest-friction parts of report production</h2></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/home-inspection-reporting/" label="HOME INSPECTION REPORTING" />)}</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">PROFESSIONAL BOUNDARY</p><h2>A reporting workflow, not a substitute for the requirements that govern an inspection</h2></div>
+      <p>The book is an educational resource about the organization, writing, editing, and quality control of residential home inspection reports. It does not establish a Standard of Practice and does not replace applicable law, regulation, licensing requirements, professional standards, inspection agreements, insurance requirements, employer procedures, or other obligations.</p>
+      <p>Examples illustrate communication and workflow principles. Final findings must remain grounded in the property actually inspected, the inspection performed, the inspector's professional judgment, and the requirements that apply to that work.</p>
+    </div>
+  </section>
+</BaseLayout>

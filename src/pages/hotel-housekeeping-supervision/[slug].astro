@@ -1,0 +1,11 @@
+---
+import { getCollection, render } from 'astro:content';
+import HotelHousekeepingSupervisionArticleLayout from '../../layouts/HotelHousekeepingSupervisionArticleLayout.astro';
+
+export async function getStaticPaths(){
+  return (await getCollection('hotelHousekeepingSupervisionGuides')).map(entry => ({params:{slug:entry.id},props:{entry}}));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<HotelHousekeepingSupervisionArticleLayout entry={entry}><Content /></HotelHousekeepingSupervisionArticleLayout>

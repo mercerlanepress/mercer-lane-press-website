@@ -6,6 +6,46 @@ export interface Book {
 }
 
 export const books: Book[] = [{
+  slug: 'your-first-30-days-as-a-hotel-housekeeping-supervisor',
+  title: 'Your First 30 Days as a Hotel Housekeeping Supervisor',
+  subtitle: 'A Practical Guide to Room Boards, Inspections, Call-Outs, Staff Feedback, Linen and Getting Rooms Ready on Time',
+  author: 'Julian Rooke', authorSlug: 'julian-rooke',
+  publisher: 'Mercer Lane Press',
+  description: 'A practical first-month field guide for newly promoted hotel housekeeping supervisors, covering the morning operating picture, fair room boards, call-outs, room-status control, inspections, front-desk coordination, linen and supply problems, staff feedback, training, handovers, and a structured 30-day development plan.',
+  cover: '/images/books/hotel-DIGITAL_BOOK_COVER.jpg',
+  coverReady: true,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HFJB8XG9',
+  intendedReader: 'New and newly promoted hotel housekeeping supervisors, especially experienced room attendants moving into responsibility for room boards, inspection flow, priorities, call-outs, linen and supply problems, front-desk coordination, staff coaching, blocked rooms, and end-of-shift handovers.',
+  problems: [
+    'Treating supervision as simply cleaning more rooms instead of controlling the flow of people, rooms, standards, information, interruptions, and decisions across the shift',
+    'Building room boards from raw room counts without accounting for service type, room type, geography, timing, experience, late checkouts, or genuine priority rooms',
+    'Trying to hide call-out capacity gaps inside overloaded boards instead of recounting capacity, protecting priorities, rebalancing work, and escalating what still does not fit',
+    'Losing visibility of rooms that are unstarted, in progress, waiting for inspection, blocked, or genuinely ready',
+    'Quietly fixing repeated room defects instead of separating isolated misses from training, supply, process, or recurring performance problems',
+    'Discovering linen, supply, equipment, maintenance, or status problems only after they have already stopped room flow',
+    'Managing former coworkers, feedback, training, and difficult shifts without clear, consistent operational reasons and appropriate escalation'
+  ],
+  topics: [
+    'READ → BUILD → BRIEF → CONTROL → CHECK → HAND OVER',
+    'Morning house read: departures, stayovers, vacant dirty rooms, late checkouts, priorities, staffing, maintenance, linen, and other constraints',
+    'Fair room boards using count, workload, distance, timing, experience, and recurring allocation patterns',
+    'Call-out recovery through capacity recounting, priority protection, rebalancing, authorised support, communication, and escalation',
+    'Room-status visibility, inspection queues, blocked rooms, maintenance handoff, and front-desk readiness updates',
+    'Consistent inspections, repeat-defect diagnosis, specific corrective feedback, and training without taking over the work',
+    'Linen, supply, and equipment risk; exception handling; and accurate end-of-shift handovers',
+    'A staged first-30-days plan with action checks, manager questions, control points, a supervisor scorecard, and Month 2 priorities'
+  ],
+  outcomes: [
+    'A repeatable way to read the house before assigning work and to keep the operating picture visible as conditions change',
+    'Room boards that can be explained using operational factors rather than raw room counts alone',
+    'A structured response to absences, bottlenecks, inspection queues, blocked rooms, and room-readiness pressure',
+    'More specific coaching and feedback based on observable work, the required standard, the next action, and follow-up',
+    'A practical first-month routine for deciding, escalating, checking, communicating, and handing over unresolved work'
+  ],
+  themes: ['hotel housekeeping supervisor','room boards','room inspections','housekeeping call-outs','room status','front desk coordination','linen control','staff feedback'],
+  hubSlug: 'hotel-housekeeping-supervision',
+  hubLabel: 'Hotel housekeeping supervision guides'
+},
   slug: 'the-new-manufacturing-supervisors-playbook',
   title: "The New Manufacturing Supervisor's Playbook",
   subtitle: 'A Practical Guide to Leading Shifts, Managing Former Peers, Giving Feedback and Handling Difficult Conversations',

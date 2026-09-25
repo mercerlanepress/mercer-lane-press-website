@@ -1,0 +1,11 @@
+---
+import { getCollection, render } from 'astro:content';
+import BookkeeperAiArticleLayout from '../../layouts/BookkeeperAiArticleLayout.astro';
+
+export async function getStaticPaths(){
+  return (await getCollection('bookkeeperAiGuides')).map(entry => ({params:{slug:entry.id},props:{entry}}));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<BookkeeperAiArticleLayout entry={entry}><Content /></BookkeeperAiArticleLayout>

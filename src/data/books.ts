@@ -6,6 +6,44 @@ export interface Book {
 }
 
 export const books: Book[] = [{
+  slug: 'the-vending-machine-route-operating-manual',
+  title: 'The Vending Machine Route Operating Manual',
+  subtitle: 'A Location-First System for Machine Economics, Stock Control, Service Planning and Building Your First 10-Machine Route',
+  author: 'Warren Holtby', authorSlug: 'warren-holtby',
+  publisher: 'Mercer Lane Press',
+  description: 'A practical U.S.-focused operating manual for people building or running a small vending-machine route, using a location-first system to qualify sites, model machine economics, choose equipment, control stock and service, measure each machine, and scale from the first machine toward a controlled ten-machine route.',
+  cover: '/images/books/The_Vending_Machine_Route_Operating_Manual_Front_Cover.jpg',
+  coverReady: true,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HHKQVLP6',
+  intendedReader: 'People considering their first vending machine, new operators building a small route, and owners of early-stage routes who want a repeatable way to qualify locations, understand machine-level economics, manage stock and service, review underperforming equipment, evaluate route purchases, and grow without relying on memory.',
+  problems: [
+    'Buying an attractive machine before a qualified location exists and then lowering the standard for where it gets placed',
+    'Judging a machine by gross sales without rebuilding product, payment, commission, waste, service, repair, and installed-equipment costs',
+    'Accepting a busy property without testing the recurring purchase occasion, placement, alternatives, access, security, host expectations, and route fit',
+    'Filling selections to capacity, changing products from instinct, or servicing every machine on the same fixed schedule without using depletion evidence',
+    'Adding geographically scattered machines that increase driving, emergency trips, stock complexity, and operating burden faster than route contribution',
+    'Considering an existing route without independently checking equipment ownership, supported sales, host transfer risk, workload, repairs, and machine-by-machine economics'
+  ],
+  topics: [
+    'QUALIFY → MODEL → MATCH → PLACE → STOCK → SERVICE → MEASURE → DECIDE',
+    'Location qualification, site surveys, route fit, and the Location Go / No-Go Scorecard',
+    'Machine contribution, weak/base/strong scenarios, commission sensitivity, and all-in installed equipment cost',
+    'Equipment matching, new/used/refurbished choices, used-machine inspection, and cashless readiness',
+    'Location prospecting, host conversations, placement responsibilities, compliance verification, and launch checks',
+    'Product mix, par levels, SKU decisions, pricing, standard service visits, and evidence-based service intervals',
+    'Route density, route planning, monthly machine scorecards, underperformance diagnosis, and relocation decisions',
+    'Existing-route due diligence and scale gates from Machine 1 through Machines 6–10'
+  ],
+  outcomes: [
+    'A location-first sequence that separates a promising site from equipment already owned or available to buy',
+    'A repeatable machine-level economics model that distinguishes gross sales from operating contribution and keeps assumptions visible',
+    'Stock, service, fault, host, and route records that turn repeated operating activity into evidence for the next decision',
+    'A scale-gate approach that makes each additional machine justify its location, economics, equipment fit, route burden, inventory demand, and service capacity'
+  ],
+  themes: ['vending machine route','location qualification','machine economics','stock control','service planning','route density','vending route due diligence'],
+  hubSlug: 'vending-machine-route',
+  hubLabel: 'Vending machine route guides'
+},{
   slug: 'write-better-home-inspection-reports-faster',
   title: 'Write Better Home Inspection Reports Faster',
   subtitle: 'A Practical Workflow for Observations, Photos, Narratives, Defect Comments, Summaries and Faster Report Delivery',

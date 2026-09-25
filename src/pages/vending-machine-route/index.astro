@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('vendingMachineRouteGuides')).sort((a,b) => a.data.order - b.data.order);
+const url = new URL('/vending-machine-route/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'CollectionPage',
+  name:'Vending Machine Route Guides',
+  description:'Practical guides for evaluating vending locations, modelling machine economics, inspecting equipment, controlling stock, planning service routes, and checking an existing route before purchase.',
+  url,
+  isPartOf:{'@type':'WebSite',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  hasPart:guides.map(guide => ({'@type':'Article',name:guide.data.title,url:'https://mercerlanepress.com/vending-machine-route/' + guide.id + '/'}))
+};
+---
+<BaseLayout title="Vending Machine Route Guides" description="Practical guides for evaluating vending locations, modelling machine economics, inspecting equipment, controlling stock, planning service routes, and checking an existing route before purchase." schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Guides',href:'/guides/'},{name:'Vending Machine Routes'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">SMALL VENDING ROUTES</p>
+    <h1>Vending Machine Route Guides</h1>
+    <p class="lede">Start with the location, rebuild the economics underneath the sales, then operate each machine as a small store that has to justify its place on the route.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><h2>A location-first operating cycle</h2><p>The route improves when each decision creates evidence for the next one instead of treating a machine purchase as the starting point.</p></div>
+      <div class="hub-steps">
+        <article><h3>Qualify</h3><p>Identify the recurring purchase occasion, repeat population, alternatives, placement, access, security, host expectations, and route fit before treating a site as an opportunity.</p></article>
+        <article><h3>Model</h3><p>Look below gross sales at product, payment, commission, waste, service, repair, and installed-equipment costs. Test weak, base, and strong cases.</p></article>
+        <article><h3>Match</h3><p>Choose equipment for the customer, location, operator, and economics rather than trying to invent a location for equipment already purchased.</p></article>
+        <article><h3>Operate</h3><p>Use par levels, product evidence, deliberate pricing, standard service visits, stock preparation, and records instead of refilling everything by habit.</p></article>
+        <article><h3>Measure</h3><p>Track machine contribution, route hours, faults, stockouts, downtime, and host condition so a busy machine is not automatically mistaken for a good route asset.</p></article>
+        <article><h3>Decide</h3><p>Keep, improve, renegotiate, replace, relocate, or exit as evidence changes. Growth should increase control rather than simply increase machine count.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Work through the decisions that determine whether a route stays controllable</h2><p>These guides cover the highest-leverage decisions before purchase, at launch, during service, and when evaluating an existing route.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/vending-machine-route/" label="VENDING MACHINE ROUTES" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">THE COMPLETE SYSTEM</p><h2>The Vending Machine Route Operating Manual</h2></div>
+      <p>Warren Holtby's manual develops the full Qualify → Model → Match → Place → Stock → Service → Measure → Decide cycle, then carries it through equipment selection, host conversations, site surveys, compliance checks, product and par decisions, route planning, monthly scorecards, route acquisitions, and scale gates from the first machine to ten.</p>
+      <p><a class="button" href="/books/the-vending-machine-route-operating-manual/">Explore the book</a></p>
+      <div class="notice"><strong>Evidence before assumptions.</strong> A scorecard cannot predict sales, and a worked financial example is not an earnings forecast. Use actual quotations, site evidence, current provider terms, and the rules that apply to your own location.</div>
+    </div>
+  </section>
+</BaseLayout>

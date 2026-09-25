@@ -1,0 +1,41 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const { entry } = Astro.props;
+const { title, description, published, related } = entry.data;
+const url = new URL('/vending-machine-route/' + entry.id + '/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Article',
+  headline:title,
+  description,
+  datePublished:published.toISOString().slice(0,10),
+  author:{'@type':'Person',name:'Warren Holtby',url:'https://mercerlanepress.com/authors/warren-holtby/'},
+  publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  mainEntityOfPage:url
+};
+---
+<BaseLayout title={title} description={description} type="article" schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Vending Machine Routes',href:'/vending-machine-route/'},{name:title}]}/>
+  <article class="article wrap narrow">
+    <header>
+      <p class="eyebrow">VENDING MACHINE ROUTE OPERATIONS</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="byline">By <a href="/authors/warren-holtby/">Warren Holtby</a> · Published <time datetime={published.toISOString()}>{published.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'})}</time></p>
+    </header>
+    <div class="article-body"><slot /></div>
+    <aside class="book-note">
+      <p class="eyebrow">THE COMPLETE OPERATING SYSTEM</p>
+      <h2>Build the route around evidence, not machine count</h2>
+      <p><em>The Vending Machine Route Operating Manual</em> connects location qualification, machine economics, equipment choice, stock control, service planning, machine-level measurement, route density, acquisition due diligence, and scale gates for the first ten machines.</p>
+      <a class="button" href="/books/the-vending-machine-route-operating-manual/">Explore the book</a>
+    </aside>
+    <nav class="related" aria-label="Related vending machine route guides">
+      <h2>Related vending machine route guides</h2>
+      <ul>{related.map((slug:string) => <li><a href={'/vending-machine-route/' + slug + '/'}>{slug.replaceAll('-',' ')}</a></li>)}</ul>
+    </nav>
+    <div class="notice"><strong>Business and compliance note.</strong> These guides provide general educational information for small U.S. vending-machine routes. They are not legal, tax, accounting, investment, insurance, electrical, engineering, or food-safety advice. Local rules, payment fees, equipment requirements, and site conditions vary; verify the requirements and commercial terms that apply to your operation.</div>
+  </article>
+</BaseLayout>

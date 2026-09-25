@@ -115,6 +115,11 @@ const firstYearHomeownerGuides = defineCollection({
   schema: guideSchema
 });
 
+const bookkeeperAiGuides = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/bookkeeper-ai' }),
+  schema: guideSchema
+});
+
 const propertyManagerAiGuides = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/property-manager-ai' }),
   schema: guideSchema
@@ -155,4 +160,4 @@ const hotelHousekeepingSupervisionGuides = defineCollection({
   schema: guideSchema
 });
 
-export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides, cooperativeCareGuides, rescueDogFirst90DaysGuides, heatPumpOwnerGuides, localAiGuides, beginnerTelescopeObservingGuides, deepSkyAstrophotographyGuides, constructionEstimatingGuides, landscapeContractorEstimatingGuides, homeAssistantMatterThreadGuides, genealogyBrickWallGuides, powerAutomateGuides, pickleballDoublesGuides, youthSoccerCoachingGuides, hamRadioTechnicianExamGuides, epa608UniversalExamGuides, firstYearHomeownerGuides, propertyManagerAiGuides, maintenancePlanningGuides, aquariumTroubleshootingGuides, homeInspectionReportingGuides, vendingMachineRouteGuides, poolTroubleshootingGuides, manufacturingSupervisionGuides, hotelHousekeepingSupervisionGuides };
+export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides, cooperativeCareGuides, rescueDogFirst90DaysGuides, heatPumpOwnerGuides, localAiGuides, beginnerTelescopeObservingGuides, deepSkyAstrophotographyGuides, constructionEstimatingGuides, landscapeContractorEstimatingGuides, homeAssistantMatterThreadGuides, genealogyBrickWallGuides, powerAutomateGuides, pickleballDoublesGuides, youthSoccerCoachingGuides, hamRadioTechnicianExamGuides, epa608UniversalExamGuides, firstYearHomeownerGuides, bookkeeperAiGuides, propertyManagerAiGuides, maintenancePlanningGuides, aquariumTroubleshootingGuides, homeInspectionReportingGuides, vendingMachineRouteGuides, poolTroubleshootingGuides, manufacturingSupervisionGuides, hotelHousekeepingSupervisionGuides };

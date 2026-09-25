@@ -1,0 +1,11 @@
+---
+import { getCollection, render } from 'astro:content';
+import ManufacturingSupervisionArticleLayout from '../../layouts/ManufacturingSupervisionArticleLayout.astro';
+
+export async function getStaticPaths(){
+  return (await getCollection('manufacturingSupervisionGuides')).map(entry => ({params:{slug:entry.id},props:{entry}}));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<ManufacturingSupervisionArticleLayout entry={entry}><Content /></ManufacturingSupervisionArticleLayout>

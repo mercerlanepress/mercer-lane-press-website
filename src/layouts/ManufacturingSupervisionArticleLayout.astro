@@ -1,0 +1,37 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+const { entry } = Astro.props;
+const { title, description, published, related } = entry.data;
+const url = new URL('/manufacturing-supervision/' + entry.id + '/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Article',
+  headline:title,
+  description,
+  datePublished:published.toISOString().slice(0,10),
+  author:{'@type':'Person',name:'Daniel Mercer',url:'https://mercerlanepress.com/authors/daniel-mercer/'},
+  publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  mainEntityOfPage:url
+};
+---
+<BaseLayout title={title} description={description} type="article" schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Manufacturing Supervision',href:'/manufacturing-supervision/'},{name:title}]}/>
+  <article class="article wrap narrow">
+    <header>
+      <p class="eyebrow">NEW MANUFACTURING SUPERVISORS</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="byline">By <a href="/authors/daniel-mercer/">Daniel Mercer</a> · Published <time datetime={published.toISOString()}>{published.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'})}</time></p>
+    </header>
+    <div class="article-body"><slot /></div>
+    <aside class="book-note">
+      <p class="eyebrow">THE COMPLETE FIRST-90-DAYS SYSTEM</p>
+      <h2>Build a practical operating system for the move into supervision</h2>
+      <p><em>The New Manufacturing Supervisor's Playbook</em> brings role clarity, shift rhythm, former-peer boundaries, delegation, difficult conversations, performance, managing up, recurring problems, a 90-day roadmap, casebook, conversation workshop, situational playbook, and reusable supervisor tools into one practical reference.</p>
+      <a class="button" href="/books/the-new-manufacturing-supervisors-playbook/">Explore the book</a>
+    </aside>
+    <nav class="related" aria-label="Related manufacturing supervision guides"><h2>Related manufacturing supervision guides</h2><ul>{related.map((slug:string) => <li><a href={'/manufacturing-supervision/' + slug + '/'}>{slug.replaceAll('-',' ')}</a></li>)}</ul></nav>
+    <div class="notice"><strong>Scope and workplace boundaries.</strong> These guides provide general educational information about frontline supervision. Employer policies, employment requirements, health and safety responsibilities, disciplinary procedures, union arrangements, technical authority, and escalation routes vary. Follow your organisation's procedures, training, and lawful instructions, and involve the appropriate manager or specialist when required.</div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,129 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'the-new-manufacturing-supervisors-playbook')!;
+const guides = (await getCollection('manufacturingSupervisionGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/daniel-mercer/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">NEW MANUFACTURING SUPERVISORS</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/daniel-mercer/">Daniel Mercer</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/manufacturing-supervision/">Read free guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>For the skilled operator, technician, or team member whose job changed when the promotion did</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">THE FIRST 90 DAYS</p>
+        <h2>Build a supervisory operating system in four stages</h2>
+        <p>The book treats the transition as a sequence rather than a demand to become a finished leader immediately. Each stage adds a small set of behaviours that can be repeated on real shifts.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>Days 1–7: learn before changing</h3><p>Clarify authority, understand the team, observe the real operation, track small commitments, and recognise where former-peer relationships create pressure.</p></article>
+        <article class="card"><h3>Days 8–30: build a shift rhythm</h3><p>Prepare, brief, observe, respond, follow up, hand over, and review. Clarify standards and begin delegating normal work without disappearing or hovering.</p></article>
+        <article class="card"><h3>Days 31–60: handle people problems earlier</h3><p>Prepare difficult conversations, replace labels with facts, check the legitimate standard, listen for what changes the problem, and follow up ordinary performance and conduct issues.</p></article>
+        <article class="card"><h3>Days 61–90: become consistent</h3><p>Use experienced employees without bluffing, improve manager updates, spot recurring problems, and reduce unnecessary dependence on the supervisor as the answer to every routine decision.</p></article>
+        <article class="card"><h3>Day 90: review your own habits</h3><p>Use the scorecard to review role clarity, team knowledge, boundaries, operating rhythm, delegation, conversations, evidence, managing up, follow-up, and recurring-problem control.</p></article>
+        <article class="card"><h3>Next 90 days: go one level deeper</h3><p>Choose a small number of development priorities rather than adding more systems simply because the first 90 days are complete.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">A REPEATABLE DIAGNOSTIC</p>
+        <h2>People problem, work problem, clarity problem, or authority problem?</h2>
+        <p>The same visible failure can come from different causes. The book repeatedly asks the supervisor to establish what happened before deciding that a person is the problem.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>People</h3><p>A person may have ignored a clear requirement, made a poor decision, behaved inappropriately, or need ordinary coaching or feedback.</p></article>
+        <article class="card"><h3>Work</h3><p>Staffing, equipment, material, process, workload, training, or another operational condition may be creating the gap.</p></article>
+        <article class="card"><h3>Clarity</h3><p>The standard, instruction, ownership, priority, or change may not have been communicated clearly or consistently.</p></article>
+        <article class="card"><h3>Authority</h3><p>The solution may require a manager, HR, Quality, Safety, Maintenance, Engineering, or another person with the necessary authority or specialist competence.</p></article>
+        <article class="card"><h3>Measurement</h3><p>For performance questions, the book adds a fifth check: whether the apparent gap is being measured fairly and meaningfully.</p></article>
+        <article class="card"><h3>Facts before conclusions</h3><p>Observable events and legitimate records can be checked. Labels and assumed motives usually make the next conversation harder.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">PRACTICAL TOOLS</p><h2>Reusable resources for real shifts and real conversations</h2><p>The resource section turns the main ideas into working sheets and checks rather than leaving them as general leadership advice.</p></div>
+      <div class="grid-3">
+        <article class="card"><h3>Role and team</h3><p>Supervisor Authority Map, First-Shift Checklist, Team Knowledge Map, and Former-Peer Boundary Planner.</p></article>
+        <article class="card"><h3>Running the shift</h3><p>Five-Minute Pre-Shift Check, Shift Briefing Planner, End-of-Shift Closeout, and Delegation Planner.</p></article>
+        <article class="card"><h3>People conversations</h3><p>Difficult-Conversation Preparation Sheet, Feedback Quick Check, and Facts-vs-Interpretation Worksheet.</p></article>
+        <article class="card"><h3>Weekly control</h3><p>15-Minute Weekly Supervisor Review, Manager Update Template, and Recurring-Issue Review.</p></article>
+        <article class="card"><h3>Boundaries and escalation</h3><p>Escalation Decision Check for issues that should move out of ordinary supervision and into the appropriate organisational route.</p></article>
+        <article class="card"><h3>Day 90 and beyond</h3><p>90-Day Supervisor Scorecard and a Next-90-Days Plan for choosing a small number of practical development priorities.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">MORE THAN THE CORE CHAPTERS</p><h2>Casework, conversation practice, and a situational reference section</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Manufacturing casebook</h3><p>Eight fictional cases combine several principles across the first 90 days, including favouritism risk, experienced employees, hidden process problems, targets, attendance, conduct, cross-shift conflict, and team dependence.</p></article>
+        <article class="card"><h3>Thirteen-week implementation plan</h3><p>A week-by-week route turns the chapters into manageable actions, questions, and watch-outs rather than expecting the reader to improve everything at once.</p></article>
+        <article class="card"><h3>Conversation workshop</h3><p>Ten extended exchanges show how ordinary supervisor conversations continue after the opening line and how new information can change the next step.</p></article>
+        <article class="card"><h3>Twenty-situation playbook</h3><p>Quick-reference entries cover former friends, public challenge, experienced operators, micromanagement, lateness, absence, quality, missed targets, refusal, conflict, unfair-allocation concerns, employee emotion, mistakes, unpopular changes, and correcting your own wrong decision.</p></article>
+        <article class="card"><h3>Twelve new-supervisor traps</h3><p>Short reminders cover proving authority, staying one of the gang, taking over, constant checking, delayed correction, public correction, assumed motive, empty threats, poor escalation, premature promises, and hidden bad news.</p></article>
+        <article class="card"><h3>Not a one-size-fits-all procedure</h3><p>The book repeatedly directs readers back to the employer's actual policies, training, authority limits, formal processes, and specialist routes.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Focused routes for the first problems new supervisors meet</h2><p>These guides expand six high-friction topics from the book while keeping the same fact-based, role-aware approach.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/manufacturing-supervision/" label="MANUFACTURING SUPERVISION" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">SCOPE AND WORKPLACE BOUNDARIES</p><h2>General supervision guidance must sit inside the rules of the actual workplace</h2></div>
+      <p>The book is intended for readers in both the United States and United Kingdom and focuses on general frontline-supervision principles where employment, safety, organisational, and authority requirements vary. It does not replace site-specific training, formal employment processes, technical instructions, or professional advice.</p>
+      <div class="notice"><strong>Use the applicable route.</strong> Follow your organisation's policies, procedures, training, and lawful instructions. When an issue involves authority you do not hold, specialist technical competence, formal employment processes, safety, health information, or other protected or serious matters, involve the appropriate manager or qualified specialist rather than improvising a process.</div>
+    </div>
+  </section>
+</BaseLayout>

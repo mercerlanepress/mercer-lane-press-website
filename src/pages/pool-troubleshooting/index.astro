@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('poolTroubleshootingGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'CollectionPage',
+  name:'Pool Troubleshooting Guides for First-Time Owners',
+  description:'Symptom-first pool troubleshooting guides for green or cloudy water, chlorine loss, filter-pressure changes, air bubbles, weak circulation, and storm recovery.',
+  url:new URL('/pool-troubleshooting/',Astro.site).href,
+  hasPart:guides.map(guide => ({
+    '@type':'Article',
+    name:guide.data.title,
+    url:new URL('/pool-troubleshooting/' + guide.id + '/',Astro.site).href
+  }))
+};
+---
+<BaseLayout title="Pool Troubleshooting Guides for First-Time Owners" description="Symptom-first pool troubleshooting guides for green or cloudy water, chlorine loss, filter-pressure changes, air bubbles, weak circulation, and storm recovery." schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Pool Troubleshooting'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">POOL OWNERSHIP</p>
+    <h1>Pool Troubleshooting Guides for First-Time Owners</h1>
+    <p class="lede">Start with what changed. Compare the pool with its own normal baseline, use only the tests that help separate plausible causes, make one justified change, then verify the result.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Use a symptom-first sequence</h2>
+        <p>Green water, low chlorine, weak flow, a changed pressure gauge, or air bubbles are observations. They become useful diagnoses only when you connect them to timing, testing, circulation, filtration, and equipment behavior.</p>
+      </div>
+      <div class="hub-steps">
+        <article><h3>Observe</h3><p>Describe the exact symptom, record the last known normal condition, and note weather, pool use, chemical additions, equipment service, settings, and water-level changes.</p></article>
+        <article><h3>Test</h3><p>Choose measurements that distinguish likely causes. Verify surprising test results before a large correction.</p></article>
+        <article><h3>Isolate</h3><p>Ask whether the strongest evidence points toward water condition, circulation, filtration, or equipment and environmental load.</p></article>
+        <article><h3>Act and verify</h3><p>Make the smallest justified correction using the relevant product label or equipment manual, then check whether the expected condition actually returned and stayed stable.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Start with the symptom in front of you</h2><p>These guides turn common first-time-owner problems into short diagnostic routes so you can narrow the cause before adding products, dismantling equipment, or changing several variables at once.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/pool-troubleshooting/" label="POOL TROUBLESHOOTING" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">FULL SYSTEM REFERENCE</p><h2>The First-Time Pool Owner's Troubleshooting Guide</h2></div>
+      <p>The book extends the method across water appearance, chlorine and pH patterns, stains and scale, return flow, filter pressure, air, returning debris, pump behavior, recurring algae, multi-problem recovery, opening and closing, time away, storms, rapid-reference finders, baseline records, and professional handoff.</p>
+      <p><a class="button" href="/books/the-first-time-pool-owners-troubleshooting-guide/">Explore the book</a></p>
+      <div class="notice"><strong>Do not turn diagnosis into unsafe DIY.</strong> Chemical labels and equipment-manufacturer instructions control product use and servicing. Electrical, gas, structural, pressurized-equipment, hazardous-chemical, and other specialist hazards can require qualified professional help.</div>
+    </div>
+  </section>
+</BaseLayout>

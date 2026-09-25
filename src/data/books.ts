@@ -6,6 +6,45 @@ export interface Book {
 }
 
 export const books: Book[] = [{
+  slug: 'the-first-time-pool-owners-troubleshooting-guide',
+  title: "The First-Time Pool Owner's Troubleshooting Guide",
+  subtitle: 'A Symptom-First System for Green or Cloudy Water, Vanishing Chlorine, Filter-Pressure Changes, Air Bubbles, Stains, Scale and Circulation Problems',
+  author: 'Evan Hargreaves', authorSlug: 'evan-hargreaves',
+  publisher: 'Mercer Lane Press',
+  description: 'A practical U.S.-focused troubleshooting guide for first-time residential pool owners, built around a symptom-first OBSERVE → TEST → ISOLATE → ACT → VERIFY method for water, circulation, filtration, equipment, recurring problems, seasonal transitions, and knowing when professional help is the correct next step.',
+  cover: '/images/books/pool - DIGITAL_BOOK_COVER.jpg',
+  coverReady: true,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HFNT77YB',
+  intendedReader: 'First-time and relatively new residential pool owners who need a structured way to investigate green or cloudy water, disappearing chlorine, pH drift, stains, scale, weak return flow, filter-pressure changes, persistent air, returning debris, pump changes, recurring algae, and seasonal or weather-related problems without guessing.',
+  problems: [
+    'Green, cloudy, hazy, or milky water where the visible symptom does not identify the cause by itself',
+    'Chlorine that repeatedly falls, pH that keeps drifting, or test results that do not match how the water looks',
+    'Filter pressure that rises or falls away from the pool\'s own clean baseline, especially when return flow changes at the same time',
+    'Persistent air bubbles, loss of prime, weak circulation, returning debris, or a pump that sounds or behaves differently',
+    'Recurring algae or several symptoms appearing together after storms, equipment changes, heavy use, or interrupted operation',
+    'Uncertainty about when owner-level checks should stop because chemical, electrical, gas, pressure, structural, or internal-equipment work needs qualified help'
+  ],
+  topics: [
+    'OBSERVE → TEST → ISOLATE → ACT → VERIFY',
+    'The four systems: water condition and chemistry, circulation, filtration, and equipment/environment',
+    'Green and cloudy water, chlorine loss, pH drift, stains, scale, and combined water symptoms',
+    'Weak return flow, high and low filter pressure, persistent air, returning debris, and abnormal pump behavior',
+    'Recurring algae, conflicting test results, and multi-problem recovery order',
+    'Opening, closing, leaving the pool unattended, returning after time away, and post-storm triage',
+    'Pool baseline records, troubleshooting logs, product/equipment records, rapid-reference finders, and professional handoff notes',
+    'Chemical-label, equipment-manual, pressure, electrical, gas, and escalation boundaries'
+  ],
+  outcomes: [
+    'A repeatable first-response method that starts with the symptom and timeline instead of a product shelf',
+    'A pool-specific baseline for pressure, flow, equipment configuration, water behavior, and operating settings',
+    'A practical way to read water tests, filter pressure, return flow, and air together as evidence',
+    'A record-based troubleshooting process that changes one justified thing at a time and verifies whether the expected condition actually returned',
+    'Clearer handoff information when the remaining problem requires professional service'
+  ],
+  themes: ['pool troubleshooting','green pool','cloudy pool water','chlorine loss','filter pressure','air bubbles','pool circulation','first-time pool owner'],
+  hubSlug: 'pool-troubleshooting',
+  hubLabel: 'Pool troubleshooting guides'
+},{
   slug: 'the-vending-machine-route-operating-manual',
   title: 'The Vending Machine Route Operating Manual',
   subtitle: 'A Location-First System for Machine Economics, Stock Control, Service Planning and Building Your First 10-Machine Route',

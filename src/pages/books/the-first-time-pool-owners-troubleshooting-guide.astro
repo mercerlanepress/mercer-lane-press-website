@@ -1,0 +1,97 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'the-first-time-pool-owners-troubleshooting-guide')!;
+const guides = (await getCollection('poolTroubleshootingGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/evan-hargreaves/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">FIRST-TIME POOL OWNERSHIP</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/evan-hargreaves/">Evan Hargreaves</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/pool-troubleshooting/">Read free guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>For the owner who can see the symptom but does not yet know the cause</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">THE OPERATING SEQUENCE</p>
+        <h2>OBSERVE → TEST → ISOLATE → ACT → VERIFY</h2>
+        <p>The book is designed to replace guess-first corrections with a repeatable sequence. A symptom begins the investigation; it does not automatically choose the treatment.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>Observe the change</h3><p>Record what looks, sounds, feels, or tests differently, when the pool was last normal, and what happened between then and now.</p></article>
+        <article class="card"><h3>Test for a reason</h3><p>Use water tests, filter pressure, return flow, air, and equipment state only when they help distinguish plausible causes. Verify a surprising measurement before acting heavily on it.</p></article>
+        <article class="card"><h3>Isolate the system</h3><p>Separate water condition and chemistry, circulation, filtration, and equipment or environmental load instead of assuming every visible problem is chemical.</p></article>
+        <article class="card"><h3>Act on one justified step</h3><p>Use the current product label and installed-equipment instructions. Avoid changing several variables at once when one change can give you the next piece of evidence.</p></article>
+        <article class="card"><h3>Verify recovery</h3><p>A treatment is not a result. Recheck appearance, sanitizer stability, pressure, flow, air, and recurrence until the expected condition has returned and remains stable.</p></article>
+        <article class="card"><h3>Know the stop point</h3><p>Good troubleshooting can end with a clear professional handoff when internal equipment, electrical, gas, structural, pressure, hazardous-chemical, or other specialist work remains.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">SYMPTOM-FIRST COVERAGE</p><h2>Connect water, pressure, flow, air, timing, and recurrence</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Water appearance</h3><p>Green or cloudy water, chlorine loss, pH drift, stains, scale, and combinations where the same appearance can arise from different causes.</p></article>
+        <article class="card"><h3>Pressure and circulation</h3><p>Weak returns, higher or lower filter pressure, suction-side air, loss of prime, returning debris, and pump behavior interpreted against the pool's own baseline.</p></article>
+        <article class="card"><h3>Recurring problems</h3><p>Algae that returns, test results that conflict with appearance, failed corrections, and the recovery order when several things go wrong at once.</p></article>
+        <article class="card"><h3>Transitions</h3><p>Opening, closing and winterizing, leaving the pool unattended, returning after time away, and recovering after storms or major weather events.</p></article>
+        <article class="card"><h3>Rapid reference</h3><p>Symptom, test-result, and equipment-behavior finders designed for the moment when something is wrong and the next useful check matters more than reading a chapter in sequence.</p></article>
+        <article class="card"><h3>Records and handoff</h3><p>A pool baseline, troubleshooting log, product and equipment record, and professional handoff sheet turn memory into usable evidence.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Focused routes for common first-time-owner problems</h2><p>Each guide below isolates one high-friction symptom and links it back to the same evidence-first troubleshooting system.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/pool-troubleshooting/" label="POOL TROUBLESHOOTING" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">SAFETY BOUNDARY</p><h2>Competent ownership does not mean maximum DIY</h2></div>
+      <p>The book repeatedly separates owner-safe observation and routine maintenance from work that should stop or move to qualified help. It does not replace product labels, equipment-manufacturer instructions, local requirements, or professional advice.</p>
+      <div class="notice"><strong>Important:</strong> Never combine different pool chemicals unless the manufacturer explicitly instructs it. Never open a pressurized filter until the system has been safely shut down and fully depressurized according to its manual. Repeated breaker trips, burning smells, gas concerns, damaged pressure-containing equipment, major leaks, structural deterioration, or unexpected chemical reactions require the appropriate safety response and qualified help.</div>
+    </div>
+  </section>
+</BaseLayout>

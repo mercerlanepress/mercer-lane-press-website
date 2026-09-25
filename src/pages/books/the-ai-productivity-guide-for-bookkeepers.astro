@@ -1,0 +1,144 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'the-ai-productivity-guide-for-bookkeepers')!;
+const guides = (await getCollection('bookkeeperAiGuides')).sort((a,b) => a.data.order - b.data.order);
+const categories = [
+  ['Client communication','Welcome emails, monthly-summary delivery, missing-information requests, scope conversations, referrals, rate changes, offboarding, follow-ups, and document confirmations.'],
+  ['Accounts receivable & invoices','Friendly and firm reminders, final notices, payment-plan drafts, internal receivables summaries, disputed-invoice responses, payment acknowledgments, and automatic-payment requests.'],
+  ['Financial report explanations','Plain-English P&L, cash-flow, variance, year-end, balance-sheet, KPI, tax-liability, and quarterly-review narratives built from figures the bookkeeper supplies.'],
+  ['Client onboarding','Information requests, plain-English engagement summaries, software setup instructions, onboarding checklists, first-meeting agendas, and post-onboarding follow-up.'],
+  ['Month-end & workflow','Month-end and year-end checklists, transaction queries, reconciliation notes, client summaries, payroll checklists, tax-return preparation checklists, and internal process notes.'],
+  ['Marketing & business development','Professional bios, educational posts, proposal emails, website copy, referral-partner outreach, testimonial requests, and FAQ drafting.'],
+  ['SOP & process documentation','Recurring-task SOPs, team onboarding processes, client-file setup procedures, and practice-policy drafts.'],
+  ['Problem-solving & advisory responses','Structured drafts for cash-flow concerns, late documents, spending concerns, meeting questions, bookkeeping errors, and other client conversations that still require professional judgment.']
+];
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/mercer-lane/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">AI FOR BOOKKEEPERS</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/mercer-lane/">Mercer Lane</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/bookkeeper-ai/">Read free bookkeeper AI guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>For bookkeepers who want reusable help with the work around the numbers</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">THE FOUR-STEP WORKING METHOD</p>
+        <h2>Copy → Paste → Edit variables → Apply</h2>
+        <p>The workbook treats prompts as working templates. Choose the prompt for the task, paste it into the AI tool you use, replace every bracketed variable with the relevant facts, then review the draft before it reaches a client, report, document, or internal process.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>1. Copy</h3><p>Start from a prompt built for a recognizable bookkeeping task instead of rebuilding the instruction from scratch.</p></article>
+        <article class="card"><h3>2. Paste</h3><p>Place the complete prompt into the AI tool you use so its role, task, context, and output instructions stay intact.</p></article>
+        <article class="card"><h3>3. Edit variables</h3><p>Replace bracketed placeholders with the names, dates, amounts, services, software, deadlines, or other facts the current task requires.</p></article>
+        <article class="card"><h3>4. Apply</h3><p>Read the output, correct facts and tone, add any details that were intentionally kept out of the prompt, and only then use the approved version.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">PROMPT STRUCTURE</p>
+        <h2>Role + Task + Context + Output</h2>
+        <p>A single four-part structure runs through the workbook: define the working role, state the exact job, supply the relevant context, and specify the form the answer should take.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>Role</h3><p>Set the working perspective, such as a bookkeeper preparing a client email, report explanation, checklist, or internal note.</p></article>
+        <article class="card"><h3>Task</h3><p>State the concrete job: draft the reminder, explain the figures, organize the checklist, prepare the questions, or document the process.</p></article>
+        <article class="card"><h3>Context</h3><p>Supply only the verified facts needed for the task, with client information minimized where full identity is unnecessary.</p></article>
+        <article class="card"><h3>Output</h3><p>Ask for the usable format you need, such as a short email, table, checklist, structured summary, SOP, or meeting agenda.</p></article>
+      </div>
+      <div class="actions"><a class="button button-secondary" href="/bookkeeper-ai/bookkeeper-ai-prompt-formula/">See the bookkeeper prompt formula guide</a></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">THE PROMPT LIBRARY</p><h2>Eight recurring areas of bookkeeping work</h2><p>The prompt library is organized around communication, reporting, process, and business tasks that recur around a bookkeeping practice.</p></div>
+      <div class="grid-3">{categories.map(([name,body]) => <article class="card"><h3>{name}</h3><p>{body}</p></article>)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FIVE WORKFLOW SYSTEMS</p><h2>Connect individual prompts into repeatable sequences</h2><p>The workbook also links prompts into complete processes, so recurring work can move through the same deliberate sequence rather than depending on memory.</p></div>
+      <div class="grid-3">
+        <article class="card"><h3>Monthly close automation workflow</h3><p>Move from close preparation and exception review into a client-facing summary and a documented next step.</p><a class="text-link" href="/bookkeeper-ai/month-end-close-ai-workflow/">Read the month-end workflow →</a></article>
+        <article class="card"><h3>Client onboarding express system</h3><p>Coordinate information requests, engagement summaries, software setup, checklists, first-meeting preparation, and follow-up.</p><a class="text-link" href="/bookkeeper-ai/bookkeeper-client-onboarding-ai-workflow/">Read the onboarding workflow →</a></article>
+        <article class="card"><h3>Overdue invoice recovery sequence</h3><p>Use staged reminders and clear records while keeping amounts, deadlines, terms, escalation choices, and any formal action tied to verified practice policy and the correct professional process.</p><a class="text-link" href="/bookkeeper-ai/overdue-invoice-ai-workflow/">Read the invoice follow-up workflow →</a></article>
+        <article class="card"><h3>Monthly report narrative generator</h3><p>Turn supplied financial figures and notable items into a draft plain-English narrative for professional review before client delivery.</p></article>
+        <article class="card"><h3>New service proposal workflow</h3><p>Structure a proposal or quote conversation from the service need through scope, value, next steps, and follow-up without asking AI to invent commercial terms.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">CLIENT CONFIDENTIALITY &amp; REVIEW</p><h2>Minimize sensitive information and keep professional judgment in charge</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Use only necessary context</h3><p>Routine drafting rarely needs full client identities combined with detailed financial data, government identifiers, bank details, payment credentials, sensitive personal information, or unrelated confidential business material.</p><a class="text-link" href="/bookkeeper-ai/client-data-privacy-for-bookkeeper-ai/">Read the client-data privacy guide →</a></article>
+        <article class="card"><h3>Review every output</h3><p>AI can draft quickly, but it can still produce wrong, incomplete, or unsuitable wording. Check the figures, facts, dates, tone, assumptions, and requested action before the output is used.</p></article>
+        <article class="card"><h3>Keep professional boundaries clear</h3><p>The workbook is an educational and productivity resource. It does not replace accounting, tax, financial, legal, privacy, or regulatory judgment, and jurisdiction-specific requirements should be checked through the appropriate current source or qualified professional.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">IMPLEMENTATION</p><h2>Build the habit over 30 days</h2><p>The final implementation checklist moves from learning one prompt structure to using core workflows, organizing a personal prompt library, and reviewing what actually helped.</p></div>
+      <div class="grid-3">
+        <article class="card"><h3>Week 1: Foundations</h3><p>Choose a primary AI tool, learn the four-part prompt formula, establish privacy habits, and use several high-frequency prompts on real low-risk tasks.</p></article>
+        <article class="card"><h3>Week 2: Core workflows</h3><p>Apply structured prompts to recurring communication, month-end, report explanations, onboarding, and receivables work, reviewing every output before use.</p></article>
+        <article class="card"><h3>Week 3: Systems</h3><p>Save the prompt versions that work, organize them by recurring job, and connect individual prompts into a sequence where a process repeats.</p></article>
+        <article class="card"><h3>Week 4: Review & refine</h3><p>Compare the new process with the old one, improve weak prompts, remove unnecessary context, and keep only the workflows that are genuinely useful in the practice.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Start with the task in front of you</h2><p>These companion articles turn five practical parts of the workbook into focused reference pages without reproducing the prompt library itself.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/bookkeeper-ai/" label="BOOKKEEPER AI" />)}</div>
+      <div class="actions"><a class="button button-secondary" href="/bookkeeper-ai/">Explore the bookkeeper AI hub</a></div>
+    </div>
+  </section>
+</BaseLayout>

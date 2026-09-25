@@ -6,6 +6,49 @@ export interface Book {
 }
 
 export const books: Book[] = [{
+  slug: 'the-ai-productivity-guide-for-bookkeepers',
+  title: 'The AI Productivity Guide for Bookkeepers',
+  subtitle: '100+ Professional AI Prompts, Workflow Systems, and Strategies Built Specifically for Bookkeepers',
+  author: 'Mercer Lane', authorSlug: 'mercer-lane',
+  publisher: 'Mercer Lane Press',
+  description: 'A practical workbook for bookkeepers using AI for recurring communication, documentation, reporting, and workflow tasks, with more than 100 customizable prompts, five connected workflow systems, privacy guidance, short action plans, advanced prompting methods, and a 30-day implementation checklist.',
+  cover: '/images/books/the-ai-productivity-guide-for-bookkeepers-cover.jpg',
+  coverReady: true,
+  purchaseUrl: 'https://www.amazon.com/dp/B0H94ZZPR9',
+  intendedReader: 'Solo bookkeepers, small bookkeeping practices, and bookkeeping team members who want a repeatable way to use AI for emails, report explanations, onboarding, month-end communication, documentation, and business-development drafting while keeping professional judgment and client confidentiality in the loop.',
+  problems: [
+    'Recurring client emails, reminders, explanations, and follow-ups that are repeatedly drafted from a blank page',
+    'Month-end and reporting communication that takes time to turn from figures and notes into clear client-facing language',
+    'Onboarding, information requests, checklists, and process documents that become inconsistent when they depend on memory',
+    'Invoice follow-up, scope conversations, proposals, and other awkward business communication that benefits from a repeatable drafting structure',
+    'AI prompts that stay too vague because the role, task, context, and required output have not been defined clearly',
+    'Client confidentiality risks when unnecessary identifying, financial, or sensitive information is copied into an AI prompt'
+  ],
+  topics: [
+    'COPY → PASTE → EDIT VARIABLES → APPLY',
+    'ROLE + TASK + CONTEXT + OUTPUT prompt structure',
+    'Client communication prompts',
+    'Accounts receivable and invoice-management prompts',
+    'Financial report writing and plain-English explanations',
+    'Client onboarding prompts',
+    'Month-end close and workflow prompts',
+    'Marketing and business-development prompts',
+    'SOP and process-documentation prompts',
+    'Problem-solving and advisory-response prompts',
+    'Prompt chaining, refinement, and a personal prompt library',
+    'Five workflow systems, three 7-day action plans, and a 30-day implementation checklist'
+  ],
+  outcomes: [
+    'A repeatable four-step method for selecting, personalizing, reviewing, and applying AI-assisted drafts',
+    'A structured prompt formula that makes recurring bookkeeping instructions easier to save, reuse, and refine',
+    'Connected workflows for month-end close, client onboarding, overdue invoices, monthly report narratives, and service proposals',
+    'A clearer habit of minimizing client data before prompting and reviewing every output before it is used',
+    'A practical 30-day route from individual prompts toward a working personal prompt library and repeatable AI-assisted processes'
+  ],
+  themes: ['bookkeeper AI','prompt structure','client communication','month-end close','workflow systems','client confidentiality','human review'],
+  hubSlug: 'bookkeeper-ai',
+  hubLabel: 'AI for bookkeepers guides'
+},{
   slug: 'your-first-30-days-as-a-hotel-housekeeping-supervisor',
   title: 'Your First 30 Days as a Hotel Housekeeping Supervisor',
   subtitle: 'A Practical Guide to Room Boards, Inspections, Call-Outs, Staff Feedback, Linen and Getting Rooms Ready on Time',

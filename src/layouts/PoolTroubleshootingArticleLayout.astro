@@ -1,0 +1,37 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+const { entry } = Astro.props;
+const { title, description, published, related } = entry.data;
+const url = new URL('/pool-troubleshooting/' + entry.id + '/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Article',
+  headline:title,
+  description,
+  datePublished:published.toISOString().slice(0,10),
+  author:{'@type':'Person',name:'Evan Hargreaves',url:'https://mercerlanepress.com/authors/evan-hargreaves/'},
+  publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  mainEntityOfPage:url
+};
+---
+<BaseLayout title={title} description={description} type="article" schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Pool Troubleshooting',href:'/pool-troubleshooting/'},{name:title}]}/>
+  <article class="article wrap narrow">
+    <header>
+      <p class="eyebrow">FIRST-TIME POOL TROUBLESHOOTING</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="byline">By <a href="/authors/evan-hargreaves/">Evan Hargreaves</a> · Published <time datetime={published.toISOString()}>{published.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'})}</time></p>
+    </header>
+    <div class="article-body"><slot /></div>
+    <aside class="book-note">
+      <p class="eyebrow">THE COMPLETE SYMPTOM-FIRST SYSTEM</p>
+      <h2>Move from what changed to the next justified check</h2>
+      <p><em>The First-Time Pool Owner's Troubleshooting Guide</em> uses the same OBSERVE → TEST → ISOLATE → ACT → VERIFY sequence across water, circulation, filtration, equipment, recurring problems, seasonal transitions, and professional handoff.</p>
+      <a class="button" href="/books/the-first-time-pool-owners-troubleshooting-guide/">Explore the book</a>
+    </aside>
+    <nav class="related" aria-label="Related pool troubleshooting guides"><h2>Related troubleshooting guides</h2><ul>{related.map((slug:string) => <li><a href={'/pool-troubleshooting/' + slug + '/'}>{slug.replaceAll('-',' ')}</a></li>)}</ul></nav>
+    <div class="notice"><strong>Safety and scope.</strong> Follow the current label for the exact pool chemical being used and the manufacturer's instructions for installed equipment. Never improvise chemical mixtures, never open pressurized equipment until it has been safely shut down and fully depressurized, and use appropriately qualified help for electrical, gas, structural, hazardous-chemical, or other specialist work.</div>
+  </article>
+</BaseLayout>

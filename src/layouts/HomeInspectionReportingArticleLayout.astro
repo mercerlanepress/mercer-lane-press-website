@@ -1,0 +1,38 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const { entry } = Astro.props;
+const { title, description, published, related } = entry.data;
+const url = new URL('/home-inspection-reporting/' + entry.id + '/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Article',
+  headline:title,
+  description,
+  datePublished:published.toISOString().slice(0,10),
+  author:{'@type':'Person',name:'Warren Holtby',url:'https://mercerlanepress.com/authors/warren-holtby/'},
+  publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  mainEntityOfPage:url
+};
+---
+<BaseLayout title={title} description={description} type="article" schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Home Inspection Reporting',href:'/home-inspection-reporting/'},{name:title}]}/>
+  <article class="article wrap narrow">
+    <header>
+      <p class="eyebrow">HOME INSPECTION REPORTING</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="byline">By <a href="/authors/warren-holtby/">Warren Holtby</a> · Published <time datetime={published.toISOString()}>{published.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'})}</time></p>
+    </header>
+    <div class="article-body"><slot /></div>
+    <aside class="book-note">
+      <p class="eyebrow">THE COMPLETE REPORTING SYSTEM</p>
+      <h2>Connect field capture, narrative design, photographs, summaries, and final QA</h2>
+      <p><em>Write Better Home Inspection Reports Faster</em> develops the complete Observe → Build → Prioritize → Verify → Deliver system, then connects it to narrative-library control, photography, same-day workflow, quality assurance, AI boundaries, and longer-term improvement.</p>
+      <a class="button" href="/books/write-better-home-inspection-reports-faster/">Explore the book</a>
+    </aside>
+    <nav class="related" aria-label="Related home inspection reporting guides"><h2>Related home inspection reporting guides</h2><ul>{related.map((slug:string) => <li><a href={'/home-inspection-reporting/' + slug + '/'}>{slug.replaceAll('-',' ')}</a></li>)}</ul></nav>
+    <div class="notice"><strong>Professional-scope note.</strong> These guides address report organization, writing, editing, and quality control. They do not establish a Standard of Practice or replace applicable law, licensing rules, professional standards, agreements, insurance requirements, employer procedures, or qualified legal, engineering, code-compliance, or other regulated advice.</div>
+  </article>
+</BaseLayout>

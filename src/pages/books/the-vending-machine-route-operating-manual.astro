@@ -1,0 +1,110 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'the-vending-machine-route-operating-manual')!;
+const guides = (await getCollection('vendingMachineRouteGuides')).sort((a,b) => a.data.order - b.data.order);
+const cycle = [
+  ['QUALIFY','Decide whether a location deserves deeper investigation using repeat population, purchase occasions, convenience, placement, access, security, host alignment, route fit, and evidence quality.'],
+  ['MODEL','Rebuild the economics below gross sales and test weak, base, and strong operating cases before committing capital.'],
+  ['MATCH','Choose equipment that fits the customer, the physical site, the operator, and the economics instead of letting an available machine define the opportunity.'],
+  ['PLACE','Survey the site, clarify access and responsibilities, agree workable commercial terms, and verify relevant requirements before installation.'],
+  ['STOCK','Treat the first fill as a hypothesis, set deliberate par levels, and change product space from repeated evidence rather than preference.'],
+  ['SERVICE','Visit because the machine needs useful attention, prepare stock before departure, and separate urgent, due, optional, and not-due stops.'],
+  ['MEASURE','Track machine contribution, route hours, stockouts, faults, downtime, host condition, and trend so each machine produces evidence.'],
+  ['DECIDE','Keep, improve, renegotiate, replace, relocate, or exit as the evidence changes; machine count alone is not the scoreboard.']
+];
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/warren-holtby/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  ...(book.coverReady ? {image:new URL(book.cover,Astro.site).href} : {}),
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">VENDING · SMALL ROUTE OPERATIONS</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/warren-holtby/">Warren Holtby</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/vending-machine-route/">Read free vending route guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>For operators who want the route to become more controlled as it grows</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">THE OPERATING CYCLE</p>
+        <h2>QUALIFY → MODEL → MATCH → PLACE → STOCK → SERVICE → MEASURE → DECIDE</h2>
+        <p>The manual starts before the machine purchase. The equipment should serve a qualified opportunity; the opportunity should not be invented to justify equipment already owned.</p>
+      </div>
+      <div class="grid-3">{cycle.map(([name,body]) => <article class="card"><h3>{name}</h3><p>{body}</p></article>)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FROM ONE MACHINE TO TEN</p><h2>Scale through operating gates, not a machine-count target</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Machine 1: prove the process</h3><p>Learn the service sequence, keep current records, reconstruct the machine economics, understand pars, and identify the main unresolved risk before treating a second machine as progress.</p></article>
+        <article class="card"><h3>Machines 2–3: prove repeatability</h3><p>Keep machine-specific product and service decisions while standardizing records, payment checks, complaint handling, and other operating mechanics.</p></article>
+        <article class="card"><h3>Machines 4–5: build the route</h3><p>Make geography, central inventory, route preparation, emergency-pattern review, and equipment serviceability explicit rather than allowing complexity to grow invisibly.</p></article>
+        <article class="card"><h3>Machines 6–10: stop managing from memory</h3><p>Move machine, host, terms, payment, service, fault, economics, route-hour, and next-action information into an external route record.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">WORKSHEETS & OPERATING TOOLS</p><h2>Turn decisions into records you can revisit</h2><p>The book collects practical route-management sheets at the back for personal business use.</p></div>
+      <div class="grid-3">
+        <article class="card"><h3>Before buying</h3><p>Initial Route Definition, Location Candidate Record, Location Go / No-Go Scorecard, Machine Economics Worksheet, Commission Sensitivity Table, All-In Acquisition Cost Sheet, Equipment Match Sheet, and Used-Machine Inspection Checklist.</p></article>
+        <article class="card"><h3>Launch and operate</h3><p>Cashless Readiness Check, Location Prospect Tracker, Site Survey, Agreement Issue Checklist, Compliance Verification Record, First-Fill Planner, Par-Level Sheet, SKU Decision Matrix, Price Review, and Standard Service Checklist.</p></article>
+        <article class="card"><h3>Run and review the route</h3><p>Service Interval Review, Route Stop Performance Table, Route Planning Sheet, Monthly Machine Scorecard, Underperformance Review, relocation and acquisition tools, scale gates, a Ten-Machine Scoreboard, and a Ten-Machine Operating Audit.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Six focused references for the route decisions that need evidence</h2></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/vending-machine-route/" label="VENDING MACHINE ROUTES" />)}</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">SCOPE & BOUNDARIES</p><h2>A practical operating manual, not an earnings promise</h2></div>
+      <p>The book is written for people operating or considering a small vending-machine route in the United States. It provides general educational information and does not replace legal, tax, accounting, investment, insurance, electrical, engineering, food-safety, or other qualified advice.</p>
+      <p>Financial figures in the book are hypothetical teaching examples. Actual sales, costs, service burden, repairs, payment fees, commissions, regulation, and profitability vary by operator and location. Current requirements and commercial terms should be verified before acting on them.</p>
+    </div>
+  </section>
+</BaseLayout>

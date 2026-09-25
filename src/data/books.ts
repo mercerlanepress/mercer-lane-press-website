@@ -12,8 +12,8 @@ export const books: Book[] = [{
   author: 'Mercer Lane', authorSlug: 'mercer-lane',
   publisher: 'Mercer Lane Press',
   description: 'A practical workbook for bookkeepers using AI for recurring communication, documentation, reporting, and workflow tasks, with more than 100 customizable prompts, five connected workflow systems, privacy guidance, short action plans, advanced prompting methods, and a 30-day implementation checklist.',
-  cover: '',
-  coverReady: false,
+  cover: '/images/books/the-ai-productivity-guide-for-bookkeepers-cover.jpg',
+  coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0H94ZZPR9',
   intendedReader: 'Solo bookkeepers, small bookkeeping practices, and bookkeeping team members who want a repeatable way to use AI for emails, report explanations, onboarding, month-end communication, documentation, and business-development drafting while keeping professional judgment and client confidentiality in the loop.',
   problems: [

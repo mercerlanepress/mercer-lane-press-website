@@ -34,8 +34,9 @@ export const GET: APIRoute = async () => {
   const poolTroubleshootingGuides = await getCollection('poolTroubleshootingGuides');
   const manufacturingSupervisionGuides = await getCollection('manufacturingSupervisionGuides');
   const hotelHousekeepingSupervisionGuides = await getCollection('hotelHousekeepingSupervisionGuides');
+  const hrAiGuides = await getCollection('hrAiGuides');
   const paths = [
-    '/', '/books/', '/authors/', '/guides/', '/dog-guides/', '/5g-home-internet/', '/local-business-ai/', '/ai-scam-defence/', '/reactive-dog-walking/', '/dog-enrichment/', '/cooperative-care/', '/rescue-dog-first-90-days/', '/heat-pump-owners/', '/local-ai/', '/beginner-telescope-observing/', '/deep-sky-astrophotography/', '/construction-estimating/', '/landscape-contractor-estimating/', '/home-assistant-matter-thread/', '/genealogy-brick-walls/', '/power-automate/', '/pickleball-doubles/', '/youth-soccer-coaching/', '/ham-radio-technician-exam/', '/epa-608-universal-exam/', '/first-year-homeowner/', '/property-manager-ai/', '/bookkeeper-ai/', '/maintenance-planning/', '/aquarium-troubleshooting/', '/home-inspection-reporting/', '/vending-machine-route/', '/pool-troubleshooting/', '/manufacturing-supervision/', '/hotel-housekeeping-supervision/', '/about/', '/contact/', '/privacy/',
+    '/', '/books/', '/authors/', '/guides/', '/dog-guides/', '/5g-home-internet/', '/local-business-ai/', '/ai-scam-defence/', '/reactive-dog-walking/', '/dog-enrichment/', '/cooperative-care/', '/rescue-dog-first-90-days/', '/heat-pump-owners/', '/local-ai/', '/beginner-telescope-observing/', '/deep-sky-astrophotography/', '/construction-estimating/', '/landscape-contractor-estimating/', '/home-assistant-matter-thread/', '/genealogy-brick-walls/', '/power-automate/', '/pickleball-doubles/', '/youth-soccer-coaching/', '/ham-radio-technician-exam/', '/epa-608-universal-exam/', '/first-year-homeowner/', '/property-manager-ai/', '/bookkeeper-ai/', '/maintenance-planning/', '/aquarium-troubleshooting/', '/home-inspection-reporting/', '/vending-machine-route/', '/pool-troubleshooting/', '/manufacturing-supervision/', '/hotel-housekeeping-supervision/', '/hr-ai/', '/about/', '/contact/', '/privacy/',
     ...books.map(({ slug }) => '/books/' + slug + '/'),
     ...authors.map(({ slug }) => '/authors/' + slug + '/'),
     ...guides.map(({ id }) => '/5g-home-internet/' + id + '/'),
@@ -67,7 +68,8 @@ export const GET: APIRoute = async () => {
     ...vendingMachineRouteGuides.map(({ id }) => '/vending-machine-route/' + id + '/'),
     ...poolTroubleshootingGuides.map(({ id }) => '/pool-troubleshooting/' + id + '/'),
     ...manufacturingSupervisionGuides.map(({ id }) => '/manufacturing-supervision/' + id + '/'),
-    ...hotelHousekeepingSupervisionGuides.map(({ id }) => '/hotel-housekeeping-supervision/' + id + '/')
+    ...hotelHousekeepingSupervisionGuides.map(({ id }) => '/hotel-housekeeping-supervision/' + id + '/'),
+    ...hrAiGuides.map(({ id }) => '/hr-ai/' + id + '/')
   ];
   const body = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + paths.map(path => '\n  <url><loc>https://mercerlanepress.com' + path + '</loc></url>').join('') + '\n</urlset>\n';
   return new Response(body, { headers: { 'Content-Type': 'application/xml' } });

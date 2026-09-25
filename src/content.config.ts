@@ -160,4 +160,9 @@ const hotelHousekeepingSupervisionGuides = defineCollection({
   schema: guideSchema
 });
 
-export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides, cooperativeCareGuides, rescueDogFirst90DaysGuides, heatPumpOwnerGuides, localAiGuides, beginnerTelescopeObservingGuides, deepSkyAstrophotographyGuides, constructionEstimatingGuides, landscapeContractorEstimatingGuides, homeAssistantMatterThreadGuides, genealogyBrickWallGuides, powerAutomateGuides, pickleballDoublesGuides, youthSoccerCoachingGuides, hamRadioTechnicianExamGuides, epa608UniversalExamGuides, firstYearHomeownerGuides, bookkeeperAiGuides, propertyManagerAiGuides, maintenancePlanningGuides, aquariumTroubleshootingGuides, homeInspectionReportingGuides, vendingMachineRouteGuides, poolTroubleshootingGuides, manufacturingSupervisionGuides, hotelHousekeepingSupervisionGuides };
+const hrAiGuides = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/hr-ai' }),
+  schema: guideSchema
+});
+
+export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides, cooperativeCareGuides, rescueDogFirst90DaysGuides, heatPumpOwnerGuides, localAiGuides, beginnerTelescopeObservingGuides, deepSkyAstrophotographyGuides, constructionEstimatingGuides, landscapeContractorEstimatingGuides, homeAssistantMatterThreadGuides, genealogyBrickWallGuides, powerAutomateGuides, pickleballDoublesGuides, youthSoccerCoachingGuides, hamRadioTechnicianExamGuides, epa608UniversalExamGuides, firstYearHomeownerGuides, bookkeeperAiGuides, propertyManagerAiGuides, maintenancePlanningGuides, aquariumTroubleshootingGuides, homeInspectionReportingGuides, vendingMachineRouteGuides, poolTroubleshootingGuides, manufacturingSupervisionGuides, hotelHousekeepingSupervisionGuides, hrAiGuides };

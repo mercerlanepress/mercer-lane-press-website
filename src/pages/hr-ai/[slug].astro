@@ -1,0 +1,11 @@
+---
+import { getCollection, render } from 'astro:content';
+import HrAiArticleLayout from '../../layouts/HrAiArticleLayout.astro';
+
+export async function getStaticPaths(){
+  return (await getCollection('hrAiGuides')).map(entry => ({params:{slug:entry.id},props:{entry}}));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<HrAiArticleLayout entry={entry}><Content /></HrAiArticleLayout>

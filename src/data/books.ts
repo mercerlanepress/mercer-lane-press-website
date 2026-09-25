@@ -6,6 +6,47 @@ export interface Book {
 }
 
 export const books: Book[] = [{
+  slug: 'ai-productivity-for-hr-professionals',
+  title: 'AI Productivity for HR Professionals',
+  subtitle: 'A Practical Guide to Using AI for Hiring, Employee Handbooks, Interview Questions, Performance Reviews, HR Templates, Employee Relations, and Everyday Human Resources Work',
+  author: 'Mercer Lane', authorSlug: 'mercer-lane',
+  publisher: 'Mercer Lane Press',
+  description: 'A practical working reference for HR professionals using AI for recurring drafting, communication, documentation, reporting, onboarding, performance management, employee relations, learning and development, and other everyday HR work, with 141 ready-to-use prompts, five connected workflows, five action plans, and a Role + Task + Context + Output framework.',
+  cover: '/images/books/ai-productivity-for-hr-professionals-cover.jpg',
+  coverReady: true,
+  purchaseUrl: 'https://www.amazon.com/dp/B0H9SDPMY3',
+  intendedReader: 'HR generalists, recruiters, HR business partners, people operations staff, small HR teams, and other human-resources professionals who want repeatable AI-assisted drafting and workflow support while keeping human judgment, confidentiality, factual review, and appropriate legal or compliance review in the loop.',
+  problems: [
+    'Recurring HR writing such as job descriptions, candidate communication, onboarding messages, performance-review drafts, policy notes, reports, and employee communications starting from a blank page',
+    'AI outputs that stay vague because the role, task, context, and required output have not been defined clearly',
+    'High-volume HR processes that are handled as isolated tasks instead of connected, reusable workflows',
+    'Sensitive employee or candidate information being included in public AI prompts when anonymized or limited context would be safer',
+    'AI-generated policies, performance documents, employee-relations material, or analytics narratives being treated as final without human verification and appropriate review',
+    'Useful prompts being recreated repeatedly instead of refined and saved into a personal or team prompt library'
+  ],
+  topics: [
+    'Role + Task + Context + Output prompt structure',
+    'Recruitment and talent acquisition prompts',
+    'Onboarding and employee experience prompts',
+    'Performance management and difficult-conversation preparation',
+    'Employee communication, policy, compliance, and documentation drafting',
+    'HR reports and people analytics narratives',
+    'Learning and development prompts',
+    'Employee relations and conflict-resolution preparation',
+    'Five end-to-end HR workflow systems and five mini action plans',
+    'Prompt chaining, refinement loops, personal prompt libraries, advanced HR scenarios, and bonus prompts'
+  ],
+  outcomes: [
+    'A repeatable method for turning recurring HR tasks into structured AI-assisted first drafts',
+    'A library of 141 prompts spanning core HR functions plus advanced scenarios and everyday utility tasks',
+    'Connected workflows for hiring, onboarding, performance reviews, employee queries and cases, and compliance documentation',
+    'Clearer habits around data minimization, factual verification, human review, and legal or compliance sign-off where appropriate',
+    'A practical route from individual prompts toward reusable HR workflows and a maintained personal prompt library'
+  ],
+  themes: ['HR AI','HR prompts','recruitment','onboarding','performance management','employee communication','employee relations','people analytics','data privacy','human review'],
+  hubSlug: 'hr-ai',
+  hubLabel: 'AI for HR professionals guides'
+},{
   slug: 'the-ai-productivity-guide-for-bookkeepers',
   title: 'The AI Productivity Guide for Bookkeepers',
   subtitle: '100+ Professional AI Prompts, Workflow Systems, and Strategies Built Specifically for Bookkeepers',

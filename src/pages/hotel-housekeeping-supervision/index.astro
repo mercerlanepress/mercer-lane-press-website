@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('hotelHousekeepingSupervisionGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'CollectionPage',
+  name:'Hotel Housekeeping Supervisor Guides',
+  description:'Practical guides for new hotel housekeeping supervisors covering fair room boards, call-outs, inspection flow, room readiness, front-desk coordination, staff feedback, and shift handovers.',
+  url:new URL('/hotel-housekeeping-supervision/',Astro.site).href,
+  hasPart:guides.map(guide => ({
+    '@type':'Article',
+    name:guide.data.title,
+    url:new URL('/hotel-housekeeping-supervision/' + guide.id + '/',Astro.site).href
+  }))
+};
+---
+<BaseLayout title="Hotel Housekeeping Supervisor Guides" description="Practical guides for new hotel housekeeping supervisors covering fair room boards, call-outs, inspection flow, room readiness, front-desk coordination, staff feedback, and shift handovers." schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Hotel Housekeeping Supervision'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">HOTEL HOUSEKEEPING SUPERVISION</p>
+    <h1>Hotel Housekeeping Supervisor Guides</h1>
+    <p class="lede">Practical help for the move from cleaning your own rooms to controlling room flow, priorities, inspections, information, people, and exceptions across a full housekeeping shift.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Keep one operating picture</h2>
+        <p>The useful question is not simply what room should be cleaned next. It is what the operation needs next, using the people, rooms, time, standards, information, linen, and support actually available.</p>
+      </div>
+      <div class="hub-steps">
+        <article><h3>Read</h3><p>Confirm the real room picture, staffing, late checkouts, priorities, maintenance blocks, and supply risks before assigning work.</p></article>
+        <article><h3>Build and brief</h3><p>Create defensible boards, explain what is different today, and make sure assignment changes reach the people and systems that need them.</p></article>
+        <article><h3>Control and check</h3><p>Recount capacity when conditions change, watch the current bottleneck, keep room status usable, and inspect against the property's approved standard.</p></article>
+        <article><h3>Hand over</h3><p>Leave unresolved work with a clear stage, owner, next action, and recheck point so the next shift can continue without information trapped in one person's memory.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Start with the problem happening on the shift</h2><p>Each guide focuses on one recurring supervisory pressure point while keeping the same room-flow, evidence, communication, and escalation principles.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/hotel-housekeeping-supervision/" label="HOTEL HOUSEKEEPING" />)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <div class="section-head"><p class="eyebrow">FULL FIRST-MONTH REFERENCE</p><h2>Your First 30 Days as a Hotel Housekeeping Supervisor</h2></div>
+      <p>The book brings room-board design, call-out recovery, room-status control, inspection, front-desk coordination, linen and supply visibility, staff feedback, training, difficult shifts, a staged 30-day action plan, scorecard, and field-manual sheets into one practical supervisor reference.</p>
+      <p><a class="button" href="/books/your-first-30-days-as-a-hotel-housekeeping-supervisor/">Explore the book</a></p>
+      <div class="notice"><strong>Property procedures govern.</strong> Hotels differ in staffing, inspection standards, systems, room types, safety procedures, employment requirements, and decision authority. Use these guides as general educational material and follow the employer-approved procedures, training, standards, and escalation routes that apply at the property.</div>
+    </div>
+  </section>
+</BaseLayout>

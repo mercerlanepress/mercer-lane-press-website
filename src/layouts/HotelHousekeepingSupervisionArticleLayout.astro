@@ -1,0 +1,37 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+const { entry } = Astro.props;
+const { title, description, published, related } = entry.data;
+const url = new URL('/hotel-housekeeping-supervision/' + entry.id + '/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Article',
+  headline:title,
+  description,
+  datePublished:published.toISOString().slice(0,10),
+  author:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  mainEntityOfPage:url
+};
+---
+<BaseLayout title={title} description={description} type="article" schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Hotel Housekeeping Supervision',href:'/hotel-housekeeping-supervision/'},{name:title}]}/>
+  <article class="article wrap narrow">
+    <header>
+      <p class="eyebrow">HOTEL HOUSEKEEPING SUPERVISION</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="byline">By Mercer Lane Press · Published <time datetime={published.toISOString()}>{published.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'})}</time></p>
+    </header>
+    <div class="article-body"><slot /></div>
+    <aside class="book-note">
+      <p class="eyebrow">THE COMPLETE FIRST-MONTH SYSTEM</p>
+      <h2>Run the shift, not every room</h2>
+      <p><em>Your First 30 Days as a Hotel Housekeeping Supervisor</em> by Julian Rooke connects the morning house read, fair room boards, call-outs, room-status control, inspections, front-desk coordination, linen and supply problems, staff feedback, training, handovers, a 30-day action plan, and field-manual sheets.</p>
+      <a class="button" href="/books/your-first-30-days-as-a-hotel-housekeeping-supervisor/">Explore the book</a>
+    </aside>
+    <nav class="related" aria-label="Related hotel housekeeping supervision guides"><h2>Related hotel housekeeping supervision guides</h2><ul>{related.map((slug:string) => <li><a href={'/hotel-housekeeping-supervision/' + slug + '/'}>{slug.replaceAll('-',' ')}</a></li>)}</ul></nav>
+    <div class="notice"><strong>Scope and workplace boundaries.</strong> These guides provide general educational information for hotel housekeeping supervision. Property standards, staffing systems, safety rules, chemical procedures, security processes, employment requirements, decision authority, and escalation routes vary. Follow the procedures and training that apply at your property.</div>
+  </article>
+</BaseLayout>

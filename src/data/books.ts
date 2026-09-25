@@ -12,8 +12,8 @@ export const books: Book[] = [{
   author: 'Evan Hargreaves', authorSlug: 'evan-hargreaves',
   publisher: 'Mercer Lane Press',
   description: 'A practical U.S.-focused troubleshooting guide for first-time residential pool owners, built around a symptom-first OBSERVE → TEST → ISOLATE → ACT → VERIFY method for water, circulation, filtration, equipment, recurring problems, seasonal transitions, and knowing when professional help is the correct next step.',
-  cover: '/images/books/The_First-Time_Pool_Owners_Troubleshooting_Guide_Front_Cover.jpg',
-  coverReady: false,
+  cover: '/images/books/pool - DIGITAL_BOOK_COVER.jpg',
+  coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0HFNT77YB',
   intendedReader: 'First-time and relatively new residential pool owners who need a structured way to investigate green or cloudy water, disappearing chlorine, pH drift, stains, scale, weak return flow, filter-pressure changes, persistent air, returning debris, pump changes, recurring algae, and seasonal or weather-related problems without guessing.',
   problems: [

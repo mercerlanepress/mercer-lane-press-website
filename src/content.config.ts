@@ -130,4 +130,9 @@ const aquariumTroubleshootingGuides = defineCollection({
   schema: guideSchema
 });
 
-export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides, cooperativeCareGuides, rescueDogFirst90DaysGuides, heatPumpOwnerGuides, localAiGuides, beginnerTelescopeObservingGuides, deepSkyAstrophotographyGuides, constructionEstimatingGuides, landscapeContractorEstimatingGuides, homeAssistantMatterThreadGuides, genealogyBrickWallGuides, powerAutomateGuides, pickleballDoublesGuides, youthSoccerCoachingGuides, hamRadioTechnicianExamGuides, epa608UniversalExamGuides, firstYearHomeownerGuides, propertyManagerAiGuides, maintenancePlanningGuides, aquariumTroubleshootingGuides };
+const homeInspectionReportingGuides = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/home-inspection-reporting' }),
+  schema: guideSchema
+});
+
+export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides, cooperativeCareGuides, rescueDogFirst90DaysGuides, heatPumpOwnerGuides, localAiGuides, beginnerTelescopeObservingGuides, deepSkyAstrophotographyGuides, constructionEstimatingGuides, landscapeContractorEstimatingGuides, homeAssistantMatterThreadGuides, genealogyBrickWallGuides, powerAutomateGuides, pickleballDoublesGuides, youthSoccerCoachingGuides, hamRadioTechnicianExamGuides, epa608UniversalExamGuides, firstYearHomeownerGuides, propertyManagerAiGuides, maintenancePlanningGuides, aquariumTroubleshootingGuides, homeInspectionReportingGuides };

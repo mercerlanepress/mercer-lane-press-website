@@ -12,7 +12,7 @@ export const books: Book[] = [{
   author: 'Warren Holtby', authorSlug: 'warren-holtby',
   publisher: 'Mercer Lane Press',
   description: 'A practical U.S.-focused operating manual for people building or running a small vending-machine route, using a location-first system to qualify sites, model machine economics, choose equipment, control stock and service, measure each machine, and scale from the first machine toward a controlled ten-machine route.',
-  cover: '/images/books/The_Vending_Machine_Route_Operating_Manual_Front_Cover.jpg',
+  cover: '/images/books/ven - DIGITAL_BOOK_COVER.jpg',
   coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0HHKQVLP6',
   intendedReader: 'People considering their first vending machine, new operators building a small route, and owners of early-stage routes who want a repeatable way to qualify locations, understand machine-level economics, manage stock and service, review underperforming equipment, evaluate route purchases, and grow without relying on memory.',

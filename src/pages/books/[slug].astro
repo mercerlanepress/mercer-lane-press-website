@@ -6,13 +6,12 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import BookCover from '../../components/BookCover.astro';
 import { books } from '../../data/books';
 
-const customBookSlugs = new Set(
-  readdirSync(join(process.cwd(),'src/pages/books'))
-    .filter(name => name.endsWith('.astro') && !['[slug].astro','index.astro'].includes(name))
-    .map(name => name.replace(/\.astro$/,''))
-);
-
 export function getStaticPaths() {
+  const customBookSlugs = new Set(
+    readdirSync(join(process.cwd(),'src/pages/books'))
+      .filter(name => name.endsWith('.astro') && !['[slug].astro','index.astro'].includes(name))
+      .map(name => name.replace(/\.astro$/,''))
+  );
   return books
     .filter(book => !customBookSlugs.has(book.slug))
     .map(book => ({ params: { slug: book.slug }, props: { book } }));

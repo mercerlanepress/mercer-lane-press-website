@@ -1,12 +1,19 @@
 ---
+import { readdirSync } from 'node:fs';
+import { join } from 'node:path';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import BookCover from '../../components/BookCover.astro';
 import { books } from '../../data/books';
 
 export function getStaticPaths() {
+  const customBookSlugs = new Set(
+    readdirSync(join(process.cwd(),'src/pages/books'))
+      .filter(name => name.endsWith('.astro') && !['[slug].astro','index.astro'].includes(name))
+      .map(name => name.replace(/\.astro$/,''))
+  );
   return books
-    .filter(book => !['the-5g-home-internet-troubleshooting-manual','ai-scam-defence-for-families','the-reactive-dog-walking-playbook','busy-dog-better-day','dog-enrichment-for-apartments-and-busy-owners','cooperative-care-for-dog-owners','the-rescue-dog-first-90-days','the-new-heat-pump-owners-operating-manual','automate-the-office','private-ai-on-your-pc','your-first-20-nights-with-a-telescope','deep-sky-astrophotography-troubleshooting','construction-estimating-for-your-first-jobs','landscape-contractor-estimating-and-pricing','the-home-assistant-and-matter-owners-manual','break-through-your-genealogy-brick-wall','so-youve-volunteered-to-coach-soccer','ham-radio-technician-exam-prep-2026-2030','epa-608-universal-certification-exam-prep-2027','whats-wrong-with-my-aquarium','write-better-home-inspection-reports-faster','the-vending-machine-route-operating-manual'].includes(book.slug))
+    .filter(book => !customBookSlugs.has(book.slug))
     .map(book => ({ params: { slug: book.slug }, props: { book } }));
 }
 
@@ -39,26 +46,30 @@ const schema = {
     </div>
   </section>
 
-  <section class="section section-tint">
+  {(book.intendedReader || book.problems?.length) && <section class="section section-tint">
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">WHO IT IS FOR</p>
-        <h2>A practical system for a specific job</h2>
-        <p>{book.intendedReader}</p>
+        <h2>For readers who want a practical, structured way forward</h2>
+        {book.intendedReader && <p>{book.intendedReader}</p>}
       </div>
       {book.problems?.length && <><h2>Problems the book helps you work through</h2><ul class="check-grid">{book.problems.map((item:string)=><li>{item}</li>)}</ul></>}
     </div>
-  </section>
+  </section>}
 
-  <section class="section">
+  {book.topics?.length && <section class="section">
     <div class="wrap">
-      <div class="section-head"><p class="eyebrow">INSIDE THE SYSTEM</p><h2>What the book focuses on</h2></div>
+      <div class="section-head"><p class="eyebrow">WHAT IT COVERS</p><h2>Inside the book</h2></div>
       <div class="grid-3">
-        {book.topics?.slice(0,6).map((topic:string)=><article class="card"><h3>{topic}</h3><p>Use clear evidence, practical checks, and documented facts rather than unsupported assumptions.</p></article>)}
+        {book.topics.slice(0,6).map((topic:string)=><article class="card"><p class="feature-highlight">{topic}</p></article>)}
       </div>
-      <div class="notice"><strong>No guaranteed AI rankings.</strong> Search and AI systems change, and no method can guarantee that a platform will mention, cite, rank, recommend, or prefer a business. The goal is to improve the quality, consistency, accessibility, and testability of the public evidence about the business.</div>
     </div>
-  </section>
+  </section>}
 
-  {book.outcomes?.length && <section class="section section-tint"><div class="wrap"><div class="section-head"><p class="eyebrow">PRACTICAL OUTCOMES</p><h2>What the 30-day system is designed to leave you with</h2></div><div class="grid-3">{book.outcomes.map((item:string)=><article class="card"><h3>{item}</h3><p>A repeatable operating habit rather than a one-off optimization tactic.</p></article>)}</div></div></section>}
+  {book.outcomes?.length && <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">PRACTICAL OUTCOMES</p><h2>What the book is designed to help you do</h2></div>
+      <div class="grid-3">{book.outcomes.map((item:string)=><article class="card"><p class="feature-highlight">{item}</p></article>)}</div>
+    </div>
+  </section>}
 </BaseLayout>

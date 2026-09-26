@@ -1,4 +1,57 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro'; import Breadcrumbs from '../../components/Breadcrumbs.astro'; import BookCover from '../../components/BookCover.astro'; import {books} from '../../data/books';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import {books} from '../../data/books';
+
+const categoryDefinitions=[
+  {id:'ai-work',label:'AI & Digital Work',description:'AI-assisted professional workflows, office automation, private local AI, and practical digital systems.',hubs:['hr-ai','bookkeeper-ai','property-manager-ai','local-business-ai','power-automate','local-ai']},
+  {id:'leadership-operations',label:'Leadership, Business & Operations',description:'Frontline supervision, maintenance planning, reporting workflows, and small-business operating systems.',hubs:['hotel-housekeeping-supervision','manufacturing-supervision','maintenance-planning','vending-machine-route','home-inspection-reporting']},
+  {id:'home-everyday',label:'Home & Everyday Life',description:'Troubleshooting, ownership, safety, heating, connectivity, pools, and smart-home systems.',hubs:['pool-troubleshooting','5g-home-internet','ai-scam-defence','heat-pump-owners','home-assistant-matter-thread','first-year-homeowner']},
+  {id:'dogs-pets',label:'Dogs & Pets',description:'Dog behaviour, enrichment, cooperative care, rescue-dog settling, and beginner aquarium troubleshooting.',hubs:['reactive-dog-walking','dog-enrichment','cooperative-care','rescue-dog-first-90-days','aquarium-troubleshooting']},
+  {id:'trades-certification',label:'Trades & Certification',description:'Estimating, pricing, and trade-exam preparation for practical working contexts.',hubs:['construction-estimating','landscape-contractor-estimating','epa-608-universal-exam']},
+  {id:'hobbies-recreation',label:'Hobbies & Recreation',description:'Astronomy, astrophotography, genealogy, pickleball, youth soccer, and amateur radio.',hubs:['beginner-telescope-observing','deep-sky-astrophotography','genealogy-brick-walls','pickleball-doubles','youth-soccer-coaching','ham-radio-technician-exam']}
+];
+
+const knownHubs=new Set(categoryDefinitions.flatMap(category=>category.hubs));
+const baseSections=categoryDefinitions.map(category=>({...category,books:books.filter(book=>book.hubSlug && category.hubs.includes(book.hubSlug))})).filter(category=>category.books.length);
+const uncategorized=books.filter(book=>!book.hubSlug || !knownHubs.has(book.hubSlug));
+const sections=uncategorized.length ? [...baseSections,{id:'other',label:'Other Practical Guides',description:'Additional Mercer Lane Press titles.',hubs:[],books:uncategorized}] : baseSections;
 ---
-<BaseLayout title="Books" description="Browse practical problem-solving nonfiction published by Mercer Lane Press."><Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books'}]}/><header class="page-head wrap"><p class="eyebrow">OUR CATALOG</p><h1>Books</h1><p class="lede">Focused nonfiction for readers who want a reliable way to diagnose a problem and decide what to do next.</p></header><section class="section section-tint"><div class="wrap">{books.map(book=><article class="book-layout"><BookCover book={book}/><div><p class="eyebrow">PRACTICAL GUIDE</p><h2>{book.title}</h2><p><strong>{book.subtitle}</strong></p><p>By <a href={`/authors/${book.authorSlug}/`}>{book.author}</a></p><p>{book.description}</p><a class="button" href={`/books/${book.slug}/`}>View book details</a></div></article>)}</div></section></BaseLayout>
+<BaseLayout title="Books" description="Browse the Mercer Lane Press catalogue by subject, including AI and work, home and technology, dogs and pets, trades, operations, and practical hobbies.">
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">OUR CATALOG</p>
+    <h1>Books</h1>
+    <p class="lede">Focused nonfiction for readers who want a reliable way to diagnose a problem and decide what to do next.</p>
+    <nav class="catalog-nav" aria-label="Browse book categories">
+      {sections.map(section=><a href={'#' + section.id}>{section.label} <span>{section.books.length}</span></a>)}
+    </nav>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      {sections.map(section=><section class="catalog-section" id={section.id}>
+        <header class="catalog-section-head">
+          <p class="eyebrow">BROWSE BY SUBJECT</p>
+          <h2>{section.label}</h2>
+          <p>{section.description}</p>
+        </header>
+        {section.books.map(book=><article class="book-layout catalog-book">
+          <BookCover book={book}/>
+          <div>
+            <p class="eyebrow">PRACTICAL GUIDE</p>
+            <h3><a href={'/books/' + book.slug + '/'}>{book.title}</a></h3>
+            <p><strong>{book.subtitle}</strong></p>
+            <p>By <a href={'/authors/' + book.authorSlug + '/'}>{book.author}</a></p>
+            <p>{book.description}</p>
+            <div class="actions">
+              <a class="button" href={'/books/' + book.slug + '/'}>View book details</a>
+              {book.hubSlug && <a class="button button-secondary" href={'/' + book.hubSlug + '/'}>Read free guides</a>}
+            </div>
+          </div>
+        </article>)}
+      </section>)}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,37 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+const { entry } = Astro.props;
+const { title, description, published, related } = entry.data;
+const url = new URL('/executive-assistant-ai/' + entry.id + '/', Astro.site).href;
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Article',
+  headline:title,
+  description,
+  datePublished:published.toISOString().slice(0,10),
+  author:{'@type':'Person',name:'Mercer Lane',url:'https://mercerlanepress.com/authors/mercer-lane/'},
+  publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  mainEntityOfPage:url
+};
+---
+<BaseLayout title={title} description={description} type="article" schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Executive Assistant AI',href:'/executive-assistant-ai/'},{name:title}]}/>
+  <article class="article wrap narrow">
+    <header>
+      <p class="eyebrow">EXECUTIVE ASSISTANT AI</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="byline">By <a href="/authors/mercer-lane/">Mercer Lane</a> · Published <time datetime={published.toISOString()}>{published.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'})}</time></p>
+    </header>
+    <div class="article-body"><slot /></div>
+    <aside class="book-note">
+      <p class="eyebrow">THE COMPLETE WORKING SYSTEM</p>
+      <h2>Build controlled AI workflows for executive support</h2>
+      <p><em>The AI Workflow Playbook for Executive Assistants</em> expands these principles across meetings, communication, briefings, calendars, research, travel, projects, SOPs, office documents, automation, quality control, governance, implementation labs, and reusable workflow cards.</p>
+      <a class="button" href="/books/the-ai-workflow-playbook-for-executive-assistants/">Explore the book</a>
+    </aside>
+    <nav class="related" aria-label="Related executive assistant AI guides"><h2>Related executive assistant AI guides</h2><ul>{related.map((slug:string) => <li><a href={'/executive-assistant-ai/' + slug + '/'}>{slug.replaceAll('-',' ')}</a></li>)}</ul></nav>
+    <div class="notice"><strong>Use organizational rules first.</strong> These pages provide educational and operational guidance, not legal, cybersecurity, privacy, employment, compliance, financial, or other professional advice. Use approved tools and data-handling rules, verify consequential facts against authoritative sources, and keep release authority with the appropriate person or approved system.</div>
+  </article>
+</BaseLayout>

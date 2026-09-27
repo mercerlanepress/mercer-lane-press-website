@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+const book=books.find(({slug})=>slug==='the-ai-workflow-playbook-for-executive-assistants')!;
+const guides=(await getCollection('executiveAssistantAiGuides')).sort((a,b)=>a.data.order-b.data.order);
+const workAreas=[
+['Meetings & follow-up','Prepare decision-ready briefs, extract candidate decisions and actions, verify owners and dates, and build follow-up from a checked action register.'],
+['Executive communication','Draft in an approved voice while separately checking facts, commitments, disclosure, recipients, links, attachments, and release authority.'],
+['Briefings & calendars','Build selective daily or weekly briefs, define source hierarchies, surface contradictions, and use AI to prepare scheduling options without inventing priority.'],
+['Research & travel','Separate discovery from evidence, verify current sources, time-stamp perishable information, compare constraints and trade-offs, and keep final decisions or bookings human-owned.'],
+['Projects, SOPs & office artifacts','Turn vague requests into explicit project briefs, draft SOPs from real process evidence, and apply artifact-specific checks to documents, spreadsheets, and presentations.'],
+['Automation & quality control','Increase authority gradually, use least privilege and safe stop conditions, and scan for invention, omission, distortion, staleness, and authority creep.']
+];
+const stages=[
+['Input','Name the source of truth and remove information the task does not need.'],
+['AI task','Define the bounded transformation, constraints, and output format.'],
+['Check','Test the likely failure with a source, live system, checklist, or deterministic calculation.'],
+['Human decision','Identify who has authority to resolve uncertainty, approve the result, or make the consequential choice.'],
+['Release','Use the result only after the stated release condition has been met.']
+];
+const schema={'@context':'https://schema.org','@type':'Book',name:book.title,alternativeHeadline:book.subtitle,author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/mercer-lane/'},publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},description:book.description,url:new URL('/books/'+book.slug+'/',Astro.site).href,sameAs:book.purchaseUrl};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady?book.cover:undefined} schema={schema}>
+<Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+<section class="wrap book-layout"><BookCover book={book} large/><div><p class="eyebrow">EXECUTIVE ASSISTANT AI</p><h1>{book.title}</h1><p class="lede">{book.subtitle}</p><p>By <a href="/authors/mercer-lane/">Mercer Lane</a> · Published by Mercer Lane Press</p><p>{book.description}</p><div class="actions"><a class="button" href={book.purchaseUrl}>Buy on Amazon</a><a class="button button-secondary" href="/executive-assistant-ai/">Read free EA AI guides</a></div></div></section>
+<section class="section section-tint"><div class="wrap"><div class="section-head"><p class="eyebrow">WHO IT IS FOR</p><h2>For executive-support professionals who want useful AI without false authority</h2><p>{book.intendedReader}</p></div><ul class="check-grid">{book.problems?.map(item=><li>{item}</li>)}</ul></div></section>
+<section class="section"><div class="wrap"><div class="section-head"><p class="eyebrow">THE OPERATING MODEL</p><h2>Input → AI task → Check → Human decision → Release</h2><p>The book treats AI as one controlled stage inside the work. A fluent output is not the release point: the workflow names its factual authority, its likely failure, the person who owns the decision, and the condition that must be true before the result is used.</p></div><div class="grid-3">{stages.map(([title,text])=><article class="card"><h3>{title}</h3><p>{text}</p></article>)}</div></div></section>
+<section class="section section-tint"><div class="wrap"><div class="section-head"><p class="eyebrow">WHAT IT COVERS</p><h2>Executive-support workflows from preparation to controlled automation</h2></div><div class="grid-3">{workAreas.map(([title,text])=><article class="card"><h3>{title}</h3><p>{text}</p></article>)}</div></div></section>
+<section class="section"><div class="wrap"><div class="section-head"><p class="eyebrow">IMPLEMENTATION</p><h2>Build a small trusted system before expanding authority</h2><p>The book moves from a quick controlled first workflow into seventeen chapters, ten end-to-end implementation labs, fifteen failure patterns, eight reusable governance controls, a thirty-day operating system, a ninety-day maturity roadmap and executive–EA working agreement, reusable workflow cards, a larger workflow library, and release checklists.</p></div><ul class="check-grid">{book.outcomes?.map(item=><li>{item}</li>)}</ul></div></section>
+<section class="section section-tint"><div class="wrap"><div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Put the control model into practice</h2></div><div class="grid-3">{guides.map(guide=><GuideCard guide={guide} base="/executive-assistant-ai/" label="Executive Assistant AI" />)}</div></div></section>
+<section class="section"><div class="wrap narrow"><div class="notice"><strong>Important boundary.</strong> The book is educational and operational guidance, not legal, cybersecurity, privacy, employment, compliance, financial, or other professional advice. Follow your employer's approved tools, policies, data-classification rules, access controls, and qualified review requirements. Current product capabilities and privacy terms should be checked in first-party documentation.</div><p><a class="button" href={book.purchaseUrl}>View on Amazon</a></p></div></section>
+</BaseLayout>

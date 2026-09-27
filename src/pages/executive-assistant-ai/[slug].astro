@@ -1,0 +1,11 @@
+---
+import { getCollection, render } from 'astro:content';
+import ExecutiveAssistantAiArticleLayout from '../../layouts/ExecutiveAssistantAiArticleLayout.astro';
+
+export async function getStaticPaths(){
+  return (await getCollection('executiveAssistantAiGuides')).map(entry => ({params:{slug:entry.id},props:{entry}}));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<ExecutiveAssistantAiArticleLayout entry={entry}><Content /></ExecutiveAssistantAiArticleLayout>

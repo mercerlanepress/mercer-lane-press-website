@@ -1,0 +1,11 @@
+---
+import { getCollection, render } from 'astro:content';
+import OverArousedDogArticleLayout from '../../layouts/OverArousedDogArticleLayout.astro';
+
+export async function getStaticPaths(){
+  return (await getCollection('overArousedDogGuides')).map(entry => ({params:{slug:entry.id},props:{entry}}));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<OverArousedDogArticleLayout entry={entry}><Content /></OverArousedDogArticleLayout>

@@ -11,6 +11,7 @@ export const GET: APIRoute = async () => {
   const dogEnrichmentGuides = await getCollection('dogEnrichmentGuides');
   const cooperativeCareGuides = await getCollection('cooperativeCareGuides');
   const rescueDogFirst90DaysGuides = await getCollection('rescueDogFirst90DaysGuides');
+  const overArousedDogGuides = await getCollection('overArousedDogGuides');
   const heatPumpOwnerGuides = await getCollection('heatPumpOwnerGuides');
   const localAiGuides = await getCollection('localAiGuides');
   const beginnerTelescopeObservingGuides = await getCollection('beginnerTelescopeObservingGuides');
@@ -37,7 +38,7 @@ export const GET: APIRoute = async () => {
   const hrAiGuides = await getCollection('hrAiGuides');
   const executiveAssistantAiGuides = await getCollection('executiveAssistantAiGuides');
   const paths = [
-    '/', '/books/', '/authors/', '/guides/', '/dog-guides/', '/5g-home-internet/', '/local-business-ai/', '/ai-scam-defence/', '/reactive-dog-walking/', '/dog-enrichment/', '/cooperative-care/', '/rescue-dog-first-90-days/', '/heat-pump-owners/', '/local-ai/', '/beginner-telescope-observing/', '/deep-sky-astrophotography/', '/construction-estimating/', '/landscape-contractor-estimating/', '/home-assistant-matter-thread/', '/genealogy-brick-walls/', '/power-automate/', '/pickleball-doubles/', '/youth-soccer-coaching/', '/ham-radio-technician-exam/', '/epa-608-universal-exam/', '/first-year-homeowner/', '/property-manager-ai/', '/bookkeeper-ai/', '/maintenance-planning/', '/aquarium-troubleshooting/', '/home-inspection-reporting/', '/vending-machine-route/', '/pool-troubleshooting/', '/manufacturing-supervision/', '/hotel-housekeeping-supervision/', '/hr-ai/', '/executive-assistant-ai/', '/about/', '/contact/', '/privacy/',
+    '/', '/books/', '/authors/', '/guides/', '/dog-guides/', '/5g-home-internet/', '/local-business-ai/', '/ai-scam-defence/', '/reactive-dog-walking/', '/dog-enrichment/', '/cooperative-care/', '/rescue-dog-first-90-days/', '/over-aroused-dog/', '/heat-pump-owners/', '/local-ai/', '/beginner-telescope-observing/', '/deep-sky-astrophotography/', '/construction-estimating/', '/landscape-contractor-estimating/', '/home-assistant-matter-thread/', '/genealogy-brick-walls/', '/power-automate/', '/pickleball-doubles/', '/youth-soccer-coaching/', '/ham-radio-technician-exam/', '/epa-608-universal-exam/', '/first-year-homeowner/', '/property-manager-ai/', '/bookkeeper-ai/', '/maintenance-planning/', '/aquarium-troubleshooting/', '/home-inspection-reporting/', '/vending-machine-route/', '/pool-troubleshooting/', '/manufacturing-supervision/', '/hotel-housekeeping-supervision/', '/hr-ai/', '/executive-assistant-ai/', '/about/', '/contact/', '/privacy/',
     ...books.map(({ slug }) => '/books/' + slug + '/'),
     ...authors.map(({ slug }) => '/authors/' + slug + '/'),
     ...guides.map(({ id }) => '/5g-home-internet/' + id + '/'),
@@ -47,6 +48,7 @@ export const GET: APIRoute = async () => {
     ...dogEnrichmentGuides.map(({ id }) => '/dog-enrichment/' + id + '/'),
     ...cooperativeCareGuides.map(({ id }) => '/cooperative-care/' + id + '/'),
     ...rescueDogFirst90DaysGuides.map(({ id }) => '/rescue-dog-first-90-days/' + id + '/'),
+    ...overArousedDogGuides.map(({ id }) => '/over-aroused-dog/' + id + '/'),
     ...heatPumpOwnerGuides.map(({ id }) => '/heat-pump-owners/' + id + '/'),
     ...localAiGuides.map(({ id }) => '/local-ai/' + id + '/'),
     ...beginnerTelescopeObservingGuides.map(({ id }) => '/beginner-telescope-observing/' + id + '/'),

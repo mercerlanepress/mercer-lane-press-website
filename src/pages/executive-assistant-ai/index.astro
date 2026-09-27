@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+const guides=(await getCollection('executiveAssistantAiGuides')).sort((a,b)=>a.data.order-b.data.order);
+const schema={'@context':'https://schema.org','@type':'CollectionPage',name:'AI Workflows for Executive Assistants',description:'Practical guides to controlled AI workflows for meetings, executive communication, information handling, briefings, verification, and staged automation.',url:new URL('/executive-assistant-ai/',Astro.site).href,publisher:{'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'}};
+---
+<BaseLayout title="AI Workflows for Executive Assistants" description="Practical guides to controlled AI workflows for meetings, executive communication, information handling, briefings, verification, and staged automation." schema={schema}>
+<Breadcrumbs items={[{name:'Home',href:'/'},{name:'Executive Assistant AI'}]}/>
+<header class="page-head wrap"><p class="eyebrow">EXECUTIVE ASSISTANT AI</p><h1>AI Workflows for Executive Assistants</h1><p class="lede">Use generative AI as a drafting, organizing, and reasoning aid inside a controlled executive-support workflow—without handing it authority it has not earned.</p></header>
+<section class="section section-tint"><div class="wrap"><div class="section-head"><h2>A controlled working sequence</h2><p>The book's operating model puts evidence, checking, and human authority around the AI step rather than treating a fluent draft as finished work.</p></div><div class="hub-steps">
+<article><h3>Classify</h3><p>Define the job, consequence, permitted information, and approved environment before material enters the model.</p></article>
+<article><h3>Source</h3><p>Name the calendar, notes, register, document, policy, or current source that acts as factual authority for the task.</p></article>
+<article><h3>Brief</h3><p>State the purpose, audience, sources, task, constraints, and output so the model has a bounded transformation to perform.</p></article>
+<article><h3>Check</h3><p>Verify the failure that matters: dates, decisions, calculations, claims, omissions, disclosure, or commitments.</p></article>
+<article><h3>Approve</h3><p>Keep decisions, commitments, sending, booking, purchasing, and release with the named human or deliberately authorized process.</p></article>
+<article><h3>Improve</h3><p>Record recurring corrections, update the workflow specification, and only expand automation after the lower-authority process is stable.</p></article>
+</div></div></section>
+<section class="section"><div class="wrap"><div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Start with one executive-support workflow</h2><p>These guides focus on the controls that make AI useful in real EA work: a repeatable workflow, information boundaries, meeting follow-up, executive communication, and staged automation.</p></div><div class="grid-3">{guides.map(guide=><GuideCard guide={guide} base="/executive-assistant-ai/" label="Executive Assistant AI" />)}</div></div></section>
+<section class="section section-tint"><div class="wrap narrow"><div class="section-head"><p class="eyebrow">THE COMPLETE BOOK</p><h2>The AI Workflow Playbook for Executive Assistants</h2></div><p>The book develops the five-stage INPUT → AI TASK → CHECK → HUMAN DECISION → RELEASE model across executive-support work, then adds implementation labs, a failure playbook, reusable governance controls, a thirty-day operating system, a ninety-day maturity roadmap, workflow cards, and release checklists.</p><p><a class="button" href="/books/the-ai-workflow-playbook-for-executive-assistants/">Explore the book</a></p><div class="notice"><strong>Professional boundary.</strong> Follow your employer's approved tools, policies, data-classification rules, access controls, and professional review requirements. Product features and privacy terms change; verify current first-party documentation before relying on a specific capability or data-handling claim.</div></div></section>
+</BaseLayout>

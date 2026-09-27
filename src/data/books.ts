@@ -6,6 +6,46 @@ export interface Book {
 }
 
 export const books: Book[] = [{
+  slug: 'the-ai-workflow-playbook-for-executive-assistants',
+  title: 'The AI Workflow Playbook for Executive Assistants',
+  subtitle: 'Safe, Practical Systems for Meetings, Communication, Executive Support, Projects, and Office Productivity',
+  author: 'Mercer Lane', authorSlug: 'mercer-lane',
+  publisher: 'Mercer Lane Press',
+  description: 'A practical, tool-neutral operating guide for executive assistants who want to use generative AI inside controlled workflows for meetings, communication, briefings, calendars, research, travel, projects, SOPs, documents, automation, and quality control while keeping source discipline, verification, judgment, and release authority with people.',
+  cover: '/images/books/AI_Workflow_Playbook_Executive_Assistants_Front_Cover.jpg',
+  coverReady: true,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HCJV255D',
+  intendedReader: 'Executive assistants and other executive-support professionals who want a repeatable way to use AI for drafting, organizing, analysis, briefing, research, and workflow preparation without weakening confidentiality, source control, professional judgment, or the human authority behind commitments and release.',
+  problems: [
+    'Fragmented calendars, email threads, notes, requests, and project information that need to be turned into a reliable working brief without inventing missing context',
+    'AI drafts that look complete but add unsupported facts, smooth over conflicts, omit caveats, use stale information, or turn suggestions into commitments',
+    'Sensitive or identifying information being copied into an AI tool before the task, data boundary, approved workspace, and minimum necessary input have been defined',
+    'Meeting summaries and follow-up that blur discussion, decision, action, owner, deadline, and unresolved questions',
+    'Research, travel, calendar, and project work where current information must be checked against the authoritative source before a consequential action',
+    'Useful prompts and automations being reused without explicit inputs, checks, approvers, release rules, exception handling, ownership, or review dates'
+  ],
+  topics: [
+    'INPUT → AI TASK → CHECK → HUMAN DECISION → RELEASE',
+    'Information classification, data minimization, sanitization, and approved-tool boundaries',
+    'Purpose, audience, source, task, constraints, and output as a disciplined model brief',
+    'Meeting preparation, action extraction, executive email, daily and weekly briefings, and calendar support',
+    'Research, decision support, travel planning, projects, SOPs, documents, spreadsheets, and presentations',
+    'Four levels of automation authority, least privilege, exception handling, logging, and rollback',
+    'Quality control for invention, omission, distortion, stale information, and authority creep',
+    'Reusable workflow libraries, a thirty-day operating system, a ninety-day maturity roadmap, and an executive–EA working agreement',
+    'Ten end-to-end implementation labs, fifteen workflow failure patterns, governance controls, reusable workflow cards, and release checklists'
+  ],
+  outcomes: [
+    'A repeatable five-stage workflow that names the source of truth, the permitted AI task, the verification step, the human decision owner, and the release condition',
+    'Clearer habits for minimizing information before prompting and keeping sensitive work inside approved organizational boundaries',
+    'A practical distinction between AI preparation and human authority for sending, booking, approving, committing, or changing a system of record',
+    'Failure-specific checks that make unsupported facts, missing evidence, stale state, altered meaning, and accidental commitments easier to catch',
+    'A small, maintainable library of verified workflows that can expand toward connected or automated preparation only after the manual process is stable'
+  ],
+  themes: ['executive assistant AI','executive support workflows','AI meeting workflow','executive email drafting','executive briefings','data minimization','human approval','AI automation','workflow governance','AI quality control'],
+  hubSlug: 'executive-assistant-ai',
+  hubLabel: 'Executive assistant AI workflow guides'
+},{
   slug: 'ai-productivity-for-hr-professionals',
   title: 'AI Productivity for HR Professionals',
   subtitle: 'A Practical Guide to Using AI for Hiring, Employee Handbooks, Interview Questions, Performance Reviews, HR Templates, Employee Relations, and Everyday Human Resources Work',

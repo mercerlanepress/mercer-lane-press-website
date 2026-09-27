@@ -12,7 +12,7 @@ export const books: Book[] = [{
   author: 'Mercer Lane', authorSlug: 'mercer-lane',
   publisher: 'Mercer Lane Press',
   description: 'A practical, tool-neutral operating guide for executive assistants who want to use generative AI inside controlled workflows for meetings, communication, briefings, calendars, research, travel, projects, SOPs, documents, automation, and quality control while keeping source discipline, verification, judgment, and release authority with people.',
-  cover: '/images/books/the-ai-workflow-playbook-for-executive-assistants-cover.jpg',
+  cover: '/images/books/AI_Workflow_Playbook_Executive_Assistants_Front_Cover.jpg',
   coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0HCJV255D',
   intendedReader: 'Executive assistants and other executive-support professionals who want a repeatable way to use AI for drafting, organizing, analysis, briefing, research, and workflow preparation without weakening confidentiality, source control, professional judgment, or the human authority behind commitments and release.',

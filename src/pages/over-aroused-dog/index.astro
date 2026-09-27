@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('overArousedDogGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'CollectionPage',
+  name:'Over-Aroused Dog Guides',
+  description:'Practical, reward-based guides for recognizing rising arousal, tracking recovery, building a calmer daily rhythm, teaching a settle mat, and applying a four-week calmness plan.',
+  url:'https://mercerlanepress.com/over-aroused-dog/',
+  hasPart:guides.map(g => ({'@type':'Article',name:g.data.title,url:'https://mercerlanepress.com/over-aroused-dog/' + g.id + '/'}))
+};
+---
+<BaseLayout title="Over-Aroused Dog Guides | Settling, Focus & Recovery" description="Practical, reward-based guides for recognizing rising arousal, tracking recovery, building a calmer daily rhythm, teaching a settle mat, and applying a four-week calmness plan." schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Dog Guides',href:'/dog-guides/'},{name:'Over-Aroused Dog'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">DOG SETTLING & OVER-AROUSAL HUB</p>
+    <h1>Help a High-Energy Dog Come Back Down</h1>
+    <p class="lede">Treat over-arousal as a pattern to observe, not a label to fight: lower unnecessary load, act on early warning signs, teach usable calm skills, and increase real-life difficulty only while the dog can still recover.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><h2>A practical pattern for dogs that struggle to switch off</h2><p>The useful question is not simply how to make the dog tired. It is what pushes activation upward, what keeps it there, and what helps the dog return to a workable state.</p></div>
+      <div class="hub-steps">
+        <article><h3>Lower the load</h3><p>Review the day, environment, exercise, enrichment, transitions, rest, and repeated trigger exposure before asking for more training.</p></article>
+        <article><h3>Notice earlier</h3><p>Learn the dog's first signs of building activation and use distance, reduced stimulation, or an easier task before the final reaction.</p></article>
+        <article><h3>Teach usable calm</h3><p>Reinforce disengagement, pausing, orienting back, settling on a mat, and recovering after excitement in conditions the dog can handle.</p></article>
+        <article><h3>Generalize carefully</h3><p>Take the same skills to doors, visitors, walks, play, cars, cafés, classes, grooming, and other settings in small enough steps to preserve learning.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">PRACTICAL GUIDES</p><h2>Start with the part of the pattern you can change today</h2></div>
+      <div class="grid-3">{guides.map(g => <GuideCard guide={g} base="/over-aroused-dog/" label="OVER-AROUSED DOG"/>)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap prose">
+      <h2>Go deeper with the complete four-week system</h2>
+      <p><a href="/books/the-over-aroused-dog/"><em>The Over-Aroused Dog</em></a> covers the causes that can sit behind similar high-energy behavior, a five-zone escalation scale, arousal mapping, daily routine and enrichment, environmental management, reward mechanics, calm capture, mat work, attention and pause skills, real-life situations, a four-week plan, troubleshooting, safety, field guides, and long-term maintenance.</p>
+      <p>The material is general education, not a diagnosis or a substitute for veterinary care or individualized behavior advice. Sudden or worsening behavior change, possible pain or illness, severe fear, biting or attempted biting, redirected behavior, escape risk, or another safety concern should change the plan toward management and appropriate professional support.</p>
+      <p>For walking-specific barking, lunging, freezing, or hard staring, use the <a href="/reactive-dog-walking/">Reactive Dog Walking hub</a>. For short low-cost activity ideas, visit <a href="/dog-enrichment/">Dog Enrichment</a>. For handling and veterinary-preparation skills, use <a href="/cooperative-care/">Cooperative Care for Dogs</a>. If the dog is newly adopted, start with the broader <a href="/rescue-dog-first-90-days/">Rescue Dog First 90 Days hub</a>.</p>
+    </div>
+  </section>
+</BaseLayout>

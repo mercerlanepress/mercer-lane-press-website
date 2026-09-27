@@ -1,0 +1,89 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'the-over-aroused-dog')!;
+const guides = (await getCollection('overArousedDogGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/sophie-ardenwood/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  ...(book.coverReady && book.cover ? {image:new URL(book.cover,Astro.site).href} : {}),
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">DOG SETTLING & OVER-AROUSAL GUIDE</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/sophie-ardenwood/">Sophie Ardenwood</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/over-aroused-dog/">Read free guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>For dogs that can get excited faster than they can come back down</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">THE CORE METHOD</p>
+        <h2>Lower the load, teach usable calm, then generalize carefully</h2>
+        <p>The book treats calmness as a set of workable behaviors and recovery skills rather than a personality change. The aim is not to remove normal enthusiasm, but to help the dog move between activity and recovery more successfully.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>Read the escalation curve</h3><p>Use a five-zone observation scale and the dog's own early, middle, and late signs so action can happen before the hardest behavior appears.</p></article>
+        <article class="card"><h3>Map triggers and recovery</h3><p>Record context, starting state, intensity, behavior, response, and time back to baseline so patterns are easier to see across the whole day.</p></article>
+        <article class="card"><h3>Change the day before drilling skills</h3><p>Review exercise after-effects, sniffing and enrichment, rest, transitions, window and doorway rehearsal, and other sources of accumulated load.</p></article>
+        <article class="card"><h3>Build calm behaviors on purpose</h3><p>Use clear reinforcement, calm capture, mat work, brief attention skills, disengagement, and tiny pauses that are easy enough for the dog to succeed.</p></article>
+        <article class="card"><h3>Apply the skills to real life</h3><p>Work through visitors, walks, play, adolescence, cars, cafés, classes, grooming, and other high-load settings by changing one important variable at a time.</p></article>
+        <article class="card"><h3>Track trends, not perfection</h3><p>Measure frequency, intensity, workable distance or duration, ability to eat or sniff, and recovery time rather than expecting a dog to be calm all day.</p></article>
+      </div>
+      <div class="notice"><strong>Important safety note.</strong> The book is educational and does not diagnose a medical or behavioral disorder. Sudden or worsening behavior changes, possible pain or illness, severe fear, aggression, biting, escape risk, or situations where safe control is uncertain call for veterinary or appropriately qualified behavior support rather than harder home training.</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">PRACTICAL PLAN & TOOLKIT</p><h2>Turn observation into a repeatable household system</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Four-week calmness plan</h3><p>Set a baseline, reduce unnecessary rehearsal, build home skills, add controlled difficulty, then apply the system to three specific real-life targets.</p></article>
+        <article class="card"><h3>Calmness toolkit</h3><p>Use an arousal event log, early-warning profile, trigger-distance record, daily balance check, activity after-effect tracker, settle-mat ladder, visitor plan, walk-readiness check, progress review, and one-page calm plan.</p></article>
+        <article class="card"><h3>Long-term field guide</h3><p>Use six common over-arousal patterns, worked plans, mistake checks, quick-start reset material, micro-protocols, household consistency sheets, and a decision sequence when the next step is unclear.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Start with the problem in front of you</h2></div>
+      <div class="grid-3">{guides.map(g => <GuideCard guide={g} base="/over-aroused-dog/" label="OVER-AROUSED DOG"/>)}</div>
+      <div class="actions"><a class="button button-secondary" href="/over-aroused-dog/">Explore the over-aroused dog hub</a></div>
+    </div>
+  </section>
+</BaseLayout>

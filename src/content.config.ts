@@ -41,6 +41,11 @@ const rescueDogFirst90DaysGuides = defineCollection({
   schema: guideSchema
 });
 
+const overArousedDogGuides = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/over-aroused-dog' }),
+  schema: guideSchema
+});
+
 const heatPumpOwnerGuides = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/heat-pump-owners' }),
   schema: guideSchema
@@ -170,4 +175,4 @@ const executiveAssistantAiGuides = defineCollection({
   schema: guideSchema
 });
 
-export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides, cooperativeCareGuides, rescueDogFirst90DaysGuides, heatPumpOwnerGuides, localAiGuides, beginnerTelescopeObservingGuides, deepSkyAstrophotographyGuides, constructionEstimatingGuides, landscapeContractorEstimatingGuides, homeAssistantMatterThreadGuides, genealogyBrickWallGuides, powerAutomateGuides, pickleballDoublesGuides, youthSoccerCoachingGuides, hamRadioTechnicianExamGuides, epa608UniversalExamGuides, firstYearHomeownerGuides, bookkeeperAiGuides, propertyManagerAiGuides, maintenancePlanningGuides, aquariumTroubleshootingGuides, homeInspectionReportingGuides, vendingMachineRouteGuides, poolTroubleshootingGuides, manufacturingSupervisionGuides, hotelHousekeepingSupervisionGuides, hrAiGuides, executiveAssistantAiGuides };
+export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides, cooperativeCareGuides, rescueDogFirst90DaysGuides, overArousedDogGuides, heatPumpOwnerGuides, localAiGuides, beginnerTelescopeObservingGuides, deepSkyAstrophotographyGuides, constructionEstimatingGuides, landscapeContractorEstimatingGuides, homeAssistantMatterThreadGuides, genealogyBrickWallGuides, powerAutomateGuides, pickleballDoublesGuides, youthSoccerCoachingGuides, hamRadioTechnicianExamGuides, epa608UniversalExamGuides, firstYearHomeownerGuides, bookkeeperAiGuides, propertyManagerAiGuides, maintenancePlanningGuides, aquariumTroubleshootingGuides, homeInspectionReportingGuides, vendingMachineRouteGuides, poolTroubleshootingGuides, manufacturingSupervisionGuides, hotelHousekeepingSupervisionGuides, hrAiGuides, executiveAssistantAiGuides };

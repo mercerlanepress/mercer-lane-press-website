@@ -1,0 +1,11 @@
+---
+import { getCollection, render } from 'astro:content';
+import ReliableRecallArticleLayout from '../../layouts/ReliableRecallArticleLayout.astro';
+
+export async function getStaticPaths(){
+  return (await getCollection('reliableRecallGuides')).map(entry => ({params:{slug:entry.id},props:{entry}}));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<ReliableRecallArticleLayout entry={entry}><Content /></ReliableRecallArticleLayout>

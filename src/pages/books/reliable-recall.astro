@@ -1,0 +1,89 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { books } from '../../data/books';
+
+const book = books.find(({slug}) => slug === 'reliable-recall')!;
+const guides = (await getCollection('reliableRecallGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/sophie-ardenwood/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  ...(book.coverReady && book.cover ? {image:new URL(book.cover,Astro.site).href} : {}),
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">DOG RECALL & OUTDOOR PROOFING GUIDE</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/sophie-ardenwood/">Sophie Ardenwood</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/reliable-recall/">Read free guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>For the dog who comes at home but becomes selective outdoors</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">THE CORE METHOD</p>
+        <h2>Proof the response without turning every walk into a test</h2>
+        <p>The system treats recall as a context-dependent skill. Management protects the dog and the cue while training gradually expands what the dog can do around distance, distractions, and new environments.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>Protect the cue</h3><p>Use the recall signal once in setups where a response is plausible, then change the setup instead of repeating the cue into failure.</p></article>
+        <article class="card"><h3>Use the 3D proofing map</h3><p>Track Distance, Distraction, and Environment separately, with arousal treated as an extra difficulty factor across all three.</p></article>
+        <article class="card"><h3>Make the return worth the choice</h3><p>Build a reward ladder and use reward-and-release so coming back does not always predict the end of sniffing, play, or exploration.</p></article>
+        <article class="card"><h3>Use the long line as insurance</h3><p>Practice slack-line handling and let reinforcement teach the return while the line prevents escape and unsafe rehearsals.</p></article>
+        <article class="card"><h3>Proof named distractions</h3><p>Train dogs, people, smells, wildlife, movement, and other distractions at distances where the dog can still notice and reconnect.</p></article>
+        <article class="card"><h3>Earn freedom by environment</h3><p>Use repeated evidence from the same kind of place and the relevant distractions before considering off-leash freedom.</p></article>
+      </div>
+      <div class="notice"><strong>Important safety note.</strong> Recall is not a substitute for physical restraint where a mistake could be dangerous. The book uses conservative management around traffic, livestock, wildlife, cliffs, unsafe water, legal restrictions, severe fear or aggression, and other high-consequence situations.</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">30-DAY PLAN & REPEAT-USE TOOLS</p><h2>Turn the method into short, measurable sessions</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Four-week progression</h3><p>Rebuild value and mechanics, develop distance and low-level distractions, work the dog’s most important real-world distraction categories, then review generalization and readiness.</p></article>
+        <article class="card"><h3>Scenario lab</h3><p>Work through common failures such as sudden wildlife, loose dogs, scent trails, open gates, beach birds, blind trail bends, ground food, adolescence, and travel or moving house.</p></article>
+        <article class="card"><h3>Checkpoints and logs</h3><p>Use quick-reference safety cards, foundation and long-line checkpoints, distraction records, environment status, and readiness evidence instead of relying on a general feeling that recall is better.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Start with the real-world problem in front of you</h2></div>
+      <div class="grid-3">{guides.map(g => <GuideCard guide={g} base="/reliable-recall/" label="RELIABLE RECALL"/>)}</div>
+      <div class="actions"><a class="button button-secondary" href="/reliable-recall/">Explore the reliable recall hub</a></div>
+    </div>
+  </section>
+</BaseLayout>

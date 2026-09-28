@@ -676,8 +676,8 @@ export const books: Book[] = [{
   author: 'Sophie Ardenwood', authorSlug: 'sophie-ardenwood',
   publisher: 'Mercer Lane Press',
   description: 'A practical, reward-based guide for owners of high-energy and easily over-aroused dogs, combining lower-load daily routines, early-warning and recovery tracking, usable calm skills, and gradual practice around visitors, walks, play, public places, handling, and other real-life situations.',
-  cover: '',
-  coverReady: false,
+  cover: '/images/books/The_Over_Aroused_Dog_Front_Cover.jpg',
+  coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0HL6DQP1V',
   intendedReader: 'Owners of dogs that become fast, noisy, mouthy, fixated, jumpy, demanding, difficult to disengage, or unable to settle after exciting or stressful events, including households trying to understand whether excitement, frustration, fear, fatigue, unmet needs, discomfort, or accumulated stimulation may be contributing to the pattern.',
   problems: [

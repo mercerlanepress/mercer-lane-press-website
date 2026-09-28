@@ -1212,8 +1212,8 @@ export const books: Book[] = [{
   author: 'Sophie Ardenwood', authorSlug: 'sophie-ardenwood',
   publisher: 'Mercer Lane Press',
   description: 'A step-by-step, reward-based recall proofing guide for owners whose dogs respond at home but tune out around wildlife, other dogs, smells, distance, or unfamiliar environments. The system combines cue protection, long-line management, a Distance–Distraction–Environment proofing map, reward-and-release, environment-specific readiness rules, a 30-day plan, and troubleshooting tools.',
-  cover: '',
-  coverReady: false,
+  cover: '/images/books/reliable_recall_front_cover.jpg',
+  coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0HL8SN618',
   intendedReader: 'Owners whose dogs recall well indoors or in easy familiar places but become selective outdoors around scent, wildlife, other dogs, people, movement, distance, open space, or novel environments, and who want a structured way to build reliability without treating recall as a guaranteed safety mechanism.',
   problems: [

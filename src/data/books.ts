@@ -670,6 +670,46 @@ export const books: Book[] = [{
   hubSlug: 'rescue-dog-first-90-days',
   hubLabel: 'Rescue dog first 90 days guides'
 },{
+  slug: 'the-over-aroused-dog',
+  title: 'The Over-Aroused Dog',
+  subtitle: 'A Practical Plan to Reduce Overexcitement, Build Focus, and Teach Your High-Energy Dog to Settle in Real Life',
+  author: 'Sophie Ardenwood', authorSlug: 'sophie-ardenwood',
+  publisher: 'Mercer Lane Press',
+  description: 'A practical, reward-based guide for owners of high-energy and easily over-aroused dogs, combining lower-load daily routines, early-warning and recovery tracking, usable calm skills, and gradual practice around visitors, walks, play, public places, handling, and other real-life situations.',
+  cover: '/images/books/The_Over_Aroused_Dog_Front_Cover.jpg',
+  coverReady: true,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HL6DQP1V',
+  intendedReader: 'Owners of dogs that become fast, noisy, mouthy, fixated, jumpy, demanding, difficult to disengage, or unable to settle after exciting or stressful events, including households trying to understand whether excitement, frustration, fear, fatigue, unmet needs, discomfort, or accumulated stimulation may be contributing to the pattern.',
+  problems: [
+    'Treating every fast or restless behavior as simply too much energy when excitement, frustration, fear, fatigue, discomfort, or reinforcement history may require different first steps',
+    'Not noticing the early changes that happen before barking, lunging, grabbing, spinning, pacing, or other high-activation behavior becomes difficult to interrupt',
+    'Using more exercise as the default answer without checking whether an activity actually improves settling and recovery afterward',
+    'Trying to teach calm behavior while the daily routine, environment, repeated trigger exposure, or household transitions keep pushing activation upward',
+    'Having calm skills that work in a quiet room but fall apart around doors, visitors, walks, play, cars, cafés, classes, grooming, or other real-life situations',
+    'Not knowing when prolonged recovery, sudden behavior change, aggression, bite risk, or possible discomfort means the plan should move beyond ordinary home training'
+  ],
+  topics: [
+    'Over-arousal as a practical description rather than a diagnosis',
+    'A five-zone escalation scale, early-warning signs, trigger stacking, and recovery time',
+    'Arousal maps, 24-hour reviews, and measurable progress instead of vague labels',
+    'Daily rhythm, exercise after-effects, protected rest, enrichment, and environmental management',
+    'Reinforcement mechanics, calm capture, settle mats, attention, disengagement, and tiny practical pauses',
+    'Visitors, walking triggers, play, adolescence, cars, cafés, classes, grooming, and other high-load settings',
+    'A four-week calmness plan, troubleshooting sequence, safety boundaries, and a repeat-use calmness toolkit',
+    'Six common over-arousal patterns and worked plans for applying the system to the individual dog'
+  ],
+  outcomes: [
+    'A clearer picture of what raises the dog’s activation, what the earliest warning signs look like, and how long recovery takes',
+    'A repeatable lower-load daily structure that balances appropriate activity with sniffing, learning, quiet transitions, and protected rest',
+    'A small set of usable calm skills that can be strengthened gradually instead of demanded at the hardest version of a situation',
+    'A practical four-week implementation plan with observable measures such as frequency, intensity, workable distance or duration, and recovery time',
+    'Clearer stop rules for reducing difficulty and involving a veterinarian or qualified behavior professional when health, aggression, severe fear, or safety concerns are present'
+  ],
+  themes: ['dog over-arousal','high-energy dogs','settling','recovery time','trigger stacking','calm skills','reward-based training','daily routine','dog focus','real-life generalization'],
+  hubSlug: 'over-aroused-dog',
+  hubLabel: 'Over-aroused dog calming and focus guides'
+}
+,{
   slug: 'the-new-heat-pump-owners-operating-manual',
   title: "The New Heat Pump Owner's Operating Manual",
   subtitle: "How to Run Your Air-to-Water Heat Pump Comfortably and Efficiently, Understand the Controls and Know When Something Isn't Right",

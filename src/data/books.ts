@@ -1205,7 +1205,48 @@ export const books: Book[] = [{
   ],
   hubSlug: 'first-year-homeowner',
   hubLabel: 'First-year homeowner maintenance guides'
+},{
+  slug: 'reliable-recall',
+  title: 'Reliable Recall: From Long Line to Real-World Freedom',
+  subtitle: 'A Step-by-Step Proofing Plan for Dogs Who Come at Home but Tune You Out Around Wildlife, Dogs, Smells, and Distance',
+  author: 'Sophie Ardenwood', authorSlug: 'sophie-ardenwood',
+  publisher: 'Mercer Lane Press',
+  description: 'A step-by-step, reward-based recall proofing guide for owners whose dogs respond at home but tune out around wildlife, other dogs, smells, distance, or unfamiliar environments. The system combines cue protection, long-line management, a Distance–Distraction–Environment proofing map, reward-and-release, environment-specific readiness rules, a 30-day plan, and troubleshooting tools.',
+  cover: '/images/books/reliable-recall-front-cover.jpg',
+  coverReady: false,
+  purchaseUrl: 'https://www.amazon.com/dp/B0HL8SN618',
+  intendedReader: 'Owners whose dogs recall well indoors or in easy familiar places but become selective outdoors around scent, wildlife, other dogs, people, movement, distance, open space, or novel environments, and who want a structured way to build reliability without treating recall as a guaranteed safety mechanism.',
+  problems: [
+    'A recall cue that works in the kitchen but becomes slow, repeated, or ignored outdoors',
+    'Not knowing whether distance, distraction, environment, arousal, or a weakened cue is causing a failed return',
+    'Long-line practice that turns into constant tension, tangles, or hauling the dog back instead of training a voluntary response',
+    'Dogs that struggle to leave sniffing, social play, other dogs, wildlife, or other high-value real-world distractions',
+    'Granting off-leash freedom based on confidence from one easy location rather than evidence from the exact type of environment',
+    'Recall regression after adolescence, adoption, seasonal wildlife changes, travel, a move, or a long gap in training'
+  ],
+  topics: [
+    'Protecting, repairing, or replacing the recall cue',
+    'Reward ladders, marking the commitment to return, and reward-and-release',
+    'Indoor foundations, outdoor reset sessions, movement games, and complete arrivals into handling reach',
+    'The 3D proofing map: Distance, Distraction, and Environment, with arousal tracked across all three',
+    'Safe long-line handling, distance ladders, and distraction proofing without repeated tests to failure',
+    'Other dogs and people, sniffing and scent, wildlife and prey drive, and everyday versus emergency recall',
+    'Generalization across trails, beaches, parks, open spaces, and other real-world environments',
+    'An environment-specific off-leash readiness gate, first freedom sessions, maintenance, and regression planning',
+    'A 30-day real-world recall plan, scenario lab, quick-reference cards, checkpoints, logs, and scorecards'
+  ],
+  outcomes: [
+    'A clearer map of where recall currently works, where it fails first, and which variable needs to change next',
+    'Safer, more fluent long-line practice that protects the cue while the dog learns to return voluntarily',
+    'A repeatable method for proofing named real-world distractions at workable distances instead of repeatedly testing at maximum difficulty',
+    'Environment-specific evidence for deciding when to keep the leash or line on and when a low-risk off-leash trial may be appropriate',
+    'A reusable maintenance and troubleshooting system for rebuilding recall when performance changes'
+  ],
+  themes: ['dog recall training','long-line recall','recall proofing','dog distractions','dog sniffing','wildlife recall','off-leash readiness','emergency recall','reward-based dog training','dog training outdoors'],
+  hubSlug: 'reliable-recall',
+  hubLabel: 'Reliable recall and long-line proofing guides'
 }
+
 ];
 
 export const featuredBook = books[0];

@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BookCover from '../components/BookCover.astro';
-import { featuredBook, books } from '../data/books';
+import { books } from '../data/books';
 
+const featuredBook=books.find(book=>book.slug==='the-rescue-dog-first-90-days')!;
 const schema={'@context':'https://schema.org','@type':'WebSite',name:'Mercer Lane Press',url:'https://mercerlanepress.com/',description:'Independent publisher of practical problem-solving nonfiction.'};
 const featuredHighlights=(featuredBook.outcomes?.length ? featuredBook.outcomes : featuredBook.topics ?? []).slice(0,3);
 const homeBooks=books.filter(book=>book.slug!==featuredBook.slug).slice(0,6);
@@ -14,6 +15,7 @@ const homeBooks=books.filter(book=>book.slug!==featuredBook.slug).slice(0,6);
         <p class="eyebrow">PRACTICAL NONFICTION</p>
         <h1>Clear systems for problems worth solving.</h1>
         <p class="lede">Mercer Lane Press publishes focused guides for readers who want to understand what is happening, test the right things, and move forward with confidence.</p>
+        <div class="notice"><strong>Free on Kindle · 1–4 October 2026.</strong> Just adopted a rescue dog? <em>The Rescue Dog First 90 Days</em> is the featured Mercer Lane Press book for this four-day Kindle promotion. <a href={featuredBook.purchaseUrl}>View it on Amazon →</a></div>
         <div class="actions"><a class="button" href="/books/">Browse our books</a><a class="button button-secondary" href="/guides/">Read practical guides</a></div>
       </div>
       <BookCover book={featuredBook}/>
@@ -23,14 +25,14 @@ const homeBooks=books.filter(book=>book.slug!==featuredBook.slug).slice(0,6);
   <section class="section">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">FEATURED BOOK</p>
+        <p class="eyebrow">FEATURED BOOK · FREE ON KINDLE 1–4 OCTOBER 2026</p>
         <h2>{featuredBook.title}</h2>
         <p>{featuredBook.description}</p>
       </div>
       {featuredHighlights.length > 0 && <div class="grid-3">
         {featuredHighlights.map(item => <article class="card"><p class="feature-highlight">{item}</p></article>)}
       </div>}
-      <div class="actions"><a class="button" href={'/books/' + featuredBook.slug + '/'}>Explore the book</a></div>
+      <div class="actions"><a class="button" href={featuredBook.purchaseUrl}>View on Amazon</a><a class="button button-secondary" href={'/books/' + featuredBook.slug + '/'}>Explore the book</a></div>
     </div>
   </section>
 

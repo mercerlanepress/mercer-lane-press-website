@@ -18,6 +18,7 @@ export function getStaticPaths() {
 }
 
 const { book } = Astro.props;
+const isConstructionEstimatingBook = book.slug === 'construction-estimating-for-your-first-jobs';
 const schema = {
   '@context':'https://schema.org',
   '@type':'Book',
@@ -43,6 +44,9 @@ const schema = {
         <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
         {book.hubSlug && <a class="button button-secondary" href={'/' + book.hubSlug + '/'}>Read free guides</a>}
       </div>
+      {isConstructionEstimatingBook && <div class="notice">
+        <strong>Want the working system?</strong> The <a href="/tools/construction-estimating-system-pro/">Mercer Lane Construction Estimating System PRO</a> turns the book’s scope-to-learning methodology into a guided Microsoft Excel workflow with a completed Oakridge demonstration, proposal layouts, bonus calculators, editable forms and printable review sheets.
+      </div>}
     </div>
   </section>
 

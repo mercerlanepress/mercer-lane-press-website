@@ -2,34 +2,41 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 ---
-<BaseLayout title="Privacy" description="How the Mercer Lane Press website handles information, analytics, and third-party services.">
+<BaseLayout title="Privacy" description="How the Mercer Lane Press website handles information, analytics, digital purchases, and third-party services.">
   <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Privacy'}]}/>
   <article class="page-head wrap prose">
     <p class="eyebrow">PRIVACY</p>
     <h1>Privacy</h1>
-    <p><strong>Last updated: September 20, 2026</strong></p>
-    <p>This page describes the current privacy practices for mercerlanepress.com. It will be updated if the website’s features or data practices change.</p>
+    <p><strong>Last updated: October 2, 2026</strong></p>
+    <p>This page describes the current privacy practices for mercerlanepress.com, including direct digital-product purchases.</p>
 
     <h2>Information you provide</h2>
-    <p>This website currently has no user accounts, contact forms, comments, or newsletter sign-up. If you choose to contact Mercer Lane Press by email, the information you include in that email will be received and used to respond to your enquiry.</p>
+    <p>The website does not currently provide user accounts, public comments or a newsletter sign-up. If you contact Mercer Lane Press by email, the information you include will be received and used to respond to your enquiry.</p>
+
+    <h2>Digital product purchases</h2>
+    <p>When you choose to buy a digital product, checkout is handled by Stripe Managed Payments. Stripe processes the information required to complete and support the transaction, which can include contact information, billing or location information, payment information, transaction identifiers, tax information and fraud-prevention signals.</p>
+    <p>Stripe is the merchant of record for transactions completed through Managed Payments. Mercer Lane Press does not receive or store your full payment-card number on this website.</p>
+    <p>For products using Mercer Lane Press secure download delivery, the website receives a Stripe Checkout Session identifier after payment and verifies that identifier with Stripe before releasing the file. Temporary access tokens and download counts may be stored by the hosting platform for a limited period so download access can be restricted. Those access records do not store full card details.</p>
+    <p>Stripe processes information under its own privacy materials and Managed Payments terms.</p>
 
     <h2>Analytics and cookies</h2>
     <p>Mercer Lane Press uses Google Analytics 4 to understand how visitors find and use the website. The Google tag runs using Google consent mode. Analytics storage is set to <strong>denied</strong> unless you choose <strong>Accept analytics</strong>.</p>
     <p>Before you consent, Google Analytics may receive limited cookieless consent and measurement signals. Analytics cookies are not intentionally set or read while analytics storage is denied. If you consent, Google Analytics may collect information such as pages viewed, referral source, browser and device information, approximate geographic information, and interactions such as scrolling and outbound-link clicks. Google Analytics may then set cookies such as <code>_ga</code> and related identifiers.</p>
-    <p>The site does not intentionally send names, email addresses, or manuscript content to Google Analytics. Advertising storage, advertising user data, and ad personalization are kept disabled in the site’s consent configuration.</p>
+    <p>The site does not intentionally send names, email addresses, manuscript content, payment-card details or the financial figures entered into free calculators to Google Analytics. Advertising storage, advertising user data, and ad personalization are kept disabled in the site’s consent configuration.</p>
+    <p>The site may send non-personal interaction events such as use of a calculator, a click to begin checkout, confirmation of a completed purchase, or a product-file download so Mercer Lane Press can measure whether tools and product pages are useful.</p>
     <p>Your analytics preference is stored in your browser so the site can remember your choice. You can reopen the consent notice at any time using <strong>Cookie settings</strong> in the footer and change that choice.</p>
     <p>Google processes Analytics information under its own privacy terms. You can read <a href="https://policies.google.com/privacy">Google’s Privacy Policy</a>.</p>
 
     <h2>Hosting and technical information</h2>
-    <p>The hosting provider may process basic technical information—such as an IP address, request time, requested page, and browser details—to deliver and secure the site. Its practices are governed by its own terms and privacy materials.</p>
+    <p>The site is delivered through Cloudflare infrastructure. Cloudflare may process basic technical information—such as an IP address, request time, requested page and browser details—to deliver and secure the site. Secure digital delivery may also use Cloudflare storage and short-lived access records.</p>
 
-    <h2>External links</h2>
-    <p>The site may link to other websites, including retailers such as Amazon. Those sites control their own privacy practices. Visiting a retailer or using an email provider is subject to that third party’s policies.</p>
+    <h2>External links and third-party services</h2>
+    <p>The site may link to or use other websites and services, including Amazon, Stripe, Google and Cloudflare. Those services control their own privacy practices for the information they process.</p>
 
     <h2>Contact</h2>
     <p>For privacy questions or other enquiries, email <a href="mailto:mercerlanepress@gmail.com">mercerlanepress@gmail.com</a>.</p>
 
     <h2>Changes</h2>
-    <p>If forms, embedded media, advertising services, or other features are introduced, this page will be revised to explain the relevant data practices.</p>
+    <p>If forms, newsletters, advertising services, account features or other data practices are introduced, this page will be revised to explain the change.</p>
   </article>
 </BaseLayout>

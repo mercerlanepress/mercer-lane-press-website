@@ -10,9 +10,10 @@ interface Props {
   image?: string;
   type?: string;
   schema?: object | object[];
+  robots?: string;
 }
 
-const { title, description, image = '/social-card.svg', type = 'website', schema } = Astro.props;
+const { title, description, image = '/social-card.svg', type = 'website', schema, robots } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const fullTitle = title.includes('Mercer Lane Press') ? title : `${title} | Mercer Lane Press`;
 const org = {
@@ -31,6 +32,7 @@ const measurementId = 'G-CK9SW6VRS9';
     <meta name="generator" content={Astro.generator}>
     <title>{fullTitle}</title>
     <meta name="description" content={description}>
+    {robots && <meta name="robots" content={robots}>}
     <link rel="canonical" href={canonical}>
     <meta property="og:type" content={type}>
     <meta property="og:title" content={fullTitle}>

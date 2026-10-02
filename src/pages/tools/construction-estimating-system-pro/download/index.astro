@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../../components/Breadcrumbs.astro';
+---
+<BaseLayout
+  title="Construction Estimating System PRO Download"
+  description="Secure download access for customers who purchased the Mercer Lane Construction Estimating System PRO."
+  robots="noindex,nofollow"
+>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Tools',href:'/tools/'},{name:'Construction Estimating System PRO',href:'/tools/construction-estimating-system-pro/'},{name:'Download'}]}/>
+  <section class="section">
+    <div class="wrap narrow">
+      <p class="eyebrow">SECURE DIGITAL DELIVERY</p>
+      <h1>Your PRO download</h1>
+      <div class="download-state" id="download-state" aria-live="polite">
+        <h2 id="download-title">Checking your purchase…</h2>
+        <p id="download-message">This page verifies the completed Stripe checkout before making the file available.</p>
+        <div id="download-actions" hidden>
+          <p><a class="button" href="/api/pro-download" id="download-button">Download the PRO package</a></p>
+          <p class="byline">Download access is limited. Save the ZIP somewhere you can find it after downloading.</p>
+        </div>
+      </div>
+      <div class="notice"><strong>Need help?</strong> If your payment completed but this page cannot verify the order, email <a href="mailto:mercerlanepress@gmail.com">mercerlanepress@gmail.com</a> using the same email address you used at checkout. Do not send full card details.</div>
+    </div>
+  </section>
+
+  <script is:inline>
+    (() => {
+      const params = new URLSearchParams(window.location.search);
+      const sessionId = params.get('session_id');
+      const title = document.getElementById('download-title');
+      const message = document.getElementById('download-message');
+      const actions = document.getElementById('download-actions');
+      const button = document.getElementById('download-button');
+
+      const fail = (heading, text) => {
+        title.textContent = heading;
+        message.textContent = text;
+        actions.hidden = true;
+      };
+
+      if (!sessionId || !sessionId.startsWith('cs_')) {
+        fail('No verified checkout found', 'Open this page from the completion step of your Stripe checkout. If you already paid and need help, contact Mercer Lane Press using the checkout email address.');
+        return;
+      }
+
+      fetch('/api/pro-access', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({ session_id: sessionId })
+      })
+        .then(async (response) => {
+          const data = await response.json().catch(() => ({}));
+          if (!response.ok) throw new Error(data.message || 'Purchase verification failed.');
+          title.textContent = 'Your download is ready';
+          message.textContent = 'Payment has been verified. Use the button below to download the Mercer Lane Construction Estimating System PRO package.';
+          actions.hidden = false;
+
+          if (typeof window.gtag === 'function') {
+            window.gtag('event', 'purchase', {
+              transaction_id: sessionId,
+              currency: 'USD',
+              value: 39.99,
+              items: [{ item_name: 'Mercer Lane Construction Estimating System PRO', price: 39.99, quantity: 1 }]
+            });
+          }
+        })
+        .catch((error) => fail('We could not verify this download', error.message || 'Please contact Mercer Lane Press for help.'));
+
+      button.addEventListener('click', () => {
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'file_download', { file_name: 'Mercer_Lane_Construction_Estimating_System_PRO.zip' });
+        }
+      });
+    })();
+  </script>
+
+  <style>
+    .download-state{border:1px solid var(--line);background:var(--paper);padding:clamp(1.5rem,4vw,2.5rem);margin:2rem 0}.download-state h2{margin-top:0}.download-state .button{margin-top:.5rem}
+  </style>
+</BaseLayout>

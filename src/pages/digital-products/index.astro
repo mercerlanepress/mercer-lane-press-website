@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+---
+<BaseLayout title="Digital Product Information & Refunds" description="Delivery, compatibility, support and refund information for Mercer Lane Press digital products.">
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Digital products'}]}/>
+  <article class="page-head wrap prose">
+    <p class="eyebrow">DIGITAL PRODUCTS</p>
+    <h1>Delivery, compatibility and refunds</h1>
+    <p><strong>Last updated: October 2, 2026</strong></p>
+    <p>This page explains what to expect when buying a downloadable Mercer Lane Press product through the website.</p>
+
+    <h2>How checkout works</h2>
+    <p>Checkout is handled through Stripe Managed Payments. Stripe is the merchant of record for those transactions and handles payment processing, applicable indirect tax, receipts and transaction support under its own terms.</p>
+
+    <h2>Digital delivery</h2>
+    <p>Purchased files are delivered electronically after successful payment. For products using Mercer Lane Press secure delivery, Stripe redirects the buyer to a Mercer Lane Press download page after checkout. The site verifies the completed paid Checkout Session before the product file is released. There is no physical shipment.</p>
+    <p>Download access is deliberately limited to reduce casual sharing. Keep the Stripe receipt and use an email address you can access at checkout. If you lose download access after purchase, contact Mercer Lane Press using that same email address so the order can be identified.</p>
+
+    <h2>Before you buy</h2>
+    <p>Check the product page for the supported software and file formats. Digital products may contain multiple files such as XLSX workbooks, PDF documentation, DOCX forms and ZIP archives.</p>
+    <p>For the Mercer Lane Construction Estimating System PRO, the primary supported environment is modern Microsoft Excel desktop. The workbooks are macro-free. Google Sheets and Excel Online are not claimed as supported environments.</p>
+
+    <h2>If a file will not open or appears damaged</h2>
+    <p>Contact <a href="mailto:mercerlanepress@gmail.com">mercerlanepress@gmail.com</a> with the email address used at checkout, the product name, the affected filename and a short description of the problem. Do not email passwords or full card details.</p>
+    <p>Where appropriate, Mercer Lane Press may provide troubleshooting guidance, replacement access or a corrected file.</p>
+
+    <h2>Refunds and cancellation</h2>
+    <p>Digital-content rights vary by country and transaction. Mercer Lane Press does not use a blanket “no refunds” rule to override rights that apply by law.</p>
+    <p>For purchases completed through Stripe Managed Payments, transaction support and refund requests may be handled by Stripe. Stripe may also contact Mercer Lane Press for product-specific information when reviewing a request.</p>
+    <p>Where a customer is entitled to a remedy because digital content is faulty, not as described or otherwise fails to meet applicable statutory requirements, those rights are not excluded by this page or the site terms.</p>
+
+    <h2>Change of mind after digital delivery</h2>
+    <p>Some jurisdictions treat cancellation rights for digital content differently once supply has begun. Any cancellation right, consent requirement or acknowledgement that applies to a particular purchase is governed by applicable law and the checkout process used for that transaction.</p>
+
+    <h2>What a refund does not change</h2>
+    <p>A refund does not create a right to continue using, sharing, reselling or redistributing the purchased files where the underlying licence or applicable law does not permit that use.</p>
+
+    <h2>Product support</h2>
+    <p>For questions about how a Mercer Lane Press product is structured, what is included, or a product-specific defect, email <a href="mailto:mercerlanepress@gmail.com">mercerlanepress@gmail.com</a>.</p>
+    <p>For payment, receipt, transaction or Managed Payments refund support, the Stripe checkout/receipt flow may direct you to Stripe or Link support.</p>
+
+    <h2>Related information</h2>
+    <p>See the <a href="/terms/">website and digital product terms</a> and <a href="/privacy/">privacy notice</a>.</p>
+  </article>
+</BaseLayout>

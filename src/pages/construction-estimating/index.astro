@@ -40,6 +40,16 @@ const guides = (await getCollection('constructionEstimatingGuides')).sort((a,b) 
   </section>
 
   <section class="section section-tint">
+    <div class="wrap narrow">
+      <p class="eyebrow">DOWNLOADABLE EXCEL SYSTEM</p>
+      <h2>Construction Estimating System PRO</h2>
+      <p>Need more than a percentage check? The PRO system carries the same estimating principles into a guided Excel workflow covering project setup, scope, takeoff, materials, labour, job costs, subcontractors, recovery, markup or margin, seven-pass review, client proposal and estimate-vs-actual learning.</p>
+      <p><a class="button" href="/tools/construction-estimating-system-pro/">Explore the PRO system</a></p>
+      <p class="byline">One-time digital purchase. Primary supported environment: Microsoft Excel desktop.</p>
+    </div>
+  </section>
+
+  <section class="section">
     <div class="wrap">
       <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Work through the parts of an estimate that most often hide assumptions</h2><p>Each guide is designed to stand alone while fitting the same scope-to-learning workflow used in the book.</p></div>
       <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/construction-estimating/" label="CONSTRUCTION ESTIMATING" />)}</div>

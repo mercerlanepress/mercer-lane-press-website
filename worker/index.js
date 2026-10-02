@@ -1,6 +1,5 @@
-const COOKIE_NAME = 'mlp_pro_download';
-const ACCESS_TTL_SECONDS = 60 * 60 * 24 * 7;
-const MAX_DOWNLOADS = 3;
+const COOKIE_NAME = 'mlp_pro_session';
+const ACCESS_TTL_SECONDS = 60 * 60 * 24;
 const DEFAULT_OBJECT_KEY = 'Mercer_Lane_Construction_Estimating_System_PRO.zip';
 
 function json(data, status = 200, headers = {}) {
@@ -23,6 +22,10 @@ function readCookie(request, name) {
   return null;
 }
 
+function validSessionId(value) {
+  return /^cs_[A-Za-z0-9_]+$/.test(String(value || ''));
+}
+
 async function retrieveStripeSession(sessionId, env) {
   if (!env.STRIPE_RESTRICTED_KEY) throw new Error('Stripe verification is not configured.');
   const response = await fetch(`https://api.stripe.com/v1/checkout/sessions/${encodeURIComponent(sessionId)}`, {
@@ -32,9 +35,25 @@ async function retrieveStripeSession(sessionId, env) {
   return response.json();
 }
 
+function isPaidProSession(session, env) {
+  return Boolean(
+    session &&
+    session.status === 'complete' &&
+    session.payment_status === 'paid' &&
+    env.PRO_PAYMENT_LINK_ID &&
+    session.payment_link === env.PRO_PAYMENT_LINK_ID
+  );
+}
+
+async function verifyPaidProSession(sessionId, env) {
+  if (!validSessionId(sessionId)) return null;
+  const session = await retrieveStripeSession(sessionId, env);
+  return isPaidProSession(session, env) ? session : null;
+}
+
 async function handleAccess(request, env) {
   if (request.method !== 'POST') return json({ message: 'Method not allowed.' }, 405, { Allow: 'POST' });
-  if (!env.DOWNLOADS || !env.PRODUCTS) return json({ message: 'Secure delivery is not configured yet.' }, 503);
+  if (!env.PRODUCTS) return json({ message: 'Secure delivery is not configured yet.' }, 503);
 
   let body;
   try {
@@ -44,69 +63,29 @@ async function handleAccess(request, env) {
   }
 
   const sessionId = String(body?.session_id || '');
-  if (!/^cs_[A-Za-z0-9_]+$/.test(sessionId)) return json({ message: 'Invalid checkout session.' }, 400);
-
-  const existingToken = await env.DOWNLOADS.get(`session:${sessionId}`);
-  const requestToken = readCookie(request, COOKIE_NAME);
-  if (existingToken) {
-    if (requestToken && requestToken === existingToken) {
-      const record = await env.DOWNLOADS.get(`token:${existingToken}`, 'json');
-      const remaining = Math.max(0, MAX_DOWNLOADS - Number(record?.downloads || 0));
-      return json({ ok: true, downloads_remaining: remaining });
-    }
-    return json({ message: 'Download access for this order has already been issued in another browser or device. Contact Mercer Lane Press if you need access restored.' }, 409);
-  }
-
-  const session = await retrieveStripeSession(sessionId, env);
-  if (!session || session.status !== 'complete' || session.payment_status !== 'paid') {
-    return json({ message: 'This checkout is not recorded as a completed paid order.' }, 403);
-  }
-
-  if (!env.PRO_PAYMENT_LINK_ID || session.payment_link !== env.PRO_PAYMENT_LINK_ID) {
-    return json({ message: 'This checkout does not match the Construction Estimating System PRO payment link.' }, 403);
-  }
-
-  const token = `${crypto.randomUUID()}${crypto.randomUUID().replaceAll('-', '')}`;
-  const record = {
-    session_id: sessionId,
-    downloads: 0,
-    issued_at: new Date().toISOString(),
-  };
-
-  await Promise.all([
-    env.DOWNLOADS.put(`session:${sessionId}`, token, { expirationTtl: ACCESS_TTL_SECONDS }),
-    env.DOWNLOADS.put(`token:${token}`, JSON.stringify(record), { expirationTtl: ACCESS_TTL_SECONDS }),
-  ]);
+  const session = await verifyPaidProSession(sessionId, env);
+  if (!session) return json({ message: 'This checkout could not be verified as a completed paid PRO order.' }, 403);
 
   return json(
-    { ok: true, downloads_remaining: MAX_DOWNLOADS },
+    { ok: true },
     200,
-    { 'Set-Cookie': `${COOKIE_NAME}=${encodeURIComponent(token)}; Max-Age=${ACCESS_TTL_SECONDS}; Path=/api/; HttpOnly; Secure; SameSite=Strict` },
+    { 'Set-Cookie': `${COOKIE_NAME}=${encodeURIComponent(sessionId)}; Max-Age=${ACCESS_TTL_SECONDS}; Path=/api/; HttpOnly; Secure; SameSite=Strict` },
   );
 }
 
 async function handleDownload(request, env) {
   if (request.method !== 'GET') return json({ message: 'Method not allowed.' }, 405, { Allow: 'GET' });
-  if (!env.DOWNLOADS || !env.PRODUCTS) return json({ message: 'Secure delivery is not configured yet.' }, 503);
+  if (!env.PRODUCTS) return json({ message: 'Secure delivery is not configured yet.' }, 503);
 
-  const token = readCookie(request, COOKIE_NAME);
-  if (!token) return json({ message: 'No valid download access was found in this browser.' }, 403);
+  const sessionId = readCookie(request, COOKIE_NAME);
+  if (!sessionId) return json({ message: 'No verified checkout was found in this browser.' }, 403);
 
-  const record = await env.DOWNLOADS.get(`token:${token}`, 'json');
-  if (!record) return json({ message: 'Download access has expired. Contact Mercer Lane Press if you need help.' }, 403);
-
-  const downloads = Number(record.downloads || 0);
-  if (downloads >= MAX_DOWNLOADS) {
-    return json({ message: 'The download limit for this order has been reached. Contact Mercer Lane Press if you need access restored.' }, 429);
-  }
+  const session = await verifyPaidProSession(sessionId, env);
+  if (!session) return json({ message: 'This download is not linked to a completed paid PRO order.' }, 403);
 
   const objectKey = env.PRO_PRODUCT_OBJECT_KEY || DEFAULT_OBJECT_KEY;
   const object = await env.PRODUCTS.get(objectKey);
   if (!object) return json({ message: 'The product file is temporarily unavailable. Contact Mercer Lane Press.' }, 503);
-
-  record.downloads = downloads + 1;
-  record.last_download_at = new Date().toISOString();
-  await env.DOWNLOADS.put(`token:${token}`, JSON.stringify(record), { expirationTtl: ACCESS_TTL_SECONDS });
 
   const headers = new Headers();
   object.writeHttpMetadata(headers);

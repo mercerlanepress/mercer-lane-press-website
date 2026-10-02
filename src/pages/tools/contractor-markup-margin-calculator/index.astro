@@ -303,7 +303,7 @@ const faqSchema = {
       });
 
       copyButton.addEventListener('click', async () => {
-        if (!lastResult && !calculate(false)) return;
+        if (!calculate(false)) return;
         const text = `Contractor markup & margin calculation\nCost base: ${lastResult.cost}\nSelling price: ${lastResult.price}\nProfit above cost: ${lastResult.profit}\nMarkup: ${lastResult.markup}\nMargin: ${lastResult.margin}`;
         try {
           await navigator.clipboard.writeText(text);

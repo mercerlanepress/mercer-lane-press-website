@@ -6,11 +6,11 @@ import GuideCard from '../../components/GuideCard.astro';
 
 const guides = (await getCollection('constructionEstimatingGuides')).sort((a,b) => a.data.order - b.data.order);
 ---
-<BaseLayout title="Construction Estimating Guides for Your First Jobs" description="Practical beginner construction estimating guides for scope, quantity takeoff, material purchasing, labor hours, subcontract quotes, markup and margin, and pre-bid review.">
+<BaseLayout title="Construction Estimating Guides, Spreadsheet & Calculator" description="Practical construction estimating guides plus a free contractor markup calculator and a Microsoft Excel estimating spreadsheet covering scope, takeoff, labour, subcontractors, bid review and job costing.">
   <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Construction Estimating'}]}/>
   <header class="page-head wrap">
     <p class="eyebrow">CONSTRUCTION ESTIMATING</p>
-    <h1>Construction Estimating Guides for Your First Jobs</h1>
+    <h1>Construction Estimating Guides, Calculator &amp; Excel System</h1>
     <p class="lede">Build the estimate in a deliberate order: define the scope, structure the cost record, measure traceable quantities, price current inputs, load the business's chosen cost-recovery method, review the result, submit a defined offer, and learn from what happens.</p>
   </header>
 
@@ -30,33 +30,39 @@ const guides = (await getCollection('constructionEstimatingGuides')).sort((a,b) 
   </section>
 
   <section class="section">
-    <div class="wrap narrow">
-      <p class="eyebrow">FREE CALCULATOR</p>
-      <h2>Contractor Markup &amp; Margin Calculator</h2>
-      <p>Enter a cost base and either a markup or target margin to calculate the selling price, profit, markup and true margin. It is a quick way to check the commercial arithmetic without confusing a 20% markup with a 20% margin.</p>
-      <p><a class="button" href="/tools/contractor-markup-margin-calculator/">Use the free calculator</a></p>
-      <div class="notice"><strong>Arithmetic, not a recommended percentage.</strong> The calculator does not decide what your cost base should include or what commercial target your business should use.</div>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">CHOOSE THE RIGHT TOOL</p>
+        <h2>Free percentage check or complete construction estimating spreadsheet?</h2>
+        <p>Use the free calculator when the cost base is already known. Use PRO when the estimate itself needs a connected workflow from scope through job costing and post-job learning.</p>
+      </div>
+      <div class="grid-2">
+        <article class="card">
+          <p class="eyebrow">FREE CALCULATOR</p>
+          <h3>Contractor Markup &amp; Margin Calculator</h3>
+          <p>Enter a cost base and either a markup or target margin to calculate the selling price, profit, markup and true margin. It is a quick way to check the commercial arithmetic without confusing a 20% markup with a 20% margin.</p>
+          <p><a class="button button-secondary" href="/tools/contractor-markup-margin-calculator/">Use the free calculator</a></p>
+          <div class="notice"><strong>Arithmetic, not a recommended percentage.</strong> The calculator does not decide what your cost base should include or what commercial target your business should use.</div>
+        </article>
+        <article class="card">
+          <p class="eyebrow">DOWNLOADABLE MICROSOFT EXCEL SYSTEM</p>
+          <h3>Construction Estimating Spreadsheet for Contractors — PRO</h3>
+          <p>The PRO system carries the same estimating principles into a guided Excel workflow covering project setup, scope, takeoff, materials, labour, job costs, subcontractors, recovery, markup or margin, seven-pass review, client proposal and estimate-vs-actual learning.</p>
+          <p><a class="button" href="/tools/construction-estimating-system-pro/">Explore the PRO estimating spreadsheet</a></p>
+          <p class="byline">One-time digital purchase. Primary supported environment: Microsoft Excel desktop.</p>
+        </article>
+      </div>
     </div>
   </section>
 
   <section class="section section-tint">
-    <div class="wrap narrow">
-      <p class="eyebrow">DOWNLOADABLE EXCEL SYSTEM</p>
-      <h2>Construction Estimating System PRO</h2>
-      <p>Need more than a percentage check? The PRO system carries the same estimating principles into a guided Excel workflow covering project setup, scope, takeoff, materials, labour, job costs, subcontractors, recovery, markup or margin, seven-pass review, client proposal and estimate-vs-actual learning.</p>
-      <p><a class="button" href="/tools/construction-estimating-system-pro/">Explore the PRO system</a></p>
-      <p class="byline">One-time digital purchase. Primary supported environment: Microsoft Excel desktop.</p>
-    </div>
-  </section>
-
-  <section class="section">
     <div class="wrap">
-      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Work through the parts of an estimate that most often hide assumptions</h2><p>Each guide is designed to stand alone while fitting the same scope-to-learning workflow used in the book.</p></div>
+      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Work through the parts of an estimate that most often hide assumptions</h2><p>Each guide is designed to stand alone while fitting the same scope-to-learning workflow used in the book and PRO workbook.</p></div>
       <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/construction-estimating/" label="CONSTRUCTION ESTIMATING" />)}</div>
     </div>
   </section>
 
-  <section class="section section-tint">
+  <section class="section">
     <div class="wrap narrow">
       <div class="section-head"><p class="eyebrow">FULL WORKED EXAMPLE</p><h2>Construction Estimating for Your First Jobs</h2></div>
       <p>The book follows the fictional Oakridge Workshop from project information and drawings through takeoff, purchasing quantities, labor, subcontract quotations, company-level treatment, red-team bid review, a customer-facing proposal, and post-job learning. The project figures are teaching inputs rather than current market prices or recommended rates.</p>

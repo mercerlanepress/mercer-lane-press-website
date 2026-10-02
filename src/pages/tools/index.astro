@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Free Practical Tools | Mercer Lane Press',
+  description: 'Free practical calculators and tools from Mercer Lane Press.',
+  url: 'https://mercerlanepress.com/tools/'
+};
+---
+<BaseLayout
+  title="Free Practical Tools"
+  description="Free practical calculators and tools from Mercer Lane Press, designed to help with specific decisions without replacing professional judgment."
+  schema={schema}
+>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Tools'}]}/>
+
+  <header class="page-head wrap">
+    <p class="eyebrow">FREE PRACTICAL TOOLS</p>
+    <h1>Useful tools for specific problems</h1>
+    <p class="lede">Simple, focused calculators and worksheets built around the same practical approach as Mercer Lane Press books and guides.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Construction estimating</h2>
+        <p>Check commercial arithmetic without turning a percentage into a substitute for a complete estimate.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card">
+          <p class="eyebrow">FREE BROWSER CALCULATOR</p>
+          <h3><a href="/tools/contractor-markup-margin-calculator/">Contractor Markup &amp; Margin Calculator</a></h3>
+          <p>Enter a cost base and either a markup or target margin. See the selling price, profit amount, markup and true margin side by side.</p>
+          <p><a class="text-link" href="/tools/contractor-markup-margin-calculator/">Use the free calculator →</a></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow">
+      <h2>Tools support decisions; they do not replace the work behind them</h2>
+      <p>A calculator can check arithmetic. It cannot tell you whether the project scope is complete, whether a labor assumption is realistic, whether a subcontract quotation covers the same work, or whether your business is recovering its costs consistently.</p>
+      <p>Where a tool depends on business-specific inputs, use your own current information and appropriate professional advice where needed.</p>
+    </div>
+  </section>
+</BaseLayout>

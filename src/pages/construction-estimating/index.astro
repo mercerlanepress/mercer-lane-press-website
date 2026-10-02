@@ -30,6 +30,16 @@ const guides = (await getCollection('constructionEstimatingGuides')).sort((a,b) 
   </section>
 
   <section class="section">
+    <div class="wrap narrow">
+      <p class="eyebrow">FREE CALCULATOR</p>
+      <h2>Contractor Markup &amp; Margin Calculator</h2>
+      <p>Enter a cost base and either a markup or target margin to calculate the selling price, profit, markup and true margin. It is a quick way to check the commercial arithmetic without confusing a 20% markup with a 20% margin.</p>
+      <p><a class="button" href="/tools/contractor-markup-margin-calculator/">Use the free calculator</a></p>
+      <div class="notice"><strong>Arithmetic, not a recommended percentage.</strong> The calculator does not decide what your cost base should include or what commercial target your business should use.</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
     <div class="wrap">
       <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Work through the parts of an estimate that most often hide assumptions</h2><p>Each guide is designed to stand alone while fitting the same scope-to-learning workflow used in the book.</p></div>
       <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/construction-estimating/" label="CONSTRUCTION ESTIMATING" />)}</div>

@@ -1,0 +1,324 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+
+const webAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Contractor Markup & Margin Calculator',
+  url: 'https://mercerlanepress.com/tools/contractor-markup-margin-calculator/',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Any',
+  isAccessibleForFree: true,
+  description: 'Free contractor calculator for converting markup or target margin into selling price, profit, markup and true margin.'
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Is markup the same as margin?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. Markup compares the amount added with cost. Margin compares profit with selling price. A 20% markup on a cost of 100 produces a selling price of 120 and a margin of about 16.67%.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I calculate a selling price from a target margin?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Selling Price = Cost / (1 - Margin). For example, a cost of 100 with a 20% target margin produces a selling price of 125.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Does this calculator tell me what markup or margin I should use?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. The calculator checks arithmetic only. A real contractor must choose cost classifications, overhead recovery and commercial targets using the business’s own financial information and appropriate professional advice where needed.'
+      }
+    }
+  ]
+};
+---
+<BaseLayout
+  title="Contractor Markup & Margin Calculator"
+  description="Free contractor markup and margin calculator. Enter your job cost and a markup or target margin to calculate selling price, profit and the true percentage relationship."
+  schema={[webAppSchema, faqSchema]}
+>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Tools',href:'/tools/'},{name:'Markup & Margin Calculator'}]}/>
+
+  <header class="page-head wrap tool-head">
+    <p class="eyebrow">FREE CONTRACTOR CALCULATOR</p>
+    <h1>Contractor Markup &amp; Margin Calculator</h1>
+    <p class="lede">Turn a known cost base into a selling price using either markup or target margin — and see the true profit, markup and margin side by side.</p>
+    <p class="privacy-note">Free to use. No sign-up required. Your figures stay in your browser.</p>
+  </header>
+
+  <section class="calculator-section">
+    <div class="wrap calculator-layout">
+      <form class="calculator-card" id="markup-margin-form" novalidate>
+        <div class="calculator-card-head">
+          <p class="eyebrow">ENTER YOUR FIGURES</p>
+          <h2>Calculate a selling price</h2>
+        </div>
+
+        <div class="form-grid">
+          <div class="field currency-field">
+            <label for="currency">Currency</label>
+            <select id="currency" name="currency">
+              <option value="USD">USD — $</option>
+              <option value="GBP">GBP — £</option>
+              <option value="EUR">EUR — €</option>
+              <option value="CAD">CAD — C$</option>
+              <option value="AUD">AUD — A$</option>
+            </select>
+            <small>This changes the display currency only. It does not convert exchange rates.</small>
+          </div>
+
+          <div class="field">
+            <label for="job-cost">Cost base</label>
+            <input id="job-cost" name="job-cost" type="number" min="0.01" step="0.01" inputmode="decimal" value="10000" required>
+            <small>Use the complete cost base you have deliberately chosen for this calculation.</small>
+          </div>
+
+          <div class="field">
+            <label for="pricing-method">Calculate using</label>
+            <select id="pricing-method" name="pricing-method">
+              <option value="margin" selected>Target margin</option>
+              <option value="markup">Markup</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="percentage"><span id="percentage-label">Target margin</span> %</label>
+            <input id="percentage" name="percentage" type="number" min="0" max="99.99" step="0.01" inputmode="decimal" value="20" required>
+            <small id="percentage-help">Target margin must be less than 100%.</small>
+          </div>
+        </div>
+
+        <div class="calculator-actions">
+          <button class="button" type="submit">Calculate price</button>
+          <button class="button button-secondary" type="button" id="reset-calculator">Reset</button>
+        </div>
+        <p class="calculator-error" id="calculator-error" role="alert" hidden></p>
+      </form>
+
+      <aside class="results-card" aria-live="polite" aria-atomic="true">
+        <p class="eyebrow">RESULT</p>
+        <div class="primary-result">
+          <span>Selling price</span>
+          <strong id="selling-price">$12,500.00</strong>
+        </div>
+        <dl class="result-grid">
+          <div><dt>Cost base</dt><dd id="result-cost">$10,000.00</dd></div>
+          <div><dt>Profit above cost</dt><dd id="profit-amount">$2,500.00</dd></div>
+          <div><dt>Markup</dt><dd id="markup-result">25.00%</dd></div>
+          <div><dt>Margin</dt><dd id="margin-result">20.00%</dd></div>
+        </dl>
+        <div class="result-explanation" id="result-explanation">
+          A 20.00% target margin on a $10,000.00 cost base requires a selling price of $12,500.00. That is equivalent to a 25.00% markup.
+        </div>
+        <button class="copy-button" type="button" id="copy-results">Copy result</button>
+        <p class="copy-status" id="copy-status" aria-live="polite"></p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow prose">
+      <p class="eyebrow">WHY THE DISTINCTION MATTERS</p>
+      <h2>Markup and margin are not the same percentage</h2>
+      <p>Markup compares the amount added with the cost base. Margin compares the profit amount with the selling price. Using the same percentage for both therefore produces different prices.</p>
+
+      <div class="example-grid">
+        <article class="example-card">
+          <h3>20% markup</h3>
+          <p>Cost = $100</p>
+          <p><strong>Selling price = $120</strong></p>
+          <p>Profit = $20</p>
+          <p>True margin = 16.67%</p>
+        </article>
+        <article class="example-card">
+          <h3>20% target margin</h3>
+          <p>Cost = $100</p>
+          <p><strong>Selling price = $125</strong></p>
+          <p>Profit = $25</p>
+          <p>Equivalent markup = 25%</p>
+        </article>
+      </div>
+
+      <h2>The formulas</h2>
+      <div class="formula-box">
+        <p><strong>Markup method:</strong> Selling Price = Cost × (1 + Markup)</p>
+        <p><strong>Target-margin method:</strong> Selling Price = Cost / (1 − Margin)</p>
+        <p><strong>Equivalent markup from margin:</strong> Markup = Margin / (1 − Margin)</p>
+      </div>
+
+      <h2>What should you enter as the cost base?</h2>
+      <p>The calculator deliberately does not decide this for you. A contractor may need to account for materials, self-performed labor, subcontractors, equipment, delivery, disposal, other project-specific costs, and the business's chosen company-level cost treatment. The exact classification and recovery method depends on the business.</p>
+      <p>Use your own current project information and financial records. If you are uncertain how business overhead, payroll burden, tax, owner compensation, depreciation, or other company costs should be classified, obtain appropriate accounting or professional advice.</p>
+
+      <div class="notice"><strong>Do not use a larger markup to repair an incomplete estimate.</strong> This calculator checks commercial arithmetic. It cannot tell you whether scope is missing, a labor assumption is realistic, a supplier price is current, or a subcontract quote covers the same work.</div>
+
+      <h2>Frequently asked questions</h2>
+      <h3>Is markup the same as margin?</h3>
+      <p>No. Markup compares the addition with cost; margin compares profit with selling price. A 20% markup on $100 cost gives a $120 selling price and a margin of about 16.67%.</p>
+
+      <h3>How do I calculate a selling price from a target margin?</h3>
+      <p>Use <strong>Selling Price = Cost / (1 − Margin)</strong>. A $100 cost base with a 20% target margin therefore requires a $125 selling price.</p>
+
+      <h3>Does this calculator tell me what markup or margin I should use?</h3>
+      <p>No. It checks the mathematics once you choose the inputs. A real contractor's overhead method and commercial targets must come from the business's own financial information and decisions.</p>
+
+      <h3>Does a target margin guarantee that profit on the completed job?</h3>
+      <p>No. Actual results can change through quantity errors, labor overruns, rework, price changes, scope changes, subcontractor issues and project conditions that differ from the estimate.</p>
+
+      <div class="related tool-related">
+        <p class="eyebrow">GO DEEPER</p>
+        <h2>Build the estimate underneath the percentage</h2>
+        <p>Read the practical guide to <a href="/construction-estimating/construction-markup-vs-margin/">construction markup vs margin</a>, work through the full <a href="/construction-estimating/">construction estimating guide hub</a>, or explore the worked example in <a href="/books/construction-estimating-for-your-first-jobs/">Construction Estimating for Your First Jobs</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    (() => {
+      const form = document.getElementById('markup-margin-form');
+      if (!form) return;
+
+      const currency = document.getElementById('currency');
+      const costInput = document.getElementById('job-cost');
+      const method = document.getElementById('pricing-method');
+      const percentageInput = document.getElementById('percentage');
+      const percentageLabel = document.getElementById('percentage-label');
+      const percentageHelp = document.getElementById('percentage-help');
+      const error = document.getElementById('calculator-error');
+      const sellingPrice = document.getElementById('selling-price');
+      const resultCost = document.getElementById('result-cost');
+      const profitAmount = document.getElementById('profit-amount');
+      const markupResult = document.getElementById('markup-result');
+      const marginResult = document.getElementById('margin-result');
+      const explanation = document.getElementById('result-explanation');
+      const resetButton = document.getElementById('reset-calculator');
+      const copyButton = document.getElementById('copy-results');
+      const copyStatus = document.getElementById('copy-status');
+
+      let lastResult = null;
+
+      const money = (value) => new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: currency.value,
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(value);
+
+      const percent = (value) => `${(value * 100).toFixed(2)}%`;
+
+      const updateMethodHelp = () => {
+        const isMargin = method.value === 'margin';
+        percentageLabel.textContent = isMargin ? 'Target margin' : 'Markup';
+        percentageInput.max = isMargin ? '99.99' : '1000';
+        percentageHelp.textContent = isMargin
+          ? 'Target margin must be less than 100%.'
+          : 'Markup is measured against the cost base.';
+      };
+
+      const calculate = (track = false) => {
+        updateMethodHelp();
+        error.hidden = true;
+        copyStatus.textContent = '';
+
+        const cost = Number(costInput.value);
+        const rawPercentage = Number(percentageInput.value);
+
+        if (!Number.isFinite(cost) || cost <= 0) {
+          error.textContent = 'Enter a cost base greater than zero.';
+          error.hidden = false;
+          return false;
+        }
+        if (!Number.isFinite(rawPercentage) || rawPercentage < 0) {
+          error.textContent = 'Enter a percentage of zero or more.';
+          error.hidden = false;
+          return false;
+        }
+        if (method.value === 'margin' && rawPercentage >= 100) {
+          error.textContent = 'Target margin must be less than 100%.';
+          error.hidden = false;
+          return false;
+        }
+
+        const rate = rawPercentage / 100;
+        const price = method.value === 'margin' ? cost / (1 - rate) : cost * (1 + rate);
+        const profit = price - cost;
+        const markup = profit / cost;
+        const margin = price === 0 ? 0 : profit / price;
+
+        sellingPrice.textContent = money(price);
+        resultCost.textContent = money(cost);
+        profitAmount.textContent = money(profit);
+        markupResult.textContent = percent(markup);
+        marginResult.textContent = percent(margin);
+
+        if (method.value === 'margin') {
+          explanation.textContent = `A ${rawPercentage.toFixed(2)}% target margin on a ${money(cost)} cost base requires a selling price of ${money(price)}. That is equivalent to a ${percent(markup)} markup.`;
+        } else {
+          explanation.textContent = `A ${rawPercentage.toFixed(2)}% markup on a ${money(cost)} cost base produces a selling price of ${money(price)}. The resulting margin is ${percent(margin)}.`;
+        }
+
+        lastResult = {
+          cost: money(cost),
+          price: money(price),
+          profit: money(profit),
+          markup: percent(markup),
+          margin: percent(margin),
+          method: method.value,
+          inputPercentage: rawPercentage.toFixed(2)
+        };
+
+        if (track && typeof window.gtag === 'function') {
+          window.gtag('event', 'tool_calculation', {
+            tool_name: 'contractor_markup_margin_calculator',
+            pricing_method: method.value
+          });
+        }
+        return true;
+      };
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        calculate(true);
+      });
+
+      method.addEventListener('change', () => calculate(false));
+      currency.addEventListener('change', () => calculate(false));
+
+      resetButton.addEventListener('click', () => {
+        form.reset();
+        updateMethodHelp();
+        calculate(false);
+      });
+
+      copyButton.addEventListener('click', async () => {
+        if (!lastResult && !calculate(false)) return;
+        const text = `Contractor markup & margin calculation\nCost base: ${lastResult.cost}\nSelling price: ${lastResult.price}\nProfit above cost: ${lastResult.profit}\nMarkup: ${lastResult.markup}\nMargin: ${lastResult.margin}`;
+        try {
+          await navigator.clipboard.writeText(text);
+          copyStatus.textContent = 'Result copied.';
+        } catch {
+          copyStatus.textContent = 'Copy was not available in this browser.';
+        }
+      });
+
+      updateMethodHelp();
+      calculate(false);
+    })();
+  </script>
+
+  <style>
+    .tool-head{padding-bottom:3rem}.privacy-note{display:inline-flex;align-items:center;gap:.45rem;margin:1rem 0 0;color:var(--muted);font-size:.92rem;font-weight:650}.privacy-note:before{content:'✓';display:inline-grid;place-items:center;width:1.4rem;height:1.4rem;border-radius:50%;background:#e7f3ee;color:#246b50;font-weight:900}.calculator-section{padding:0 0 clamp(4rem,8vw,7rem)}.calculator-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);gap:1.5rem;align-items:stretch}.calculator-card,.results-card{border:1px solid var(--line);padding:clamp(1.5rem,3vw,2.25rem);background:#fff}.calculator-card{box-shadow:0 18px 50px rgba(16,35,63,.08)}.results-card{background:var(--navy);color:#fff;box-shadow:0 18px 50px rgba(16,35,63,.13)}.results-card .eyebrow{color:#8ed7e8}.calculator-card-head{border-bottom:1px solid var(--line);margin-bottom:1.6rem}.calculator-card-head h2{margin-bottom:1.35rem}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem}.field{display:grid;gap:.4rem;align-content:start}.field label{font-weight:800;color:var(--navy)}.field input,.field select{width:100%;min-height:48px;border:1px solid #aeb8c2;border-radius:0;background:#fff;color:var(--ink);font:inherit;padding:.65rem .75rem}.field input:focus,.field select:focus{outline:3px solid #8ed7e8;outline-offset:1px;border-color:var(--cyan)}.field small{color:var(--muted);font-size:.82rem;line-height:1.45}.calculator-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.7rem}.calculator-actions button{font:inherit;cursor:pointer}.calculator-error{margin:1rem 0 0;padding:.8rem 1rem;border-left:4px solid #a33737;background:#fff1f1;color:#7a2525;font-weight:700}.primary-result{padding-bottom:1.4rem;margin-bottom:1.4rem;border-bottom:1px solid #536278}.primary-result span{display:block;font-size:.85rem;color:#c9d5e4;font-weight:700;text-transform:uppercase;letter-spacing:.08em}.primary-result strong{display:block;margin-top:.25rem;font-family:var(--serif);font-size:clamp(2.4rem,5vw,4rem);line-height:1;color:#fff}.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:0}.result-grid div{padding:1rem;background:rgba(255,255,255,.07)}.result-grid dt{font-size:.78rem;color:#bdcad9;font-weight:700;text-transform:uppercase;letter-spacing:.06em}.result-grid dd{margin:.2rem 0 0;font-size:1.2rem;font-weight:800;color:#fff}.result-explanation{margin-top:1.4rem;padding:1rem 0;border-top:1px solid #536278;border-bottom:1px solid #536278;color:#dfe7f1}.copy-button{margin-top:1.2rem;padding:.65rem .9rem;border:1px solid #8ed7e8;background:transparent;color:#fff;font:inherit;font-weight:800;cursor:pointer}.copy-button:hover{background:#fff;color:var(--navy)}.copy-button:focus-visible{outline:3px solid #8ed7e8;outline-offset:3px}.copy-status{min-height:1.6em;margin:.5rem 0 0;color:#bfe5ee;font-size:.85rem}.example-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0 2.5rem}.example-card{border:1px solid var(--line);padding:1.35rem;background:var(--paper)}.example-card h3{margin-bottom:.8rem}.example-card p{margin-bottom:.35rem}.formula-box{border-left:5px solid var(--cyan);background:var(--paper);padding:1.35rem 1.5rem;margin:1.25rem 0 2.5rem}.formula-box p:last-child{margin-bottom:0}.tool-related{background:var(--paper);padding:1.6rem;border-top:0}.tool-related h2{margin-top:0}@media(max-width:760px){.calculator-layout,.form-grid,.example-grid{grid-template-columns:1fr}.calculator-section{padding-top:0}.primary-result strong{font-size:2.7rem}.result-grid{grid-template-columns:1fr 1fr}}@media(max-width:460px){.result-grid{grid-template-columns:1fr}.calculator-actions .button{width:100%;text-align:center}}
+  </style>
+</BaseLayout>

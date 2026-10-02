@@ -43,6 +43,11 @@ const faqSchema = {
       '@type': 'Question',
       name: 'What is included?',
       acceptedAnswer: { '@type': 'Answer', text: 'The package includes the PRO estimating workbook, completed Oakridge demonstration workbook, five bonus calculators and tools, editable forms, printable review sheets, worked examples and full documentation.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'How is the download delivered?',
+      acceptedAnswer: { '@type': 'Answer', text: 'After successful Stripe checkout, the buyer is redirected to a secure Mercer Lane Press download page. The page verifies the completed paid checkout before making the ZIP package available.' }
     }
   ]
 };
@@ -64,7 +69,7 @@ const faqSchema = {
           <a class="button" href={checkoutUrl} data-pro-checkout>Buy PRO — US$39.99</a>
           <a class="button button-secondary" href="#whats-included">See what’s included</a>
         </div>
-        <p class="purchase-note">One-time digital purchase. Applicable taxes are calculated at checkout. Stripe may display a local-currency amount where supported.</p>
+        <p class="purchase-note">One-time digital purchase. Applicable taxes are calculated at checkout. Stripe may display a local-currency amount where supported. Secure download access follows a successful checkout.</p>
       </div>
       <aside class="system-panel" aria-label="Estimating workflow">
         <p class="eyebrow">GUIDED WORKFLOW</p>
@@ -141,7 +146,7 @@ const faqSchema = {
       <h3>Can I use it for any contractor trade?</h3>
       <p>The estimating structure is deliberately general rather than trade-rate specific. You still need to define the actual scope, units, quantities, labour activities, supplier prices, subcontract quotations and company-level assumptions for your own work.</p>
       <h3>How is the download delivered?</h3>
-      <p>After a successful checkout, digital delivery is sent to the email address used for the purchase. Keep access to that email address in case you need the delivery message again.</p>
+      <p>After a successful Stripe checkout, you are redirected to a secure Mercer Lane Press download page. The page verifies the completed paid checkout before making the ZIP available. Access is limited to reduce casual sharing; if you lose access after purchase, contact Mercer Lane Press using the checkout email address.</p>
       <h3>What about refunds?</h3>
       <p>Digital purchases are subject to applicable consumer law and the transaction-support process used by Stripe Managed Payments. Product-specific problems can also be raised with Mercer Lane Press. See <a href="/digital-products/">Digital product information &amp; refunds</a>.</p>
     </div>
@@ -160,7 +165,7 @@ const faqSchema = {
     </div>
   </section>
 
-  <script is:inline define:vars={{ checkoutUrl }}>
+  <script is:inline>
     document.querySelectorAll('[data-pro-checkout]').forEach((link) => {
       link.addEventListener('click', () => {
         if (typeof window.gtag === 'function') {

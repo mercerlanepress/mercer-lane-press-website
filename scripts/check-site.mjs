@@ -26,6 +26,7 @@ for(const file of html){
   metadata.add(key);
   for(const href of source.matchAll(/href="(\/[^"#?]*)/g)){
     const path=href[1];
+    if(path.startsWith('/api/')) continue;
     if(path.startsWith('/images/')||path.includes('.')){
       if(!existsSync(join(dist,path))) throw new Error(`Broken internal link ${path} in ${file}`);
     } else {

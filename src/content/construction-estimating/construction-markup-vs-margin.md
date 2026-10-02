@@ -104,6 +104,12 @@ The $25 difference is 20% of the $125 selling price.
 
 That is why identical percentage labels can produce different selling prices when one is markup and the other is margin.
 
+## Check your own figures with the free calculator
+
+Use the free [Contractor Markup & Margin Calculator](/tools/contractor-markup-margin-calculator/) to enter your own cost base and either a markup or target margin. It shows the resulting selling price, profit amount, markup and true margin side by side.
+
+The calculator checks the arithmetic only. It does not recommend a cost base, markup, target margin or overhead-recovery method.
+
 ## What markup corresponds to a target margin?
 
 The relationship can also be written:

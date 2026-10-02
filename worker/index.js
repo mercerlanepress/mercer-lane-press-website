@@ -69,7 +69,6 @@ async function handleAccess(request, env) {
   const token = `${crypto.randomUUID()}${crypto.randomUUID().replaceAll('-', '')}`;
   const record = {
     session_id: sessionId,
-    email: session.customer_details?.email || session.customer_email || null,
     downloads: 0,
     issued_at: new Date().toISOString(),
   };

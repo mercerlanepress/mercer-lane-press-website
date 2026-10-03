@@ -3,7 +3,7 @@ import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
 const root=resolve(import.meta.dirname,'..');
-execFileSync('npm',['run','build'],{cwd:root,stdio:'inherit'});
+execFileSync(process.execPath,[join(root,'node_modules/astro/bin/astro.mjs'),'build'],{cwd:root,stdio:'inherit'});
 execFileSync('git',['diff','--check'],{cwd:root,stdio:'inherit'});
 
 const bookPagesDir=join(root,'src/pages/books');

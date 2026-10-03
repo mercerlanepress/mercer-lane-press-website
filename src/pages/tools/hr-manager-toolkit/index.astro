@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+const groups=[
+ ['People and performance','Employee Directory, HR Dashboard, reviews, goals, one-to-ones and improvement actions.'],
+ ['Hiring and onboarding','Recruitment, interview scores, candidate comparison, question planning, onboarding and 30/60/90 plans.'],
+ ['Recurring HR operations','Cases, meeting records, training, skills, leave, HR Calendar and a central Actions register.'],
+ ['AI productivity','48 HR prompts, AI Prompt Builder, Personal Prompts, Prompt Chaining, input preparation, output review and guided workflows.'],
+ ['Editable forms','22 HR form designs in Word, with printable A4 and US Letter versions. Alternate formats are versions of the same designs.'],
+ ['Guides and examples','Blank and fictional example workbooks, Start Here, Help / FAQ, advanced help and practical quick references.']
+];
+---
+<BaseLayout title="HR Manager Toolkit + AI Productivity System" description="Explore the Mercer Lane Press HR Manager Toolkit: Excel tools for recurring HR work, 48 HR AI prompts and 22 editable HR form designs.">
+ <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Tools',href:'/tools/'},{name:'HR Manager Toolkit'}]}/>
+ <header class="page-head wrap"><p class="eyebrow">MERCER LANE PRESS</p><h1>HR Manager Toolkit + AI Productivity System</h1><p class="lede">A broader system for recurring people management, HR operations and optional AI-assisted preparation.</p><p>The complete toolkit connects employee records, performance follow-up, hiring, onboarding and routine HR actions in an Excel workbook, with companion forms and AI guidance.</p><div class="notice"><strong>Purchase availability.</strong> Online checkout for this toolkit is not currently available on this page. This page describes the product; it does not take payment or release the paid files.</div><p><a class="button" href="/free-tools/performance-review-template-excel/">Try the free performance review starter kit</a></p></header>
+ <section class="section section-tint"><div class="wrap"><h2>What the complete toolkit adds</h2><div class="grid-3">{groups.map(([head,text])=><article class="card"><h3>{head}</h3><p>{text}</p></article>)}</div></div></section>
+ <section class="section"><div class="wrap narrow"><h2>A wider scope for ongoing HR work</h2><p>The free starter kit handles one employee and one performance review at a time. The complete toolkit includes 31 workbook sheets for broader recurring HR work, plus a blank workbook and a fictional example system. It includes no automatic employment decisions.</p><h2>Optional AI with human review</h2><p>The AI tools use Role + Task + Context + Output. Follow your organisation’s AI/privacy policy, minimise confidential information and verify every draft. The companion <a href="/books/ai-productivity-for-hr-professionals/">AI Productivity for HR Professionals</a> book by Mercer Lane explains the wider method and HR workflows.</p><div class="notice">General HR productivity resources, not legal, employment-law or jurisdiction-specific compliance advice. Adapt to organisation policy and local requirements. Obtain qualified review where appropriate.</div></div></section>
+</BaseLayout>

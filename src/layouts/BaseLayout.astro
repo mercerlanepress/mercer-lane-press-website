@@ -11,9 +11,10 @@ interface Props {
   type?: string;
   schema?: object | object[];
   robots?: string;
+  sensitiveTool?: boolean;
 }
 
-const { title, description, image = '/social-card.svg', type = 'website', schema, robots } = Astro.props;
+const { title, description, image = '/social-card.svg', type = 'website', schema, robots, sensitiveTool = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const fullTitle = title.includes('Mercer Lane Press') ? title : `${title} | Mercer Lane Press`;
 const org = {
@@ -45,7 +46,7 @@ const measurementId = 'G-CK9SW6VRS9';
     <meta name="theme-color" content="#10233f">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
-    <script is:inline define:vars={{ measurementId }}>
+    {!sensitiveTool && <script is:inline define:vars={{ measurementId }}>
       (() => {
         const storageKey = 'mlp-analytics-consent';
         const savedChoice = localStorage.getItem(storageKey);
@@ -66,8 +67,32 @@ const measurementId = 'G-CK9SW6VRS9';
           anonymize_ip: true
         });
       })();
-    </script>
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-CK9SW6VRS9"></script>
+    </script>}
+    {!sensitiveTool && <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-CK9SW6VRS9"></script>}
+    {sensitiveTool && <script is:inline define:vars={{ measurementId }}>
+      (() => {
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag('consent', 'default', {ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied'});
+        let loaded = false;
+        const enable = () => {
+          if (loaded) return;
+          loaded = true;
+          window.gtag('js', new Date());
+          window.gtag('config', measurementId, {send_page_view:false,allow_google_signals:false,allow_ad_personalization_signals:false});
+          const script = document.createElement('script');
+          script.async = true; script.src = 'https://www.googletagmanager.com/gtag/js?id=' + measurementId;
+          document.head.append(script);
+        };
+        window.addEventListener('mlp:analytics-consent', event => { if (event.detail === 'granted') enable(); });
+        try {
+          if (localStorage.getItem('mlp-analytics-consent') === 'granted') {
+            window.gtag('consent','update',{analytics_storage:'granted'}); enable();
+            window.gtag('event','page_view',{page_title:document.title,page_location:location.origin+location.pathname,page_path:location.pathname});
+          }
+        } catch { /* No storage: analytics remains off. */ }
+      })();
+    </script>}
 
     <script type="application/ld+json" set:html={JSON.stringify(org)} />
     {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}

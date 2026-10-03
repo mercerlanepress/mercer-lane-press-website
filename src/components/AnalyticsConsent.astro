@@ -56,11 +56,12 @@ const measurementId = 'G-CK9SW6VRS9';
     const acceptAnalytics = () => {
       localStorage.setItem(storageKey, 'granted');
       updateConsent('granted');
+      window.dispatchEvent(new CustomEvent('mlp:analytics-consent', {detail:'granted'}));
 
       if (typeof window.gtag === 'function') {
         window.gtag('event', 'page_view', {
           page_title: document.title,
-          page_location: window.location.href,
+          page_location: window.location.origin + window.location.pathname,
           page_path: window.location.pathname
         });
       }

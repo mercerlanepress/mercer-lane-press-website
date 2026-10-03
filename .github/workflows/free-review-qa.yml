@@ -1,0 +1,32 @@
+name: Free review package QA
+on:
+  pull_request:
+    paths:
+      - 'public/downloads/Mercer_Lane_Free_Performance_Review_Starter_Kit.zip'
+      - 'src/**/performance-review*'
+      - 'src/pages/free-tools/**'
+      - 'scripts/check-free-review*'
+      - '.github/workflows/free-review-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  files:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install independent file QA tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y libreoffice-writer libreoffice-calc poppler-utils fonts-liberation
+          pip install openpyxl pypdf
+      - name: Verify package, recalculate prompts and render Word
+        run: python scripts/check-free-review-files.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: free-review-qa
+          path: free-review-qa/

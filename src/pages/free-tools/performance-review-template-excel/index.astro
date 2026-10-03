@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import { tones, outputTypes, contextFields } from '../../../lib/performance-review-prompt.js';
+const download = '/downloads/Mercer_Lane_Free_Performance_Review_Starter_Kit.zip';
+const toolkit = '/tools/hr-manager-toolkit/';
+const book = '/books/ai-productivity-for-hr-professionals/';
+const faqs = [
+  ['What should be included in an employee performance review?', 'Record the employee’s role and review period, verified achievements, strengths, development needs, manager summary, employee comments, goals, agreed support and next check-in. Use work evidence and allow space for corrections.'],
+  ['Can I edit the Excel template?', 'Yes. The amber input cells are editable while formula cells and labels are protected. Save a separate copy for each review. The workbook is macro-free. Use Excel desktop; other spreadsheet apps require their own verification.'],
+  ['Is this performance review template really free?', 'Yes. Download the ZIP directly with no email, account, checkout or payment required. It focuses on one employee and one review at a time.'],
+  ['Do I need ChatGPT?', 'No. You can complete the review without AI. If you use the optional prompt, choose an AI tool approved by your organisation. No API key or AI subscription is required to build the prompt.'],
+  ['Does the AI Prompt Builder send my information anywhere?', 'The builder assembles the prompt locally in your browser. It does not submit your HR entries to a server or AI service, or save them in browser storage. If you accept analytics, we record only named usage events, never field contents or prompt text. Pasting the prompt into an AI tool is a separate action under that tool’s policy.'],
+  ['Is the template suitable for every country?', 'It uses general, jurisdiction-neutral wording. Adapt it to your organisation’s process and local requirements. It is not legal or employment-law advice, and it does not establish compliance.'],
+  ['Can I use PDF or Word instead of Excel?', 'Yes. The kit includes an editable three-page Word review form and printable three-page PDF forms in A4 and US Letter. Transfer the agreed notes manually; the files do not synchronise automatically.'],
+  ['What is included in the complete HR Manager Toolkit?', 'The paid toolkit expands to broader HR work: employee records, dashboards, review-cycle tracking, recruitment, onboarding, cases, training, skills, leave, a calendar, actions, 48 HR prompts, prompt chaining, guided workflows and 22 editable HR form designs.']
+];
+const schema = {'@context':'https://schema.org','@type':'WebPage',name:'Free Employee Performance Review Template for Excel + AI Prompt Builder',description:'A free workbook, editable Word form, printable PDFs and optional local AI review prompt builder.',url:'https://mercerlanepress.com/free-tools/performance-review-template-excel/'};
+---
+<BaseLayout title="Free Employee Performance Review Template for Excel + AI Prompt Builder" description="Download a free Excel performance review template, editable Word form and A4/US Letter PDFs. Build an optional AI review prompt locally. No signup required." image="/images/free-performance-review/review.png" schema={schema} sensitiveTool>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Tools',href:'/tools/'},{name:'Free performance review template'}]}/>
+  <section class="review-hero section-tint">
+    <div class="wrap hero-grid">
+      <div><p class="eyebrow">FREE HR RESOURCE</p><h1>Free Employee Performance Review Template for Excel</h1><p class="lede">Run a structured employee review, record goals and actions, and optionally build a copy-ready AI prompt — no signup required.</p><p>Excel Performance Review Template + Editable Word Form + Printable PDF + AI Review Prompt Builder</p><div class="actions"><a class="button" href={download} download data-review-event="free_hr_template_download">Download Free Template</a><a class="button button-secondary" href="#prompt-builder">Build an AI Review Prompt</a></div><p class="download-note"><strong>Download Free — No Signup Required</strong><br/>One employee / one review at a time. No macros. AI is optional.</p></div>
+      <figure class="preview-card"><img src="/images/free-performance-review/review.png" alt="Performance Review worksheet with a fictional Marketing Coordinator example and space for evidence" width="1440" height="1300"/><figcaption>A structured review, grounded in work evidence. Preview data is fictional.</figcaption></figure>
+    </div>
+  </section>
+  <section class="section"><div class="wrap"><div class="section-head"><h2>A clear record from preparation to follow-up</h2><p>For HR managers, generalists, office managers and people managers who need a practical employee evaluation template for an individual review.</p></div><div class="grid-3">
+    <article class="card"><h3>Excel review workbook</h3><p>Five sheets: Start Here, Performance Review, Goals &amp; Actions, AI Review Prompt, and Help / FAQ. Record evidence, comments and priorities; track up to eight goals or actions.</p></article>
+    <article class="card"><h3>Word and printable forms</h3><p>An editable Word review form, plus A4 and US Letter PDFs with writing space. Each covers details, evidence, discussion, goals, support and acknowledgement.</p></article>
+    <article class="card"><h3>Prompt builder and instructions</h3><p>The Excel builder and the browser tool below use Role + Task + Context + Output with safeguards. A five-page Start Here guide and one-page AI guide help you get started.</p></article>
+  </div><div class="preview-grid"><figure><img src="/images/free-performance-review/goals.png" alt="Goals and Actions worksheet showing a fictional handover checklist goal, success measure, owner and dates" width="2200" height="650" loading="lazy"/><figcaption>Agree measurable goals and support, then check in.</figcaption></figure><figure><img src="/images/free-performance-review/prompt.png" alt="Excel AI Review Prompt worksheet with tone and output choices and generated prompt text" width="1440" height="1000" loading="lazy"/><figcaption>Build a draft request with facts and safeguards.</figcaption></figure></div></div></section>
+  <section class="section section-tint"><div class="wrap"><div class="section-head"><h2>How to run a performance review</h2><p>A review works best when it connects concrete evidence with the employee’s perspective and useful next steps.</p></div><div class="review-steps">
+    <article><h3>Before the review</h3><p>Confirm the review period and agreed responsibilities. Gather dated work examples, project outcomes and goals. Ask the employee for their perspective. Separate verified facts from impressions.</p><p>For example, “Delivered the September campaign on schedule” is more useful than “Shows commitment.” Add the evidence that supports your assessment.</p></article>
+    <article><h3>During the review</h3><p>Discuss achievements, strengths and development needs. Ask what helped, what was difficult and what support would make a difference. Record employee comments and corrections. Keep proposals separate from agreed conclusions.</p></article>
+    <article><h3>Agree next steps</h3><p>Set an achievable goal with a success measure, owner, support and target date. “Use a handover checklist reviewed before the next campaign” gives you something concrete to follow up.</p></article>
+    <article><h3>Follow up</h3><p>Schedule a check-in. Review progress and barriers, provide the agreed support and update the record when goals change. Complete the Word or PDF record manually and store it securely.</p></article>
+  </div></div></section>
+  <section id="prompt-builder" class="section"><div class="wrap"><div class="section-head"><p class="eyebrow">OPTIONAL AI SUPPORT</p><h2>AI Performance Review Prompt Builder</h2><p>This tool builds the prompt in your browser. It does not send your HR information to an AI service.</p></div>
+    <div class="notice" id="prompt-privacy"><strong>Use minimised context.</strong> Follow your organisation’s AI/privacy policy. Avoid unnecessary personal information and use placeholders. Paste only into an approved AI tool. Every result is a draft requiring human review.</div>
+    <noscript><p>The browser builder needs JavaScript. The download and practical review guidance still work; the Excel workbook includes a prompt builder.</p></noscript>
+    <div class="prompt-panel" aria-describedby="prompt-privacy">
+      <div class="prompt-fields">{contextFields.map(([label,key],i)=><div class={i < 2 ? '' : 'wide'}><label for={'review-'+key}>{label}</label>{i<2 ? <input id={'review-'+key} data-context={key} type="text" maxlength="1200" autocomplete="off" placeholder={i===0?'e.g. Marketing Coordinator':'e.g. Q3 2026'}/> : <textarea id={'review-'+key} data-context={key} rows="3" maxlength="1200" autocomplete="off" placeholder="Use brief, factual notes. Leave unknown information blank."/>}</div>)}
+        <div><label for="review-tone">Tone</label><select id="review-tone">{tones.map(t=><option>{t}</option>)}</select></div>
+        <div><label for="review-output">Output type</label><select id="review-output">{outputTypes.map(t=><option>{t}</option>)}</select></div>
+      </div><p class="field-hint">All fields are optional. Missing context is marked “[Not supplied]”. Up to 1,200 characters per text field.</p>
+      <div class="actions"><button class="button" id="generate-prompt" type="button">Generate My Prompt</button><button class="button button-secondary" id="clear-review" type="button">Clear All</button></div>
+      <div id="prompt-result" hidden><label for="generated-prompt">Your copy-ready prompt</label><textarea id="generated-prompt" readonly rows="20" spellcheck="false" aria-describedby="copy-help"/><div class="actions"><button class="button" id="copy-prompt" type="button">Copy Prompt</button></div><p id="copy-help">If copying is blocked, select the prompt text and use your device’s copy command. Verify the AI draft before use.</p></div>
+      <p id="prompt-status" class="prompt-status" role="status" aria-live="polite"/>
+    </div>
+  </div></section>
+  <section class="section section-tint"><div class="wrap"><div class="section-head"><h2>Managing More Than One Review?</h2><p>The free tool focuses on individual performance reviews. The complete HR Manager Toolkit + AI Productivity System supports broader recurring HR work.</p></div><div class="comparison"><div class="compare-head"><strong>Free Starter</strong><strong>Complete Toolkit</strong></div>{[
+    ['Individual employee review','Employee Directory, HR Dashboard and review-cycle tracking'],
+    ['Eight goals/actions for this review','Goals, one-to-ones and a central Actions register'],
+    ['Focused AI Review Prompt Builder','AI Productivity Centre, 48 HR prompts, Prompt Chaining and guided workflows'],
+    ['One editable review form design','22 editable HR form designs with A4 and US Letter PDFs'],
+    ['Performance review focus','Recruitment, candidate comparison, onboarding, 30/60/90 plans, cases, training, skills, leave and calendar']
+  ].map(([a,b])=><div class="compare-row"><span><b class="mobile-label">Free Starter: </b>{a}</span><span><b class="mobile-label">Complete Toolkit: </b>{b}</span></div>)}</div><p class="actions"><a class="button" href={toolkit} data-review-event="full_hr_toolkit_clicked">Explore the Complete HR Manager Toolkit</a></p></div></section>
+  <section class="section"><div class="wrap narrow"><h2>Want the Complete AI Method?</h2><p><em>AI Productivity for HR Professionals</em> by Mercer Lane explains the wider AI methodology, HR prompt library, workflows and advanced scenarios. The starter kit puts the book’s Role + Task + Context + Output approach to work on one review.</p><p><a class="button button-secondary" href={book} data-review-event="hr_ai_book_clicked">Explore the HR AI book</a></p><p>For related guidance, read <a href="/hr-ai/hr-ai-prompt-formula/">the HR AI prompt formula</a> and <a href="/hr-ai/hr-ai-data-privacy/">HR AI data privacy</a>.</p></div></section>
+  <section class="section section-tint"><div class="wrap narrow"><h2>Frequently asked questions</h2>{faqs.map(([question,answer])=><details class="review-faq"><summary>{question}</summary><p>{answer}</p></details>)}<p class="actions"><a class="button" href={download} download data-review-event="free_hr_template_download">Download Free — No Signup Required</a></p></div></section>
+  <script>
+    import { buildPerformanceReviewPrompt, trackReviewEvent } from '../../../lib/performance-review-prompt.js';
+    const output = document.querySelector<HTMLTextAreaElement>('#generated-prompt')!;
+    const result = document.querySelector<HTMLElement>('#prompt-result')!;
+    const status = document.querySelector<HTMLElement>('#prompt-status')!;
+    let generated = false;
+    const inputs = () => {
+      const data: Record<string,string> = {};
+      document.querySelectorAll<HTMLInputElement|HTMLTextAreaElement>('[data-context]').forEach(el=>data[el.dataset.context!] = el.value);
+      data.tone = document.querySelector<HTMLSelectElement>('#review-tone')!.value;
+      data.outputType = document.querySelector<HTMLSelectElement>('#review-output')!.value;
+      return data;
+    };
+    document.querySelector('#generate-prompt')!.addEventListener('click',()=>{
+      output.value = buildPerformanceReviewPrompt(inputs()); result.hidden = false; generated = true;
+      status.textContent = 'Prompt generated locally. Review the context, then copy it into an approved AI tool.';
+      trackReviewEvent('ai_prompt_builder_used'); output.focus();
+    });
+    document.querySelectorAll('[data-context], #review-tone, #review-output').forEach(el=>el.addEventListener('input',()=>{
+      if (generated) { output.value=''; result.hidden=true; generated=false; status.textContent='Your inputs changed. Generate a new prompt before copying.'; }
+    }));
+    document.querySelector('#copy-prompt')!.addEventListener('click',async()=>{
+      if (!generated) return;
+      try { await navigator.clipboard.writeText(output.value); status.textContent='Prompt copied. Verify the AI draft before use.'; trackReviewEvent('ai_prompt_copied'); }
+      catch { output.focus(); output.select(); status.textContent='Automatic copy is blocked. The prompt is selected; use your device’s copy command.'; }
+    });
+    const clear = () => {
+      document.querySelectorAll<HTMLInputElement|HTMLTextAreaElement>('[data-context]').forEach(el=>el.value='');
+      document.querySelector<HTMLSelectElement>('#review-tone')!.selectedIndex=0;document.querySelector<HTMLSelectElement>('#review-output')!.selectedIndex=0;
+      output.value='';result.hidden=true;generated=false;status.textContent='All review context cleared.';
+    };
+    document.querySelector('#clear-review')!.addEventListener('click',()=>{clear();document.querySelector<HTMLInputElement>('[data-context]')!.focus();});
+    window.addEventListener('pagehide',clear);
+    window.addEventListener('pageshow',event=>{if(event.persisted) clear();});
+    document.querySelectorAll<HTMLElement>('[data-review-event]').forEach(el=>el.addEventListener('click',()=>trackReviewEvent(el.dataset.reviewEvent!)));
+  </script>
+  <style>
+    .review-hero{padding:4rem 0}.review-hero h1{font-size:clamp(2.3rem,4.5vw,3.8rem)}.download-note{margin-top:1.5rem;font-size:.94rem}.preview-card{margin:0;background:white;padding:1rem;border:1px solid var(--line);box-shadow:0 12px 35px #243a5018}.preview-card img{width:100%;max-height:560px;object-fit:contain}.preview-card figcaption,figcaption{font-size:.9rem;color:var(--muted);margin-top:.75rem}.preview-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:3rem}.preview-grid figure{margin:0;min-width:0}.preview-grid img{width:100%;height:290px;object-fit:contain;border:1px solid var(--line)}.review-steps{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem}.prompt-panel{padding:2rem;border:1px solid var(--line);background:#f6f8fa}.prompt-fields{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}.wide{grid-column:1/-1}label{display:block;font-weight:700;margin-bottom:.45rem}input,textarea,select{font:inherit;width:100%;max-width:100%;padding:.75rem;border:1px solid #728394;background:white;color:var(--ink);border-radius:3px}textarea{resize:vertical}button{font:inherit;cursor:pointer}.prompt-panel button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #087f9c;outline-offset:3px}.field-hint,#copy-help{font-size:.93rem;margin-top:1rem}#prompt-result{margin-top:2rem}.prompt-status{margin-top:1rem;min-height:1.65em}.comparison{border:1px solid var(--line)}.compare-head,.compare-row{display:grid;grid-template-columns:1fr 1fr}.compare-head{background:var(--navy);color:white}.compare-head strong,.compare-row span{padding:1rem 1.3rem}.compare-row{border-top:1px solid var(--line)}.compare-row:nth-child(odd){background:white}.mobile-label{display:none}.review-faq{border-bottom:1px solid var(--line);padding:1.25rem 0}.review-faq summary{cursor:pointer;font-weight:700}.review-faq p{margin:1rem 0 0}#prompt-builder{scroll-margin-top:1rem}@media(max-width:720px){.preview-grid,.review-steps,.prompt-fields{grid-template-columns:1fr}.prompt-panel{padding:1.2rem}.compare-head{display:none}.compare-row{grid-template-columns:1fr}.compare-row span+span{padding-top:0}.mobile-label{display:inline}.prompt-panel .actions button{width:100%}}
+  </style>
+</BaseLayout>

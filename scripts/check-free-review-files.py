@@ -1,5 +1,5 @@
 """Customer-package verification and independent LibreOffice render/recalculation in CI."""
-import json, os, subprocess, zipfile, pathlib, tempfile, copy, xml.etree.ElementTree as ET
+import json, os, subprocess, zipfile, pathlib, tempfile, copy, re, xml.etree.ElementTree as ET
 import openpyxl
 from pypdf import PdfReader
 ROOT=pathlib.Path(__file__).resolve().parent.parent
@@ -16,7 +16,13 @@ for s in w:
     assert s.protection.sheet and not s.protection.password
     for row in s:
         for c in row:
-            if c.data_type=='f':assert c.protection.locked
+            if c.data_type=='f':
+                assert c.protection.locked
+                assert len(c.value)<8192
+                # OOXML schema validation and LibreOffice accept longer literals;
+                # Excel's formula parser rejects any quoted string over 255 characters.
+                for literal in re.findall(r'"(?:[^"]|"")*"', c.value):
+                    assert len(literal[1:-1].replace('""','"'))<=255, (s.title,c.coordinate,'Excel formula literal too long')
 assert not w['PERFORMANCE REVIEW']['D10'].protection.locked
 assert not w['GOALS & ACTIONS']['A9'].protection.locked
 assert not w['AI REVIEW PROMPT']['D10'].protection.locked

@@ -19,6 +19,8 @@ A repeatable onboarding sequence can connect pre-boarding messages, manager prep
 ## Performance reviews
 Organize manager notes, draft the review, convert vague goals into measurable options, prepare coaching conversations, and keep calibration and final judgment with managers and HR.
 
+For a single review, use the [free Excel performance review starter kit and local AI Prompt Builder](/free-tools/performance-review-template-excel/). It includes a review workbook, editable Word form, printable PDFs and goals/actions for the follow-up discussion.
+
 ## Employee queries and cases
 Document intake factually, diagnose the type of issue, prepare neutral questions, use de-escalation or mediation structures where appropriate, and keep formal investigation and outcome steps inside the organization's process.
 

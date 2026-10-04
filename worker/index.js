@@ -1,3 +1,4 @@
+import { handleHrRoute } from './hr-delivery.js';
 const COOKIE_NAME = 'mlp_pro_session';
 const ACCESS_TTL_SECONDS = 60 * 60 * 24;
 const DEFAULT_OBJECT_KEY = 'Mercer_Lane_Construction_Estimating_System_PRO.zip';
@@ -102,6 +103,8 @@ async function handleDownload(request, env) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    const hrResponse = await handleHrRoute(request, env);
+    if (hrResponse) return hrResponse;
 
     if (url.pathname === '/api/pro-access') return handleAccess(request, env);
     if (url.pathname === '/api/pro-download') return handleDownload(request, env);

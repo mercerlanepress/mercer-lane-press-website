@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../../components/Breadcrumbs.astro';
+---
+<BaseLayout title="HR Manager Toolkit Secure Download" description="Secure download access for paid Mercer Lane HR Manager Toolkit orders." robots="noindex,nofollow" sensitiveTool={true}>
+<Breadcrumbs items={[{name:'Home',href:'/'},{name:'Tools',href:'/tools/'},{name:'HR Manager Toolkit',href:'/tools/hr-manager-toolkit/'},{name:'Download'}]}/>
+<section class="section"><div class="wrap narrow"><p class="eyebrow">SECURE DIGITAL DELIVERY</p><h1>Your HR Manager Toolkit download</h1><div aria-live="polite"><h2 id="download-title">Checking your purchase…</h2><p id="download-message">Please wait while we verify your completed Stripe payment.</p><div id="download-actions" hidden><p><a class="button" href="/api/hr-download">Download the HR Manager Toolkit ZIP</a></p><p>Save the ZIP, extract it, and begin with START_HERE.pdf. Explore the fictional example, then save a copy of the blank workbook for your organisation.</p><p>Access in this browser lasts up to 24 hours. Keep your receipt and saved ZIP. Contact support if you need help recovering access.</p></div></div><div class="notice"><strong>Need help?</strong> Email <a href="mailto:mercerlanepress@gmail.com">mercerlanepress@gmail.com</a> from the checkout email address. Include your receipt reference, but never full card details or employee information.</div><p><a href="/tools/hr-manager-toolkit/">Return to the toolkit page</a></p></div></section>
+<script is:inline>
+(async()=>{
+ const params=new URLSearchParams(location.search);const id=params.get('session_id');
+ history.replaceState(null,'',location.pathname);
+ const title=document.getElementById('download-title'),message=document.getElementById('download-message'),actions=document.getElementById('download-actions');
+ const fail=text=>{title.textContent='We could not verify this download';message.textContent=text;actions.hidden=true;};
+ if(!/^cs_[A-Za-z0-9_]{8,200}$/.test(id||'')){fail('Open this page from your completed Stripe checkout. If you already paid, contact support using the checkout email address.');return;}
+ try{const r=await fetch('/api/hr-access',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({session_id:id})});const d=await r.json();if(!r.ok)throw new Error(d.message||'Purchase verification failed.');title.textContent='Your download is ready';message.textContent='Payment verified. Download and save your complete toolkit below.';actions.hidden=false;}
+ catch(e){fail(e.message||'Try again later or contact support with your receipt.');}
+})();
+</script>
+</BaseLayout>

@@ -22,7 +22,9 @@
       ],
       "vars": {
         "PRO_PAYMENT_LINK_ID": "plink_1UMBuqQGaNH4tpd8Oh2M3kiW",
-        "PRO_PRODUCT_OBJECT_KEY": "Mercer_Lane_Construction_Estimating_System_PRO.zip"
+        "PRO_PRODUCT_OBJECT_KEY": "Mercer_Lane_Construction_Estimating_System_PRO.zip",
+        "HR_PAYMENT_LINK_ID": "plink_1UMo4yQGaNH4tpd8DCxe6BVq",
+        "HR_PRODUCT_OBJECT_KEY": "Mercer_Lane_HR_Manager_Toolkit_v1_0.zip"
       }
     },
     "production": {
@@ -46,7 +48,9 @@
       ],
       "vars": {
         "PRO_PAYMENT_LINK_ID": "plink_1UMBuqQGaNH4tpd8Oh2M3kiW",
-        "PRO_PRODUCT_OBJECT_KEY": "Mercer_Lane_Construction_Estimating_System_PRO.zip"
+        "PRO_PRODUCT_OBJECT_KEY": "Mercer_Lane_Construction_Estimating_System_PRO.zip",
+        "HR_PAYMENT_LINK_ID": "plink_1UMo4yQGaNH4tpd8DCxe6BVq",
+        "HR_PRODUCT_OBJECT_KEY": "Mercer_Lane_HR_Manager_Toolkit_v1_0.zip"
       }
     }
   }

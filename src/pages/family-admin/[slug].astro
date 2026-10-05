@@ -1,0 +1,11 @@
+---
+import { getCollection, render } from 'astro:content';
+import FamilyAdminArticleLayout from '../../layouts/FamilyAdminArticleLayout.astro';
+
+export async function getStaticPaths(){
+  return (await getCollection('familyAdminGuides')).map(entry => ({params:{slug:entry.id},props:{entry}}));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<FamilyAdminArticleLayout entry={entry}><Content /></FamilyAdminArticleLayout>

@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('familyAdminGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'CollectionPage',
+  name:'Family Admin Guides',
+  description:'Practical guides for household calendars, forms, appointments, renewals, follow-ups, document organization, weekly reviews, and shared family admin.',
+  url:'https://mercerlanepress.com/family-admin/',
+  hasPart:guides.map(g => ({'@type':'Article',name:g.data.title,url:'https://mercerlanepress.com/family-admin/' + g.id + '/'}))
+};
+---
+<BaseLayout title="Family Admin Guides | Household Calendars, Documents & Follow-Up" description="Practical family admin guides for household calendars, forms, appointments, renewals, follow-ups, document organization, weekly reviews, and handovers." schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Guides',href:'/guides/'},{name:'Family Admin'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">FAMILY ADMIN &amp; HOUSEHOLD ORGANIZATION</p>
+    <h1>Build a Family Admin System You Can Actually Trust</h1>
+    <p class="lede">Move dates, forms, replies, records, and handoffs out of memory and into a small set of controls the household can review, retrieve, and recover.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><h2>Use one route for almost every household obligation</h2><p>The core loop is deliberately simple: capture the item, decide what it requires, schedule the time-sensitive work, store useful reference information, then review the system often enough for it to stay current.</p></div>
+      <div class="hub-steps">
+        <article><h3>Capture</h3><p>Move active paper, messages, and verbal requests into a small number of trusted landing places instead of leaving them scattered.</p></article>
+        <article><h3>Process</h3><p>Name the next observable action, one owner, the real date, and what will prove the item is complete.</p></article>
+        <article><h3>Schedule</h3><p>Separate events from deadlines, preparation, review, and follow-up dates so the calendar creates useful runway.</p></article>
+        <article><h3>Store</h3><p>Keep useful records findable with broad categories and concrete location descriptions rather than relying on private memory.</p></article>
+        <article><h3>Review</h3><p>Use a short weekly reset to clear capture points, scan the next fourteen days, update Waiting For, and confirm handoffs.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">PRACTICAL GUIDES</p><h2>Start with the part of household admin that keeps breaking</h2></div>
+      <div class="grid-3">{guides.map(g => <GuideCard guide={g} base="/family-admin/" label="FAMILY ADMIN"/>)}</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap prose">
+      <h2>Go deeper with the complete household operating system</h2>
+      <p><a href="/books/stop-drowning-in-family-admin/"><em>Stop Drowning in Family Admin</em></a> covers the full Capture → Process → Schedule → Store → Review method, the 20-minute Weekly Admin Reset, school and appointment logistics, renewals, important records, home and vehicle administration, pet and travel administration, shared ownership, Waiting For, continuity, privacy, recovery after a backlog, and a 30-day rollout.</p>
+      <p>The book also includes implementation playbooks, worked family-admin scenarios, troubleshooting, and 82 modular workbook tools so households can use the smallest set that solves their real recurring problems.</p>
+      <div class="notice"><strong>Important boundary.</strong> The system organizes household logistics and record locations. It is not legal, financial, tax, medical, insurance, cybersecurity, safeguarding, or other professional advice. Requirements vary by location and can change, so high-stakes decisions should use current official guidance or an appropriately qualified professional.</div>
+      <p><a class="button" href="/books/stop-drowning-in-family-admin/">Explore the book</a></p>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,114 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { stopDrowningInFamilyAdmin as book } from '../../data/stop-drowning-in-family-admin';
+
+const guides = (await getCollection('familyAdminGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/mercer-lane/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  ...(book.coverReady && book.cover ? {image:new URL(book.cover,Astro.site).href} : {}),
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">FAMILY ADMIN &amp; HOUSEHOLD ORGANIZATION GUIDE</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/mercer-lane/">Mercer Lane</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions">
+        <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
+        <a class="button button-secondary" href="/family-admin/">Read free guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">WHO IT IS FOR</p>
+        <h2>For households where the admin has become a second invisible job</h2>
+        <p>{book.intendedReader}</p>
+      </div>
+      <ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">THE CORE OPERATING MODEL</p>
+        <h2>Stop using memory as the storage system</h2>
+        <p>The book uses the same five-stage route for almost every household obligation so paper, messages, dates, next actions, records, and follow-ups do not become separate systems.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>1. Capture</h3><p>Give active paper, email, messages, and verbal requests a trusted landing place instead of letting them remain scattered or depend on memory.</p></article>
+        <article class="card"><h3>2. Process</h3><p>Decide what the item requires, name the next observable action, assign one owner, record the real date, and define what proves completion.</p></article>
+        <article class="card"><h3>3. Schedule</h3><p>Put dates where time lives, separating the event from deadlines, preparation, review, and follow-up when those distinctions matter.</p></article>
+        <article class="card"><h3>4. Store</h3><p>Keep useful reference information in a findable location and use concrete location language another authorized household member can follow.</p></article>
+        <article class="card"><h3>5. Review</h3><p>Return to the system on a rhythm so inboxes, dates, open dependencies, and handoffs do not quietly become stale.</p></article>
+        <article class="card"><h3>Waiting For</h3><p>Treat replies, refunds, quotes, confirmations, and promised documents as active dependencies with request and chase dates until they are genuinely closed.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">THE WEEKLY CONTROL POINT</p><h2>A 20-minute reset instead of an open-ended admin marathon</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>Capture and process</h3><p>Sweep loose inputs into the trusted inbox, then decide the next action, owner, date, waiting status, and reference location.</p></article>
+        <article class="card"><h3>Look two weeks ahead</h3><p>Scan for forms, appointments, travel, preparation work, renewals, and other obligations that need runway before the visible event.</p></article>
+        <article class="card"><h3>Close dependencies and handoffs</h3><p>Review Waiting For items that have reached their chase date and make sure anyone affected by the coming week can see what they need to know.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">HOUSEHOLD DOMAINS</p><h2>Use one operating system across the admin that keeps recurring</h2></div>
+      <ul class="check-grid">{book.topics?.slice(7,10).map(item => <li>{item}</li>)}</ul>
+      <p>The domain chapters cover school and childcare, appointments, bills and renewals, important records, home maintenance, vehicle and transport administration, pet administration, travel, annual and seasonal obligations, shared responsibility, continuity, privacy, and recovery after a backlog.</p>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">IMPLEMENTATION &amp; WORKBOOK TOOLS</p><h2>Install the system in layers, then keep only the tools that earn their place</h2></div>
+      <div class="grid-3">
+        <article class="card"><h3>30-day rollout</h3><p>Week one makes current work visible; later weeks add retrieval, recurring domains, sharing, resilience, and simplification instead of starting with a complete archive.</p></article>
+        <article class="card"><h3>10 implementation playbooks</h3><p>Focused sessions cover the minimum viable system, back-to-school admin, renewal runway, retrieval, handoffs, continuity testing, backlog recovery, annual review, provider problem trails, and digital archive cleanup.</p></article>
+        <article class="card"><h3>82 modular workbook tools</h3><p>The workbook is a menu rather than a checklist, with trackers and reference pages for setup, calendars, Waiting For, school, appointments, documents, renewals, home, vehicles, pets, travel, sharing, provider problems, and recovery.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow prose">
+      <h2>Keep the working system useful without turning it into a vault</h2>
+      <p>The book repeatedly separates household logistics from sensitive records. General worksheets are designed around dates, owners, next actions, safe references, and storage locations rather than unnecessary credentials or identity details.</p>
+      <div class="notice"><strong>Scope of the book.</strong> This is an organizational guide, not legal, financial, tax, medical, insurance, cybersecurity, safeguarding, or other professional advice. Laws, retention requirements, provider procedures, and official rules vary by location and can change. Use current official guidance or an appropriately qualified professional for high-stakes decisions.</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Start with the part of family admin that is causing friction now</h2></div>
+      <div class="grid-3">{guides.map(g => <GuideCard guide={g} base="/family-admin/" label="FAMILY ADMIN"/>)}</div>
+      <div class="actions"><a class="button button-secondary" href="/family-admin/">Explore the family admin hub</a></div>
+    </div>
+  </section>
+</BaseLayout>

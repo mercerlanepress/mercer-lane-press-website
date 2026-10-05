@@ -3,11 +3,11 @@ import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../../../components/Breadcrumbs.astro';
 ---
 <BaseLayout
-  title="Construction Estimating System PRO Download"
-  description="Secure download access for customers who purchased the Mercer Lane Construction Estimating System PRO."
+  title="Toolkit PRO Download"
+  description="Secure download access for customers who purchased the Mercer Lane Construction Estimating & Job Costing Toolkit PRO."
   robots="noindex,nofollow"
 >
-  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Tools',href:'/tools/'},{name:'Construction Estimating System PRO',href:'/tools/construction-estimating-system-pro/'},{name:'Download'}]}/>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Tools',href:'/tools/'},{name:'Toolkit PRO',href:'/tools/construction-estimating-system-pro/'},{name:'Download'}]}/>
   <section class="section">
     <div class="wrap narrow">
       <p class="eyebrow">SECURE DIGITAL DELIVERY</p>
@@ -54,15 +54,15 @@ import Breadcrumbs from '../../../../components/Breadcrumbs.astro';
           const data = await response.json().catch(() => ({}));
           if (!response.ok) throw new Error(data.message || 'Purchase verification failed.');
           title.textContent = 'Your download is ready';
-          message.textContent = 'Payment has been verified. Use the button below to download the Mercer Lane Construction Estimating System PRO package.';
+          message.textContent = 'Payment has been verified. Use the button below to download the Mercer Lane Construction Estimating & Job Costing Toolkit PRO package.';
           actions.hidden = false;
 
           if (typeof window.gtag === 'function') {
             window.gtag('event', 'purchase', {
               transaction_id: sessionId,
-              currency: 'USD',
-              value: 19.99,
-              items: [{ item_name: 'Mercer Lane Construction Estimating System PRO', price: 19.99, quantity: 1 }]
+              currency: String(data.currency || 'USD').toUpperCase(),
+              value: Number(data.amount_subtotal || 0) / 100,
+              items: [{ item_name: 'Mercer Lane Construction Estimating & Job Costing Toolkit PRO', price: Number(data.amount_subtotal || 0) / 100, quantity: 1 }]
             });
           }
         })
@@ -70,7 +70,7 @@ import Breadcrumbs from '../../../../components/Breadcrumbs.astro';
 
       button.addEventListener('click', () => {
         if (typeof window.gtag === 'function') {
-          window.gtag('event', 'file_download', { file_name: 'Mercer_Lane_Construction_Estimating_System_PRO.zip' });
+          window.gtag('event', 'file_download', { file_name: 'ML-Toolkit-PRO-v32.zip' });
         }
       });
     })();

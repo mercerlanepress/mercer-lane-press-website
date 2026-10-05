@@ -1,282 +1,35 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../../components/Breadcrumbs.astro';
-
-const checkoutUrl = 'https://buy.stripe.com/00wfZj3M9fKt5A62JSds400';
-const productSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Product',
-  name: 'Mercer Lane Construction Estimating System PRO',
-  description: 'A downloadable Microsoft Excel construction estimating spreadsheet and job costing system for contractors, covering scope, takeoff, materials, labour, subcontract costs, markup and margin, bid review, client proposals and estimate-vs-actual learning.',
-  brand: { '@type': 'Brand', name: 'Mercer Lane Press' },
-  category: 'Construction estimating software and templates',
-  url: 'https://mercerlanepress.com/tools/construction-estimating-system-pro/',
-  offers: {
-    '@type': 'Offer',
-    price: '19.99',
-    priceCurrency: 'USD',
-    availability: 'https://schema.org/InStock',
-    url: checkoutUrl
-  }
-};
-
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'What software do I need?',
-      acceptedAnswer: { '@type': 'Answer', text: 'The primary supported environment is modern Microsoft Excel desktop. The system is macro-free. Google Sheets and Excel Online are not claimed as supported environments.' }
-    },
-    {
-      '@type': 'Question',
-      name: 'Is this a construction estimate template or a full estimating system?',
-      acceptedAnswer: { '@type': 'Answer', text: 'It is a guided Excel estimating system rather than a single blank estimate sheet. It connects project setup, scope, takeoff, materials, labour, job costs, subcontractors, pricing, bid review, client proposal and estimate-vs-actual learning.' }
-    },
-    {
-      '@type': 'Question',
-      name: 'Is this a subscription?',
-      acceptedAnswer: { '@type': 'Answer', text: 'No. It is a one-time digital purchase.' }
-    },
-    {
-      '@type': 'Question',
-      name: 'Does the system tell me what margin, labour rate or overhead percentage to use?',
-      acceptedAnswer: { '@type': 'Answer', text: 'No. The system helps structure and calculate an estimate using the inputs and business decisions you provide. It does not prescribe commercial targets or replace accounting, contractual or professional judgment.' }
-    },
-    {
-      '@type': 'Question',
-      name: 'What is included?',
-      acceptedAnswer: { '@type': 'Answer', text: 'The package includes the PRO estimating workbook, completed Oakridge demonstration workbook, five bonus calculators and tools, editable forms, printable review sheets, worked examples and full documentation.' }
-    },
-    {
-      '@type': 'Question',
-      name: 'Does it include construction job costing and estimate-vs-actual tracking?',
-      acceptedAnswer: { '@type': 'Answer', text: 'Yes. The workflow includes actual-cost, estimate-vs-actual, lessons and cost-history stages so completed jobs can feed back into future estimating.' }
-    },
-    {
-      '@type': 'Question',
-      name: 'How is the download delivered?',
-      acceptedAnswer: { '@type': 'Answer', text: 'After successful Stripe checkout, the buyer is redirected to a secure Mercer Lane Press download page. The page verifies the completed paid checkout before making the ZIP package available.' }
-    }
-  ]
-};
+const schema = {"@context": "https://schema.org", "@type": "Product", "name": "Mercer Lane Construction Estimating & Job Costing Toolkit PRO", "description": "Two Microsoft Excel desktop workbooks for construction estimating, quote preparation, job costing and profit control, with worked demos, five bonus tools, forms and guides.", "brand": {"@type": "Brand", "name": "Mercer Lane Press"}, "url": "https://mercerlanepress.com/tools/construction-estimating-system-pro/", "offers": {"@type": "Offer", "price": "19.99", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "https://buy.stripe.com/00wfZj3M9fKt5A62JSds400"}};
 ---
-<BaseLayout
-  title="Construction Estimating Spreadsheet for Contractors"
-  description="Construction estimating spreadsheet for contractors in Microsoft Excel: scope, takeoff, materials, labour, subcontractors, markup or margin, bid review, client proposal, job costing and estimate-vs-actual tracking."
-  schema={[productSchema, faqSchema]}
->
-  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Tools',href:'/tools/'},{name:'Construction Estimating System PRO'}]}/>
+<BaseLayout title="Construction Estimating & Job Costing Excel Toolkit PRO" description="Estimate and quote in one Excel workbook; track actual costs, remaining costs and job profit in another. Complete Toolkit PRO v3.2 package: US$19.99." schema={schema}>
+<Breadcrumbs items={[{name:'Home',href:'/'},{name:"Mercer Lane Construction Estimating & Job Costing Toolkit PRO"}]}/>
 
-  <header class="pro-hero">
-    <div class="wrap pro-hero-grid">
-      <div>
-        <p class="eyebrow">CONSTRUCTION ESTIMATING SPREADSHEET · MICROSOFT EXCEL</p>
-        <h1>Construction Estimating Spreadsheet for Contractors</h1>
-        <p class="hero-hook">From “What am I pricing?” to “What did the job actually cost?”</p>
-        <p class="lede">A guided Excel estimating and job-costing system for contractors and small construction businesses. Build a traceable route from project scope and quantity takeoff through materials, labour, subcontractors, pricing, bid review, client proposal and estimate-vs-actual learning.</p>
-        <div class="actions">
-          <a class="button" href={checkoutUrl} data-pro-checkout>Buy PRO — US$19.99</a>
-          <a class="button button-secondary" href="#whats-included">See exactly what’s included</a>
-        </div>
-        <p class="purchase-note">One-time digital purchase. Applicable taxes are calculated at checkout. Stripe may display a local-currency amount where supported. Secure download access follows a successful checkout.</p>
-      </div>
-      <aside class="system-panel" aria-label="Construction estimating workflow">
-        <p class="eyebrow">GUIDED WORKFLOW</p>
-        <ol>
-          <li><strong>Scope</strong><span>Define what is included, excluded, unclear or by others.</span></li>
-          <li><strong>Structure</strong><span>Build a visible cost record before detailed pricing.</span></li>
-          <li><strong>Measure</strong><span>Keep takeoff quantities and sources traceable.</span></li>
-          <li><strong>Price</strong><span>Separate materials, labour, job costs and subcontractors.</span></li>
-          <li><strong>Load</strong><span>Apply your chosen recovery and commercial method.</span></li>
-          <li><strong>Review</strong><span>Run a seven-pass challenge before release.</span></li>
-          <li><strong>Submit</strong><span>Create a customer-facing proposal without exposing internals.</span></li>
-          <li><strong>Learn</strong><span>Compare estimate with actual cost after the job.</span></li>
-        </ol>
-      </aside>
-    </div>
-  </header>
+<header class="page-head wrap">
+<p class="eyebrow">TOOLKIT PRO · VERSION 3.2 · MICROSOFT EXCEL</p>
+<h1>Construction Estimating &amp; Job Costing Toolkit PRO</h1>
+<p class="lede">Build a quote you can review. Track what the accepted job actually costs. Keep estimating and job control in two focused Excel workbooks.</p>
+<div class="actions"><a class="button" href="https://buy.stripe.com/00wfZj3M9fKt5A62JSds400" data-pro-checkout>Get the complete toolkit — US$19.99</a><a class="button button-secondary" href="#included">See what you receive</a></div>
+<p class="byline">One-time digital purchase. US$19.99 plus applicable tax. Secure ZIP download after successful payment. Microsoft Excel desktop required.</p>
+</header>
+<section class="section section-tint"><div class="wrap"><h2>Two workbooks. Two clear jobs.</h2><div class="grid-2">
+<article class="card"><p class="eyebrow">01 · BEFORE THE JOB</p><h3>Estimate &amp; Quote Builder</h3><p>Save a separate file for each estimate. Work from project setup and scope through takeoff, materials, labour, subcontract quotes, equipment and other costs, company recovery, markup or margin and bid review.</p><p>Readiness checks highlight unresolved issues before you release a Classic, Modern or Compact customer proposal. The Estimate Overview chart helps you see the cost build-up.</p><p><strong>27 sheets</strong>, including a values-only Job Handoff for accepted work.</p></article>
+<article class="card"><p class="eyebrow">02 · AFTER ACCEPTANCE</p><h3>Job Cost &amp; Profit Control</h3><p>Keep one working master for the business. Register accepted jobs, record expenses and labour, track subcontract commitments and approved changes, and review invoices and cash received.</p><p>Enter remaining costs to see a forecast final result. Review budget against actual and forecast costs, contribution after company recovery, portfolio status and lessons for future estimates.</p><p><strong>14 sheets</strong>, with a Dashboard, Job Review and Portfolio. Three editable Excel dashboard charts make comparisons easier to see.</p></article>
+</div></div></section>
+<section class="section"><div class="wrap"><h2>See the job-control dashboard</h2><p>The completed fictional Oakridge example shows the dashboard populated. Your own results depend on the costs, approved changes and remaining-cost review you enter.</p><img src="/images/construction-toolkit/v32-dashboard.png" alt="Populated Job Cost and Profit Control dashboard in the fictional Oakridge example" loading="lazy" width="1200" style="max-width:100%;height:auto;border:1px solid var(--line)"/><p class="byline">Example data for training. Figures are not recommended prices, rates or business targets.</p></div></section>
+<section class="section section-tint" id="included"><div class="wrap"><h2>The complete US$19.99 package</h2><div class="grid-3">
+<article class="card"><h3>Two clean core workbooks</h3><p>Estimate &amp; Quote Builder and Job Cost &amp; Profit Control, ready for your own inputs. Formula cells are protected against routine accidental overwrite.</p></article>
+<article class="card"><h3>Two separate worked demos</h3><p>Estimate Demo and Job Cost Demo show the fictional Oakridge workflow in each tool. Start your own work from the clean files.</p></article>
+<article class="card"><h3>Five bonus workbooks</h3><p>Quick Estimate, True Labour Cost, Overhead Recovery, Markup &amp; Margin, and Change Order Pricing.</p></article>
+<article class="card"><h3>Three proposal layouts</h3><p>Classic, Modern and Compact layouts use the reviewed estimate, keeping internal labour, overhead and margin calculations out of client-facing output.</p></article>
+<article class="card"><h3>Editable and printable forms</h3><p>Project information, supplier and subcontractor quote requests, post-job review, and printable scope, takeoff, pre-estimate, bid-review and job-cost sheets.</p></article>
+<article class="card"><h3>Guides and worked examples</h3><p>Start Here, first-10-minutes and first-estimate workflows, the full user guide, worked bid examples, proposal examples, licence and version information.</p></article>
+</div></div></section>
+<section class="section"><div class="wrap narrow prose"><h2>From an accepted quote to job control</h2><ol><li><strong>Build and review the estimate.</strong> Save a job-specific copy of Estimate &amp; Quote Builder and resolve the readiness checks before issuing the proposal.</li><li><strong>Capture the accepted baseline.</strong> Complete Job Handoff after acceptance. Copy its row as values into Add New Job in your business Job Cost &amp; Profit Control master, then register the prepared row as values.</li><li><strong>Record the work.</strong> Enter job expenses, labour, subcontract records, approved changes, invoices and cash received.</li><li><strong>Review the expected finish.</strong> Review remaining costs and company recovery, update the review date and check Dashboard, Job Review and Portfolio.</li></ol><p>The files have no external workbook links or macros. The handoff is a deliberate copy-and-paste-values step; later estimate changes do not silently alter the registered baseline.</p><h2>Capacity and compatibility</h2><p>The supplied job-costing master holds up to <strong>30 registered jobs</strong>. Main transaction logs have 300 entry rows each; subcontract and learning logs have 150 rows each. Keep backups and monitor capacity as your records grow.</p><p>Use modern <strong>Microsoft Excel desktop</strong>. Google Sheets and Excel Online are not claimed as supported. Use Excel's normal print or Save PDF controls for client proposals.</p><h2>What the figures tell you</h2><p>Gross profit is revenue less direct job costs. Contribution after company recovery also deducts the company overhead allocation you enter. Forecast profit includes expected remaining costs. Profit and cash received answer different questions.</p><p>The toolkit supports estimating and job reviews. It does not replace accounting software, prescribe your rates or commercial targets, or guarantee profit or estimate accuracy.</p></div></section>
+<section class="section section-tint"><div class="wrap"><h2>Try the free tool first</h2><div class="grid-2"><article class="card"><h3>Construction Job Profit Calculator</h3><p>Check one job's revenue, costs, gross profit, contribution, margin and markup. Compare estimated against actual or forecast figures in the browser.</p><a class="button button-secondary" href="/tools/construction-job-profit-calculator/">Calculate one job free</a></article><article class="card"><h3>Understand construction job costing</h3><p>Learn how an accepted estimate, actual costs and a remaining-cost forecast fit together before choosing a workbook.</p><a class="text-link" href="/construction-job-costing/">Read the job-costing guide →</a></article></div></div></section>
+<section class="section"><div class="wrap narrow prose"><h2>Before you buy</h2><h3>Is this a subscription?</h3><p>No. The complete v3.2 package is a one-time purchase for US$19.99 plus applicable tax.</p><h3>Do I get both core workbooks?</h3><p>Yes. Both clean core workbooks, both worked demos, five bonuses, forms and documentation are included.</p><h3>Does the dashboard update automatically?</h3><p>The workbook calculates from your recorded inputs. Enter actual costs and approved changes, review remaining costs and company recovery, and update the review date so the forecast reflects your latest review.</p><h3>Can I import transactions from accounting software?</h3><p>No automatic accounting integration is included. Enter records into the provided logs and follow the guide's values-only handoff.</p><h3>How do I receive the files?</h3><p>Successful Stripe checkout redirects you to a secure download page. Save the ZIP and extract it before opening the workbooks. There is no physical product.</p><h3>What if I need help or have a refund question?</h3><p>See <a href="/digital-products/">digital delivery, compatibility and refund information</a>. Contact Mercer Lane Press using the email address used at checkout if you cannot access a paid download.</p></div></section>
+<section class="section section-tint"><div class="wrap narrow"><h2>Build estimates. Control accepted jobs.</h2><p>Get the complete Construction Estimating &amp; Job Costing Toolkit PRO v3.2 for <strong>US$19.99</strong>, plus applicable tax.</p><a class="button" href="https://buy.stripe.com/00wfZj3M9fKt5A62JSds400" data-pro-checkout>Get the complete toolkit — US$19.99</a><p class="byline">Check <a href="/digital-products/">digital-product information</a> and <a href="/terms/">site terms</a> before purchase. The product licence is included with the download.</p></div></section>
+<script is:inline>document.querySelectorAll('[data-pro-checkout]').forEach(link=>link.addEventListener('click',()=>{if(typeof window.gtag==='function')window.gtag('event','begin_checkout',{currency:'USD',value:19.99,items:[{item_name:'Mercer Lane Construction Estimating & Job Costing Toolkit PRO',price:19.99,quantity:1}]});}));</script>
 
-  <section class="section">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">WHAT THE SPREADSHEET HELPS YOU DO</p>
-        <h2>One connected construction estimate instead of disconnected notes and totals</h2>
-        <p>A construction estimate can be mathematically correct and still be incomplete. PRO keeps the decisions behind the final price visible enough to review before the bid leaves the business.</p>
-      </div>
-      <div class="workflow-grid">
-        <article><span>01</span><h3>Set up the project</h3><p>Record company, customer, project and document information before detailed estimating starts.</p></article>
-        <article><span>02</span><h3>Define the scope</h3><p>Classify work as INCLUDED, EXCLUDED, CLARIFY or BY OTHERS so unknowns do not quietly become zero.</p></article>
-        <article><span>03</span><h3>Build the takeoff</h3><p>Keep units, source references, measured quantities and purchase quantities visible and traceable.</p></article>
-        <article><span>04</span><h3>Price materials and labour</h3><p>Separate purchasing logic from measurement and build labour from activities, crew, duration and person-hours.</p></article>
-        <article><span>05</span><h3>Compare subcontract quotes</h3><p>Record inclusions, exclusions, allowances, interfaces and validity instead of comparing headline numbers alone.</p></article>
-        <article><span>06</span><h3>Calculate the selling price</h3><p>Apply your chosen cost-recovery and markup or target-margin method without PRO recommending commercial percentages.</p></article>
-        <article><span>07</span><h3>Review before release</h3><p>Use a seven-pass review plus HOLD and FIX THIS prompts to surface unresolved estimating issues.</p></article>
-        <article><span>08</span><h3>Create the client proposal</h3><p>Use the reviewed price in a customer-facing layout without exposing internal labour, overhead or margin calculations.</p></article>
-        <article><span>09</span><h3>Track estimate vs actual</h3><p>Record actual project cost, variance, cause and lessons so completed work improves future estimates.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-tint" id="whats-included">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">THE COMPLETE PACKAGE</p>
-        <h2>More than a blank construction estimate template</h2>
-        <p>The download combines the full estimating system with a completed training example, focused calculators, forms, review sheets and documentation.</p>
-      </div>
-      <div class="grid-3 pro-cards">
-        <article class="card"><h3>PRO estimating system</h3><p>A 30-sheet guided workbook covering company setup, project information, scope, questions, documents, takeoff, materials, labour, job costs, subcontractors, cost recovery, pricing, assumptions, review, corrections, proposal, actuals and lessons.</p></article>
-        <article class="card"><h3>Oakridge completed example</h3><p>A fully populated fictional project using the same estimating engine, so you can see the workflow completed before starting your own estimate.</p></article>
-        <article class="card"><h3>Three proposal layouts</h3><p>Classic, Modern and Compact customer-facing proposals using the reviewed price and customer wording without exposing internal labour, overhead or margin calculations.</p></article>
-        <article class="card"><h3>Five bonus tools</h3><p>Quick Estimate, True Labour Cost, Overhead Recovery, Markup &amp; Margin, and Change Order Pricing workbooks for focused tasks outside the full PRO workflow.</p></article>
-        <article class="card"><h3>Editable forms</h3><p>Project Information Capture, Subcontractor Quote Request, Supplier Price Request and Post-Job Estimating Review supplied in editable and printable formats.</p></article>
-        <article class="card"><h3>Review and training pack</h3><p>Printable pre-estimate, scope/question, takeoff, seven-pass review and job-cost sheets, plus the full user guide, first-estimate workflow and worked bid examples.</p></article>
-      </div>
-
-      <div class="package-table-wrap">
-        <table class="package-table">
-          <caption>Customer download package</caption>
-          <thead><tr><th>Part</th><th>What it is for</th></tr></thead>
-          <tbody>
-            <tr><td><strong>PRO workbook</strong></td><td>Complete scope-to-learning construction estimating workflow.</td></tr>
-            <tr><td><strong>Oakridge demo</strong></td><td>Completed fictional estimate showing how the same workbook looks when populated.</td></tr>
-            <tr><td><strong>Quick Estimate</strong></td><td>Focused estimating workbook for simpler jobs where the full PRO route is unnecessary.</td></tr>
-            <tr><td><strong>True Labour Cost</strong></td><td>Focused workbook for building a labour-cost input from your own figures.</td></tr>
-            <tr><td><strong>Overhead Recovery</strong></td><td>Focused workbook for applying your business's chosen recovery inputs.</td></tr>
-            <tr><td><strong>Markup &amp; Margin</strong></td><td>Checks the arithmetic relationship between cost, selling price, markup and margin.</td></tr>
-            <tr><td><strong>Change Order Pricing</strong></td><td>Structured extra-work pricing and change-order record.</td></tr>
-            <tr><td><strong>Editable forms</strong></td><td>Project information, supplier and subcontract quote requests, and post-job review.</td></tr>
-            <tr><td><strong>Printable review pack</strong></td><td>Pre-estimate, scope/question, takeoff, seven-pass review and job-cost sheets.</td></tr>
-            <tr><td><strong>Documentation and examples</strong></td><td>User guide, first-estimate workflow, first-10-minutes guide and worked bid/proposal examples.</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap pro-split">
-      <div>
-        <p class="eyebrow">BUILT FOR CONTROL</p>
-        <h2>The spreadsheet does the arithmetic. You still control the estimate.</h2>
-        <ul class="feature-list">
-          <li>Formula cells are protected against routine accidental overwrite.</li>
-          <li>Input cells remain editable and native dropdown validation guides key statuses.</li>
-          <li>Dynamic HOLD and FIX THIS prompts surface unresolved estimating issues.</li>
-          <li>Registers use filters, frozen panes and grouped advanced columns where useful.</li>
-          <li>The workbook is macro-free and does not require VBA.</li>
-          <li>The quote workflow separates internal estimate information from customer-facing output.</li>
-          <li>Estimate-vs-actual, lessons and cost history retain feedback after the job.</li>
-        </ul>
-      </div>
-      <div class="notice compatibility"><strong>Compatibility.</strong> The primary supported environment is modern <strong>Microsoft Excel desktop</strong>. Google Sheets and Excel Online are not claimed as supported environments. Some output steps, such as saving a proposal as PDF, use Excel’s normal Print/Save PDF controls.</div>
-    </div>
-  </section>
-
-  <section class="section section-tint">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">FREE CALCULATOR OR FULL SYSTEM?</p>
-        <h2>Use the smallest tool that fits the job</h2>
-      </div>
-      <div class="compare-grid">
-        <article class="compare-card">
-          <p class="eyebrow">FREE</p>
-          <h3>Contractor Markup &amp; Margin Calculator</h3>
-          <p>Best when you already know the cost base and only need to check the relationship between markup, target margin, profit and selling price.</p>
-          <ul><li>Runs in the browser</li><li>No sign-up</li><li>One commercial calculation</li><li>No estimate storage or takeoff workflow</li></ul>
-          <a class="button button-secondary" href="/tools/contractor-markup-margin-calculator/">Use the free calculator</a>
-        </article>
-        <article class="compare-card featured">
-          <p class="eyebrow">PRO · US$19.99</p>
-          <h3>Construction Estimating System PRO</h3>
-          <p>Best when you need the complete estimate to remain connected from scope and takeoff through cost build-up, review, proposal and post-job learning.</p>
-          <ul><li>30-sheet guided Excel workbook</li><li>Scope, takeoff, materials, labour and subcontractors</li><li>Markup or margin, review and proposal</li><li>Estimate-vs-actual and lessons</li></ul>
-          <a class="button" href={checkoutUrl} data-pro-checkout>Buy PRO securely</a>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap narrow prose">
-      <p class="eyebrow">WHAT IT DOES — AND DOES NOT DO</p>
-      <h2>A structured estimating system, not a source of recommended rates</h2>
-      <p>The workbook helps you record scope, quantities, current prices, labour assumptions, quotations, recovery choices and review decisions in a consistent structure. It does not decide what your labour rate, overhead recovery method, markup, target margin or contractual terms should be.</p>
-      <p>Worked figures in the Oakridge example are fictional teaching inputs. Use your own current project information, supplier prices, labour assumptions, company financial information and appropriate professional advice where needed.</p>
-      <div class="notice"><strong>No estimate is made complete by a formula.</strong> A calculated selling price can still be wrong if scope, quantities, labour, quotations or assumptions underneath it are incomplete.</div>
-    </div>
-  </section>
-
-  <section class="section section-tint">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">CONSTRUCTION ESTIMATING SPREADSHEET GUIDES</p>
-        <h2>Research the workflow before you buy</h2>
-        <p>These free guides explain the decisions the workbook is designed to keep visible.</p>
-      </div>
-      <div class="grid-2 seo-guide-grid">
-        <article class="card"><h3><a href="/construction-estimating/construction-estimating-spreadsheet-what-to-include/">What should a construction estimating spreadsheet include?</a></h3><p>A buyer's checklist covering scope, takeoff, labour, quotations, review, proposal and estimate-vs-actual learning.</p></article>
-        <article class="card"><h3><a href="/construction-estimating/construction-estimate-template-vs-estimating-system/">Construction estimate template vs estimating system</a></h3><p>When a simple template is enough and when the job benefits from a fuller connected workflow.</p></article>
-        <article class="card"><h3><a href="/construction-estimating/construction-job-costing-spreadsheet-estimate-vs-actual/">Construction job costing spreadsheet: estimate vs actual</a></h3><p>How to compare planned and real costs and turn project variance into estimating feedback.</p></article>
-        <article class="card"><h3><a href="/construction-estimating/contractor-bid-spreadsheet-estimate-to-client-proposal/">Contractor bid spreadsheet: estimate to client proposal</a></h3><p>Keep internal cost build-up and customer-facing proposal connected without exposing internal calculations.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap narrow prose">
-      <p class="eyebrow">FREQUENTLY ASKED QUESTIONS</p>
-      <h2>Before you buy</h2>
-      <h3>Is this a construction estimate template or a full estimating system?</h3>
-      <p>It is a guided estimating system rather than a single blank estimate sheet. The workbook carries project setup, scope, takeoff, materials, labour, job costs, subcontractors, pricing, review, proposal and post-job learning in one connected structure.</p>
-      <h3>Is this a subscription?</h3>
-      <p>No. It is a one-time digital purchase.</p>
-      <h3>What software do I need?</h3>
-      <p>Use a modern Microsoft Excel desktop installation. The workbooks are macro-free. Google Sheets and Excel Online are not claimed as supported environments.</p>
-      <h3>Will it produce a client quote?</h3>
-      <p>Yes. Once the estimate passes the built-in readiness checks, you can choose Classic, Modern or Compact proposal layouts and use Excel’s normal Print/Save PDF workflow.</p>
-      <h3>Does it include job costing?</h3>
-      <p>It includes actual-cost, estimate-vs-actual, lessons and cost-history stages so you can compare the reviewed estimate with what the completed job actually cost. It is an estimating feedback system, not a replacement for accounting software.</p>
-      <h3>Can I use it for any contractor trade?</h3>
-      <p>The estimating structure is deliberately general rather than trade-rate specific. You still need to define the actual scope, units, quantities, labour activities, supplier prices, subcontract quotations and company-level assumptions for your own work.</p>
-      <h3>How is the download delivered?</h3>
-      <p>After a successful Stripe checkout, you are redirected to a secure Mercer Lane Press download page. The page verifies the completed paid checkout before making the ZIP available. Access is limited to reduce casual sharing; if you lose access after purchase, contact Mercer Lane Press using the checkout email address.</p>
-      <h3>What about refunds?</h3>
-      <p>Digital purchases are subject to applicable consumer law and the transaction-support process used by Stripe Managed Payments. Product-specific problems can also be raised with Mercer Lane Press. See <a href="/digital-products/">Digital product information &amp; refunds</a>.</p>
-    </div>
-  </section>
-
-  <section class="section pro-cta">
-    <div class="wrap narrow">
-      <p class="eyebrow">READY TO BUILD THE ESTIMATE?</p>
-      <h2>Mercer Lane Construction Estimating System PRO</h2>
-      <p>One-time digital purchase: <strong>US$19.99</strong> plus applicable tax. Checkout is handled by Stripe Managed Payments.</p>
-      <div class="actions">
-        <a class="button" href={checkoutUrl} data-pro-checkout>Buy securely with Stripe</a>
-        <a class="text-link" href="/tools/contractor-markup-margin-calculator/">Not ready? Use the free markup &amp; margin calculator →</a>
-      </div>
-      <p class="fineprint">By purchasing, you agree to the <a href="/terms/">site terms</a> and the product licence supplied with the download. See <a href="/digital-products/">digital delivery and refund information</a> before purchase.</p>
-    </div>
-  </section>
-
-  <script is:inline>
-    document.querySelectorAll('[data-pro-checkout]').forEach((link) => {
-      link.addEventListener('click', () => {
-        if (typeof window.gtag === 'function') {
-          window.gtag('event', 'begin_checkout', {
-            currency: 'USD',
-            value: 19.99,
-            items: [{ item_name: 'Mercer Lane Construction Estimating System PRO', price: 19.99, quantity: 1 }]
-          });
-        }
-      });
-    });
-  </script>
-
-  <style>
-    .pro-hero{background:var(--paper);border-bottom:1px solid var(--line);padding:clamp(4rem,8vw,7rem) 0}.pro-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(330px,.85fr);gap:clamp(2.5rem,6vw,5.5rem);align-items:start}.pro-hero h1{font-size:clamp(2.7rem,5.5vw,4.7rem)}.hero-hook{font-family:var(--serif);font-size:clamp(1.35rem,2vw,1.8rem);line-height:1.25;color:var(--navy);margin:.5rem 0 1rem}.purchase-note,.fineprint{font-size:.9rem;color:var(--muted);margin-top:1rem}.system-panel{background:var(--navy);color:#fff;padding:1.6rem}.system-panel .eyebrow{color:#8bd6e6}.system-panel ol{list-style:none;margin:0;padding:0;display:grid;gap:.8rem}.system-panel li{display:grid;grid-template-columns:95px 1fr;gap:1rem;border-top:1px solid #ffffff2b;padding-top:.8rem}.system-panel strong{color:#fff}.system-panel span{color:#dbe5ef;font-size:.94rem}.workflow-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}.workflow-grid article{border:1px solid var(--line);padding:1.35rem;background:#fff}.workflow-grid span{font-weight:900;color:var(--cyan);letter-spacing:.08em}.workflow-grid h3{margin:.45rem 0}.workflow-grid p{margin:0;color:var(--muted)}.pro-cards .card{height:100%}.package-table-wrap{overflow-x:auto;margin-top:2.5rem}.package-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line)}.package-table caption{text-align:left;font-family:var(--serif);font-size:1.5rem;font-weight:800;color:var(--navy);padding:0 0 .8rem}.package-table th,.package-table td{text-align:left;vertical-align:top;padding:.9rem 1rem;border-bottom:1px solid var(--line)}.package-table th{background:var(--navy);color:#fff}.package-table td:first-child{width:28%}.pro-split{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(2rem,6vw,5rem);align-items:start}.feature-list{padding-left:1.25rem}.feature-list li{margin-bottom:.75rem}.compatibility{margin:0}.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}.compare-card{border:1px solid var(--line);background:#fff;padding:clamp(1.4rem,3vw,2rem)}.compare-card.featured{border-top:5px solid var(--cyan)}.compare-card ul{padding-left:1.2rem;margin:1.2rem 0 1.5rem}.compare-card li{margin-bottom:.45rem}.seo-guide-grid .card h3{margin-bottom:.6rem}.seo-guide-grid .card a{text-decoration-thickness:1px;text-underline-offset:3px}.pro-cta{text-align:left}.pro-cta .actions{align-items:center}.pro-cta .text-link{padding:.75rem 0}@media(max-width:800px){.pro-hero-grid,.pro-split,.workflow-grid,.compare-grid{grid-template-columns:1fr}.system-panel li{grid-template-columns:80px 1fr}.package-table td:first-child{width:auto}}@media(min-width:801px) and (max-width:1050px){.workflow-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-  </style>
 </BaseLayout>

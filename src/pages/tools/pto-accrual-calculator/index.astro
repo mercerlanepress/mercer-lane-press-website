@@ -1,0 +1,383 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+
+const toolkit = '/tools/hr-manager-toolkit/';
+
+const webAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Free PTO Accrual Calculator',
+  url: 'https://mercerlanepress.com/tools/pto-accrual-calculator/',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Any',
+  isAccessibleForFree: true,
+  description: 'Free browser-based PTO accrual calculator for estimating accrual per pay period, accrued PTO, current available balance and year-end balance from your organisation’s own policy inputs.'
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How do I calculate PTO accrual per pay period?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Divide the annual PTO allowance by the number of accrual periods in the year. For example, 120 PTO hours divided by 26 biweekly periods equals about 4.62 hours per period.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I calculate an employee’s current PTO balance?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'For a simple period-based policy, add the starting or carryover balance to PTO accrued so far, then subtract PTO already used. Apply any policy-specific caps, waiting periods, adjustments or front-loading rules separately.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Does this calculator determine legal PTO or vacation entitlement?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. It performs arithmetic using the policy figures you enter. PTO, vacation, sick leave and statutory leave rules vary by organisation and jurisdiction, so confirm the applicable policy and local requirements.'
+      }
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title="Free PTO Accrual Calculator"
+  description="Calculate PTO accrual per pay period, accrued PTO to date, current available balance and year-end balance. Free browser calculator with no signup required."
+  schema={[webAppSchema, faqSchema]}
+>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Tools',href:'/tools/'},{name:'PTO Accrual Calculator'}]}/>
+
+  <header class="page-head wrap pto-head">
+    <p class="eyebrow">FREE HR CALCULATOR</p>
+    <h1>PTO Accrual Calculator</h1>
+    <p class="lede">Calculate PTO earned per pay period, accrued PTO to date and the employee’s available balance using your own organisation’s policy figures.</p>
+    <p class="privacy-note">Free to use. No sign-up required. The calculator runs in your browser and does not need employee names or personal information.</p>
+  </header>
+
+  <section class="calculator-section">
+    <div class="wrap calculator-layout">
+      <form class="calculator-card" id="pto-form" novalidate>
+        <div class="calculator-card-head">
+          <p class="eyebrow">ENTER YOUR POLICY FIGURES</p>
+          <h2>Calculate PTO accrual</h2>
+        </div>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="annual-allowance">Annual PTO allowance (hours)</label>
+            <input id="annual-allowance" name="annual-allowance" type="number" min="0" step="0.01" inputmode="decimal" value="120" required>
+            <small>Use the annual amount defined by your policy. Example: 15 days × 8 hours = 120 hours.</small>
+          </div>
+
+          <div class="field">
+            <label for="hours-per-day">Hours in one standard workday</label>
+            <input id="hours-per-day" name="hours-per-day" type="number" min="0.01" step="0.01" inputmode="decimal" value="8" required>
+            <small>Used only to show the balance as an equivalent number of days.</small>
+          </div>
+
+          <div class="field">
+            <label for="frequency">Accrual frequency</label>
+            <select id="frequency" name="frequency">
+              <option value="52">Weekly — 52 periods/year</option>
+              <option value="26" selected>Biweekly — 26 periods/year</option>
+              <option value="24">Semimonthly — 24 periods/year</option>
+              <option value="12">Monthly — 12 periods/year</option>
+              <option value="custom">Custom</option>
+            </select>
+          </div>
+
+          <div class="field" id="custom-period-field" hidden>
+            <label for="custom-periods">Accrual periods per year</label>
+            <input id="custom-periods" name="custom-periods" type="number" min="1" max="366" step="1" inputmode="numeric" value="26">
+            <small>Enter the number of times PTO is credited in a full year.</small>
+          </div>
+
+          <div class="field">
+            <label for="completed-periods">Completed credited periods</label>
+            <input id="completed-periods" name="completed-periods" type="number" min="0" max="26" step="1" inputmode="numeric" value="20" required>
+            <small>Count only periods that have actually earned or been credited under the policy.</small>
+          </div>
+
+          <div class="field">
+            <label for="starting-balance">Starting / carryover balance (hours)</label>
+            <input id="starting-balance" name="starting-balance" type="number" step="0.01" inputmode="decimal" value="8">
+            <small>Enter zero if there was no balance carried into the year.</small>
+          </div>
+
+          <div class="field">
+            <label for="pto-used">PTO used so far (hours)</label>
+            <input id="pto-used" name="pto-used" type="number" min="0" step="0.01" inputmode="decimal" value="40" required>
+            <small>Include approved PTO already deducted from the balance if that matches your policy process.</small>
+          </div>
+        </div>
+
+        <div class="calculator-actions">
+          <button class="button" type="submit">Calculate PTO</button>
+          <button class="button button-secondary" type="button" id="reset-calculator">Reset</button>
+        </div>
+        <p class="calculator-error" id="calculator-error" role="alert" hidden></p>
+      </form>
+
+      <aside class="results-card" aria-live="polite" aria-atomic="true">
+        <p class="eyebrow">RESULT</p>
+        <div class="primary-result">
+          <span>Available PTO balance</span>
+          <strong id="available-balance">60.31 hours</strong>
+          <small id="available-days">7.54 days at 8 hours/day</small>
+        </div>
+        <dl class="result-grid">
+          <div><dt>Accrual per period</dt><dd id="accrual-per-period">4.62 hours</dd></div>
+          <div><dt>Accrued this year</dt><dd id="accrued-to-date">92.31 hours</dd></div>
+          <div><dt>Starting / carryover</dt><dd id="result-starting">8.00 hours</dd></div>
+          <div><dt>PTO used</dt><dd id="result-used">40.00 hours</dd></div>
+          <div><dt>Completed periods</dt><dd id="result-periods">20 of 26</dd></div>
+          <div><dt>Projected year-end*</dt><dd id="projected-year-end">88.00 hours</dd></div>
+        </dl>
+        <p class="projection-note">*Before any future PTO use and before policy-specific caps, adjustments or forfeiture rules.</p>
+        <div class="result-explanation" id="result-explanation">With 120 annual PTO hours across 26 periods, each credited period earns 4.62 hours. After 20 credited periods, 8 hours carried in and 40 hours used, the calculated available balance is 60.31 hours.</div>
+        <button class="copy-button" type="button" id="copy-results">Copy result</button>
+        <p class="copy-status" id="copy-status" aria-live="polite"></p>
+
+        <div class="toolkit-cta">
+          <p class="eyebrow">MANAGING PTO ACROSS A TEAM?</p>
+          <h2>Move from one calculation to ongoing HR tracking</h2>
+          <p>The <strong>HR Manager Toolkit + AI Productivity System</strong> adds a leave tracker, employee records, HR dashboard, calendar, actions, reviews, onboarding, recruitment and other recurring HR workflows.</p>
+          <p><a class="button" href={toolkit} data-pto-event="pto_toolkit_clicked">Explore the HR Manager Toolkit</a></p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow prose">
+      <p class="eyebrow">HOW THE CALCULATION WORKS</p>
+      <h2>PTO accrual formula</h2>
+      <p>For a straightforward policy that earns a fixed annual allowance evenly across pay or accrual periods:</p>
+      <div class="formula-box">
+        <p><strong>Accrual per period</strong> = Annual PTO allowance ÷ Accrual periods per year</p>
+        <p><strong>Accrued PTO to date</strong> = Accrual per period × Completed credited periods</p>
+        <p><strong>Available PTO balance</strong> = Starting/carryover balance + Accrued PTO to date − PTO used</p>
+      </div>
+
+      <h2>Example: biweekly PTO accrual</h2>
+      <p>An employee receives 120 PTO hours per year and accrues PTO across 26 biweekly periods. The accrual rate is 120 ÷ 26 = approximately 4.62 hours per period.</p>
+      <p>After 20 credited periods, the employee has accrued about 92.31 hours during the year. If 8 hours were carried over and 40 hours have already been used, the calculated balance is about 60.31 hours.</p>
+
+      <h2>What this PTO calculator does not decide</h2>
+      <p>The arithmetic is intentionally policy-neutral. It does not decide when an accrual becomes available, whether an employee is eligible, whether a waiting period applies, whether unused PTO carries over, whether a cap applies, how a partial year is prorated, or how any statutory leave requirement should be handled.</p>
+      <p>Enter only figures that match the organisation’s approved policy and payroll/HR process. If the policy front-loads PTO instead of accruing it period by period, use the organisation’s actual front-loaded balance rather than treating this calculator as the source of entitlement.</p>
+      <div class="notice"><strong>Important:</strong> This is a general HR arithmetic tool, not legal, payroll, tax or employment-law advice. PTO, vacation, sick leave and statutory leave requirements vary by jurisdiction and organisation. Confirm the applicable policy and local requirements.</div>
+
+      <h2>Frequently asked questions</h2>
+      <h3>How do I calculate PTO accrual per pay period?</h3>
+      <p>Divide the annual PTO allowance by the number of accrual periods in the year. For example, 120 hours divided by 26 biweekly periods gives approximately 4.62 hours of PTO per period.</p>
+
+      <h3>How do I calculate an employee’s current PTO balance?</h3>
+      <p>For a simple period-based policy, add the starting or carryover balance to PTO accrued so far, then subtract PTO already used. Apply policy-specific caps, waiting periods, manual adjustments and other rules separately.</p>
+
+      <h3>What is the difference between biweekly and semimonthly PTO accrual?</h3>
+      <p>Biweekly schedules normally have 26 periods in a 52-week year, while semimonthly schedules have 24 periods. The annual allowance can therefore be the same even though the amount credited in each period differs.</p>
+
+      <h3>Can I use this for vacation or annual leave?</h3>
+      <p>You can use the arithmetic for a policy that distributes a known annual hour allowance evenly across periods. The tool does not determine whether a particular vacation, annual-leave or statutory-leave policy should use that method.</p>
+
+      <h3>Does this calculator store employee data?</h3>
+      <p>No employee identity is requested. The calculation is performed in the browser. If analytics are enabled through the site consent choice, calculator usage events contain only the event name and not the figures entered.</p>
+
+      <div class="related tool-related">
+        <p class="eyebrow">NEXT STEP</p>
+        <h2>Keep leave, actions and recurring HR work in one system</h2>
+        <p>A one-off PTO calculation is useful for checking a balance. For ongoing HR administration, the <a href={toolkit} data-pto-event="pto_toolkit_text_clicked">HR Manager Toolkit + AI Productivity System</a> includes a leave tracker alongside employee records, dashboard, reviews, recruitment, onboarding, training, calendar and action tracking.</p>
+        <p><a class="button" href={toolkit} data-pto-event="pto_toolkit_bottom_clicked">See the complete HR Manager Toolkit</a></p>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    (() => {
+      const form = document.getElementById('pto-form');
+      if (!form) return;
+
+      const annualAllowance = document.getElementById('annual-allowance');
+      const hoursPerDay = document.getElementById('hours-per-day');
+      const frequency = document.getElementById('frequency');
+      const customField = document.getElementById('custom-period-field');
+      const customPeriods = document.getElementById('custom-periods');
+      const completedPeriods = document.getElementById('completed-periods');
+      const startingBalance = document.getElementById('starting-balance');
+      const ptoUsed = document.getElementById('pto-used');
+      const error = document.getElementById('calculator-error');
+      const copyStatus = document.getElementById('copy-status');
+      const resetButton = document.getElementById('reset-calculator');
+      const copyButton = document.getElementById('copy-results');
+
+      const availableBalance = document.getElementById('available-balance');
+      const availableDays = document.getElementById('available-days');
+      const accrualPerPeriod = document.getElementById('accrual-per-period');
+      const accruedToDate = document.getElementById('accrued-to-date');
+      const resultStarting = document.getElementById('result-starting');
+      const resultUsed = document.getElementById('result-used');
+      const resultPeriods = document.getElementById('result-periods');
+      const projectedYearEnd = document.getElementById('projected-year-end');
+      const explanation = document.getElementById('result-explanation');
+
+      let lastResult = null;
+
+      const track = (name) => {
+        try {
+          if (localStorage.getItem('mlp-analytics-consent') === 'granted' && typeof window.gtag === 'function') {
+            window.gtag('event', name);
+          }
+        } catch { /* analytics stays off */ }
+      };
+
+      const hours = (value) => `${value.toFixed(2)} hours`;
+      const getPeriodsPerYear = () => frequency.value === 'custom' ? Number(customPeriods.value) : Number(frequency.value);
+
+      const syncFrequency = () => {
+        const isCustom = frequency.value === 'custom';
+        customField.hidden = !isCustom;
+        const periods = getPeriodsPerYear();
+        if (Number.isFinite(periods) && periods > 0) completedPeriods.max = String(Math.floor(periods));
+      };
+
+      const calculate = (shouldTrack = false) => {
+        syncFrequency();
+        error.hidden = true;
+        copyStatus.textContent = '';
+
+        const allowance = Number(annualAllowance.value);
+        const dayHours = Number(hoursPerDay.value);
+        const periods = getPeriodsPerYear();
+        const completed = Number(completedPeriods.value);
+        const starting = Number(startingBalance.value || 0);
+        const used = Number(ptoUsed.value);
+
+        if (!Number.isFinite(allowance) || allowance < 0) {
+          error.textContent = 'Enter an annual PTO allowance of zero hours or more.';
+          error.hidden = false;
+          return false;
+        }
+        if (!Number.isFinite(dayHours) || dayHours <= 0) {
+          error.textContent = 'Enter standard workday hours greater than zero.';
+          error.hidden = false;
+          return false;
+        }
+        if (!Number.isFinite(periods) || periods < 1 || periods > 366) {
+          error.textContent = 'Enter between 1 and 366 accrual periods per year.';
+          error.hidden = false;
+          return false;
+        }
+        if (!Number.isInteger(completed) || completed < 0 || completed > periods) {
+          error.textContent = `Completed credited periods must be a whole number from 0 to ${Math.floor(periods)}.`;
+          error.hidden = false;
+          return false;
+        }
+        if (!Number.isFinite(starting)) {
+          error.textContent = 'Enter a valid starting or carryover balance.';
+          error.hidden = false;
+          return false;
+        }
+        if (!Number.isFinite(used) || used < 0) {
+          error.textContent = 'Enter PTO used as zero hours or more.';
+          error.hidden = false;
+          return false;
+        }
+
+        const perPeriod = allowance / periods;
+        const accrued = perPeriod * completed;
+        const available = starting + accrued - used;
+        const days = available / dayHours;
+        const projected = starting + allowance - used;
+
+        availableBalance.textContent = hours(available);
+        availableDays.textContent = `${days.toFixed(2)} days at ${dayHours.toFixed(2).replace(/\.00$/, '')} hours/day`;
+        accrualPerPeriod.textContent = hours(perPeriod);
+        accruedToDate.textContent = hours(accrued);
+        resultStarting.textContent = hours(starting);
+        resultUsed.textContent = hours(used);
+        resultPeriods.textContent = `${completed} of ${periods}`;
+        projectedYearEnd.textContent = hours(projected);
+        explanation.textContent = `With ${allowance.toFixed(2).replace(/\.00$/, '')} annual PTO hours across ${periods} periods, each credited period earns ${perPeriod.toFixed(2)} hours. After ${completed} credited periods, ${starting.toFixed(2).replace(/\.00$/, '')} hours carried in and ${used.toFixed(2).replace(/\.00$/, '')} hours used, the calculated available balance is ${available.toFixed(2)} hours.`;
+
+        lastResult = { allowance, dayHours, periods, completed, starting, used, perPeriod, accrued, available, days, projected };
+        if (shouldTrack) track('pto_calculator_used');
+        return true;
+      };
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        calculate(true);
+      });
+
+      frequency.addEventListener('change', () => {
+        syncFrequency();
+        calculate(false);
+      });
+
+      [annualAllowance, hoursPerDay, customPeriods, completedPeriods, startingBalance, ptoUsed].forEach((input) => {
+        input.addEventListener('input', () => {
+          copyStatus.textContent = '';
+        });
+      });
+
+      resetButton.addEventListener('click', () => {
+        annualAllowance.value = '120';
+        hoursPerDay.value = '8';
+        frequency.value = '26';
+        customPeriods.value = '26';
+        completedPeriods.value = '20';
+        startingBalance.value = '8';
+        ptoUsed.value = '40';
+        syncFrequency();
+        calculate(false);
+        annualAllowance.focus();
+      });
+
+      copyButton.addEventListener('click', async () => {
+        if (!calculate(false) || !lastResult) return;
+        const text = [
+          'PTO Accrual Calculator result',
+          `Annual allowance: ${lastResult.allowance.toFixed(2)} hours`,
+          `Accrual periods: ${lastResult.periods} per year`,
+          `Completed credited periods: ${lastResult.completed}`,
+          `Accrual per period: ${lastResult.perPeriod.toFixed(2)} hours`,
+          `Accrued this year: ${lastResult.accrued.toFixed(2)} hours`,
+          `Starting/carryover balance: ${lastResult.starting.toFixed(2)} hours`,
+          `PTO used: ${lastResult.used.toFixed(2)} hours`,
+          `Available balance: ${lastResult.available.toFixed(2)} hours (${lastResult.days.toFixed(2)} days)`,
+          `Projected year-end before future use: ${lastResult.projected.toFixed(2)} hours`,
+          'Check policy-specific caps, timing, carryover, adjustments and local requirements separately.'
+        ].join('\n');
+        try {
+          await navigator.clipboard.writeText(text);
+          copyStatus.textContent = 'Result copied.';
+          track('pto_result_copied');
+        } catch {
+          copyStatus.textContent = 'Automatic copy is blocked. Select the result on screen and copy it manually.';
+        }
+      });
+
+      document.querySelectorAll('[data-pto-event]').forEach((link) => {
+        link.addEventListener('click', () => track(link.dataset.ptoEvent));
+      });
+
+      syncFrequency();
+      calculate(false);
+    })();
+  </script>
+
+  <style>
+    .pto-head{max-width:900px}.pto-head h1{font-size:clamp(2.3rem,4.5vw,3.8rem)}.privacy-note{font-size:.94rem;color:var(--muted)}
+    .calculator-section{padding:1rem 0 4rem}.calculator-layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap:2rem;align-items:start}.calculator-card,.results-card{border:1px solid var(--line);background:white;padding:2rem;box-shadow:0 12px 35px #243a5012}.results-card{position:sticky;top:1rem;background:#f6f8fa}.calculator-card-head{margin-bottom:1.5rem}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}.field label{display:block;font-weight:700;margin-bottom:.45rem}.field input,.field select{font:inherit;width:100%;padding:.75rem;border:1px solid #728394;background:white;color:var(--ink);border-radius:3px}.field small{display:block;margin-top:.4rem;color:var(--muted);font-size:.85rem;line-height:1.45}.calculator-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.5rem}.calculator-error{margin-top:1rem;padding:.8rem 1rem;border-left:4px solid #a33;background:#fff3f3}.primary-result{padding:1.25rem 0 1.5rem;border-bottom:1px solid var(--line)}.primary-result span,.primary-result small{display:block}.primary-result strong{display:block;font-size:clamp(2rem,4vw,3rem);line-height:1.05;margin:.35rem 0}.primary-result small{color:var(--muted)}.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:1rem 0}.result-grid div{padding:.8rem 0;border-bottom:1px solid var(--line)}.result-grid div:nth-child(odd){padding-right:.8rem}.result-grid div:nth-child(even){padding-left:.8rem}.result-grid dt{font-size:.82rem;color:var(--muted)}.result-grid dd{margin:.2rem 0 0;font-weight:700}.projection-note{font-size:.78rem;color:var(--muted)}.result-explanation{margin:1rem 0;padding:1rem;background:white;border-left:4px solid #087f9c}.copy-button{font:inherit;cursor:pointer;border:1px solid var(--line);background:white;padding:.65rem .9rem;font-weight:700}.copy-status{min-height:1.4em;font-size:.85rem}.toolkit-cta{margin-top:2rem;padding-top:2rem;border-top:2px solid var(--line)}.toolkit-cta h2{font-size:1.45rem}.formula-box{padding:1.25rem 1.5rem;background:#f6f8fa;border-left:4px solid #087f9c;margin:1.5rem 0}.formula-box p:last-child{margin-bottom:0}.tool-related{margin-top:3rem}.pto-head .lede{max-width:780px}
+    @media(max-width:900px){.calculator-layout{grid-template-columns:1fr}.results-card{position:static}.form-grid{grid-template-columns:1fr}}
+    @media(max-width:560px){.calculator-card,.results-card{padding:1.25rem}.result-grid{grid-template-columns:1fr}.result-grid div:nth-child(odd),.result-grid div:nth-child(even){padding-left:0;padding-right:0}}
+  </style>
+</BaseLayout>

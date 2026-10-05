@@ -1,57 +1,57 @@
-{
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "mercer-lane-press",
-  "main": "worker/index.js",
-  "compatibility_date": "2026-09-19",
-  "assets": {
-    "directory": "./dist",
-    "binding": "ASSETS",
-    "run_worker_first": [
-      "/api/*"
-    ]
-  },
-  "env": {
-    "preview": {
-      "name": "mercer-lane-press-preview",
-      "workers_dev": true,
-      "r2_buckets": [
-        {
-          "binding": "PRODUCTS",
-          "bucket_name": "mercer-lane-products"
-        }
-      ],
-      "vars": {
-        "PRO_PAYMENT_LINK_ID": "plink_1UMBuqQGaNH4tpd8Oh2M3kiW",
-        "PRO_PRODUCT_OBJECT_KEY": "Mercer_Lane_Construction_Estimating_System_PRO.zip",
-        "HR_PAYMENT_LINK_ID": "plink_1UMo4yQGaNH4tpd8DCxe6BVq",
-        "HR_PRODUCT_OBJECT_KEY": "Mercer_Lane_HR_Manager_Toolkit_v1_0.zip"
-      }
-    },
-    "production": {
-      "name": "mercer-lane-press",
-      "workers_dev": true,
-      "routes": [
-        {
-          "pattern": "mercerlanepress.com",
-          "custom_domain": true
-        },
-        {
-          "pattern": "www.mercerlanepress.com",
-          "custom_domain": true
-        }
-      ],
-      "r2_buckets": [
-        {
-          "binding": "PRODUCTS",
-          "bucket_name": "mercer-lane-products"
-        }
-      ],
-      "vars": {
-        "PRO_PAYMENT_LINK_ID": "plink_1UMBuqQGaNH4tpd8Oh2M3kiW",
-        "PRO_PRODUCT_OBJECT_KEY": "Mercer_Lane_Construction_Estimating_System_PRO.zip",
-        "HR_PAYMENT_LINK_ID": "plink_1UMo4yQGaNH4tpd8DCxe6BVq",
-        "HR_PRODUCT_OBJECT_KEY": "Mercer_Lane_HR_Manager_Toolkit_v1_0.zip"
-      }
-    }
-  }
-}
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "mercer-lane-press",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-09-19",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/api/*"
+    ]
+  },
+  "env": {
+    "preview": {
+      "name": "mercer-lane-press-preview",
+      "workers_dev": true,
+      "r2_buckets": [
+        {
+          "binding": "PRODUCTS",
+          "bucket_name": "mercer-lane-products"
+        }
+      ],
+      "vars": {
+        "PRO_PAYMENT_LINK_ID": "plink_1UMBuqQGaNH4tpd8Oh2M3kiW",
+        "PRO_PRODUCT_OBJECT_KEY": "ML-Toolkit-PRO-v32.zip",
+        "HR_PAYMENT_LINK_ID": "plink_1UMo4yQGaNH4tpd8DCxe6BVq",
+        "HR_PRODUCT_OBJECT_KEY": "Mercer_Lane_HR_Manager_Toolkit_v1_0.zip"
+      }
+    },
+    "production": {
+      "name": "mercer-lane-press",
+      "workers_dev": true,
+      "routes": [
+        {
+          "pattern": "mercerlanepress.com",
+          "custom_domain": true
+        },
+        {
+          "pattern": "www.mercerlanepress.com",
+          "custom_domain": true
+        }
+      ],
+      "r2_buckets": [
+        {
+          "binding": "PRODUCTS",
+          "bucket_name": "mercer-lane-products"
+        }
+      ],
+      "vars": {
+        "PRO_PAYMENT_LINK_ID": "plink_1UMBuqQGaNH4tpd8Oh2M3kiW",
+        "PRO_PRODUCT_OBJECT_KEY": "ML-Toolkit-PRO-v32.zip",
+        "HR_PAYMENT_LINK_ID": "plink_1UMo4yQGaNH4tpd8DCxe6BVq",
+        "HR_PRODUCT_OBJECT_KEY": "Mercer_Lane_HR_Manager_Toolkit_v1_0.zip"
+      }
+    }
+  }
+}

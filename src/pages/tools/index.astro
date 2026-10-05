@@ -1,57 +1,71 @@
----
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
-
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'CollectionPage',
-  name: 'Practical Tools | Mercer Lane Press',
-  description: 'Free calculators and practical downloadable tools from Mercer Lane Press.',
-  url: 'https://mercerlanepress.com/tools/'
-};
----
-<BaseLayout
-  title="Practical Tools"
-  description="Free calculators and downloadable Excel systems from Mercer Lane Press for construction estimating, performance reviews and recurring HR administration."
-  schema={schema}
->
-  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Tools'}]}/>
-
-  <header class="page-head wrap">
-    <p class="eyebrow">PRACTICAL TOOLS</p>
-    <h1>Useful tools for specific problems</h1>
-    <p class="lede">Focused calculators and working systems built around the same practical approach as Mercer Lane Press books and guides.</p>
-  </header>
-
-  <section class="section section-tint">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Construction estimating and job-costing tools</h2>
-        <p>Start with a free arithmetic check when you already know the cost base, or use the full Excel estimating spreadsheet when scope, takeoff, cost build-up, review, client output and post-job learning need to stay connected.</p>
-      </div>
-      <div class="grid-3"><article class="card"><p class="eyebrow">FREE BROWSER CALCULATOR</p><h3><a href="/tools/construction-job-profit-calculator/">Construction Job Profit Calculator</a></h3><p>Check revenue, costs, gross profit, contribution, margin and markup. Compare estimated with actual or forecast figures for one job.</p><p><a class="text-link" href="/tools/construction-job-profit-calculator/">Calculate job profit →</a></p><p><a href="/construction-job-costing/">Learn the job-costing workflow</a></p></article>
-        <article class="card">
-          <p class="eyebrow">FREE BROWSER CALCULATOR</p>
-          <h3><a href="/tools/contractor-markup-margin-calculator/">Contractor Markup &amp; Margin Calculator</a></h3>
-          <p>Enter a cost base and either a markup or target margin. See the selling price, profit amount, markup and true margin side by side.</p>
-          <p><a class="text-link" href="/tools/contractor-markup-margin-calculator/">Use the free calculator →</a></p>
-        </article>
-        <article class="card">
-          <p class="eyebrow">DOWNLOADABLE MICROSOFT EXCEL SYSTEM</p>
-          <h3><a href="/tools/construction-estimating-system-pro/">Construction Estimating &amp; Job Costing Toolkit PRO</a></h3>
-          <p>Two focused Excel desktop workbooks: Estimate &amp; Quote Builder and Job Cost &amp; Profit Control. Complete v3.2 package: US$19.99 plus applicable tax, one-time purchase.</p>
-          <p><a class="text-link" href="/tools/construction-estimating-system-pro/">Explore the construction estimating spreadsheet →</a></p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap narrow">
-      <h2>Tools support decisions; they do not replace the work behind them</h2>
-      <p>A calculator can check arithmetic. A workbook can make assumptions visible. Neither can tell you automatically whether the project scope is complete, whether a labour assumption is realistic, whether a subcontract quotation covers the same work, or whether your business is recovering its costs consistently.</p>
-      <p>Where a tool depends on business-specific inputs, use your own current information and appropriate professional advice where needed.</p>
-    </div>
-  </section>
-  <section class="section section-tint"><div class="wrap"><h2>HR performance review tools</h2><div class="grid-3"><article class="card"><h3><a href="/free-tools/performance-review-template-excel/">Free Performance Review Starter Kit</a></h3><p>An Excel workbook, editable Word form, A4 and US Letter PDFs, and an optional client-side AI Review Prompt Builder. One employee and one review at a time; no signup required.</p><a class="text-link" href="/free-tools/performance-review-template-excel/">Use the free review tool</a></article><article class="card"><h3><a href="/tools/hr-manager-toolkit/">HR Manager Toolkit + AI Productivity System</a></h3><p>31 Excel sheets for recurring HR work, 48 HR prompts and 22 editable form designs. $24.99 USD, one-time purchase.</p><a class="text-link" href="/tools/hr-manager-toolkit/">Explore the complete HR toolkit →</a></article></div></div></section>
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Practical Tools | Mercer Lane Press',
+  description: 'Free calculators and practical downloadable tools from Mercer Lane Press.',
+  url: 'https://mercerlanepress.com/tools/'
+};
+---
+<BaseLayout
+  title="Practical Tools"
+  description="Free calculators and downloadable Excel systems from Mercer Lane Press for construction estimating, PTO accrual, performance reviews and recurring HR administration."
+  schema={schema}
+>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Tools'}]}/>
+
+  <header class="page-head wrap">
+    <p class="eyebrow">PRACTICAL TOOLS</p>
+    <h1>Useful tools for specific problems</h1>
+    <p class="lede">Focused calculators and working systems built around the same practical approach as Mercer Lane Press books and guides.</p>
+  </header>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Construction estimating and job-costing tools</h2>
+        <p>Start with a free arithmetic check when you already know the cost base, or use the full Excel estimating spreadsheet when scope, takeoff, cost build-up, review, client output and post-job learning need to stay connected.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><p class="eyebrow">FREE BROWSER CALCULATOR</p><h3><a href="/tools/construction-job-profit-calculator/">Construction Job Profit Calculator</a></h3><p>Check revenue, costs, gross profit, contribution, margin and markup. Compare estimated with actual or forecast figures for one job.</p><p><a class="text-link" href="/tools/construction-job-profit-calculator/">Calculate job profit →</a></p><p><a href="/construction-job-costing/">Learn the job-costing workflow</a></p></article>
+        <article class="card">
+          <p class="eyebrow">FREE BROWSER CALCULATOR</p>
+          <h3><a href="/tools/contractor-markup-margin-calculator/">Contractor Markup &amp; Margin Calculator</a></h3>
+          <p>Enter a cost base and either a markup or target margin. See the selling price, profit amount, markup and true margin side by side.</p>
+          <p><a class="text-link" href="/tools/contractor-markup-margin-calculator/">Use the free calculator →</a></p>
+        </article>
+        <article class="card">
+          <p class="eyebrow">DOWNLOADABLE MICROSOFT EXCEL SYSTEM</p>
+          <h3><a href="/tools/construction-estimating-system-pro/">Construction Estimating &amp; Job Costing Toolkit PRO</a></h3>
+          <p>Two focused Excel desktop workbooks: Estimate &amp; Quote Builder and Job Cost &amp; Profit Control. Complete v3.2 package: US$19.99 plus applicable tax, one-time purchase.</p>
+          <p><a class="text-link" href="/tools/construction-estimating-system-pro/">Explore the construction estimating spreadsheet →</a></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow">
+      <h2>Tools support decisions; they do not replace the work behind them</h2>
+      <p>A calculator can check arithmetic. A workbook can make assumptions visible. Neither can tell you automatically whether the project scope is complete, whether a labour assumption is realistic, whether a subcontract quotation covers the same work, or whether your business is recovering its costs consistently.</p>
+      <p>Where a tool depends on business-specific inputs, use your own current information and appropriate professional advice where needed.</p>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>HR tools</h2>
+        <p>Use a focused free tool for a single calculation or review, then move into the complete toolkit when recurring HR work needs to stay connected.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><p class="eyebrow">FREE BROWSER CALCULATOR</p><h3><a href="/tools/pto-accrual-calculator/">PTO Accrual Calculator</a></h3><p>Calculate PTO earned per period, accrued PTO to date, available balance, days equivalent and projected year-end balance from your own policy figures.</p><a class="text-link" href="/tools/pto-accrual-calculator/">Calculate PTO accrual →</a></article>
+        <article class="card"><p class="eyebrow">FREE DOWNLOAD + BROWSER TOOL</p><h3><a href="/free-tools/performance-review-template-excel/">Free Performance Review Starter Kit</a></h3><p>An Excel workbook, editable Word form, A4 and US Letter PDFs, and an optional client-side AI Review Prompt Builder. One employee and one review at a time; no signup required.</p><a class="text-link" href="/free-tools/performance-review-template-excel/">Use the free review tool →</a></article>
+        <article class="card"><p class="eyebrow">COMPLETE HR SYSTEM</p><h3><a href="/tools/hr-manager-toolkit/">HR Manager Toolkit + AI Productivity System</a></h3><p>31 Excel sheets for recurring HR work, 48 HR prompts and 22 editable form designs. $24.99 USD, one-time purchase.</p><a class="text-link" href="/tools/hr-manager-toolkit/">Explore the complete HR toolkit →</a></article>
+      </div>
+    </div>
+  </section>
 </BaseLayout>

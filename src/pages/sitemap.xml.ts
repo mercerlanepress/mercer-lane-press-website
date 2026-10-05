@@ -12,6 +12,7 @@ export const GET: APIRoute = async () => {
   const cooperativeCareGuides = await getCollection('cooperativeCareGuides');
   const rescueDogFirst90DaysGuides = await getCollection('rescueDogFirst90DaysGuides');
   const overArousedDogGuides = await getCollection('overArousedDogGuides');
+  const familyAdminGuides = await getCollection('familyAdminGuides');
   const heatPumpOwnerGuides = await getCollection('heatPumpOwnerGuides');
   const localAiGuides = await getCollection('localAiGuides');
   const beginnerTelescopeObservingGuides = await getCollection('beginnerTelescopeObservingGuides');
@@ -38,6 +39,7 @@ export const GET: APIRoute = async () => {
   const hrAiGuides = await getCollection('hrAiGuides');
   const executiveAssistantAiGuides = await getCollection('executiveAssistantAiGuides');
   const paths = [
+    '/books/stop-drowning-in-family-admin/', '/family-admin/',
     '/construction-job-costing/', '/tools/construction-job-profit-calculator/',
     '/free-tools/performance-review-template-excel/', '/tools/hr-manager-toolkit/',
     '/', '/books/', '/authors/', '/guides/', '/tools/', '/tools/contractor-markup-margin-calculator/', '/tools/construction-estimating-system-pro/', '/terms/', '/digital-products/', '/dog-guides/', '/5g-home-internet/', '/local-business-ai/', '/ai-scam-defence/', '/reactive-dog-walking/', '/dog-enrichment/', '/cooperative-care/', '/rescue-dog-first-90-days/', '/over-aroused-dog/', '/heat-pump-owners/', '/local-ai/', '/beginner-telescope-observing/', '/deep-sky-astrophotography/', '/construction-estimating/', '/landscape-contractor-estimating/', '/home-assistant-matter-thread/', '/genealogy-brick-walls/', '/power-automate/', '/pickleball-doubles/', '/youth-soccer-coaching/', '/ham-radio-technician-exam/', '/epa-608-universal-exam/', '/first-year-homeowner/', '/property-manager-ai/', '/bookkeeper-ai/', '/maintenance-planning/', '/aquarium-troubleshooting/', '/home-inspection-reporting/', '/vending-machine-route/', '/pool-troubleshooting/', '/manufacturing-supervision/', '/hotel-housekeeping-supervision/', '/hr-ai/', '/executive-assistant-ai/', '/about/', '/contact/', '/privacy/',
@@ -51,6 +53,7 @@ export const GET: APIRoute = async () => {
     ...cooperativeCareGuides.map(({ id }) => '/cooperative-care/' + id + '/'),
     ...rescueDogFirst90DaysGuides.map(({ id }) => '/rescue-dog-first-90-days/' + id + '/'),
     ...overArousedDogGuides.map(({ id }) => '/over-aroused-dog/' + id + '/'),
+    ...familyAdminGuides.map(({ id }) => '/family-admin/' + id + '/'),
     ...heatPumpOwnerGuides.map(({ id }) => '/heat-pump-owners/' + id + '/'),
     ...localAiGuides.map(({ id }) => '/local-ai/' + id + '/'),
     ...beginnerTelescopeObservingGuides.map(({ id }) => '/beginner-telescope-observing/' + id + '/'),

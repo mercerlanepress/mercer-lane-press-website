@@ -8,8 +8,8 @@ export const stopDrowningInFamilyAdmin: Book = {
   authorSlug: 'mercer-lane',
   publisher: 'Mercer Lane Press',
   description: 'A practical household operating system for moving family admin out of memory and into a small set of trusted controls: capture points, clear next actions, calendars, Waiting For, findable records, weekly resets, explicit handoffs, and focused tools for recurring household obligations.',
-  cover: '/images/books/stop_drowning_in_family_admin_front_cover.jpg',
-  coverReady: false,
+  cover: '/images/books/Stop_Drowning_in_Family_Admin_Front_Cover.jpg',
+  coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0HLXZ6J1Q',
   intendedReader: 'Adults and households who are carrying school forms, appointments, renewals, documents, home and vehicle records, pet or travel logistics, provider follow-ups, and other recurring admin across too many inboxes, calendars, apps, paper piles, and private memory.',
   problems: [

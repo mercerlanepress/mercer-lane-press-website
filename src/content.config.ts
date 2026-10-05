@@ -51,11 +51,15 @@ const reliableRecallGuides = defineCollection({
   schema: guideSchema
 });
 
+const familyAdminGuides = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/family-admin' }),
+  schema: guideSchema
+});
+
 const heatPumpOwnerGuides = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/heat-pump-owners' }),
   schema: guideSchema
 });
-
 
 const localAiGuides = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/local-ai' }),
@@ -82,7 +86,6 @@ const landscapeContractorEstimatingGuides = defineCollection({
   schema: guideSchema
 });
 
-
 const homeAssistantMatterThreadGuides = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/home-assistant-matter-thread' }),
   schema: guideSchema
@@ -98,7 +101,6 @@ const powerAutomateGuides = defineCollection({
   schema: guideSchema
 });
 
-
 const pickleballDoublesGuides = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/pickleball-doubles' }),
   schema: guideSchema
@@ -108,7 +110,6 @@ const youthSoccerCoachingGuides = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/youth-soccer-coaching' }),
   schema: guideSchema
 });
-
 
 const hamRadioTechnicianExamGuides = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/ham-radio-technician-exam' }),
@@ -180,4 +181,4 @@ const executiveAssistantAiGuides = defineCollection({
   schema: guideSchema
 });
 
-export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides, cooperativeCareGuides, rescueDogFirst90DaysGuides, overArousedDogGuides, reliableRecallGuides, heatPumpOwnerGuides, localAiGuides, beginnerTelescopeObservingGuides, deepSkyAstrophotographyGuides, constructionEstimatingGuides, landscapeContractorEstimatingGuides, homeAssistantMatterThreadGuides, genealogyBrickWallGuides, powerAutomateGuides, pickleballDoublesGuides, youthSoccerCoachingGuides, hamRadioTechnicianExamGuides, epa608UniversalExamGuides, firstYearHomeownerGuides, bookkeeperAiGuides, propertyManagerAiGuides, maintenancePlanningGuides, aquariumTroubleshootingGuides, homeInspectionReportingGuides, vendingMachineRouteGuides, poolTroubleshootingGuides, manufacturingSupervisionGuides, hotelHousekeepingSupervisionGuides, hrAiGuides, executiveAssistantAiGuides };
+export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides, cooperativeCareGuides, rescueDogFirst90DaysGuides, overArousedDogGuides, reliableRecallGuides, familyAdminGuides, heatPumpOwnerGuides, localAiGuides, beginnerTelescopeObservingGuides, deepSkyAstrophotographyGuides, constructionEstimatingGuides, landscapeContractorEstimatingGuides, homeAssistantMatterThreadGuides, genealogyBrickWallGuides, powerAutomateGuides, pickleballDoublesGuides, youthSoccerCoachingGuides, hamRadioTechnicianExamGuides, epa608UniversalExamGuides, firstYearHomeownerGuides, bookkeeperAiGuides, propertyManagerAiGuides, maintenancePlanningGuides, aquariumTroubleshootingGuides, homeInspectionReportingGuides, vendingMachineRouteGuides, poolTroubleshootingGuides, manufacturingSupervisionGuides, hotelHousekeepingSupervisionGuides, hrAiGuides, executiveAssistantAiGuides };

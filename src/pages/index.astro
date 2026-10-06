@@ -7,7 +7,7 @@ import { smallFleetMaintenanceOperatingManual } from '../data/the-small-fleet-ma
 const featuredBook=smallFleetMaintenanceOperatingManual;
 const schema={'@context':'https://schema.org','@type':'WebSite',name:'Mercer Lane Press',url:'https://mercerlanepress.com/',description:'Independent publisher of practical problem-solving nonfiction.'};
 const featuredHighlights=(featuredBook.outcomes?.length ? featuredBook.outcomes : featuredBook.topics ?? []).slice(0,3);
-const homeBooks=books.filter(book=>book.slug!==featuredBook.slug).slice(0,6);
+const homeBooks=books.slice(0,6);
 ---
 <BaseLayout title="Mercer Lane Press | Practical problem-solving books" description="Mercer Lane Press publishes practical nonfiction guides that turn confusing problems into clear, repeatable steps." schema={schema}>
   <section class="hero">

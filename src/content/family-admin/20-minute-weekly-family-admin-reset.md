@@ -123,3 +123,8 @@ During a particularly busy week, use a minimum version rather than abandoning th
 A short review that happens consistently is more useful than an ambitious review that is repeatedly postponed.
 
 To build the surrounding controls from scratch, start with [How to Organize Family Admin Without Building a Complicated System](/family-admin/how-to-organize-family-admin/).
+
+
+## Put this into a small weekly plan
+
+Use the [free Weekly Family Admin Reset Planner](/tools/family-admin-reset-planner/) to give household tasks, upcoming dates and replies to chase a next action, owner and checkpoint date. Copy or print your two-week plan; no signup or Excel is required.

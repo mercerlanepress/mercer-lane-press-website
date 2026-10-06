@@ -101,3 +101,8 @@ Run the test after major household changes and as part of the annual system revi
 You do not need perfect redundancy for every detail. The goal is enough continuity that another trusted person can understand the next two weeks, current obligations, open dependencies, useful contacts, and the location of important shared records.
 
 If the simulation reveals that the underlying system is still scattered, return to [How to Organize Family Admin Without Building a Complicated System](/family-admin/how-to-organize-family-admin/) and rebuild the core controls first.
+
+
+## Put this into a small weekly plan
+
+Use the [free Weekly Family Admin Reset Planner](/tools/family-admin-reset-planner/) to give household tasks, upcoming dates and replies to chase a next action, owner and checkpoint date. Copy or print your two-week plan; no signup or Excel is required.

@@ -123,3 +123,8 @@ A document-location index is one of the core controls in the [minimum viable fam
 It becomes even more useful during the [Household Handover Test](/family-admin/household-handover-test/), when another trusted adult tries to operate the next week without relying on the usual administrator’s private memory.
 
 If they can find the calendar but not the supporting record, the household still has a single point of failure.
+
+
+## Put this into a small weekly plan
+
+Use the [free Weekly Family Admin Reset Planner](/tools/family-admin-reset-planner/) to give household tasks, upcoming dates and replies to chase a next action, owner and checkpoint date. Copy or print your two-week plan; no signup or Excel is required.

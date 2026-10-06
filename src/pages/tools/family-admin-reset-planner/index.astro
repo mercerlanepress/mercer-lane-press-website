@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+const schema = {
+  '@context':'https://schema.org', '@type':'WebApplication', name:'Free Weekly Family Admin Reset Planner',
+  url:'https://mercerlanepress.com/tools/family-admin-reset-planner/', applicationCategory:'LifestyleApplication',
+  operatingSystem:'Any', isAccessibleForFree:true,
+  description:'A free browser planner that turns household tasks, upcoming dates and replies to chase into a printable two-week admin reset plan.'
+};
+---
+<BaseLayout title="Free Family Admin Planner & Weekly Reset Checklist" description="Make a printable two-week family admin plan: organise household tasks, owners, deadlines and follow-ups. Free browser tool, no signup or Excel required." schema={schema} sensitiveTool={true}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Tools',href:'/tools/'},{name:'Family Admin Reset Planner'}]} />
+  <header class="page-head wrap reset-head">
+    <p class="eyebrow">FREE FAMILY ADMIN TOOL</p>
+    <h1>A clearer week starts with one small reset.</h1>
+    <p class="lede">Get loose tasks, upcoming dates and replies to chase out of your head. Give each one a next action, an owner and a place in your next two weeks.</p>
+    <p><strong>Free to use. No signup. No Excel needed.</strong></p>
+    <a class="button" href="#reset-planner">Make my reset plan</a>
+    <p class="privacy-line">Your entries stay in this open tab. Copy or print your plan before closing or refreshing the page.</p>
+  </header>
+  <section class="reset-section section-tint" aria-label="Weekly reset planner">
+    <div class="wrap reset-layout">
+      <aside class="reset-help">
+        <p class="eyebrow">A SMALL, USEFUL START</p>
+        <h2>Your weekly reset checklist</h2>
+        <ol>
+          <li><strong>Capture.</strong> Gather loose papers, messages and reminders.</li>
+          <li><strong>Decide.</strong> Write the next visible action and choose one owner.</li>
+          <li><strong>Look ahead.</strong> Scan the next fourteen days. Include preparation, deadlines and follow-ups.</li>
+          <li><strong>Chase.</strong> Review replies you are waiting for; choose when to follow up.</li>
+          <li><strong>Hand off.</strong> Confirm who does what and put time-sensitive work in your usual calendar.</li>
+        </ol>
+        <p>You are planning the work here. Longer tasks can have their own time block.</p>
+        <p><a href="/family-admin/20-minute-weekly-family-admin-reset/">Read the 20-minute reset guide →</a></p>
+      </aside>
+      <div id="reset-planner" class="reset-card">
+        <p class="eyebrow">YOUR RESET PLAN</p>
+        <h2>Start with what needs attention</h2>
+        <p>Add up to twelve items. Dates are optional; undated items stay visible so you can decide what happens next.</p>
+        <p class="input-note">Use brief labels. Leave out passwords, identity numbers and detailed medical information. Nothing you type is sent to us or saved by this page.</p>
+        <div class="reset-date-field"><label for="reset-date">Reset date</label><input id="reset-date" type="date" min="1900-01-01" max="9999-12-18" required /><small>Your two-week plan includes this date and the next thirteen days.</small></div>
+        <div class="example-bar"><button id="load-reset-example" class="quiet-button" type="button">Try a fictional example</button><span id="row-count"></span></div>
+        <p id="example-note" class="input-note" hidden>Keep your entries safe: clear them first if you want to load the example.</p>
+        <div id="reset-items"></div>
+        <button id="add-reset-item" class="quiet-button" type="button">+ Add another item</button>
+        <p id="reset-error" class="reset-error" role="alert" tabindex="-1" hidden></p>
+        <div class="reset-actions"><button id="build-reset" class="button" type="button">Build my two-week plan</button><button id="clear-reset" class="quiet-button" type="button">Clear my entries</button></div>
+        <noscript><p>This planner needs JavaScript. You can still follow the checklist on this page or use the <a href="/family-admin/20-minute-weekly-family-admin-reset/">weekly reset guide</a>.</p></noscript>
+      </div>
+    </div>
+  </section>
+  <template id="reset-row-template">
+    <fieldset class="reset-row">
+      <legend>Item</legend><div class="row-head"><button class="remove-item" type="button" data-remove>Remove</button></div>
+      <div class="reset-field-grid">
+        <div><label data-label="item">What needs attention?</label><input data-field="item" type="text" maxlength="100" placeholder="e.g. School trip form" /></div>
+        <div><label data-label="action">What is the next action?</label><input data-field="action" type="text" maxlength="180" placeholder="e.g. Read and return the permission form" /></div>
+        <div><label data-label="owner">Who owns it? <span>(optional)</span></label><input data-field="owner" type="text" maxlength="50" placeholder="e.g. Alex" /></div>
+        <div><label data-label="kind">What kind of checkpoint?</label><select data-field="kind"><option>Task</option><option>Preparation</option><option>Deadline</option><option>Follow-up</option></select></div>
+        <div><label data-label="date">Action or checkpoint date <span>(optional)</span></label><input data-field="date" type="date" min="1900-01-01" max="9999-12-31" /></div>
+      </div>
+    </fieldset>
+  </template>
+  <div class="wrap"><p id="reset-status" class="reset-status" role="status" aria-live="polite"></p></div>
+  <section id="reset-result" class="reset-section" hidden aria-labelledby="reset-result-title">
+    <div class="wrap narrow">
+      <p class="eyebrow">YOUR FAMILY ADMIN RESET</p><h2 id="reset-result-title" tabindex="-1">Your two-week plan</h2>
+      <p id="reset-range" class="plan-range"></p><p id="reset-summary"></p>
+      <div class="reset-actions result-actions"><button id="copy-reset" class="button" type="button" disabled>Copy my plan</button><button id="print-reset" class="button button-secondary" type="button" disabled>Print / save as PDF</button></div>
+      <div id="reset-groups" class="reset-groups"></div>
+      <div class="finish-reset"><h3>Finish the reset</h3><ul><li>Review replies you are waiting for and choose the next chase date.</li><li>Confirm owners and handoffs with your household.</li><li>Put time-sensitive actions in your usual calendar.</li></ul><p>Past dates are prompts to review the item, not proof that something was missed. This page does not send reminders or sync calendars.</p></div>
+      <p class="print-credit">Made with the free Mercer Lane Press Family Admin Reset Planner.</p>
+    </div>
+  </section>
+  <section class="section section-tint offers-section">
+    <div class="wrap"><div class="section-head"><p class="eyebrow">KEEP THE ROUTINE GOING</p><h2>Choose the next step that fits your household.</h2><p>This free planner handles one reset. Build the routine with the book, or keep ongoing records in the digital companion.</p></div>
+      <div class="reset-offers">
+        <article class="card"><p class="eyebrow">LEARN THE METHOD</p><h3>Stop Drowning in Family Admin</h3><p>Build a manageable household routine for tasks, dates, records, follow-ups and shared responsibilities, with worked examples and a 30-day rollout.</p><a class="button button-secondary" data-reset-offer="book" href="/books/stop-drowning-in-family-admin/">Explore the book</a></article>
+        <article class="card"><p class="eyebrow">KEEP AN ONGOING SYSTEM</p><h3>Family Admin Operating System</h3><p>Clean and demo Excel workbooks, a 15-page Quick Start and ten printable designs in A4 and US Letter for ongoing household tracking.</p><p><strong>£7.49 · One-time digital download</strong><br /><small>Microsoft 365 desktop Excel required, purchased separately. The book is not required. Checkout through Etsy.</small></p><a class="button" data-reset-offer="bundle" href="/tools/family-admin-operating-system/">See the Excel + printable bundle</a></article>
+      </div>
+    </div>
+  </section>
+  <section class="section"><div class="wrap narrow prose"><h2>About this free family admin planner</h2><p>Use it to organise the next actions behind household paperwork, appointments, school forms, renewals and provider replies. A date can mean a deadline, a preparation step or the day you plan to chase a reply.</p><h3>Are my entries saved?</h3><p>No. Your entries and plan remain in this tab only. Copy or print the result before refreshing or closing the page. If you allow website analytics, usage events record only the action taken, such as building a plan or clicking an offer; they do not include your entries.</p><h3>Does it replace my calendar?</h3><p>No. Transfer important dates to the calendar you already use. This tool creates a plan; it does not send notifications or synchronise calendars.</p><h3>Can I use it without buying anything?</h3><p>Yes. The planner and printable result are free. The book and digital bundle are optional next steps.</p><p><a href="/family-admin/">Explore the free family admin guides →</a></p></div></section>
+</BaseLayout>
+<script>
+  import { initResetPlanner } from '../../../scripts/family-reset.mjs';
+  initResetPlanner();
+</script>
+<style>
+  .reset-head{padding-bottom:3rem}.privacy-line{font-size:.95rem;margin:1rem 0 0;max-width:45rem}.reset-section{padding:3rem 0;scroll-margin-top:1rem}.reset-layout{display:grid;grid-template-columns:minmax(240px,.7fr) minmax(0,1.5fr);gap:3rem;align-items:start}.reset-help ol{padding-left:1.3rem}.reset-help li{margin-bottom:1.1rem}.reset-help h2{font-size:2rem}.reset-card{padding:2rem;background:#fff;border:1px solid var(--line);border-top:5px solid #426f6d;border-radius:8px;scroll-margin-top:1rem}.reset-card h2{font-size:2rem}.input-note{font-size:.92rem;color:var(--muted)}.reset-date-field{max-width:23rem;margin:1.5rem 0}.reset-card label{display:block;font-weight:700;font-size:.94rem;margin-bottom:.35rem}.reset-card label span{font-weight:400}.reset-card input,.reset-card select{display:block;width:100%;min-width:0;font:inherit;border:1px solid #80919e;border-radius:4px;padding:.65rem;background:#fff;color:var(--ink)}.reset-card small{display:block;margin-top:.4rem;color:var(--muted);font-size:.86rem}.reset-card input:focus-visible,.reset-card select:focus-visible,button:focus-visible{outline:3px solid #087f9c;outline-offset:3px}.example-bar,.row-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}.example-bar{margin:1.5rem 0}.example-bar span{color:var(--muted);font-size:.85rem}.quiet-button,.remove-item{font:inherit;cursor:pointer;border:1px solid #9aa9b2;border-radius:4px;padding:.55rem .75rem;background:#fff;color:var(--navy)}.quiet-button:hover,.remove-item:hover{background:var(--paper)}.reset-actions{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin-top:1.5rem}.reset-actions button{font:inherit;cursor:pointer;border-radius:4px}.reset-actions .button{font-weight:700}.reset-actions button:disabled,.quiet-button:disabled{opacity:.5;cursor:default}.reset-row{margin:0 0 1.25rem;border:1px solid var(--line);border-radius:6px;padding:1.2rem;background:#fbfcfc;min-width:0}.row-head{margin-bottom:1rem}.reset-row legend{font-weight:800;color:var(--navy)}.remove-item{font-size:.85rem;padding:.25rem .55rem}.reset-field-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.reset-field-grid>div:nth-child(2){grid-column:1/-1}.reset-field-grid>div:first-child{grid-column:1/-1}.reset-error{border-left:4px solid #a13223;background:#fff0eb;padding:1rem;margin:1rem 0;color:#802519}.reset-status{padding-top:1rem;color:#315c5a}.plan-range{font-size:1.25rem;font-weight:700;color:#426f6d}.reset-groups :global(section){margin-top:2rem}.reset-groups :global(ul){list-style:none;padding:0}.reset-groups :global(li){border:1px solid var(--line);border-left:4px solid #426f6d;padding:1rem;margin-bottom:.8rem;border-radius:4px;overflow-wrap:anywhere}.reset-groups :global(p){margin:.25rem 0}.reset-groups :global(.plan-detail){color:var(--muted);font-size:.92rem}.finish-reset{margin-top:2rem;padding:1.5rem;background:var(--paper)}.finish-reset p{font-size:.9rem;margin:0}.reset-offers{display:grid;grid-template-columns:1fr 1fr;gap:2rem}.reset-offers .card{display:flex;flex-direction:column;align-items:start}.reset-offers .button{margin-top:auto}.print-credit{font-size:.85rem;color:var(--muted);margin-top:2rem}#reset-result-title:focus{outline:none}[hidden]{display:none!important}@media(max-width:850px){.reset-layout{grid-template-columns:1fr;gap:1.5rem}.reset-help{max-width:40rem}.reset-offers{grid-template-columns:1fr}.reset-card{padding:1.25rem}}@media(max-width:520px){.reset-field-grid{grid-template-columns:1fr}.reset-actions{align-items:stretch}.reset-actions button{width:100%}.reset-row{padding:.85rem}.reset-head h1{font-size:2.6rem}}
+  @media print{ :global(.site-header),:global(.site-footer),:global(.consent-banner),:global(.breadcrumbs),:global(main)>:not(#reset-result){display:none!important}:global(body){font-size:11pt;background:#fff;color:#000}:global(main){display:block}#reset-result{display:block!important;padding:0}#reset-result[hidden]{display:none!important}.result-actions{display:none}.wrap{width:100%;max-width:none}.reset-groups :global(li),.finish-reset{break-inside:avoid}.reset-groups :global(h3){break-after:avoid}.print-credit{font-size:9pt}@page{margin:16mm}}
+</style>

@@ -103,3 +103,8 @@ The item closes only after the expected outcome has actually arrived or the hous
 That small distinction—**sent is not finished**—closes one of the biggest gaps in ordinary household admin.
 
 For the broader setup around the tracker, use [How to Organize Family Admin Without Building a Complicated System](/family-admin/how-to-organize-family-admin/).
+
+
+## Put this into a small weekly plan
+
+Use the [free Weekly Family Admin Reset Planner](/tools/family-admin-reset-planner/) to give household tasks, upcoming dates and replies to chase a next action, owner and checkpoint date. Copy or print your two-week plan; no signup or Excel is required.

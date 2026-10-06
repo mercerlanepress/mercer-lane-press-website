@@ -1,6 +1,6 @@
 ---
-title: "Save Outlook Attachments to SharePoint Without Creating a Mess"
-description: "A practical Power Automate pattern for saving Outlook email attachments to SharePoint, filtering unwanted files, handling duplicate names, and testing the result."
+title: "Power Automate: Save Outlook Attachments to SharePoint"
+description: "Use Power Automate to save Outlook email attachments to SharePoint with controlled filenames, duplicate handling and a simple audit trail."
 published: 2026-09-21
 summary: "Start with one controlled mailbox and one test library. Prove that the correct attachment content reaches SharePoint before adding filename rules, routing, and notifications."
 order: 2

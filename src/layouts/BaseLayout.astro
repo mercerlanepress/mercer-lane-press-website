@@ -35,15 +35,31 @@ const enhanceStructuredData = (value: any): any => {
   ) as Record<string, any>;
   const schemaTypes = Array.isArray(mapped['@type']) ? mapped['@type'] : [mapped['@type']];
 
+  // Many collection pages use lightweight name+URL references for their guide cards.
+  // Those are links to pages, not full Article entities, so expose them as WebPage
+  // rather than emitting incomplete Article markup that requires headline/image/date.
   if (
-    schemaTypes.includes('Organization') &&
+    schemaTypes.includes('Article') &&
+    mapped.name &&
+    mapped.url &&
+    !mapped.headline &&
+    !mapped.datePublished &&
+    !mapped.image
+  ) {
+    mapped['@type'] = 'WebPage';
+  }
+
+  const normalizedTypes = Array.isArray(mapped['@type']) ? mapped['@type'] : [mapped['@type']];
+
+  if (
+    normalizedTypes.includes('Organization') &&
     mapped.name === 'Mercer Lane Press' &&
     !mapped.logo
   ) {
     mapped.logo = organizationLogo;
   }
 
-  if (bookSeo && schemaTypes.includes('Book')) {
+  if (bookSeo && normalizedTypes.includes('Book')) {
     mapped.keywords = bookSeo.keywords.join(', ');
   }
 

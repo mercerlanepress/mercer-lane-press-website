@@ -9,7 +9,7 @@ export const smallFleetMaintenanceOperatingManual: Book = {
   publisher: 'Mercer Lane Press',
   description: 'A practical administrative system for small fleets that connects vehicle records, source-backed maintenance rules, due and overdue scheduling, defect and repair actions, service history, repair costs, downtime, review routines, and a 30-day implementation plan.',
   cover: '/images/books/The_Small_Fleet_Maintenance_Front_Cover.jpg',
-  coverReady: false,
+  coverReady: true,
   purchaseUrl: 'https://www.amazon.com/dp/B0HM33JJL6',
   intendedReader: 'Owners, managers, administrators, and maintenance coordinators responsible for roughly 3-50 vehicles who need a dependable way to keep maintenance information, mileage, defects, repair approvals, invoices, costs, and follow-up from becoming scattered across memory, messages, calendars, and disconnected files.',
   problems: [

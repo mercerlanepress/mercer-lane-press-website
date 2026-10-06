@@ -109,3 +109,8 @@ The test is simple: can each case retain what was observed, show who owns the ne
 Next, see [how to track repair costs and downtime for management decisions](/small-fleet-maintenance/fleet-repair-cost-downtime-replace/).
 
 > **Scope:** This workflow is for administrative control. It does not diagnose faults or determine whether a vehicle is safe to operate. Use the appropriate qualified and official sources for technical, safety, and regulatory decisions.
+
+
+## Working tools
+
+Use the [free due date and mileage calculator](/tools/fleet-maintenance-due-calculator/) to check one verified requirement. The [Small Fleet Maintenance System](/tools/small-fleet-maintenance-system/) connects recurring rules, actions, completion evidence, costs and downtime across several vehicles.

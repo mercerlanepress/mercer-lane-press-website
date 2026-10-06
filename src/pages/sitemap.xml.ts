@@ -40,6 +40,7 @@ export const GET: APIRoute = async () => {
   const executiveAssistantAiGuides = await getCollection('executiveAssistantAiGuides');
   const smallFleetMaintenanceGuides = await getCollection('smallFleetMaintenanceGuides');
   const paths = [
+    '/tools/fleet-maintenance-due-calculator/', '/tools/small-fleet-maintenance-system/',
     '/tools/family-admin-reset-planner/', '/tools/family-admin-operating-system/', '/books/stop-drowning-in-family-admin/', '/family-admin/',
     '/books/the-small-fleet-maintenance-operating-manual/', '/small-fleet-maintenance/',
     '/construction-job-costing/', '/tools/construction-job-profit-calculator/', '/free-tools/performance-review-template-excel/', '/tools/pto-accrual-calculator/', '/tools/hr-manager-toolkit/',

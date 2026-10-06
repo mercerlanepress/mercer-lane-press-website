@@ -3,6 +3,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import AnalyticsConsent from '../components/AnalyticsConsent.astro';
 import { bookSeoBySlug } from '../data/book-seo';
+import { bookSeoSearchConsoleOverrides } from '../data/book-seo-search-console';
 import '../styles/global.css';
 
 interface Props {
@@ -18,19 +19,44 @@ interface Props {
 const { title, description, image = '/social-card.svg', type = 'website', schema, robots, sensitiveTool = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const bookMatch = Astro.url.pathname.match(/^\/books\/([^/]+)\/?$/);
-const bookSeo = bookMatch ? bookSeoBySlug[bookMatch[1]] : undefined;
+const bookSeo = bookMatch
+  ? bookSeoSearchConsoleOverrides[bookMatch[1]] ?? bookSeoBySlug[bookMatch[1]]
+  : undefined;
 const effectiveDescription = bookSeo?.metaDescription ?? description;
 const fullTitle = bookSeo?.seoTitle ?? (title.includes('Mercer Lane Press') ? title : `${title} | Mercer Lane Press`);
-const enhancedSchema = schema && bookSeo
+const organizationLogo = new URL('/favicon.svg', Astro.site).href;
+
+const addOrganizationLogo = (value: any): any => {
+  if (Array.isArray(value)) return value.map(addOrganizationLogo);
+  if (!value || typeof value !== 'object') return value;
+
+  const mapped = Object.fromEntries(
+    Object.entries(value).map(([key, child]) => [key, addOrganizationLogo(child)])
+  ) as Record<string, any>;
+
+  if (
+    mapped['@type'] === 'Organization' &&
+    mapped.name === 'Mercer Lane Press' &&
+    !mapped.logo
+  ) {
+    mapped.logo = organizationLogo;
+  }
+
+  return mapped;
+};
+
+const keywordEnhancedSchema = schema && bookSeo
   ? Array.isArray(schema)
     ? schema.map(item => ({ ...item, keywords: bookSeo.keywords.join(', ') }))
     : { ...schema, keywords: bookSeo.keywords.join(', ') }
   : schema;
+const enhancedSchema = keywordEnhancedSchema ? addOrganizationLogo(keywordEnhancedSchema) : keywordEnhancedSchema;
 const org = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'Mercer Lane Press',
-  url: 'https://mercerlanepress.com/'
+  url: 'https://mercerlanepress.com/',
+  logo: organizationLogo
 };
 const measurementId = 'G-CK9SW6VRS9';
 ---

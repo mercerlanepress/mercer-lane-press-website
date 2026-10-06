@@ -11,174 +11,40 @@ const guides = defineCollection({
   schema: guideSchema
 });
 
-const localBusinessAiGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/local-business-ai' }),
-  schema: guideSchema
-});
+const localBusinessAiGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/local-business-ai' }), schema: guideSchema });
+const aiScamDefenceGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/ai-scam-defence' }), schema: guideSchema });
+const reactiveDogWalkingGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/reactive-dog-walking' }), schema: guideSchema });
+const dogEnrichmentGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/dog-enrichment' }), schema: guideSchema });
+const cooperativeCareGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/cooperative-care' }), schema: guideSchema });
+const rescueDogFirst90DaysGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/rescue-dog-first-90-days' }), schema: guideSchema });
+const overArousedDogGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/over-aroused-dog' }), schema: guideSchema });
+const reliableRecallGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/reliable-recall' }), schema: guideSchema });
+const familyAdminGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/family-admin' }), schema: guideSchema });
+const heatPumpOwnerGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/heat-pump-owners' }), schema: guideSchema });
+const localAiGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/local-ai' }), schema: guideSchema });
+const beginnerTelescopeObservingGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/beginner-telescope-observing' }), schema: guideSchema });
+const deepSkyAstrophotographyGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/deep-sky-astrophotography' }), schema: guideSchema });
+const constructionEstimatingGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/construction-estimating' }), schema: guideSchema });
+const landscapeContractorEstimatingGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/landscape-contractor-estimating' }), schema: guideSchema });
+const homeAssistantMatterThreadGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/home-assistant-matter-thread' }), schema: guideSchema });
+const genealogyBrickWallGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/genealogy-brick-walls' }), schema: guideSchema });
+const powerAutomateGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/power-automate' }), schema: guideSchema });
+const pickleballDoublesGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/pickleball-doubles' }), schema: guideSchema });
+const youthSoccerCoachingGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/youth-soccer-coaching' }), schema: guideSchema });
+const hamRadioTechnicianExamGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/ham-radio-technician-exam' }), schema: guideSchema });
+const epa608UniversalExamGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/epa-608-universal-exam' }), schema: guideSchema });
+const firstYearHomeownerGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/first-year-homeowner' }), schema: guideSchema });
+const bookkeeperAiGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/bookkeeper-ai' }), schema: guideSchema });
+const propertyManagerAiGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/property-manager-ai' }), schema: guideSchema });
+const maintenancePlanningGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/maintenance-planning' }), schema: guideSchema });
+const aquariumTroubleshootingGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/aquarium-troubleshooting' }), schema: guideSchema });
+const homeInspectionReportingGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/home-inspection-reporting' }), schema: guideSchema });
+const vendingMachineRouteGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/vending-machine-route' }), schema: guideSchema });
+const poolTroubleshootingGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/pool-troubleshooting' }), schema: guideSchema });
+const manufacturingSupervisionGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/manufacturing-supervision' }), schema: guideSchema });
+const hotelHousekeepingSupervisionGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/hotel-housekeeping-supervision' }), schema: guideSchema });
+const hrAiGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/hr-ai' }), schema: guideSchema });
+const executiveAssistantAiGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/executive-assistant-ai' }), schema: guideSchema });
+const smallFleetMaintenanceGuides = defineCollection({ loader: glob({ pattern: '**/*.md', base: './src/content/small-fleet-maintenance' }), schema: guideSchema });
 
-const aiScamDefenceGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/ai-scam-defence' }),
-  schema: guideSchema
-});
-
-const reactiveDogWalkingGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/reactive-dog-walking' }),
-  schema: guideSchema
-});
-
-const dogEnrichmentGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/dog-enrichment' }),
-  schema: guideSchema
-});
-
-const cooperativeCareGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/cooperative-care' }),
-  schema: guideSchema
-});
-
-const rescueDogFirst90DaysGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/rescue-dog-first-90-days' }),
-  schema: guideSchema
-});
-
-const overArousedDogGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/over-aroused-dog' }),
-  schema: guideSchema
-});
-
-const reliableRecallGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/reliable-recall' }),
-  schema: guideSchema
-});
-
-const familyAdminGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/family-admin' }),
-  schema: guideSchema
-});
-
-const heatPumpOwnerGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/heat-pump-owners' }),
-  schema: guideSchema
-});
-
-const localAiGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/local-ai' }),
-  schema: guideSchema
-});
-
-const beginnerTelescopeObservingGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/beginner-telescope-observing' }),
-  schema: guideSchema
-});
-
-const deepSkyAstrophotographyGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/deep-sky-astrophotography' }),
-  schema: guideSchema
-});
-
-const constructionEstimatingGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/construction-estimating' }),
-  schema: guideSchema
-});
-
-const landscapeContractorEstimatingGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/landscape-contractor-estimating' }),
-  schema: guideSchema
-});
-
-const homeAssistantMatterThreadGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/home-assistant-matter-thread' }),
-  schema: guideSchema
-});
-
-const genealogyBrickWallGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/genealogy-brick-walls' }),
-  schema: guideSchema
-});
-
-const powerAutomateGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/power-automate' }),
-  schema: guideSchema
-});
-
-const pickleballDoublesGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/pickleball-doubles' }),
-  schema: guideSchema
-});
-
-const youthSoccerCoachingGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/youth-soccer-coaching' }),
-  schema: guideSchema
-});
-
-const hamRadioTechnicianExamGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/ham-radio-technician-exam' }),
-  schema: guideSchema
-});
-
-const epa608UniversalExamGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/epa-608-universal-exam' }),
-  schema: guideSchema
-});
-
-const firstYearHomeownerGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/first-year-homeowner' }),
-  schema: guideSchema
-});
-
-const bookkeeperAiGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/bookkeeper-ai' }),
-  schema: guideSchema
-});
-
-const propertyManagerAiGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/property-manager-ai' }),
-  schema: guideSchema
-});
-
-const maintenancePlanningGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/maintenance-planning' }),
-  schema: guideSchema
-});
-
-const aquariumTroubleshootingGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/aquarium-troubleshooting' }),
-  schema: guideSchema
-});
-
-const homeInspectionReportingGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/home-inspection-reporting' }),
-  schema: guideSchema
-});
-
-const vendingMachineRouteGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/vending-machine-route' }),
-  schema: guideSchema
-});
-
-const poolTroubleshootingGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/pool-troubleshooting' }),
-  schema: guideSchema
-});
-
-const manufacturingSupervisionGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/manufacturing-supervision' }),
-  schema: guideSchema
-});
-
-const hotelHousekeepingSupervisionGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/hotel-housekeeping-supervision' }),
-  schema: guideSchema
-});
-
-const hrAiGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/hr-ai' }),
-  schema: guideSchema
-});
-
-const executiveAssistantAiGuides = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/executive-assistant-ai' }),
-  schema: guideSchema
-});
-
-export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides, cooperativeCareGuides, rescueDogFirst90DaysGuides, overArousedDogGuides, reliableRecallGuides, familyAdminGuides, heatPumpOwnerGuides, localAiGuides, beginnerTelescopeObservingGuides, deepSkyAstrophotographyGuides, constructionEstimatingGuides, landscapeContractorEstimatingGuides, homeAssistantMatterThreadGuides, genealogyBrickWallGuides, powerAutomateGuides, pickleballDoublesGuides, youthSoccerCoachingGuides, hamRadioTechnicianExamGuides, epa608UniversalExamGuides, firstYearHomeownerGuides, bookkeeperAiGuides, propertyManagerAiGuides, maintenancePlanningGuides, aquariumTroubleshootingGuides, homeInspectionReportingGuides, vendingMachineRouteGuides, poolTroubleshootingGuides, manufacturingSupervisionGuides, hotelHousekeepingSupervisionGuides, hrAiGuides, executiveAssistantAiGuides };
+export const collections = { guides, localBusinessAiGuides, aiScamDefenceGuides, reactiveDogWalkingGuides, dogEnrichmentGuides, cooperativeCareGuides, rescueDogFirst90DaysGuides, overArousedDogGuides, reliableRecallGuides, familyAdminGuides, heatPumpOwnerGuides, localAiGuides, beginnerTelescopeObservingGuides, deepSkyAstrophotographyGuides, constructionEstimatingGuides, landscapeContractorEstimatingGuides, homeAssistantMatterThreadGuides, genealogyBrickWallGuides, powerAutomateGuides, pickleballDoublesGuides, youthSoccerCoachingGuides, hamRadioTechnicianExamGuides, epa608UniversalExamGuides, firstYearHomeownerGuides, bookkeeperAiGuides, propertyManagerAiGuides, maintenancePlanningGuides, aquariumTroubleshootingGuides, homeInspectionReportingGuides, vendingMachineRouteGuides, poolTroubleshootingGuides, manufacturingSupervisionGuides, hotelHousekeepingSupervisionGuides, hrAiGuides, executiveAssistantAiGuides, smallFleetMaintenanceGuides };

@@ -26,31 +26,31 @@ const effectiveDescription = bookSeo?.metaDescription ?? description;
 const fullTitle = bookSeo?.seoTitle ?? (title.includes('Mercer Lane Press') ? title : `${title} | Mercer Lane Press`);
 const organizationLogo = new URL('/logo.svg', Astro.site).href;
 
-const addOrganizationLogo = (value: any): any => {
-  if (Array.isArray(value)) return value.map(addOrganizationLogo);
+const enhanceStructuredData = (value: any): any => {
+  if (Array.isArray(value)) return value.map(enhanceStructuredData);
   if (!value || typeof value !== 'object') return value;
 
   const mapped = Object.fromEntries(
-    Object.entries(value).map(([key, child]) => [key, addOrganizationLogo(child)])
+    Object.entries(value).map(([key, child]) => [key, enhanceStructuredData(child)])
   ) as Record<string, any>;
+  const schemaTypes = Array.isArray(mapped['@type']) ? mapped['@type'] : [mapped['@type']];
 
   if (
-    mapped['@type'] === 'Organization' &&
+    schemaTypes.includes('Organization') &&
     mapped.name === 'Mercer Lane Press' &&
     !mapped.logo
   ) {
     mapped.logo = organizationLogo;
   }
 
+  if (bookSeo && schemaTypes.includes('Book')) {
+    mapped.keywords = bookSeo.keywords.join(', ');
+  }
+
   return mapped;
 };
 
-const keywordEnhancedSchema = schema && bookSeo
-  ? Array.isArray(schema)
-    ? schema.map(item => ({ ...item, keywords: bookSeo.keywords.join(', ') }))
-    : { ...schema, keywords: bookSeo.keywords.join(', ') }
-  : schema;
-const enhancedSchema = keywordEnhancedSchema ? addOrganizationLogo(keywordEnhancedSchema) : keywordEnhancedSchema;
+const enhancedSchema = schema ? enhanceStructuredData(schema) : schema;
 const org = {
   '@context': 'https://schema.org',
   '@type': 'Organization',

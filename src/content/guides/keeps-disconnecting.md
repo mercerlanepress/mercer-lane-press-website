@@ -1,6 +1,6 @@
 ---
 title: Why Does My 5G Home Internet Keep Disconnecting?
-description: Learn how to isolate recurring 5G home internet dropouts across the provider network, cellular link, gateway, Wi-Fi, and individual devices.
+description: Troubleshoot 5G home internet that keeps disconnecting, dropping out or turning off, with a controlled test sequence for gateway, signal and network causes.
 published: 2026-09-19
 summary: Separate a true internet outage from a gateway, Wi-Fi, or single-device interruption.
 order: 1

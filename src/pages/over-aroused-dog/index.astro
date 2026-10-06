@@ -9,12 +9,12 @@ const schema = {
   '@context':'https://schema.org',
   '@type':'CollectionPage',
   name:'Over-Aroused Dog Guides',
-  description:'Practical, reward-based guides for recognizing rising arousal, tracking recovery, building a calmer daily rhythm, teaching a settle mat, and applying a four-week calmness plan.',
+  description:'Guides for dogs that struggle to settle, including arousal signs, recovery, calm routines, mat work and a four-week plan.',
   url:'https://mercerlanepress.com/over-aroused-dog/',
-  hasPart:guides.map(g => ({'@type':'Article',name:g.data.title,url:'https://mercerlanepress.com/over-aroused-dog/' + g.id + '/'}))
+  hasPart:guides.map(g => ({'@type':'WebPage',name:g.data.title,url:'https://mercerlanepress.com/over-aroused-dog/' + g.id + '/'}))
 };
 ---
-<BaseLayout title="Over-Aroused Dog Guides | Settling, Focus & Recovery" description="Practical, reward-based guides for recognizing rising arousal, tracking recovery, building a calmer daily rhythm, teaching a settle mat, and applying a four-week calmness plan." schema={schema}>
+<BaseLayout title="Over-Aroused Dog: Settling, Focus & Recovery" description="Guides for dogs that struggle to settle, including arousal signs, recovery, calm routines, mat work and a four-week calmness plan." schema={schema}>
   <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Dog Guides',href:'/dog-guides/'},{name:'Over-Aroused Dog'}]}/>
   <header class="page-head wrap">
     <p class="eyebrow">DOG SETTLING & OVER-AROUSAL HUB</p>
@@ -46,7 +46,7 @@ const schema = {
       <h2>Go deeper with the complete four-week system</h2>
       <p><a href="/books/the-over-aroused-dog/"><em>The Over-Aroused Dog</em></a> covers the causes that can sit behind similar high-energy behavior, a five-zone escalation scale, arousal mapping, daily routine and enrichment, environmental management, reward mechanics, calm capture, mat work, attention and pause skills, real-life situations, a four-week plan, troubleshooting, safety, field guides, and long-term maintenance.</p>
       <p>The material is general education, not a diagnosis or a substitute for veterinary care or individualized behavior advice. Sudden or worsening behavior change, possible pain or illness, severe fear, biting or attempted biting, redirected behavior, escape risk, or another safety concern should change the plan toward management and appropriate professional support.</p>
-      <p>For walking-specific barking, lunging, freezing, or hard staring, use the <a href="/reactive-dog-walking/">Reactive Dog Walking hub</a>. For short low-cost activity ideas, visit <a href="/dog-enrichment/">Dog Enrichment</a>. For handling and veterinary-preparation skills, use <a href="/cooperative-care/">Cooperative Care for Dogs</a>. If the dog is newly adopted, start with the broader <a href="/rescue-dog-first-90-days/">Rescue Dog First 90 Days hub</a>.</p>
+      <p>For walking-specific barking, lunging, freezing, or hard staring, use the <a href="/reactive-dog-walking/">Reactive Dog Training hub</a>. For short low-cost activity ideas, visit <a href="/dog-enrichment/">Dog Enrichment Activities</a>. For handling and veterinary-preparation skills, use <a href="/cooperative-care/">Cooperative Care for Dogs</a>. If the dog is newly adopted, start with the broader <a href="/rescue-dog-first-90-days/">Rescue Dog First 90 Days hub</a>.</p>
     </div>
   </section>
 </BaseLayout>

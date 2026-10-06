@@ -6,17 +6,17 @@ import GuideCard from '../../components/GuideCard.astro';
 
 const guides = (await getCollection('reactiveDogWalkingGuides')).sort((a,b) => a.data.order - b.data.order);
 ---
-<BaseLayout title="Reactive Dog Walking Guides" description="Practical, reward-based guides for working distance, early warning signs, clean exits, route planning, recovery, and safer real-world walks with a reactive dog.">
-  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Dog Guides',href:'/dog-guides/'},{name:'Reactive Dog Walking'}]}/>
+<BaseLayout title="Reactive Dog Training: Walking, Triggers & Recovery" description="Reactive dog training guides for barking and lunging on walks, trigger distance, route planning, recovery and calmer real-world practice.">
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Dog Guides',href:'/dog-guides/'},{name:'Reactive Dog Training'}]}/>
   <header class="page-head wrap">
-    <p class="eyebrow">REACTIVE DOG WALKING HUB</p>
-    <h1>Reactive Dog Walking</h1>
-    <p class="lede">Notice earlier, make space sooner, keep a small set of skills available, and measure progress by flexibility and recovery rather than by forcing close passes.</p>
+    <p class="eyebrow">REACTIVE DOG TRAINING HUB</p>
+    <h1>Reactive Dog Training for Calmer, Safer Walks</h1>
+    <p class="lede">Work with barking, lunging and hard staring by noticing triggers earlier, creating enough distance for learning, rehearsing clean exits and measuring progress by flexibility and recovery rather than forced close passes.</p>
   </header>
 
   <section class="section section-tint">
     <div class="wrap">
-      <div class="section-head"><h2>A simple decision pattern for real walks</h2><p>The first question is not “Can my dog get closer?” It is “Does my dog still have enough flexibility to learn here?”</p></div>
+      <div class="section-head"><h2>A simple training decision pattern for real walks</h2><p>The first question is not “Can my dog get closer?” It is “Does my dog still have enough flexibility to learn here?”</p></div>
       <div class="hub-steps">
         <article><h3>Notice</h3><p>Watch for the first change from your dog's normal walking baseline: stillness, hard staring, pace changes, a closed mouth, scanning, or another reliable early sign.</p></article>
         <article><h3>Make space</h3><p>Cross, arc away, turn, retreat, or use a visual barrier before attention becomes locked on.</p></article>
@@ -28,8 +28,8 @@ const guides = (await getCollection('reactiveDogWalkingGuides')).sort((a,b) => a
 
   <section class="section">
     <div class="wrap">
-      <div class="section-head"><p class="eyebrow">PRACTICAL GUIDES</p><h2>Start with the problem on today's walk</h2></div>
-      <div class="grid-3">{guides.map(g => <GuideCard guide={g} base="/reactive-dog-walking/" label="REACTIVE DOG WALKING"/>)}</div>
+      <div class="section-head"><p class="eyebrow">PRACTICAL GUIDES</p><h2>Start with the reactive-dog problem on today's walk</h2></div>
+      <div class="grid-3">{guides.map(g => <GuideCard guide={g} base="/reactive-dog-walking/" label="REACTIVE DOG TRAINING"/>)}</div>
     </div>
   </section>
 

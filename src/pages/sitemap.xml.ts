@@ -39,6 +39,7 @@ export const GET: APIRoute = async () => {
   const hrAiGuides = await getCollection('hrAiGuides');
   const executiveAssistantAiGuides = await getCollection('executiveAssistantAiGuides');
   const paths = [
+    '/tools/family-admin-operating-system/',
     '/books/stop-drowning-in-family-admin/', '/family-admin/',
     '/construction-job-costing/', '/tools/construction-job-profit-calculator/',
     '/free-tools/performance-review-template-excel/', '/tools/pto-accrual-calculator/', '/tools/hr-manager-toolkit/',

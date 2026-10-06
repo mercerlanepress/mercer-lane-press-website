@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+const checkoutUrl = 'https://www.etsy.com/listing/4589614172/family-admin-excel-planner-household';
+const schema = {
+  '@context':'https://schema.org', '@type':'Product',
+  name:'Mercer Lane Family Admin Operating System',
+  description:'An Excel system for household tasks, deadlines, renewals and follow-ups, with a worked demo, Quick Start guide and A4 and US Letter printables.',
+  brand:{'@type':'Brand',name:'Mercer Lane Press'}, sku:'MLP-FAMILY-ADMIN-1-1',
+  image:'https://mercerlanepress.com/images/family-admin-operating-system/01_family_admin_bundle.png',
+  offers:{'@type':'Offer',url:checkoutUrl,priceCurrency:'GBP',price:'7.49',availability:'https://schema.org/InStock'}
+};
+const groups = [
+  ['Tasks and follow-ups','Capture the next action, assign one owner and track replies you are waiting for.'],
+  ['Dates and renewals','Look ahead across preparation dates, deadlines, reviews, renewals and document expiries.'],
+  ['Household records','Keep safe pointers to documents, providers, logistics, home, vehicle and pet administration.'],
+  ['Shared responsibilities','Make projects and handoffs visible so another authorised household member can follow the next step.'],
+  ['Weekly reset','Review open work, update Waiting For items and scan the coming weeks.'],
+  ['Guided setup','Start with the fictional demo and Quick Start, then use a clean workbook and the 30-day rollout.']
+];
+---
+<BaseLayout title="Family Admin Excel Planner & Printable Bundle" description="Organise household tasks, deadlines, renewals and follow-ups with an Excel workbook, worked demo, Quick Start and A4/Letter printables. £7.49." image="/images/family-admin-operating-system/01_family_admin_bundle.png" schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Tools',href:'/tools/'},{name:'Family Admin Operating System'}]}/>
+  <header class="page-head wrap family-hero">
+    <div>
+      <p class="eyebrow">HOUSEHOLD EXCEL SYSTEM + PRINTABLES</p>
+      <h1>Family Admin Operating System</h1>
+      <p class="lede">Keep household tasks, dates and follow-ups in one place.</p>
+      <p>See the next action, the owner and the date together. Use the Command Center to see dated checkpoints needing attention, and Calendar Runway to look ahead across your household.</p>
+      <p class="price">£7.49 <span>One-time purchase · digital download</span></p>
+      <div class="button-row"><a class="button" href={checkoutUrl} rel="noopener">Buy the digital bundle on Etsy</a><a class="button button-secondary" href="/family-admin/">Read free family admin guides</a></div>
+      <p class="fineprint">Requires Microsoft 365 desktop Excel, purchased separately. No physical item is supplied. Checkout and download delivery through Etsy; any applicable tax and currency conversion appear there.</p>
+    </div>
+    <figure><img src="/images/family-admin-operating-system/01_family_admin_bundle.png" alt="Family Admin Operating System bundle with an actual Command Center preview from the fictional demo" width="2000" height="1500" fetchpriority="high"/><figcaption>Clean and demo Excel workbooks, a Quick Start guide and printable pages.</figcaption></figure>
+  </header>
+  <section class="section section-tint"><div class="wrap"><h2>Start with the controls your household needs</h2><p>Begin with current tasks, Waiting For items and key dates. Add optional modules when they solve a recurring problem.</p><div class="grid-3">{groups.map(([heading,text])=><article class="card"><h3>{heading}</h3><p>{text}</p></article>)}</div></div></section>
+  <section class="section"><div class="wrap"><h2>See inside the workbook</h2><div class="family-previews"><figure><img src="/images/family-admin-operating-system/02_command_center.png" alt="Command Center showing next actions, owners, dates and record areas for a fictional household" width="2000" height="1500" loading="lazy"/><figcaption>Dated checkpoints needing attention, together in one view.</figcaption></figure><figure><img src="/images/family-admin-operating-system/03_calendar_runway.png" alt="Calendar Runway showing consolidated household checkpoints and its horizon control" width="2000" height="1500" loading="lazy"/><figcaption>Look ahead across preparation dates, deadlines, renewals and reviews.</figcaption></figure></div><p class="fineprint">All previews use fictional demo records.</p></div></section>
+  <section class="section section-tint"><div class="wrap narrow"><h2>Your download includes</h2><ul>
+    <li><strong>Clean Excel workbook:</strong> ready for your household, with 15 visible tabs and ten registers.</li>
+    <li><strong>Demo Excel workbook:</strong> a fictional household example using the same system.</li>
+    <li><strong>15-page Quick Start PDF:</strong> onboarding, annotated examples and FAQ.</li>
+    <li><strong>Ten printable pages:</strong> supplied in both A4 and US Letter formats.</li>
+    <li><strong>README and personal household-use licence.</strong></li>
+  </ul><p>Each register has up to 150 prepared records, including completed history. Use the existing blank rows; do not insert rows or expand the tables.</p></div></section>
+  <section class="section"><div class="wrap narrow"><h2>From download to your first reset</h2><ol><li>Download and extract the ZIP to a local folder.</li><li>Read the Quick Start and explore the demo.</li><li>Make a working copy of the clean workbook.</li><li>Open START HERE, add your household members and choose your first Weekly Reset.</li></ol><p>The bundle is a digital companion to <a href="/books/stop-drowning-in-family-admin/">Stop Drowning in Family Admin</a>. The book is sold separately and is not required to use the files.</p></div></section>
+  <section class="section section-tint"><div class="wrap narrow"><h2>Before you buy</h2>
+    <details><summary>What software do I need?</summary><p>Microsoft 365 desktop Excel for the workbooks and a PDF reader for the guide and printables. Excel is not included. Google Sheets is not currently supported.</p></details>
+    <details><summary>Does it need the internet or send reminders?</summary><p>It works offline after download. No macros, add-ins or external connections are required. Dates and attention views update within the workbook when Excel recalculates. It does not send notifications or synchronise with your calendar.</p></details>
+    <details><summary>How do I receive the files?</summary><p>The purchase button opens this product's Etsy listing. Etsy provides the digital download after purchase. Extract the ZIP before opening the workbooks and keep a backup.</p></details>
+    <details><summary>Can my household share a working copy?</summary><p>The licence permits adaptation, backups, printing and sharing with household members or an authorised trusted helper solely to coordinate your household. It does not permit resale, public sharing or redistribution to other households.</p></details>
+    <details><summary>What should I keep out of the workbook?</summary><p>Store necessary dates, owners, next actions and safe source locations. Do not enter passwords, PINs, recovery codes, complete identity numbers, full financial credentials or unnecessary medical information. Worksheet protection prevents accidental edits; it is not encryption.</p></details>
+    <details><summary>What happens when a register is full?</summary><p>The limit is 150 records per register, including history. Keep a dated backup, start a fresh clean working copy and carry forward every live record. Do not expand the prepared tables.</p></details>
+    <p>For product questions, contact <a href="mailto:mercerlanepress@gmail.com">mercerlanepress@gmail.com</a>. Purchase and download enquiries can also use your Etsy order.</p>
+  </div></section>
+  <section class="section"><div class="wrap narrow"><h2>Give the next step a place to live</h2><p class="price">£7.49 <span>Family Admin Operating System v1.1</span></p><p><a class="button" href={checkoutUrl} rel="noopener">Buy the digital bundle on Etsy</a></p><p class="fineprint">Microsoft 365 desktop Excel required · Digital ZIP download · Personal household use</p></div></section>
+</BaseLayout>
+<style>
+.family-hero{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:center}.family-hero h1{font-size:clamp(2rem,4vw,3.3rem)}figure{margin:0}figure img{display:block;width:100%;height:auto;border:1px solid var(--line)}figcaption,.fineprint{font-size:.88rem;color:var(--muted)}figcaption{margin-top:.7rem}.price{font-size:2rem;font-weight:700}.price span{display:block;font-size:.95rem;font-weight:400}.button-row{display:flex;gap:.8rem;flex-wrap:wrap}.family-previews{display:grid;grid-template-columns:1fr 1fr;gap:2rem}details{padding:1rem 0;border-bottom:1px solid var(--line)}summary{font-weight:700;cursor:pointer}@media(max-width:850px){.family-hero,.family-previews{grid-template-columns:1fr}}
+</style>

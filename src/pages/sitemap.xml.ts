@@ -38,12 +38,13 @@ export const GET: APIRoute = async () => {
   const hotelHousekeepingSupervisionGuides = await getCollection('hotelHousekeepingSupervisionGuides');
   const hrAiGuides = await getCollection('hrAiGuides');
   const executiveAssistantAiGuides = await getCollection('executiveAssistantAiGuides');
+  const reliableRecallGuides = await getCollection('reliableRecallGuides');
   const smallFleetMaintenanceGuides = await getCollection('smallFleetMaintenanceGuides');
   const paths = [
     '/tools/family-admin-reset-planner/', '/tools/family-admin-operating-system/', '/books/stop-drowning-in-family-admin/', '/family-admin/',
     '/books/the-small-fleet-maintenance-operating-manual/', '/small-fleet-maintenance/',
     '/construction-job-costing/', '/tools/construction-job-profit-calculator/', '/free-tools/performance-review-template-excel/', '/tools/pto-accrual-calculator/', '/tools/hr-manager-toolkit/',
-    '/', '/books/', '/authors/', '/guides/', '/tools/', '/tools/contractor-markup-margin-calculator/', '/tools/construction-estimating-system-pro/', '/terms/', '/digital-products/', '/dog-guides/', '/5g-home-internet/', '/local-business-ai/', '/ai-scam-defence/', '/reactive-dog-walking/', '/dog-enrichment/', '/cooperative-care/', '/rescue-dog-first-90-days/', '/over-aroused-dog/', '/heat-pump-owners/', '/local-ai/', '/beginner-telescope-observing/', '/deep-sky-astrophotography/', '/construction-estimating/', '/landscape-contractor-estimating/', '/home-assistant-matter-thread/', '/genealogy-brick-walls/', '/power-automate/', '/pickleball-doubles/', '/youth-soccer-coaching/', '/ham-radio-technician-exam/', '/epa-608-universal-exam/', '/first-year-homeowner/', '/property-manager-ai/', '/bookkeeper-ai/', '/maintenance-planning/', '/aquarium-troubleshooting/', '/home-inspection-reporting/', '/vending-machine-route/', '/pool-troubleshooting/', '/manufacturing-supervision/', '/hotel-housekeeping-supervision/', '/hr-ai/', '/executive-assistant-ai/', '/about/', '/contact/', '/privacy/',
+    '/', '/books/', '/authors/', '/guides/', '/tools/', '/tools/contractor-markup-margin-calculator/', '/tools/construction-estimating-system-pro/', '/terms/', '/digital-products/', '/dog-guides/', '/5g-home-internet/', '/local-business-ai/', '/ai-scam-defence/', '/reactive-dog-walking/', '/dog-enrichment/', '/cooperative-care/', '/rescue-dog-first-90-days/', '/over-aroused-dog/', '/reliable-recall/', '/heat-pump-owners/', '/local-ai/', '/beginner-telescope-observing/', '/deep-sky-astrophotography/', '/construction-estimating/', '/landscape-contractor-estimating/', '/home-assistant-matter-thread/', '/genealogy-brick-walls/', '/power-automate/', '/pickleball-doubles/', '/youth-soccer-coaching/', '/ham-radio-technician-exam/', '/epa-608-universal-exam/', '/first-year-homeowner/', '/property-manager-ai/', '/bookkeeper-ai/', '/maintenance-planning/', '/aquarium-troubleshooting/', '/home-inspection-reporting/', '/vending-machine-route/', '/pool-troubleshooting/', '/manufacturing-supervision/', '/hotel-housekeeping-supervision/', '/hr-ai/', '/executive-assistant-ai/', '/about/', '/contact/', '/privacy/',
     ...books.map(({ slug }) => '/books/' + slug + '/'),
     ...authors.map(({ slug }) => '/authors/' + slug + '/'),
     ...guides.map(({ id }) => '/5g-home-internet/' + id + '/'),
@@ -54,6 +55,7 @@ export const GET: APIRoute = async () => {
     ...cooperativeCareGuides.map(({ id }) => '/cooperative-care/' + id + '/'),
     ...rescueDogFirst90DaysGuides.map(({ id }) => '/rescue-dog-first-90-days/' + id + '/'),
     ...overArousedDogGuides.map(({ id }) => '/over-aroused-dog/' + id + '/'),
+    ...reliableRecallGuides.map(({ id }) => '/reliable-recall/' + id + '/'),
     ...familyAdminGuides.map(({ id }) => '/family-admin/' + id + '/'),
     ...heatPumpOwnerGuides.map(({ id }) => '/heat-pump-owners/' + id + '/'),
     ...localAiGuides.map(({ id }) => '/local-ai/' + id + '/'),
@@ -67,7 +69,7 @@ export const GET: APIRoute = async () => {
     ...pickleballDoublesGuides.map(({ id }) => '/pickleball-doubles/' + id + '/'),
     ...youthSoccerCoachingGuides.map(({ id }) => '/youth-soccer-coaching/' + id + '/'),
     ...hamRadioTechnicianExamGuides.map(({ id }) => '/ham-radio-technician-exam/' + id + '/'),
-    ...epa608UniversalExamGuides.map(({ id }) => '/epa608-universal-exam/' + id + '/'),
+    ...epa608UniversalExamGuides.map(({ id }) => '/epa-608-universal-exam/' + id + '/'),
     ...firstYearHomeownerGuides.map(({ id }) => '/first-year-homeowner/' + id + '/'),
     ...propertyManagerAiGuides.map(({ id }) => '/property-manager-ai/' + id + '/'),
     ...bookkeeperAiGuides.map(({ id }) => '/bookkeeper-ai/' + id + '/'),

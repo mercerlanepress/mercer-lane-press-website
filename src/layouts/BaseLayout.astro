@@ -5,6 +5,7 @@ import AnalyticsConsent from '../components/AnalyticsConsent.astro';
 import { bookSeoBySlug } from '../data/book-seo';
 import { bookSeoSearchConsoleOverrides } from '../data/book-seo-search-console';
 import { siteSeoByPath } from '../data/site-seo';
+import { guideSeoByPath } from '../data/guide-seo';
 import '../styles/global.css';
 
 interface Props {
@@ -20,7 +21,7 @@ interface Props {
 const { title, description, image = '/social-card.svg', type = 'website', schema, robots, sensitiveTool = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const pathname = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
-const siteSeo = siteSeoByPath[pathname];
+const siteSeo = guideSeoByPath[pathname] ?? siteSeoByPath[pathname];
 const bookMatch = Astro.url.pathname.match(/^\/books\/([^/]+)\/?$/);
 const bookSeo = bookMatch
   ? bookSeoSearchConsoleOverrides[bookMatch[1]] ?? bookSeoBySlug[bookMatch[1]]

@@ -4,6 +4,7 @@ import Footer from '../components/Footer.astro';
 import AnalyticsConsent from '../components/AnalyticsConsent.astro';
 import { bookSeoBySlug } from '../data/book-seo';
 import { bookSeoSearchConsoleOverrides } from '../data/book-seo-search-console';
+import { siteSeoByPath } from '../data/site-seo';
 import '../styles/global.css';
 
 interface Props {
@@ -18,12 +19,14 @@ interface Props {
 
 const { title, description, image = '/social-card.svg', type = 'website', schema, robots, sensitiveTool = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const pathname = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const siteSeo = siteSeoByPath[pathname];
 const bookMatch = Astro.url.pathname.match(/^\/books\/([^/]+)\/?$/);
 const bookSeo = bookMatch
   ? bookSeoSearchConsoleOverrides[bookMatch[1]] ?? bookSeoBySlug[bookMatch[1]]
   : undefined;
-const effectiveDescription = bookSeo?.metaDescription ?? description;
-const fullTitle = bookSeo?.seoTitle ?? (title.includes('Mercer Lane Press') ? title : `${title} | Mercer Lane Press`);
+const effectiveDescription = bookSeo?.metaDescription ?? siteSeo?.metaDescription ?? description;
+const fullTitle = bookSeo?.seoTitle ?? siteSeo?.seoTitle ?? (title.includes('Mercer Lane Press') ? title : `${title} | Mercer Lane Press`);
 const organizationLogo = new URL('/logo.svg', Astro.site).href;
 
 const enhanceStructuredData = (value: any): any => {
@@ -35,9 +38,9 @@ const enhanceStructuredData = (value: any): any => {
   ) as Record<string, any>;
   const schemaTypes = Array.isArray(mapped['@type']) ? mapped['@type'] : [mapped['@type']];
 
-  // Many collection pages use lightweight name+URL references for their guide cards.
-  // Those are links to pages, not full Article entities, so expose them as WebPage
-  // rather than emitting incomplete Article markup that requires headline/image/date.
+  // Collection pages often use lightweight name+URL references for guide cards.
+  // Those are links to pages, not complete Article entities, so expose them as
+  // WebPage rather than emitting Article markup without headline/image/date.
   if (
     schemaTypes.includes('Article') &&
     mapped.name &&

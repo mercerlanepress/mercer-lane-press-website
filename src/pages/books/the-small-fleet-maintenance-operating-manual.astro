@@ -1,0 +1,55 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BookCover from '../../components/BookCover.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { smallFleetMaintenanceOperatingManual as book } from '../../data/the-small-fleet-maintenance-operating-manual';
+
+const guides = (await getCollection('smallFleetMaintenanceGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org',
+  '@type':'Book',
+  name:book.title,
+  alternativeHeadline:book.subtitle,
+  author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/warren-holtby/'},
+  publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
+  description:book.description,
+  ...(book.coverReady && book.cover ? {image:new URL(book.cover,Astro.site).href} : {}),
+  url:new URL('/books/' + book.slug + '/',Astro.site).href,
+  sameAs:book.purchaseUrl
+};
+---
+<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
+  <section class="wrap book-layout">
+    <BookCover book={book} large/>
+    <div>
+      <p class="eyebrow">SMALL FLEET MAINTENANCE &amp; OPERATIONS</p>
+      <h1>{book.title}</h1>
+      <p class="lede">{book.subtitle}</p>
+      <p>By <a href="/authors/warren-holtby/">Warren Holtby</a> · Published by Mercer Lane Press</p>
+      <p>{book.description}</p>
+      <div class="actions"><a class="button" href={book.purchaseUrl}>Buy on Amazon</a><a class="button button-secondary" href="/small-fleet-maintenance/">Read free guides</a></div>
+    </div>
+  </section>
+
+  <section class="section section-tint"><div class="wrap"><div class="section-head"><p class="eyebrow">WHO IT IS FOR</p><h2>For small fleets that have outgrown memory and scattered records</h2><p>{book.intendedReader}</p></div><ul class="check-grid">{book.problems?.map(item => <li>{item}</li>)}</ul></div></section>
+
+  <section class="section"><div class="wrap"><div class="section-head"><p class="eyebrow">THE CONTROL SYSTEM</p><h2>Six connected records instead of several partial systems</h2><p>The operating model links the asset, the maintenance requirement, the due trigger, the next action, completion evidence, and the review of exceptions.</p></div><div class="grid-3">
+    <article class="card"><h3>Vehicle register</h3><p>Give every vehicle a stable Unit ID and keep the identity, status, current mileage, maintenance source, assignment, and document location together.</p></article>
+    <article class="card"><h3>Maintenance rules</h3><p>Record what each vehicle requires, where the requirement came from, the trigger type, the last supported baseline, and the next due point.</p></article>
+    <article class="card"><h3>Live service schedule</h3><p>Separate requirement, status, and action so DATA ISSUE, OVERDUE, DUE SOON, BOOKED, and CURRENT remain visible for the right reasons.</p></article>
+    <article class="card"><h3>Defects and repair actions</h3><p>Turn observations into controlled records with an owner, next action, target date, approval path, and documented disposition.</p></article>
+    <article class="card"><h3>Service and cost history</h3><p>Close completed work with date, mileage, vendor, cost, evidence, linked actions, recommendations, and the correct next-due reset.</p></article>
+    <article class="card"><h3>Exception review</h3><p>Use weekly, monthly, and quarterly views to focus attention on overdue work, stale data, open actions, downtime, repeat events, cost changes, and replacement-review candidates.</p></article>
+  </div></div></section>
+
+  <section class="section section-tint"><div class="wrap"><div class="section-head"><p class="eyebrow">DECISION-USEFUL RECORDS</p><h2>See more than the repair invoice total</h2></div><ul class="check-grid">{book.topics?.slice(5,10).map(item => <li>{item}</li>)}</ul><p>The book keeps planned and unplanned work, downtime, repeat events, source confidence, and repair-versus-replace evidence distinct so a single number does not become a false verdict.</p></div></section>
+
+  <section class="section"><div class="wrap"><div class="section-head"><p class="eyebrow">IMPLEMENTATION</p><h2>Build forward control first, then improve the history</h2></div><div class="grid-3"><article class="card"><h3>Spreadsheet architecture</h3><p>Build separate tables for vehicles, mileage, rules, defects/actions, service history, downtime, settings, audit checks, and dashboard exceptions.</p></article><article class="card"><h3>Formula and data QA</h3><p>Test exact due points, missing mileage, dual triggers, stale data, late service, corrections, row additions, negative values, and other edge cases before trusting the status output.</p></article><article class="card"><h3>30-day rollout</h3><p>Define ownership, reconcile active vehicles, verify maintenance sources, launch the due board and mileage routine, add repair control and cost history, then stress-test and freeze Version 1.</p></article></div></div></section>
+
+  <section class="section section-tint"><div class="wrap narrow prose"><h2>What this book does not do</h2><p>The system organizes maintenance administration. It does not invent vehicle-specific service intervals, diagnose faults, or replace manufacturer information, qualified mechanical advice, warranty requirements, recall instructions, or the legal and regulatory rules that apply to a particular operation.</p><div class="notice"><strong>Use authoritative sources.</strong> Vehicle-specific requirements vary. Use current manufacturer information and the appropriate official or qualified source for maintenance, safety, regulatory, warranty, and technical decisions.</div></div></section>
+
+  <section class="section"><div class="wrap"><div class="section-head"><p class="eyebrow">FREE SUPPORTING GUIDES</p><h2>Build the part of the fleet-maintenance system you need next</h2></div><div class="grid-3">{guides.map(g => <GuideCard guide={g} base="/small-fleet-maintenance/" label="FLEET MAINTENANCE"/>)}</div><div class="actions"><a class="button button-secondary" href="/small-fleet-maintenance/">Explore the small fleet maintenance hub</a></div></div></section>
+</BaseLayout>

@@ -24,7 +24,7 @@ const bookSeo = bookMatch
   : undefined;
 const effectiveDescription = bookSeo?.metaDescription ?? description;
 const fullTitle = bookSeo?.seoTitle ?? (title.includes('Mercer Lane Press') ? title : `${title} | Mercer Lane Press`);
-const organizationLogo = new URL('/favicon.svg', Astro.site).href;
+const organizationLogo = new URL('/logo.svg', Astro.site).href;
 
 const addOrganizationLogo = (value: any): any => {
   if (Array.isArray(value)) return value.map(addOrganizationLogo);

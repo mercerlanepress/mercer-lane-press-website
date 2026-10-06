@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import { buildPlan, dayNumber, planText } from '../src/scripts/family-reset.mjs';
+const row = (date, item = 'A task') => ({item, action:'Take the next step',owner:'Alex',date,kind:'Task'});
+const plan = buildPlan('2026-10-24', [row('2026-10-23'),row('2026-10-24'),row('2026-11-06'),row('2026-11-07'),row('')]);
+assert.equal(plan.end, '2026-11-06');
+assert.deepEqual(Object.values(plan.groups).map(group => group.length), [1,2,1,1]);
+assert.equal(dayNumber('2026-02-29'),null);
+assert.notEqual(dayNumber('2028-02-29'),null);
+assert.equal(buildPlan('2026-12-31',[row('2027-01-01')]).end,'2027-01-13');
+assert.throws(() => buildPlan('2026-10-06',[{...row(''),action:''}]),/next action/);
+assert.throws(() => buildPlan('2026-10-06',[]),/at least one/);
+assert.throws(() => buildPlan('9999-12-19',[row('')]),/before/);
+assert.throws(() => buildPlan('2026-10-06',[{item:'',action:'',owner:'',date:''},{...row(''),action:''}]),/Item 2:/);
+assert.equal(buildPlan('2026-10-06',[{...row(''),owner:''}]).unassigned,1);
+assert.match(planText(plan),/Past dates to review/i);
+assert.match(planText(buildPlan('2026-10-06',[row('', '<img src=x onerror=alert(1)>')])),/<img src=x onerror=alert\(1\)>/);
+console.log('Family reset checks passed: fortnight boundaries, daylight-saving transition, year rollover, leap dates, empty/incomplete entries and missing owners.');

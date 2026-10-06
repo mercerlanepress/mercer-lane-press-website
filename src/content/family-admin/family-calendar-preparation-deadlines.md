@@ -124,3 +124,8 @@ Add that date.
 This one habit changes the calendar from a record of events into a practical control system.
 
 If the remaining problem is that external replies still disappear after contact, pair the calendar with the [Waiting For tracker](/family-admin/waiting-for-tracker-household-admin/).
+
+
+## Put this into a small weekly plan
+
+Use the [free Weekly Family Admin Reset Planner](/tools/family-admin-reset-planner/) to give household tasks, upcoming dates and replies to chase a next action, owner and checkpoint date. Copy or print your two-week plan; no signup or Excel is required.

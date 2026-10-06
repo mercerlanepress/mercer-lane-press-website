@@ -110,3 +110,8 @@ A household might add a school forms tracker, renewal runway, home service recor
 A smaller maintained system is stronger than a comprehensive one that is avoided.
 
 If your system works only while one person is present, the next improvement is not necessarily another tracker. Run the [Household Handover Test](/family-admin/household-handover-test/) and find the hidden knowledge that still depends on one person’s memory.
+
+
+## Put this into a small weekly plan
+
+Use the [free Weekly Family Admin Reset Planner](/tools/family-admin-reset-planner/) to give household tasks, upcoming dates and replies to chase a next action, owner and checkpoint date. Copy or print your two-week plan; no signup or Excel is required.

@@ -1,0 +1,11 @@
+---
+import { getCollection, render } from 'astro:content';
+import SmallFleetMaintenanceArticleLayout from '../../layouts/SmallFleetMaintenanceArticleLayout.astro';
+
+export async function getStaticPaths(){
+  return (await getCollection('smallFleetMaintenanceGuides')).map(entry => ({params:{slug:entry.id},props:{entry}}));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<SmallFleetMaintenanceArticleLayout entry={entry}><Content /></SmallFleetMaintenanceArticleLayout>

@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('smallFleetMaintenanceGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context':'https://schema.org','@type':'CollectionPage',
+  name:'Small Fleet Maintenance Guides',
+  description:'Practical guides for vehicle records, maintenance scheduling, mileage freshness, defects, repair control, costs, downtime, and small-fleet review routines.',
+  url:'https://mercerlanepress.com/small-fleet-maintenance/',
+  hasPart:guides.map(g => ({'@type':'Article',name:g.data.title,url:'https://mercerlanepress.com/small-fleet-maintenance/' + g.id + '/'}))
+};
+---
+<BaseLayout title="Small Fleet Maintenance Guides | Scheduling, Records & Repair Costs" description="Practical small fleet maintenance guides for service scheduling, mileage and vehicle records, defects, repair costs, downtime, spreadsheets, and review routines." schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Guides',href:'/guides/'},{name:'Small Fleet Maintenance'}]}/>
+  <header class="page-head wrap"><p class="eyebrow">SMALL FLEET MAINTENANCE</p><h1>Build a Maintenance System That Shows What Needs Attention Next</h1><p class="lede">Connect vehicle records, source-backed maintenance rules, current mileage, due work, defects, repair actions, costs, and management review without asking memory to hold the system together.</p></header>
+
+  <section class="section section-tint"><div class="wrap"><div class="section-head"><h2>Use a closed maintenance-control loop</h2><p>The useful question is not whether you own a spreadsheet or fleet app. It is whether every maintenance need can move from a trustworthy source to a visible trigger, an owned action, documented completion, a reset next-due point, and review.</p></div><div class="hub-steps">
+    <article><h3>Know the asset</h3><p>Use a stable Unit ID and one reliable vehicle register.</p></article>
+    <article><h3>Know the requirement</h3><p>Record the maintenance source rather than inventing generic intervals.</p></article>
+    <article><h3>Know the trigger</h3><p>Track date, mileage, hours, event, or condition as the source requires.</p></article>
+    <article><h3>Create the action</h3><p>Give due work and reported problems an owner, next step, and target date.</p></article>
+    <article><h3>Confirm completion</h3><p>Keep completion mileage, vendor, cost, evidence, and the work actually performed.</p></article>
+    <article><h3>Reset and review</h3><p>Reset only the rule the work satisfies, then review overdue work, stale data, open defects, repeat events, downtime, and cost changes.</p></article>
+  </div></div></section>
+
+  <section class="section"><div class="wrap"><div class="section-head"><p class="eyebrow">PRACTICAL GUIDES</p><h2>Start with the control point that is weakest today</h2></div><div class="grid-3">{guides.map(g => <GuideCard guide={g} base="/small-fleet-maintenance/" label="FLEET MAINTENANCE"/>)}</div></div></section>
+
+  <section class="section section-tint"><div class="wrap prose"><h2>Go deeper with the complete small-fleet operating system</h2><p><a href="/books/the-small-fleet-maintenance-operating-manual/"><em>The Small Fleet Maintenance Operating Manual</em></a> covers the master vehicle register, maintenance-rule register, due-date logic, mileage freshness, defect and repair workflow, authorizations, service history, costs, downtime, decision-useful metrics, repeat problems, repair-versus-replace evidence, review routines, spreadsheet architecture, software-fit decisions, and a 30-day implementation plan.</p><div class="notice"><strong>Important boundary.</strong> These resources organize maintenance administration. They do not prescribe vehicle-specific service intervals, diagnose faults, or replace current manufacturer information, qualified technical advice, or applicable legal and regulatory requirements.</div><p><a class="button" href="/books/the-small-fleet-maintenance-operating-manual/">Explore the book</a></p></div></section>
+</BaseLayout>

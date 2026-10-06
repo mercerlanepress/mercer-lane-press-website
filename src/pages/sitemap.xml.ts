@@ -38,12 +38,11 @@ export const GET: APIRoute = async () => {
   const hotelHousekeepingSupervisionGuides = await getCollection('hotelHousekeepingSupervisionGuides');
   const hrAiGuides = await getCollection('hrAiGuides');
   const executiveAssistantAiGuides = await getCollection('executiveAssistantAiGuides');
+  const smallFleetMaintenanceGuides = await getCollection('smallFleetMaintenanceGuides');
   const paths = [
-    '/tools/family-admin-reset-planner/',
-    '/tools/family-admin-operating-system/',
-    '/books/stop-drowning-in-family-admin/', '/family-admin/',
-    '/construction-job-costing/', '/tools/construction-job-profit-calculator/',
-    '/free-tools/performance-review-template-excel/', '/tools/pto-accrual-calculator/', '/tools/hr-manager-toolkit/',
+    '/tools/family-admin-reset-planner/', '/tools/family-admin-operating-system/', '/books/stop-drowning-in-family-admin/', '/family-admin/',
+    '/books/the-small-fleet-maintenance-operating-manual/', '/small-fleet-maintenance/',
+    '/construction-job-costing/', '/tools/construction-job-profit-calculator/', '/free-tools/performance-review-template-excel/', '/tools/pto-accrual-calculator/', '/tools/hr-manager-toolkit/',
     '/', '/books/', '/authors/', '/guides/', '/tools/', '/tools/contractor-markup-margin-calculator/', '/tools/construction-estimating-system-pro/', '/terms/', '/digital-products/', '/dog-guides/', '/5g-home-internet/', '/local-business-ai/', '/ai-scam-defence/', '/reactive-dog-walking/', '/dog-enrichment/', '/cooperative-care/', '/rescue-dog-first-90-days/', '/over-aroused-dog/', '/heat-pump-owners/', '/local-ai/', '/beginner-telescope-observing/', '/deep-sky-astrophotography/', '/construction-estimating/', '/landscape-contractor-estimating/', '/home-assistant-matter-thread/', '/genealogy-brick-walls/', '/power-automate/', '/pickleball-doubles/', '/youth-soccer-coaching/', '/ham-radio-technician-exam/', '/epa-608-universal-exam/', '/first-year-homeowner/', '/property-manager-ai/', '/bookkeeper-ai/', '/maintenance-planning/', '/aquarium-troubleshooting/', '/home-inspection-reporting/', '/vending-machine-route/', '/pool-troubleshooting/', '/manufacturing-supervision/', '/hotel-housekeeping-supervision/', '/hr-ai/', '/executive-assistant-ai/', '/about/', '/contact/', '/privacy/',
     ...books.map(({ slug }) => '/books/' + slug + '/'),
     ...authors.map(({ slug }) => '/authors/' + slug + '/'),
@@ -80,7 +79,8 @@ export const GET: APIRoute = async () => {
     ...manufacturingSupervisionGuides.map(({ id }) => '/manufacturing-supervision/' + id + '/'),
     ...hotelHousekeepingSupervisionGuides.map(({ id }) => '/hotel-housekeeping-supervision/' + id + '/'),
     ...hrAiGuides.map(({ id }) => '/hr-ai/' + id + '/'),
-    ...executiveAssistantAiGuides.map(({ id }) => '/executive-assistant-ai/' + id + '/')
+    ...executiveAssistantAiGuides.map(({ id }) => '/executive-assistant-ai/' + id + '/'),
+    ...smallFleetMaintenanceGuides.map(({ id }) => '/small-fleet-maintenance/' + id + '/')
   ];
   const body = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + paths.map(path => '\n  <url><loc>https://mercerlanepress.com' + path + '</loc></url>').join('') + '\n</urlset>\n';
   return new Response(body, { headers: { 'Content-Type': 'application/xml' } });

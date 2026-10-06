@@ -4,7 +4,6 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { books } from '../../data/books';
 
 const dogBooks = books.filter(book => book.authorSlug === 'sophie-ardenwood');
-const rescueBook = dogBooks.find(book => book.slug === 'the-rescue-dog-first-90-days')!;
 const schema = {
   '@context':'https://schema.org',
   '@type':'CollectionPage',
@@ -27,7 +26,6 @@ const schema = {
     <p class="eyebrow">DOG GUIDES</p>
     <h1>Practical Dog Guides</h1>
     <p class="lede">Start with the problem in front of you: building real-world recall, helping an excitable dog come back down, settling a newly adopted dog, making walks more manageable, adding useful enrichment, or making routine handling and care easier to train.</p>
-    <div class="notice"><strong>Free on Kindle · 1–4 October 2026.</strong> Just adopted a rescue dog? <em>The Rescue Dog First 90 Days</em> is free on Kindle for this four-day promotion. <a href={rescueBook.purchaseUrl}>View it on Amazon →</a></div>
   </header>
 
   <section class="section section-tint">

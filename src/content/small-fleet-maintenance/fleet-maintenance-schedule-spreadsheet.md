@@ -130,3 +130,8 @@ Protect calculated cells while leaving genuine inputs usable, and keep filtering
 For the wider workflow, read [how to build the small fleet maintenance system](/small-fleet-maintenance/small-fleet-maintenance-system/) and [how to control defects and repairs](/small-fleet-maintenance/fleet-defect-repair-workflow/).
 
 > **Scope:** The spreadsheet should record maintenance requirements from the source adopted for each vehicle. It should not invent generic service intervals or make mechanical or regulatory judgments.
+
+
+## Working tools
+
+Use the [free due date and mileage calculator](/tools/fleet-maintenance-due-calculator/) to check one verified requirement. The [Small Fleet Maintenance System](/tools/small-fleet-maintenance-system/) connects recurring rules, actions, completion evidence, costs and downtime across several vehicles.

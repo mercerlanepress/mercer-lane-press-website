@@ -107,3 +107,8 @@ That small decision log prevents the same debate restarting from memory at the n
 For the operating workflow behind the data, see the [fleet defect and repair workflow](/small-fleet-maintenance/fleet-defect-repair-workflow/) and [small fleet maintenance system guide](/small-fleet-maintenance/small-fleet-maintenance-system/).
 
 > **Scope:** Cost and replacement decisions may involve technical, finance, tax, accounting, safety, legal, warranty, and operational considerations. Use the appropriate current professional and official sources rather than treating a fleet spreadsheet as the final authority.
+
+
+## Working tools
+
+Use the [free due date and mileage calculator](/tools/fleet-maintenance-due-calculator/) to check one verified requirement. The [Small Fleet Maintenance System](/tools/small-fleet-maintenance-system/) connects recurring rules, actions, completion evidence, costs and downtime across several vehicles.

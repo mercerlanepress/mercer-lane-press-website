@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import { fleetSystem } from '../../../data/small-fleet-system';
+const checkout = fleetSystem.released ? fleetSystem.checkoutUrl : null;
+const groups = [
+ ['Schedule verified requirements','Keep date, mileage and dual triggers visible. Separate DATA ISSUE, overdue and due-soon status from the booking action.'],
+ ['Trust the mileage','Preserve accepted readings and review anomalies, corrections and stale data. Keep Unit ID stable across records.'],
+ ['Control reported defects','Capture observations, owners, target dates and next actions without turning a symptom into an unsupported diagnosis.'],
+ ['Authorize and close repairs','Connect approved scope and limits to actual service, invoice evidence, rule resets, recommendations and downtime closure.'],
+ ['Review cost and disruption','Use defined fleet-paid categories and actual mileage boundaries. Separate technical downtime, shop cycle and business impact.'],
+ ['Make evidence visible','Use monthly and quarterly review workspaces and a repair-versus-replace evidence pack. Management makes the decision.']
+];
+const schema = {
+ '@context':'https://schema.org', '@type':'Product', name:'Mercer Lane Small Fleet Maintenance System',
+ description:'Connected Excel workbooks for small-fleet maintenance administration, with a worked demo, visual guide and editable operational forms.',
+ brand:{'@type':'Brand',name:'Mercer Lane Press'}, sku:'MLP-FLEET-1-2',
+ image:'https://mercerlanepress.com/images/small-fleet-system/01_small_fleet_bundle.jpg',
+ ...(checkout ? {offers:{'@type':'Offer',url:checkout,priceCurrency:'GBP',price:'5.99',availability:'https://schema.org/InStock'}} : {})
+};
+---
+<BaseLayout title="Small Fleet Maintenance Excel System & Editable Forms | £5.99" description="Track verified maintenance rules, mileage, due work, repair approvals, service history, costs and downtime. Blank and Demo Excel workbooks, Word/PDF forms. Introductory £5.99." image="/images/small-fleet-system/01_small_fleet_bundle.jpg" schema={schema}>
+ <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Tools',href:'/tools/'},{name:'Small Fleet Maintenance System'}]}/>
+ <header class="wrap page-head fleet-hero">
+  <div><p class="eyebrow">MERCER LANE PRESS · EXCEL SYSTEM + OPERATIONAL FORMS</p><h1>Small Fleet Maintenance System</h1>
+   <p class="lede">Keep maintenance scheduling, repair approvals and completion evidence connected.</p>
+   <p>A working system for the owner, office manager or fleet administrator handling a small fleet of cars, vans, pickups or light-duty vehicles. Give the next maintenance action a source, an owner and completion evidence.</p>
+   <p class="price">£5.99 <span>Introductory price · one-time digital purchase</span></p>
+   <div class="actions">{checkout && <a class="button" href={checkout} rel="noopener">Buy the digital bundle on Etsy</a>}<a class="button button-secondary" href="/tools/fleet-maintenance-due-calculator/">Try the free due calculator</a></div>
+   <p class="small">Microsoft Excel desktop required and supplied separately. Checkout and download delivery through Etsy; applicable taxes and local-currency conversion appear there. No physical item is supplied.</p>
+  </div><figure><img src="/images/small-fleet-system/01_small_fleet_bundle.jpg" alt="Small Fleet Maintenance System v1.2 bundle with an actual fictional Demo dashboard and included workbook and form details" width="2000" height="1500" fetchpriority="high"/><figcaption>Six files: Blank and Demo Excel workbooks, a visual guide, Word/PDF forms and use notes.</figcaption></figure>
+ </header>
+ <section class="section section-tint"><div class="wrap"><h2>Make the maintenance process easier to follow</h2><div class="grid-3">{groups.map(([heading,text])=><article class="card"><h3>{heading}</h3><p>{text}</p></article>)}</div></div></section>
+ <section class="section"><div class="wrap"><h2>See inside the finished v1.2 files</h2><p>Actual workbook and document previews. The Demo uses fictional Northline records and a fixed 15 October 2026 snapshot. All intervals, costs and outcomes are illustrations, not recommendations or benchmarks.</p>
+  <div class="preview-grid">
+   <figure><a href="/images/small-fleet-system/02_dashboard.jpg"><img src="/images/small-fleet-system/02_dashboard.jpg" alt="Actual fictional Demo dashboard showing due work, open actions, audit issues, defined costs and downtime" width="2000" height="1500" loading="lazy"/></a><figcaption>Review exceptions, open work and period totals together.</figcaption></figure>
+   <figure><a href="/images/small-fleet-system/03_service_and_closure.jpg"><img src="/images/small-fleet-system/03_service_and_closure.jpg" alt="Actual Rule Reset and CLOSED ADMIN repair authorization excerpts from the completed fictional workflow" width="2000" height="1500" loading="lazy"/></a><figcaption>Follow actual service through a verified reset and administrative closure.</figcaption></figure>
+   <figure><a href="/images/small-fleet-system/04_input_guide.jpg"><img src="/images/small-fleet-system/04_input_guide.jpg" alt="Input Guide entries with meanings, completion conditions, formats, sources, fictional examples and cautions" width="2000" height="1500" loading="lazy"/></a><figcaption>198 specific input explanations, with filters and links to operational sheets.</figcaption></figure>
+   <figure><a href="/images/small-fleet-system/05_guides_and_forms.jpg"><img src="/images/small-fleet-system/05_guides_and_forms.jpg" alt="Visual Quick Start first page and Weekly Fleet Exception List form from the final package" width="2000" height="1500" loading="lazy"/></a><figcaption>Read the setup sequence and use the printable or editable forms.</figcaption></figure>
+  </div></div></section>
+ <section class="section section-tint"><div class="wrap narrow"><h2>Your download contains exactly six files</h2><ul>
+  <li><strong>Blank Excel workbook:</strong> clean operational registers for your own fleet.</li>
+  <li><strong>Worked Demo Excel workbook:</strong> fictional records, deliberate exceptions and complete service/reset/approval examples.</li>
+  <li><strong>16-page visual Quick Start and User Guide PDF.</strong></li>
+  <li><strong>13-page Operational Forms PDF:</strong> weekly exceptions, defect reports, authorization, service history, downtime, review and replacement-evidence workspaces.</li>
+  <li><strong>Matching editable Operational Forms Word document.</strong></li>
+  <li><strong>License and Use Notes PDF.</strong></li>
+ </ul><p>Highlighted inputs and locked formulas help reduce accidental edits. The core workbook requires no macros, add-ins, external workbook links or internet connection.</p><h3>Start with a working copy</h3><ol><li>Purchase on Etsy, download the ZIP and extract all six files.</li><li>Read the Quick Start and explore the fictional Demo.</li><li>Save a working copy of Blank; choose your settings and add stable vehicle IDs.</li><li>Add actual mileage and source-verified requirements, then review due work and Audit exceptions.</li></ol></div></section>
+ <section class="section"><div class="wrap narrow"><h2>Capacity, software and practical limits</h2><p>Prepared capacity: 75 vehicles and cost rows; 3,000 mileage readings; 1,000 maintenance rules and actions; 500 authorizations; 1,500 service events and reset links; 750 downtime events; 100 replacement-evidence records; 200 monthly and quarterly reviews.</p><p>Use the prepared rows first. Structural expansion or sorting locked calculated tables requires temporarily unprotecting, preserving formulas and validation, checking the result and re-protecting. Filtering and routine entry are available while protected. Protection is not encryption.</p><p>Microsoft Excel desktop is required. Word or compatible document software is needed to edit the DOCX, and PDF software for the printable files. These applications are supplied separately. Google Sheets and Excel Web have not been verified.</p><p>Hours, event and condition requirements use entered evidence and manual review; the automatic engine calculates date and mileage rules. The system does not supply universal service intervals, diagnose faults, send automatic reminders, certify safety, guarantee savings or replace qualified advice or required inspection/compliance records.</p><p>The licence permits internal use by the purchasing organisation and its authorised employees/helpers. No resale, sublicensing or redistribution. Developed with AI assistance and reviewed by Mercer Lane Press.</p></div></section>
+ <section class="section section-tint"><div class="wrap narrow"><h2>The book teaches the method. The digital system supplies the working files.</h2><p><a href="/books/the-small-fleet-maintenance-operating-manual/">The Small Fleet Maintenance Operating Manual</a> by Warren Holtby explains source discipline, operating routines and review decisions. This separate companion implements that process in workbooks and forms.</p><p><strong>The book is sold separately and is not included in this digital download.</strong></p><a class="button button-secondary" href="https://www.amazon.com/dp/B0HM33JJL6">Read the book on Amazon</a></div></section>
+ <section class="section"><div class="wrap narrow"><h2>Frequently asked questions</h2>
+ <details><summary>Is there a subscription?</summary><p>No product subscription: the introductory price is £5.99 for a one-time digital purchase. Excel is supplied separately. Etsy shows applicable taxes and currency conversion.</p></details>
+ <details><summary>Are service intervals included?</summary><p>No. Enter current requirements from an appropriate verified source for each specific vehicle. Demo intervals and costs are fictional illustrations.</p></details>
+ <details><summary>How do I receive the files?</summary><p>Checkout and digital-file delivery are through Etsy. After purchase, download one ZIP containing the six customer files and extract it on your computer.</p></details>
+ <details><summary>Can I try a calculation first?</summary><p>Use the free <a href="/tools/fleet-maintenance-due-calculator/">Fleet Maintenance Due Date &amp; Mileage Calculator</a> for one verified rule. No account or email is required.</p></details>
+ <details><summary>Where can I get product help?</summary><p>Email <a href="mailto:mercerlanepress@gmail.com">mercerlanepress@gmail.com</a> with the product version and a non-sensitive description. Keep driver, invoice and payment details out of support messages.</p></details>
+ {checkout && <p><a class="button" href={checkout} rel="noopener">Get the six-file bundle on Etsy — £5.99</a></p>}
+ </div></section>
+</BaseLayout>
+<style>.fleet-hero{display:grid;grid-template-columns:1.15fr 1fr;gap:2rem;align-items:center}.fleet-hero figure{margin:0}.fleet-hero img,.preview-grid img{display:block;width:100%;height:auto;border:1px solid var(--line)}.preview-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem}.preview-grid figure{margin:0}figcaption{font-size:.9rem;color:var(--muted);margin-top:.7rem}.page-head h1{font-size:clamp(2.4rem,5vw,4rem);max-width:900px}.price{font-size:2rem;font-weight:700}.price span{display:block;font-size:1rem;font-weight:400}.small{font-size:.9rem;color:var(--muted);margin-top:1rem}details{border-bottom:1px solid var(--line);padding:1rem 0}summary{font-weight:700;cursor:pointer}details p{margin-top:.8rem}@media(max-width:800px){.fleet-hero,.preview-grid{grid-template-columns:1fr}}</style>

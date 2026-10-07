@@ -2,6 +2,10 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import AnalyticsConsent from '../components/AnalyticsConsent.astro';
+import { bookSeoBySlug } from '../data/book-seo';
+import { bookSeoSearchConsoleOverrides } from '../data/book-seo-search-console';
+import { siteSeoByPath } from '../data/site-seo';
+import { guideSeoByPath } from '../data/guide-seo';
 import '../styles/global.css';
 
 interface Props {
@@ -16,12 +20,63 @@ interface Props {
 
 const { title, description, image = '/social-card.svg', type = 'website', schema, robots, sensitiveTool = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const fullTitle = title.includes('Mercer Lane Press') ? title : `${title} | Mercer Lane Press`;
+const pathname = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const siteSeo = guideSeoByPath[pathname] ?? siteSeoByPath[pathname];
+const bookMatch = Astro.url.pathname.match(/^\/books\/([^/]+)\/?$/);
+const bookSeo = bookMatch
+  ? bookSeoSearchConsoleOverrides[bookMatch[1]] ?? bookSeoBySlug[bookMatch[1]]
+  : undefined;
+const effectiveDescription = bookSeo?.metaDescription ?? siteSeo?.metaDescription ?? description;
+const fullTitle = bookSeo?.seoTitle ?? siteSeo?.seoTitle ?? (title.includes('Mercer Lane Press') ? title : `${title} | Mercer Lane Press`);
+const organizationLogo = new URL('/logo.svg', Astro.site).href;
+
+const enhanceStructuredData = (value: any): any => {
+  if (Array.isArray(value)) return value.map(enhanceStructuredData);
+  if (!value || typeof value !== 'object') return value;
+
+  const mapped = Object.fromEntries(
+    Object.entries(value).map(([key, child]) => [key, enhanceStructuredData(child)])
+  ) as Record<string, any>;
+  const schemaTypes = Array.isArray(mapped['@type']) ? mapped['@type'] : [mapped['@type']];
+
+  // Collection pages often use lightweight name+URL references for guide cards.
+  // Those are links to pages, not complete Article entities, so expose them as
+  // WebPage rather than emitting Article markup without headline/image/date.
+  if (
+    schemaTypes.includes('Article') &&
+    mapped.name &&
+    mapped.url &&
+    !mapped.headline &&
+    !mapped.datePublished &&
+    !mapped.image
+  ) {
+    mapped['@type'] = 'WebPage';
+  }
+
+  const normalizedTypes = Array.isArray(mapped['@type']) ? mapped['@type'] : [mapped['@type']];
+
+  if (
+    normalizedTypes.includes('Organization') &&
+    mapped.name === 'Mercer Lane Press' &&
+    !mapped.logo
+  ) {
+    mapped.logo = organizationLogo;
+  }
+
+  if (bookSeo && normalizedTypes.includes('Book')) {
+    mapped.keywords = bookSeo.keywords.join(', ');
+  }
+
+  return mapped;
+};
+
+const enhancedSchema = schema ? enhanceStructuredData(schema) : schema;
 const org = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'Mercer Lane Press',
-  url: 'https://mercerlanepress.com/'
+  url: 'https://mercerlanepress.com/',
+  logo: organizationLogo
 };
 const measurementId = 'G-CK9SW6VRS9';
 ---
@@ -32,17 +87,17 @@ const measurementId = 'G-CK9SW6VRS9';
     <meta name="viewport" content="width=device-width">
     <meta name="generator" content={Astro.generator}>
     <title>{fullTitle}</title>
-    <meta name="description" content={description}>
+    <meta name="description" content={effectiveDescription}>
     {robots && <meta name="robots" content={robots}>}
     <link rel="canonical" href={canonical}>
     <meta property="og:type" content={type}>
     <meta property="og:title" content={fullTitle}>
-    <meta property="og:description" content={description}>
+    <meta property="og:description" content={effectiveDescription}>
     <meta property="og:url" content={canonical}>
     <meta property="og:image" content={new URL(image, Astro.site)}>
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content={fullTitle}>
-    <meta name="twitter:description" content={description}>
+    <meta name="twitter:description" content={effectiveDescription}>
     <meta name="theme-color" content="#10233f">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
@@ -95,11 +150,26 @@ const measurementId = 'G-CK9SW6VRS9';
     </script>}
 
     <script type="application/ld+json" set:html={JSON.stringify(org)} />
-    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+    {enhancedSchema && <script type="application/ld+json" set:html={JSON.stringify(enhancedSchema)} />}
   </head>
   <body>
     <Header/>
-    <main id="main-content"><slot /></main>
+    <main id="main-content">
+      <slot />
+      {bookSeo && <section class="section section-tint" aria-labelledby="search-intent-heading">
+        <div class="wrap narrow">
+          <div class="section-head">
+            <p class="eyebrow">SEARCH BY THE PROBLEM</p>
+            <h2 id="search-intent-heading">{bookSeo.heading}</h2>
+            <p>{bookSeo.intro}</p>
+          </div>
+          <h3>Questions this guide is designed to help with</h3>
+          <ul class="check-grid">
+            {bookSeo.questions.map(question => <li>{question}</li>)}
+          </ul>
+        </div>
+      </section>}
+    </main>
     <Footer/>
     <AnalyticsConsent/>
   </body>

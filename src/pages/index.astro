@@ -2,11 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BookCover from '../components/BookCover.astro';
 import { books } from '../data/books';
+import { smallFleetMaintenanceOperatingManual } from '../data/the-small-fleet-maintenance-operating-manual';
 
-const featuredBook=books.find(book=>book.slug==='the-rescue-dog-first-90-days')!;
+const featuredBook=smallFleetMaintenanceOperatingManual;
 const schema={'@context':'https://schema.org','@type':'WebSite',name:'Mercer Lane Press',url:'https://mercerlanepress.com/',description:'Independent publisher of practical problem-solving nonfiction.'};
 const featuredHighlights=(featuredBook.outcomes?.length ? featuredBook.outcomes : featuredBook.topics ?? []).slice(0,3);
-const homeBooks=books.filter(book=>book.slug!==featuredBook.slug).slice(0,6);
+const homeBooks=books.slice(0,6);
 ---
 <BaseLayout title="Mercer Lane Press | Practical problem-solving books" description="Mercer Lane Press publishes practical nonfiction guides that turn confusing problems into clear, repeatable steps." schema={schema}>
   <section class="hero">
@@ -15,7 +16,7 @@ const homeBooks=books.filter(book=>book.slug!==featuredBook.slug).slice(0,6);
         <p class="eyebrow">PRACTICAL NONFICTION</p>
         <h1>Clear systems for problems worth solving.</h1>
         <p class="lede">Mercer Lane Press publishes focused guides for readers who want to understand what is happening, test the right things, and move forward with confidence.</p>
-        <div class="notice"><strong>Free on Kindle · 1–4 October 2026.</strong> Just adopted a rescue dog? <em>The Rescue Dog First 90 Days</em> is the featured Mercer Lane Press book for this four-day Kindle promotion. <a href={featuredBook.purchaseUrl}>View it on Amazon →</a></div>
+        <div class="notice"><strong>Featured book.</strong> Managing a small fleet? <em>{featuredBook.title}</em> provides a practical system for maintenance schedules, repair actions, vehicle records, costs and downtime. <a href={'/books/' + featuredBook.slug + '/'}>Explore the book →</a></div>
         <div class="actions"><a class="button" href="/books/">Browse our books</a><a class="button button-secondary" href="/guides/">Read practical guides</a></div>
       </div>
       <BookCover book={featuredBook}/>
@@ -25,7 +26,7 @@ const homeBooks=books.filter(book=>book.slug!==featuredBook.slug).slice(0,6);
   <section class="section">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">FEATURED BOOK · FREE ON KINDLE 1–4 OCTOBER 2026</p>
+        <p class="eyebrow">FEATURED BOOK</p>
         <h2>{featuredBook.title}</h2>
         <p>{featuredBook.description}</p>
       </div>

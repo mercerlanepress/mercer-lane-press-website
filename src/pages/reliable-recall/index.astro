@@ -8,23 +8,23 @@ const guides = (await getCollection('reliableRecallGuides')).sort((a,b) => a.dat
 const schema = {
   '@context':'https://schema.org',
   '@type':'CollectionPage',
-  name:'Reliable Recall Guides',
-  description:'Practical, reward-based guides for long-line recall training, distractions, wildlife, sniffing, other dogs, and environment-specific off-leash readiness.',
+  name:'Dog Recall Training Guides',
+  description:'Dog recall training guides for long-line work, distractions, wildlife, sniffing, other dogs and off-leash readiness.',
   url:'https://mercerlanepress.com/reliable-recall/',
   hasPart:guides.map(g => ({'@type':'Article',name:g.data.title,url:'https://mercerlanepress.com/reliable-recall/' + g.id + '/'}))
 };
 ---
-<BaseLayout title="Reliable Recall Guides | Long-Line & Real-World Proofing" description="Practical, reward-based guides for long-line recall training, distractions, wildlife, sniffing, other dogs, and environment-specific off-leash readiness." schema={schema}>
-  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Dog Guides',href:'/dog-guides/'},{name:'Reliable Recall'}]}/>
+<BaseLayout title="Dog Recall Training: Long-Line & Real-World Recall" description="Dog recall training guides for long-line work, distractions, wildlife, sniffing, other dogs and off-leash readiness." schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Dog Guides',href:'/dog-guides/'},{name:'Dog Recall Training'}]}/>
   <header class="page-head wrap">
-    <p class="eyebrow">DOG RECALL & OUTDOOR PROOFING HUB</p>
-    <h1>Build Recall That Holds Up Outside the House</h1>
-    <p class="lede">A good kitchen recall is only the starting point. Build a clean cue, protect it with sensible management, and proof distance, distractions, and environments one variable at a time.</p>
+    <p class="eyebrow">DOG RECALL TRAINING HUB</p>
+    <h1>Dog Recall Training for Real-World Distractions</h1>
+    <p class="lede">Build a clear recall cue, protect it with sensible management, then train it on a long line around distance, distractions and changing environments instead of repeatedly testing the dog before the skill is ready.</p>
   </header>
 
   <section class="section section-tint">
     <div class="wrap">
-      <div class="section-head"><h2>Train the setup instead of repeatedly testing the dog</h2><p>Outdoor recall becomes more useful when you can identify exactly what changed: distance, the value of the distraction, the environment, or the dog’s arousal.</p></div>
+      <div class="section-head"><h2>A practical recall-training progression</h2><p>Outdoor recall becomes more useful when you can identify exactly what changed: distance, the value of the distraction, the environment, or the dog’s arousal.</p></div>
       <div class="hub-steps">
         <article><h3>Protect the cue</h3><p>Call once when success is plausible. Use a leash, long line, fence, or more distance to prevent repeated practice of ignoring the cue.</p></article>
         <article><h3>Change one variable</h3><p>Increase distance, distraction, or environmental difficulty separately so a failed repetition tells you something useful.</p></article>
@@ -36,8 +36,8 @@ const schema = {
 
   <section class="section">
     <div class="wrap">
-      <div class="section-head"><p class="eyebrow">PRACTICAL GUIDES</p><h2>Start with the distraction or decision that is causing trouble</h2></div>
-      <div class="grid-3">{guides.map(g => <GuideCard guide={g} base="/reliable-recall/" label="RELIABLE RECALL"/>)}</div>
+      <div class="section-head"><p class="eyebrow">PRACTICAL GUIDES</p><h2>Start with the recall problem or distraction causing trouble</h2></div>
+      <div class="grid-3">{guides.map(g => <GuideCard guide={g} base="/reliable-recall/" label="DOG RECALL TRAINING"/>)}</div>
     </div>
   </section>
 
@@ -46,7 +46,7 @@ const schema = {
       <h2>Go deeper with the complete proofing system</h2>
       <p><a href="/books/reliable-recall/"><em>Reliable Recall: From Long Line to Real-World Freedom</em></a> covers cue repair, reward strategy, indoor foundations, long-line handling, the Distance–Distraction–Environment proofing map, social and scent distractions, wildlife, emergency recall, generalization, environment-specific off-leash readiness, maintenance, troubleshooting, a 30-day plan, scenarios, and repeat-use logs and checkpoints.</p>
       <p>Recall is a safety skill, not a replacement for physical restraint where a mistake could have serious consequences. Roads, livestock, wildlife, cliffs, unsafe water, local leash rules, and uncontrolled public spaces can make a leash or long line the correct choice regardless of training progress.</p>
-      <p>If another dog triggers fear, lunging, snapping, or intense distress rather than simple social excitement, use the <a href="/reactive-dog-walking/">Reactive Dog Walking hub</a> and consider appropriate professional support. For dogs whose responsiveness changes as arousal rises more generally, the <a href="/over-aroused-dog/">Over-Aroused Dog hub</a> may also be useful.</p>
+      <p>If another dog triggers fear, lunging, snapping, or intense distress rather than simple social excitement, use the <a href="/reactive-dog-walking/">Reactive Dog Training hub</a> and consider appropriate professional support. For dogs whose responsiveness changes as arousal rises more generally, the <a href="/over-aroused-dog/">Over-Aroused Dog hub</a> may also be useful.</p>
     </div>
   </section>
 </BaseLayout>

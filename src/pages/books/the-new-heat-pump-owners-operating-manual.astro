@@ -20,7 +20,7 @@ const schema = {
   sameAs:book.purchaseUrl
 };
 ---
-<BaseLayout title={book.title} description={book.description} image={book.coverReady ? book.cover : undefined} schema={schema}>
+<BaseLayout title="Heat Pump Owner's Manual UK | Controls, Settings & Troubleshooting" description="UK air-to-water heat pump owner's guide: understand weather compensation, flow temperature, cold rooms, defrost cycles, running costs and when to call an installer." image={book.coverReady ? book.cover : undefined} schema={schema}>
   <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Books',href:'/books/'},{name:book.title}]}/>
   <section class="wrap book-layout">
     <BookCover book={book} large/>
@@ -33,6 +33,21 @@ const schema = {
       <div class="actions">
         <a class="button" href={book.purchaseUrl}>Buy on Amazon</a>
         <a class="button button-secondary" href="/heat-pump-owners/">Read free guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">HEATING SEASON QUESTIONS</p>
+        <h2>Heat pump not heating properly, running constantly or costing more than expected?</h2>
+        <p>Start by identifying the symptom instead of changing several controls at once. A heat pump can run for long periods with lukewarm radiators and still be operating normally. But a home that cannot reach its target temperature, repeated fault messages or an unexplained change deserves closer attention.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>House feels cold</h3><p>Check the room target, heating schedule and whether the problem affects the whole home or just one room. Record the outdoor temperature and when comfort drops. Avoid adjusting installer-only parameters.</p><p><a href="/heat-pump-owners/">Start with the owner guides →</a></p></article>
+        <article class="card"><h3>Heat pump running all day</h3><p>Long, steady operation can be normal for low-temperature heating. Compare indoor comfort, outdoor conditions, hot-water activity and electricity use before deciding something is wrong.</p><p><a href="/heat-pump-owners/">Understand normal operation →</a></p></article>
+        <article class="card"><h3>Electricity bills seem high</h3><p>First distinguish whole-house electricity from the heat pump's measured use. Note weather, schedules, hot-water demand and auxiliary heating, then compare like-for-like periods.</p><p><a href="/heat-pump-owners/">Investigate high running costs →</a></p></article>
       </div>
     </div>
   </section>

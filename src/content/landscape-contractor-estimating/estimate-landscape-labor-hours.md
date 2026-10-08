@@ -196,3 +196,5 @@ The goal is not perfect prediction.
 It is a labor estimate that becomes more evidence-based over time.
 
 Continue with [estimate versus actual and production-rate learning](/landscape-contractor-estimating/landscape-estimate-versus-actual/).
+
+To carry these assumptions into a working estimate, the separate [Landscape Estimating & Job Costing Excel System](/tools/landscape-estimating-job-costing-system/) supports direct productive hours or quantity-based production rates, additional paid hours and your own loaded labour costs. Its job review compares actual paid labour with the awarded budget, while the production log keeps comparable productive observations separate for learning.

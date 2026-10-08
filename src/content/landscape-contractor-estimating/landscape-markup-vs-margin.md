@@ -192,3 +192,5 @@ If the estimate produces a higher number than the available budget, possible com
 Changing the final price cell without changing the scope or cost assumptions does not repair the estimate.
 
 The stronger workflow is to make the price an output of the [Six-Pass Landscape Estimate](/landscape-contractor-estimating/six-pass-landscape-estimate/).
+
+The separate [Landscape Estimating & Job Costing Excel System](/tools/landscape-estimating-job-costing-system/) implements a defined cost base: direct costs, one overhead allocation and an explicit risk allowance, followed by markup or target margin. It retains the calculated and quoted price for review, then connects the sold estimate with actual job costs and final profit.

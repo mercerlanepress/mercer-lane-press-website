@@ -255,3 +255,5 @@ The loop is simple:
 **Estimate → Freeze → Perform → Record → Compare → Diagnose → Update**
 
 Then feed the lesson back into the next [Six-Pass Landscape Estimate](/landscape-contractor-estimating/six-pass-landscape-estimate/).
+
+For a working implementation, the separate [Landscape Estimating & Job Costing Excel System](/tools/landscape-estimating-job-costing-system/) keeps a values-only awarded baseline, incurred costs, approved variations and final job results connected. Its production log separates comparable productive observations from paid labour costs so you can review the evidence before changing expected rates.

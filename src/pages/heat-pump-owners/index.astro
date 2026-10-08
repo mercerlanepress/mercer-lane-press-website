@@ -6,13 +6,27 @@ import GuideCard from '../../components/GuideCard.astro';
 
 const guides = (await getCollection('heatPumpOwnerGuides')).sort((a,b) => a.data.order - b.data.order);
 ---
-<BaseLayout title="Heat Pump Owner Guides" description="Practical UK guides for domestic air-to-water heat pump owners: controls, weather compensation, defrost, comfort, electricity use, faults, and knowing when to call the installer.">
+<BaseLayout title="Heat Pump Troubleshooting & Settings | UK Owner Guides" description="Free UK heat pump owner guides: what to check when your house feels cold, heating runs constantly, electricity use is high, or defrost and weather compensation seem confusing.">
   <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Heat Pump Owners'}]}/>
   <header class="page-head wrap">
     <p class="eyebrow">UK AIR-TO-WATER HEAT PUMPS</p>
-    <h1>Heat Pump Owner Guides</h1>
+    <h1>Heat Pump Troubleshooting and Settings: UK Owner Guides</h1>
     <p class="lede">Start with what the system is doing now, make one deliberate owner-level change at a time, and stop when the next useful step belongs with a competent professional.</p>
   </header>
+
+  <section class="section">
+    <div class="wrap narrow">
+      <h2>Why is my air source heat pump not heating the house?</h2>
+      <p>If your home is colder than expected, check whether the controller is requesting heating, whether a holiday or setback schedule is active, and whether the issue is limited to one room or affects the whole house. Note the outside temperature and any fault messages. A system that never reaches the requested temperature needs installer assessment rather than repeated guessing at technical settings.</p>
+      <h2>Should heat pump radiators feel hot?</h2>
+      <p>Air-to-water heat pumps often circulate lower-temperature water than traditional boilers, so radiators may feel warm rather than very hot. Judge the system by room comfort over time. If comfort is poor, record the symptoms and discuss flow-temperature or heating-curve changes with your installer or consult the exact manufacturer's owner instructions.</p>
+      <h2>Is it normal for a heat pump to run constantly in winter?</h2>
+      <p>Long heating cycles can be normal, particularly in cold weather. Concern increases when the house stays cold, faults appear, or consumption changes sharply without an obvious reason. Compare like-for-like weather and heating demands before concluding there is a fault.</p>
+      <h2>Why is my heat pump steaming or defrosting?</h2>
+      <p>Visible vapour, dripping water and temporary interruptions to heating can be part of a normal outdoor-unit defrost cycle. Persistent ice, damage, fault messages or heating that does not recover warrant professional advice. Keep hands and tools out of the outdoor unit.</p>
+      <p>For a structured approach to controls, settings, running costs and evidence to give an installer, explore <a href="/books/the-new-heat-pump-owners-operating-manual/">The New Heat Pump Owner's Operating Manual</a> by Gareth Fenwick.</p>
+    </div>
+  </section>
 
   <section class="section section-tint">
     <div class="wrap">

@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+const schema = {'@context':'https://schema.org','@type':'WebApplication',name:'UK Heat Pump Running Cost Calculator',url:'https://mercerlanepress.com/tools/heat-pump-running-cost-calculator/',applicationCategory:'UtilitiesApplication',operatingSystem:'Any',isAccessibleForFree:true,description:'Calculate estimated UK air-source heat pump electricity costs using your own kWh, tariff and efficiency assumptions.'};
+---
+<BaseLayout title="Heat Pump Running Cost Calculator UK | Free kWh Cost Tool" description="Free UK air source heat pump running cost calculator. Estimate daily, monthly and heating-season electricity costs from kWh, tariff and COP or SCOP. No signup." schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Tools',href:'/tools/'},{name:'Heat Pump Running Cost Calculator'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">FREE UK HEAT PUMP CALCULATOR</p>
+    <h1>Heat Pump Running Cost Calculator</h1>
+    <p class="lede">Estimate what your air-to-water heat pump costs to run using your own electricity tariff and measured consumption—or estimate from delivered heat and an assumed COP.</p>
+  </header>
+  <section class="section"><div class="wrap narrow">
+    <div class="notice"><strong>Use your own tariff.</strong> Electricity prices vary by supplier, region, meter and tariff. The example inputs are illustrative, not a live UK price quote. This calculator estimates energy cost only: it excludes standing charges, other household electricity and any heat-pump-related costs you do not enter.</div>
+    <form id="heat-cost-form" class="card" style="display:grid;gap:1rem" novalidate>
+      <fieldset style="border:0;padding:0;margin:0;display:grid;gap:.65rem">
+        <legend style="font-weight:700;margin-bottom:.6rem">Choose how you want to calculate</legend>
+        <label><input type="radio" name="method" value="meter" checked/> I know my heat pump electricity use (kWh)</label>
+        <label><input type="radio" name="method" value="heat"/> I know or estimate useful heat delivered (kWh)</label>
+      </fieldset>
+      <div id="meter-fields"><label for="electricity">Heat pump electricity used per day (kWh)</label><input id="electricity" type="number" inputmode="decimal" min="0" max="10000" step="any" value="15" style="display:block;width:100%;padding:.7rem;margin-top:.35rem"/><p class="small">Prefer dedicated heat-pump metering if available. Whole-house meter readings include other appliances.</p></div>
+      <div id="heat-fields" hidden>
+        <label for="heat">Useful heat delivered per day (kWh)</label><input id="heat" type="number" inputmode="decimal" min="0" max="10000" step="any" value="45" style="display:block;width:100%;padding:.7rem;margin:.35rem 0 1rem"/>
+        <label for="cop">Assumed COP or average period efficiency</label><input id="cop" type="number" inputmode="decimal" min="0.1" max="20" step="any" value="3" style="display:block;width:100%;padding:.7rem;margin-top:.35rem"/><p class="small">COP varies with weather and operating conditions. A seasonal SCOP should only be used with heat demand for the matching season.</p>
+      </div>
+      <div><label for="tariff">Electricity unit price (pence per kWh)</label><input id="tariff" type="number" inputmode="decimal" min="0" max="1000" step="any" value="25" style="display:block;width:100%;padding:.7rem;margin-top:.35rem"/></div>
+      <div><label for="days">Days in the period to estimate</label><input id="days" type="number" inputmode="numeric" min="1" max="366" step="1" value="30" style="display:block;width:100%;padding:.7rem;margin-top:.35rem"/></div>
+      <div class="actions"><button class="button" type="submit">Calculate running cost</button><button class="button button-secondary" type="reset">Reset example</button></div>
+      <p id="calc-error" role="alert" hidden style="color:#9b2c2c"></p>
+    </form>
+    <section id="heat-results" class="card" aria-live="polite" aria-atomic="true" style="margin-top:1rem">
+      <p class="eyebrow">ESTIMATED RUNNING COST</p><h2 id="period-cost">£112.50 over 30 days</h2>
+      <p id="detail-line">15.00 kWh/day × 25.00p/kWh</p>
+      <div class="grid-3">
+        <div><h3>Daily</h3><p id="daily-cost">£3.75</p></div>
+        <div><h3>7 days</h3><p id="week-cost">£26.25</p></div>
+        <div><h3>30 days</h3><p id="month-cost">£112.50</p></div>
+      </div>
+      <p id="units-line">Estimated period electricity: 450.00 kWh</p>
+    </section>
+    <h2>How to estimate heat pump electricity costs</h2>
+    <p>If you have a dedicated electricity reading, use that. Daily cost equals <strong>electricity used (kWh) × tariff (£/kWh)</strong>. For example, 15 kWh/day at 25p/kWh costs £3.75 per day. Multiply by the number of comparable days to estimate a period.</p>
+    <p>If you only know useful heat delivered, divide delivered heat (kWh) by the <strong>COP</strong> assumed for the same period to estimate electricity consumption. A COP of 3 means approximately 3 kWh of useful heat per 1 kWh of electricity in that period. It does not mean every winter day will perform the same.</p>
+    <h2>Why actual bills may differ</h2>
+    <p>Heat demand and efficiency change with outdoor temperature, hot-water use, schedules, home insulation, target temperature, backup heating and defrost cycles. Some heat-pump monitors omit auxiliary equipment. Time-of-use tariffs need separate calculations for the kWh bought at each rate. The calculator is a planning illustration—not a prediction of your actual bill.</p>
+    <h2>Heat pump using more electricity than expected?</h2>
+    <p>Compare similar weather and comfort requirements before adjusting controls. Record the tariff, meter period, heating and hot-water schedules, indoor target and any error messages. Read the <a href="/heat-pump-owners/">free UK heat pump owner troubleshooting guides</a> for a structured approach.</p>
+    <div class="notice"><strong>Want a complete operating method?</strong> <a href="/books/the-new-heat-pump-owners-operating-manual/">The New Heat Pump Owner's Operating Manual by Gareth Fenwick</a> covers controls, flow temperature, weather compensation, comfort, electricity-use investigations and when to contact an installer. <a href="https://www.amazon.co.uk/dp/B0HF51WQ1F">See the book on Amazon UK</a>.</div>
+  </div></section>
+  <script>
+    const form = document.querySelector<HTMLFormElement>('#heat-cost-form');
+    const $ = (id: string) => document.getElementById(id)!;
+    const money = (n: number) => new Intl.NumberFormat('en-GB',{style:'currency',currency:'GBP'}).format(n);
+    const number = (n: number) => new Intl.NumberFormat('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}).format(n);
+    function recalc() {
+      if (!form) return;
+      const method = (form.querySelector<HTMLInputElement>('input[name="method"]:checked')?.value ?? 'meter');
+      $('meter-fields').hidden = method !== 'meter';
+      $('heat-fields').hidden = method !== 'heat';
+      const val = (id: string) => Number((document.getElementById(id) as HTMLInputElement).value);
+      const ids = method === 'meter' ? ['electricity','tariff','days'] : ['heat','cop','tariff','days'];
+      const valid = ids.every(id => {
+        const element = document.getElementById(id) as HTMLInputElement;
+        return element.value.trim() !== '' && element.validity.valid && Number.isFinite(val(id));
+      }) && (method !== 'heat' || val('cop') > 0);
+      const err = $('calc-error');
+      err.hidden = valid;
+      if (!valid) {err.textContent='Enter valid, non-negative numbers within the displayed ranges. COP must be greater than zero.';$('heat-results').hidden=true;return;}
+      const dailyKwh = method === 'meter' ? val('electricity') : val('heat') / val('cop');
+      const price = val('tariff') / 100, days = val('days');
+      $('heat-results').hidden = false;
+      $('period-cost').textContent = money(dailyKwh * price * days) + ' over ' + days + (days === 1 ? ' day' : ' days');
+      $('detail-line').textContent = number(dailyKwh) + ' kWh/day × ' + number(val('tariff')) + 'p/kWh' + (method === 'heat' ? ' (estimated from heat ÷ COP)' : '');
+      $('daily-cost').textContent = money(dailyKwh*price);
+      $('week-cost').textContent = money(dailyKwh*price*7);
+      $('month-cost').textContent = money(dailyKwh*price*30);
+      $('units-line').textContent = 'Estimated period electricity: ' + number(dailyKwh*days) + ' kWh';
+    }
+    form?.addEventListener('submit', event => {event.preventDefault();recalc();});
+    form?.addEventListener('input', recalc);
+    form?.addEventListener('change', recalc);
+    form?.addEventListener('reset', () => window.setTimeout(recalc,0));
+    recalc();
+  </script>
+</BaseLayout>

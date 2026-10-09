@@ -42,6 +42,7 @@ export const GET: APIRoute = async () => {
   const smallFleetMaintenanceGuides = await getCollection('smallFleetMaintenanceGuides');
   const paths = [
     '/tools/landscape-estimating-job-costing-system/',
+    '/tools/heat-pump-running-cost-calculator/',
     '/tools/fleet-maintenance-due-calculator/', '/tools/small-fleet-maintenance-system/',
     '/tools/family-admin-reset-planner/', '/tools/family-admin-operating-system/', '/books/stop-drowning-in-family-admin/', '/family-admin/',
     '/books/the-small-fleet-maintenance-operating-manual/', '/small-fleet-maintenance/',

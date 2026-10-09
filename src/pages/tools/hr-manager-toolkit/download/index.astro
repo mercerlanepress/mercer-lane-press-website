@@ -8,11 +8,10 @@ import Breadcrumbs from '../../../../components/Breadcrumbs.astro';
 <script is:inline>
 (async()=>{
  const params=new URLSearchParams(location.search);const id=params.get('session_id');
- history.replaceState(null,'',location.pathname);
  const title=document.getElementById('download-title'),message=document.getElementById('download-message'),actions=document.getElementById('download-actions');
  const fail=text=>{title.textContent='We could not verify this download';message.textContent=text;actions.hidden=true;};
  if(!/^cs_[A-Za-z0-9_]{8,200}$/.test(id||'')){fail('Open this page from your completed Stripe checkout. If you already paid, contact support using the checkout email address.');return;}
- try{const r=await fetch('/api/hr-access',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({session_id:id})});const d=await r.json();if(!r.ok)throw new Error(d.message||'Purchase verification failed.');title.textContent='Your download is ready';message.textContent='Payment verified. Download and save your complete toolkit below.';actions.hidden=false;}
+ try{const r=await fetch('/api/hr-access',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({session_id:id})});const d=await r.json();if(!r.ok)throw new Error(d.message||'Purchase verification failed.');title.textContent='Your download is ready';message.textContent='Payment verified. Download and save your complete toolkit below.';actions.hidden=false;history.replaceState(null,'',location.pathname+location.hash);}
  catch(e){fail(e.message||'Try again later or contact support with your receipt.');}
 })();
 </script>

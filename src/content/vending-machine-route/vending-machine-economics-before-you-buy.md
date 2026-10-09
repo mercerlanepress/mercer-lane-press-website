@@ -114,3 +114,8 @@ Revisit the model if:
 The model is a decision tool, not a one-time spreadsheet exercise.
 
 Before you model a site, make sure it deserves the work. Start with [how to evaluate a vending machine location](/vending-machine-route/evaluate-vending-machine-location/). If the equipment is used, continue with the [used vending machine inspection checklist](/vending-machine-route/inspect-a-used-vending-machine/).
+
+
+## Try the arithmetic with your own assumptions
+
+Use the [free vending machine profit calculator](/tools/vending-machine-profit-calculator/) to compare contribution, break-even sales, commission and service costs. Its separate location assessment does not forecast revenue.

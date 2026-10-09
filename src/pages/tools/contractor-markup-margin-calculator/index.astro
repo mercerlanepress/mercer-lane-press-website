@@ -235,12 +235,12 @@ const faqSchema = {
         const cost = Number(costInput.value);
         const rawPercentage = Number(percentageInput.value);
 
-        if (!Number.isFinite(cost) || cost <= 0) {
+        if (costInput.value.trim() === '' || !costInput.validity.valid || !Number.isFinite(cost) || cost <= 0) {
           error.textContent = 'Enter a cost base greater than zero.';
           error.hidden = false;
           return false;
         }
-        if (!Number.isFinite(rawPercentage) || rawPercentage < 0) {
+        if (percentageInput.value.trim() === '' || !percentageInput.validity.valid || !Number.isFinite(rawPercentage) || rawPercentage < 0) {
           error.textContent = 'Enter a percentage of zero or more.';
           error.hidden = false;
           return false;

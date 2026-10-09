@@ -46,6 +46,17 @@ for(const value of bookData.matchAll(/"?cover"?:\s*["']([^"']+)/g)) if(!existsSy
 
 const sitemap=readFileSync(join(dist,'sitemap.xml'),'utf8');
 if(!sitemap.startsWith('<?xml')||!sitemap.includes('https://mercerlanepress.com/')) throw new Error('Sitemap is missing or invalid.');
+// Every public Tools or Free Tools landing page should be discoverable via sitemap.
+for (const section of ['tools', 'free-tools']) {
+  const directory=join(root,'src/pages',section);
+  for (const entry of readdirSync(directory,{withFileTypes:true})) {
+    if (entry.name==='index.astro') continue;
+    const slug=entry.isDirectory()?entry.name:entry.name.endsWith('.astro')?entry.name.slice(0,-'.astro'.length):null;
+    if (!slug) continue;
+    const location='<loc>https://mercerlanepress.com/'+section+'/'+slug+'/</loc>';
+    if (!sitemap.includes(location)) throw new Error('Missing public tool in sitemap: '+location);
+  }
+}
 const robots=readFileSync(join(dist,'robots.txt'),'utf8');
 if(!/Sitemap:\s*https:\/\/mercerlanepress\.com\/sitemap\.xml/i.test(robots)) throw new Error('robots.txt does not identify the canonical sitemap.');
 for(const file of html){

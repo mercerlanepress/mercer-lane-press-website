@@ -8,7 +8,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "node scripts/check-site.mjs && node scripts/check-free-review.mjs && node scripts/check-hr-delivery.mjs && node scripts/check-family-reset.mjs && node scripts/check-fleet.mjs"
+    "check": "node scripts/check-site.mjs && node scripts/check-free-review.mjs && node scripts/check-hr-delivery.mjs && node scripts/check-family-reset.mjs && node scripts/check-fleet.mjs && node scripts/check-job-profit.mjs"
   },
   "dependencies": {
     "astro": "^7.3.3"

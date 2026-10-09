@@ -260,12 +260,12 @@ const faqSchema = {
         const starting = Number(startingBalance.value || 0);
         const used = Number(ptoUsed.value);
 
-        if (!Number.isFinite(allowance) || allowance < 0) {
+        if (annualAllowance.value.trim() === '' || !annualAllowance.validity.valid || !Number.isFinite(allowance) || allowance < 0) {
           error.textContent = 'Enter an annual PTO allowance of zero hours or more.';
           error.hidden = false;
           return false;
         }
-        if (!Number.isFinite(dayHours) || dayHours <= 0) {
+        if (hoursPerDay.value.trim() === '' || !hoursPerDay.validity.valid || !Number.isFinite(dayHours) || dayHours <= 0) {
           error.textContent = 'Enter standard workday hours greater than zero.';
           error.hidden = false;
           return false;
@@ -275,7 +275,7 @@ const faqSchema = {
           error.hidden = false;
           return false;
         }
-        if (!Number.isInteger(completed) || completed < 0 || completed > periods) {
+        if (completedPeriods.value.trim() === '' || !completedPeriods.validity.valid || !Number.isInteger(completed) || completed < 0 || completed > periods) {
           error.textContent = `Completed credited periods must be a whole number from 0 to ${Math.floor(periods)}.`;
           error.hidden = false;
           return false;
@@ -285,7 +285,7 @@ const faqSchema = {
           error.hidden = false;
           return false;
         }
-        if (!Number.isFinite(used) || used < 0) {
+        if (ptoUsed.value.trim() === '' || !ptoUsed.validity.valid || !Number.isFinite(used) || used < 0) {
           error.textContent = 'Enter PTO used as zero hours or more.';
           error.hidden = false;
           return false;

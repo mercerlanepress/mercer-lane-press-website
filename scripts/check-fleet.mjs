@@ -42,6 +42,7 @@ try{
  assert.equal((await handleFleetRoute(new Request('https://example.com/api/fleet-download'),env)).status,403);
 }finally{globalThis.fetch=fetchOriginal;}
 for(const p of ['fleet-maintenance-due-calculator','small-fleet-maintenance-system']){const html=readFileSync(`dist/tools/${p}/index.html`,'utf8');assert.match(html,/rel="canonical"/);assert.match(readFileSync('dist/sitemap.xml','utf8'),new RegExp(`/tools/${p}/`));}
+const calculatorHtml=readFileSync('dist/tools/fleet-maintenance-due-calculator/index.html','utf8');assert.match(calculatorHtml,/Engine hours only/);assert.match(calculatorHtml,/id="due-hours"/);assert.match(calculatorHtml,/engine-hour/);
 assert.equal(existsSync('public/Mercer_Lane_Small_Fleet_Maintenance_System_v1_0.zip'),false);
 const tool=readFileSync('src/scripts/fleet-due.mjs','utf8');assert.doesNotMatch(tool,/localStorage\.setItem|sessionStorage|fetch\(/);assert.match(tool,/mlp-analytics-consent/);
 console.log(`Fleet checks passed: ${cases.length} status scenarios including engine hours, calendar boundaries, manuscript example, delivery release gate, paid product/session isolation, origin checks, private routing and page metadata.`);

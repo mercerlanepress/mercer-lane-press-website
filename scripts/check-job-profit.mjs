@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { amount, calculate, compare } from '../public/tools-assets/job-profit/logic.js';
+import { amount, calculate, compare, targetRevenue } from '../public/tools-assets/job-profit/logic.js';
 
 const actual = {
   original: '40000', changes: '1500',
@@ -19,6 +19,10 @@ assert.ok(Math.abs(result.margin - 8500/41500) < 1e-12);
 assert.ok(Math.abs(result.markup - 8500/33000) < 1e-12);
 assert.equal(result.shortfall, 0);
 assert.equal(result.cushion, 8500);
+assert.equal(targetRevenue(result.total, 25), 44000);
+assert.equal(targetRevenue(0, 25), 0);
+assert.throws(()=>targetRevenue(100,'100'),RangeError);
+assert.throws(()=>targetRevenue(100,'-1'),RangeError);
 const variance = compare(estimated, actual);
 assert.equal(variance.profitVariance, 1500);
 assert.deepEqual(variance.costVariances, [0,0,0,0,0,0]);
@@ -33,4 +37,4 @@ assert.equal(loss.shortfall, 40);
 assert.equal(loss.cushion, 0);
 for(const bad of ['abc','-1','1000000000000.01','Infinity']) assert.throws(()=>amount(bad),RangeError);
 assert.equal(amount(''),0);
-console.log('Construction job profit checks passed: worked example, margins, cost variance, zero denominators, losses and invalid values.');
+console.log('Construction job profit checks passed: worked example, margins, target-margin revenue, cost variance, zero denominators, losses and invalid values.');

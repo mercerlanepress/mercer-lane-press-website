@@ -1,14 +1,21 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
-const schema = {'@context':'https://schema.org','@type':'WebApplication',name:'UK Heat Pump Running Cost Calculator',url:'https://mercerlanepress.com/tools/heat-pump-running-cost-calculator/',applicationCategory:'UtilitiesApplication',operatingSystem:'Any',isAccessibleForFree:true,description:'Calculate estimated UK air-source heat pump electricity costs using your own kWh, tariff and efficiency assumptions.'};
+const schema = {'@context':'https://schema.org','@type':'WebApplication',name:'UK Heat Pump Running Cost Calculator',url:'https://mercerlanepress.com/tools/heat-pump-running-cost-calculator/',applicationCategory:'UtilitiesApplication',operatingSystem:'Any',isAccessibleForFree:true,description:'Calculate UK air-source heat pump electricity use and running cost from daily or annual kWh, electricity tariff and COP or SCOP assumptions.'};
+const faqSchema = {'@context':'https://schema.org','@type':'FAQPage','mainEntity':[
+  {'@type':'Question',name:'How do I calculate annual heat pump running cost?','acceptedAnswer':{'@type':'Answer',text:'Estimate annual heat pump electricity use, then multiply it by your electricity unit rate. If you start from annual useful heat demand, divide that heat demand by the seasonal efficiency or SCOP first.'}},
+  {'@type':'Question',name:'How do I calculate heat pump electricity use from SCOP?','acceptedAnswer':{'@type':'Answer',text:'Electricity use is useful heat demand divided by SCOP for the same period. For example, 12,000 kWh of annual useful heat at a SCOP of 3 would require about 4,000 kWh of electricity.'}},
+  {'@type':'Question',name:'What is the difference between COP and SCOP?','acceptedAnswer':{'@type':'Answer',text:'COP describes efficiency at a particular operating condition or period, while SCOP is a seasonal average. Use an efficiency figure that matches the period represented by the heat-demand input.'}},
+  {'@type':'Question',name:'Does this heat pump calculator include the electricity standing charge?','acceptedAnswer':{'@type':'Answer',text:'No. It estimates the variable electricity cost attributable to the heat pump from the kWh and tariff entered. Standing charges and other household electricity are excluded.'}},
+  {'@type':'Question',name:'Why might my actual heat pump bill differ from the calculator?','acceptedAnswer':{'@type':'Answer',text:'Actual use changes with weather, indoor temperature, hot-water demand, flow temperature, controls, defrosting, backup heating and the accuracy of the metering and efficiency assumptions.'}}
+]};
 ---
-<BaseLayout title="Heat Pump Running Cost Calculator UK | Free kWh Cost Tool" description="Free UK air source heat pump running cost calculator. Estimate daily, monthly and heating-season electricity costs from kWh, tariff and COP or SCOP. No signup." schema={schema}>
+<BaseLayout title="Air Source Heat Pump Running Cost Calculator UK | COP & SCOP" description="Free UK heat pump running cost calculator. Estimate daily, monthly or annual electricity cost from kWh, tariff and COP/SCOP using your own figures." schema={[schema, faqSchema]}>
   <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Tools',href:'/tools/'},{name:'Heat Pump Running Cost Calculator'}]}/>
   <header class="page-head wrap">
     <p class="eyebrow">FREE UK HEAT PUMP CALCULATOR</p>
     <h1>Heat Pump Running Cost Calculator</h1>
-    <p class="lede">Estimate what your air-to-water heat pump costs to run using your own electricity tariff and measured consumption—or estimate from delivered heat and an assumed COP.</p>
+    <p class="lede">Estimate daily, monthly and annual air-source heat pump running costs using your own electricity tariff and measured electricity use—or calculate electricity from useful heat and an assumed COP or SCOP.</p>
   </header>
   <section class="section"><div class="wrap narrow">
     <div class="notice"><strong>Use your own tariff.</strong> Electricity prices vary by supplier, region, meter and tariff. The example inputs are illustrative, not a live UK price quote. This calculator estimates energy cost only: it excludes standing charges, other household electricity and any heat-pump-related costs you do not enter.</div>
@@ -18,9 +25,10 @@ const schema = {'@context':'https://schema.org','@type':'WebApplication',name:'U
         <label><input type="radio" name="method" value="meter" checked/> I know my heat pump electricity use (kWh)</label>
         <label><input type="radio" name="method" value="heat"/> I know or estimate useful heat delivered (kWh)</label>
       </fieldset>
-      <div id="meter-fields"><label for="electricity">Heat pump electricity used per day (kWh)</label><input id="electricity" type="number" inputmode="decimal" min="0" max="10000" step="any" value="15" style="display:block;width:100%;padding:.7rem;margin-top:.35rem"/><p class="small">Prefer dedicated heat-pump metering if available. Whole-house meter readings include other appliances.</p></div>
+      <div><label for="input-period">Energy input period</label><select id="input-period" style="display:block;width:100%;padding:.7rem;margin-top:.35rem"><option value="day" selected>Per day</option><option value="year">Per year (365 days)</option></select><p class="small">Choose the period represented by the electricity-use or useful-heat figure you enter.</p></div>
+      <div id="meter-fields"><label for="electricity">Heat pump electricity used (kWh)</label><input id="electricity" type="number" inputmode="decimal" min="0" max="1000000" step="any" value="15" style="display:block;width:100%;padding:.7rem;margin-top:.35rem"/><p class="small">Enter kWh for the selected input period. Prefer dedicated heat-pump metering if available; whole-house readings include other appliances.</p></div>
       <div id="heat-fields" hidden>
-        <label for="heat">Useful heat delivered per day (kWh)</label><input id="heat" type="number" inputmode="decimal" min="0" max="10000" step="any" value="45" style="display:block;width:100%;padding:.7rem;margin:.35rem 0 1rem"/>
+        <label for="heat">Useful heat delivered (kWh)</label><input id="heat" type="number" inputmode="decimal" min="0" max="1000000" step="any" value="45" style="display:block;width:100%;padding:.7rem;margin:.35rem 0 1rem"/><p class="small">Enter useful heat for the selected input period. For annual heat demand, use a seasonal efficiency such as SCOP rather than a single-condition COP.</p>
         <label for="cop">Assumed COP or average period efficiency</label><input id="cop" type="number" inputmode="decimal" min="0.1" max="20" step="any" value="3" style="display:block;width:100%;padding:.7rem;margin-top:.35rem"/><p class="small">COP varies with weather and operating conditions. A seasonal SCOP should only be used with heat demand for the matching season.</p>
       </div>
       <div><label for="tariff">Electricity unit price (pence per kWh)</label><input id="tariff" type="number" inputmode="decimal" min="0" max="1000" step="any" value="25" style="display:block;width:100%;padding:.7rem;margin-top:.35rem"/></div>
@@ -31,18 +39,30 @@ const schema = {'@context':'https://schema.org','@type':'WebApplication',name:'U
     <section id="heat-results" class="card" aria-live="polite" aria-atomic="true" style="margin-top:1rem">
       <p class="eyebrow">ESTIMATED RUNNING COST</p><h2 id="period-cost">£112.50 over 30 days</h2>
       <p id="detail-line">15.00 kWh/day × 25.00p/kWh</p>
-      <div class="grid-3">
+      <div class="grid-2">
         <div><h3>Daily</h3><p id="daily-cost">£3.75</p></div>
         <div><h3>7 days</h3><p id="week-cost">£26.25</p></div>
         <div><h3>30 days</h3><p id="month-cost">£112.50</p></div>
+        <div><h3>365 days</h3><p id="year-cost">£1,368.75</p></div>
       </div>
       <p id="units-line">Estimated period electricity: 450.00 kWh</p>
+      <p id="annual-line">Annualised electricity at the same average use: 5,475.00 kWh</p>
+      <p id="heat-cost-line" hidden></p>
     </section>
     <h2>How to estimate heat pump electricity costs</h2>
-    <p>If you have a dedicated electricity reading, use that. Daily cost equals <strong>electricity used (kWh) × tariff (£/kWh)</strong>. For example, 15 kWh/day at 25p/kWh costs £3.75 per day. Multiply by the number of comparable days to estimate a period.</p>
-    <p>If you only know useful heat delivered, divide delivered heat (kWh) by the <strong>COP</strong> assumed for the same period to estimate electricity consumption. A COP of 3 means approximately 3 kWh of useful heat per 1 kWh of electricity in that period. It does not mean every winter day will perform the same.</p>
+    <p>If you have a dedicated electricity reading, use that. Running cost equals <strong>electricity used (kWh) × tariff (£/kWh)</strong>. You can enter daily or annual electricity use. For example, 15 kWh/day at 25p/kWh costs £3.75 per day, while 5,475 kWh/year at the same rate costs £1,368.75 per year.</p>
+    <p>If you only know useful heat delivered, divide delivered heat (kWh) by the <strong>COP or SCOP</strong> that represents the same period to estimate electricity consumption. A COP of 3 means approximately 3 kWh of useful heat per 1 kWh of electricity in that period. A seasonal SCOP is usually the more appropriate basis for an annual heat-demand calculation.</p>
+    <h2>Worked annual heat pump cost example</h2>
+    <p>If a home needs 12,000 kWh of useful heat over a year and the heat pump achieves a SCOP of 3.0, estimated electricity use is 12,000 ÷ 3.0 = 4,000 kWh. At an illustrative electricity price of 25p/kWh, that is about £1,000 per year in variable electricity cost before standing charges and other household electricity.</p>
+    <p>The same arithmetic shows why efficiency matters: at the same 12,000 kWh heat demand and tariff, a SCOP of 4.0 would use about 3,000 kWh instead. Treat these as examples, not expected performance for a particular property or installation.</p>
     <h2>Why actual bills may differ</h2>
     <p>Heat demand and efficiency change with outdoor temperature, hot-water use, schedules, home insulation, target temperature, backup heating and defrost cycles. Some heat-pump monitors omit auxiliary equipment. Time-of-use tariffs need separate calculations for the kWh bought at each rate. The calculator is a planning illustration—not a prediction of your actual bill.</p>
+    <h2>Frequently asked questions</h2>
+    <h3>How do I calculate annual heat pump running cost?</h3><p>Estimate the heat pump's annual electricity use and multiply it by your electricity unit price. If starting from annual useful heat demand, divide the heat demand by the annual or seasonal efficiency first.</p>
+    <h3>How do I calculate electricity use from SCOP?</h3><p>Divide useful heat demand by SCOP. For example, 12,000 kWh of useful heat at SCOP 3.0 is approximately 4,000 kWh of electricity.</p>
+    <h3>What is the difference between COP and SCOP?</h3><p>COP describes efficiency at a particular operating condition or shorter period. SCOP is a seasonal average. Match the efficiency figure to the same period as the heat-demand figure.</p>
+    <h3>Does the calculator include electricity standing charges?</h3><p>No. It estimates variable electricity cost attributable to the heat pump from the kWh and tariff entered. Standing charges and other household electricity are excluded.</p>
+    <h3>Why might my actual bill differ?</h3><p>Weather, indoor temperature, hot-water use, flow temperature, controls, defrost cycles, backup heating and metering scope can all change actual consumption and cost.</p>
     <h2>Heat pump using more electricity than expected?</h2>
     <p>Compare similar weather and comfort requirements before adjusting controls. Record the tariff, meter period, heating and hot-water schedules, indoor target and any error messages. Read the <a href="/heat-pump-owners/">free UK heat pump owner troubleshooting guides</a> for a structured approach.</p>
     <div class="notice"><strong>Want a complete operating method?</strong> <a href="/books/the-new-heat-pump-owners-operating-manual/">The New Heat Pump Owner's Operating Manual by Gareth Fenwick</a> covers controls, flow temperature, weather compensation, comfort, electricity-use investigations and when to contact an installer. <a href="https://www.amazon.co.uk/dp/B0HF51WQ1F">See the book on Amazon UK</a>.</div>
@@ -55,6 +75,7 @@ const schema = {'@context':'https://schema.org','@type':'WebApplication',name:'U
     function recalc() {
       if (!form) return;
       const method = (form.querySelector<HTMLInputElement>('input[name="method"]:checked')?.value ?? 'meter');
+      const inputPeriod = (document.getElementById('input-period') as HTMLSelectElement).value;
       $('meter-fields').hidden = method !== 'meter';
       $('heat-fields').hidden = method !== 'heat';
       const val = (id: string) => Number((document.getElementById(id) as HTMLInputElement).value);
@@ -66,15 +87,21 @@ const schema = {'@context':'https://schema.org','@type':'WebApplication',name:'U
       const err = $('calc-error');
       err.hidden = valid;
       if (!valid) {err.textContent='Enter valid, non-negative numbers within the displayed ranges. COP must be greater than zero.';$('heat-results').hidden=true;return;}
-      const dailyKwh = method === 'meter' ? val('electricity') : val('heat') / val('cop');
+      const enteredElectricity = method === 'meter' ? val('electricity') : val('heat') / val('cop');
+      const dailyKwh = inputPeriod === 'year' ? enteredElectricity / 365 : enteredElectricity;
       const price = val('tariff') / 100, days = val('days');
       $('heat-results').hidden = false;
       $('period-cost').textContent = money(dailyKwh * price * days) + ' over ' + days + (days === 1 ? ' day' : ' days');
-      $('detail-line').textContent = number(dailyKwh) + ' kWh/day × ' + number(val('tariff')) + 'p/kWh' + (method === 'heat' ? ' (estimated from heat ÷ COP)' : '');
+      $('detail-line').textContent = number(dailyKwh) + ' kWh/day × ' + number(val('tariff')) + 'p/kWh' + (method === 'heat' ? ' (estimated from heat ÷ ' + (inputPeriod === 'year' ? 'SCOP/COP' : 'COP') + ')' : '') + (inputPeriod === 'year' ? ' · normalised from annual input' : '');
       $('daily-cost').textContent = money(dailyKwh*price);
       $('week-cost').textContent = money(dailyKwh*price*7);
       $('month-cost').textContent = money(dailyKwh*price*30);
+      $('year-cost').textContent = money(dailyKwh*price*365);
       $('units-line').textContent = 'Estimated period electricity: ' + number(dailyKwh*days) + ' kWh';
+      $('annual-line').textContent = 'Annualised electricity at the same average use: ' + number(dailyKwh*365) + ' kWh';
+      const heatCostLine = $('heat-cost-line');
+      heatCostLine.hidden = method !== 'heat';
+      if (method === 'heat') heatCostLine.textContent = 'Variable electricity cost per kWh of useful heat at this efficiency: ' + number(val('tariff') / val('cop')) + 'p';
     }
     form?.addEventListener('submit', event => {event.preventDefault();recalc();});
     form?.addEventListener('input', recalc);

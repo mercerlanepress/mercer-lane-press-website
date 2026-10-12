@@ -49,7 +49,7 @@ console.log(`Fleet checks passed: ${cases.length} status scenarios including eng
 
 const product=readFileSync('dist/tools/small-fleet-maintenance-system/index.html','utf8');
 assert.match(product,/https:\/\/www\.etsy\.com\/listing\/4590397687\/small-fleet-maintenance-excel-system/);
-assert.match(product,/"priceCurrency":"GBP","price":"5\.99"/);
+assert.match(product,/"priceCurrency":"GBP","price":"2\.99"/);
 assert.match(product,/75 vehicles/);
 assert.doesNotMatch(product,/HOLD|NOT FOR COMMERCIAL SALE|up to 60 vehicles/);
 for (const name of ['01_small_fleet_bundle','02_dashboard','03_service_and_closure','04_input_guide','05_guides_and_forms']) {
@@ -57,4 +57,4 @@ for (const name of ['01_small_fleet_bundle','02_dashboard','03_service_and_closu
  assert.ok(existsSync('dist/images/small-fleet-system/'+name+'.jpg'));
 }
 assert.equal(existsSync('public/Mercer_Lane_Small_Fleet_Maintenance_System_v1_2_CUSTOMER_RETAIL.zip'),false);
-console.log('Fleet v1.2 retail page: live Etsy destination, GBP 5.99, capacities, five actual previews and private ZIP boundary passed.');
+console.log('Fleet v1.2 retail page: live Etsy destination, GBP 2.99, capacities, five actual previews and private ZIP boundary passed.');

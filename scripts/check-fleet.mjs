@@ -3,7 +3,7 @@ import {readFileSync,existsSync} from 'node:fs';
 import {calculateDue,addMonths,parseDate} from '../src/scripts/fleet-due.mjs';
 import {handleFleetRoute} from '../worker/fleet-delivery.js';
 const today='2026-10-15';
-const base={trigger:'dual',sourceVerified:true,intervalMiles:10000,lastMileage:30250,currentMileage:39600,readingDate:today,intervalMonths:12,lastDate:'2026-01-12',warningMiles:1000,warningDays:30,freshnessDays:14};
+const base={trigger:'dual',sourceVerified:true,intervalMiles:10000,lastMileage:30250,currentMileage:39600,readingDate:today,intervalMonths:12,lastDate:'2026-01-12',warningMiles:1000,warningDays:30,freshnessDays:14,intervalHours:500,lastHours:1000,currentHours:1450,hoursReadingDate:today,warningHours:100,hoursFreshnessDays:14};
 const cases=[
  ['dual due soon',{},'DUE SOON'],['exact mileage',{currentMileage:40250},'OVERDUE'],['one before',{currentMileage:40249},'DUE SOON'],['one after',{currentMileage:40251},'OVERDUE'],
  ['date exact',{lastDate:'2025-10-15'},'OVERDUE'],['date overdue mileage current',{lastDate:'2025-09-15',currentMileage:31000},'OVERDUE'],['miles overdue date current',{currentMileage:45000},'OVERDUE'],
@@ -14,13 +14,19 @@ const cases=[
  ['date only ignores mileage',{trigger:'date',currentMileage:'',readingDate:'',lastMileage:''},'CURRENT'],['miles only ignores date',{trigger:'miles',lastDate:'',intervalMonths:''},'DUE SOON'],
  ['source overrides overdue',{sourceVerified:false,currentMileage:45000},'DATA ISSUE'],['missing other trigger overrides overdue',{lastDate:'',currentMileage:45000},'DATA ISSUE'],
  ['freshness exact boundary',{readingDate:'2026-10-01'},'DUE SOON'],['freshness one over',{readingDate:'2026-09-30'},'DATA ISSUE'],['blank freshness',{freshnessDays:'',readingDate:'2026-09-01'},'DUE SOON'],
- ['zero baseline legitimate',{lastMileage:0,currentMileage:1},'CURRENT'],['blank interval',{intervalMiles:''},'DATA ISSUE'],['zero interval',{intervalMiles:0},'DATA ISSUE'],['unrecognized mode',{trigger:'other'},'DATA ISSUE']
+ ['zero baseline legitimate',{lastMileage:0,currentMileage:1},'CURRENT'],['blank interval',{intervalMiles:''},'DATA ISSUE'],['zero interval',{intervalMiles:0},'DATA ISSUE'],
+ ['hours only due soon',{trigger:'hours'},'DUE SOON'],['hours exact',{trigger:'hours',currentHours:1500},'OVERDUE'],['hours one before warning',{trigger:'hours',currentHours:1399,warningHours:100},'CURRENT'],
+ ['hours stale',{trigger:'hours',hoursReadingDate:'2026-09-01'},'DATA ISSUE'],['hours backward',{trigger:'hours',currentHours:900},'DATA ISSUE'],['hours missing reading',{trigger:'hours',hoursReadingDate:''},'DATA ISSUE'],
+ ['triple hours controls',{trigger:'triple',currentMileage:31000,lastDate:'2026-01-12'},'DUE SOON'],['triple missing hours baseline',{trigger:'triple',lastHours:''},'DATA ISSUE'],
+ ['date plus hours',{trigger:'datehours',currentHours:1450},'DUE SOON'],['miles plus hours',{trigger:'mileshours',currentMileage:31000},'DUE SOON'],
+ ['unrecognized mode',{trigger:'other'},'DATA ISSUE']
 ];
 for(const[label,change,status]of cases)assert.equal(calculateDue({...base,...change},today).status,status,label);
 assert.equal(addMonths(parseDate('2024-01-31'),1).toISOString().slice(0,10),'2024-02-29');
 assert.equal(addMonths(parseDate('2025-01-31'),1).toISOString().slice(0,10),'2025-02-28');
 assert.equal(addMonths(parseDate('2024-02-29'),12).toISOString().slice(0,10),'2025-02-28');
 const demo=calculateDue(base,today);assert.equal(demo.nextMileage,40250);assert.equal(demo.nextDate,'2027-01-12');assert.equal(demo.milesRemaining,650);assert.equal(demo.controlling,'Mileage');
+const hourDemo=calculateDue({...base,trigger:'hours'},today);assert.equal(hourDemo.nextHours,1500);assert.equal(hourDemo.hoursRemaining,50);assert.equal(hourDemo.hoursStatus,'DUE SOON');assert.equal(hourDemo.controlling,'Engine hours');
 const api='https://example.com/api/fleet-access';
 assert.equal((await handleFleetRoute(new Request(api,{method:'POST'}),{})).status,503,'Unconfigured release fails closed');
 assert.equal((await handleFleetRoute(new Request(api),{FLEET_RELEASED:'true'})).status,405);
@@ -36,9 +42,10 @@ try{
  assert.equal((await handleFleetRoute(new Request('https://example.com/api/fleet-download'),env)).status,403);
 }finally{globalThis.fetch=fetchOriginal;}
 for(const p of ['fleet-maintenance-due-calculator','small-fleet-maintenance-system']){const html=readFileSync(`dist/tools/${p}/index.html`,'utf8');assert.match(html,/rel="canonical"/);assert.match(readFileSync('dist/sitemap.xml','utf8'),new RegExp(`/tools/${p}/`));}
+const calculatorHtml=readFileSync('dist/tools/fleet-maintenance-due-calculator/index.html','utf8');assert.match(calculatorHtml,/Engine hours only/);assert.match(calculatorHtml,/id="due-hours"/);assert.match(calculatorHtml,/engine-hour/);
 assert.equal(existsSync('public/Mercer_Lane_Small_Fleet_Maintenance_System_v1_0.zip'),false);
 const tool=readFileSync('src/scripts/fleet-due.mjs','utf8');assert.doesNotMatch(tool,/localStorage\.setItem|sessionStorage|fetch\(/);assert.match(tool,/mlp-analytics-consent/);
-console.log(`Fleet checks passed: ${cases.length} status scenarios, calendar boundaries, manuscript example, delivery release gate, paid product/session isolation, origin checks, private routing and page metadata.`);
+console.log(`Fleet checks passed: ${cases.length} status scenarios including engine hours, calendar boundaries, manuscript example, delivery release gate, paid product/session isolation, origin checks, private routing and page metadata.`);
 
 const product=readFileSync('dist/tools/small-fleet-maintenance-system/index.html','utf8');
 assert.match(product,/https:\/\/www\.etsy\.com\/listing\/4590397687\/small-fleet-maintenance-excel-system/);

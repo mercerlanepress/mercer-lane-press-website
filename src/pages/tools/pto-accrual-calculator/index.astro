@@ -12,7 +12,7 @@ const webAppSchema = {
   applicationCategory: 'BusinessApplication',
   operatingSystem: 'Any',
   isAccessibleForFree: true,
-  description: 'Free browser-based PTO accrual calculator for estimating accrual per pay period, accrued PTO, current available balance and year-end balance from your organisation’s own policy inputs.'
+  description: 'Free browser-based PTO accrual calculator for estimating PTO per pay period, PTO accrual rate per hour worked, accrued PTO, current balance and year-end balance from your organisation’s own policy inputs.'
 };
 
 const faqSchema = {
@@ -37,6 +37,30 @@ const faqSchema = {
     },
     {
       '@type': 'Question',
+      name: 'What is a 0.0577 PTO accrual rate?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A rate of 0.0577 means about 0.0577 PTO hours are earned for each eligible hour worked. Over 2,080 eligible work hours, that is about 120 PTO hours for the year. Use this only when the policy actually accrues PTO by eligible hours worked.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'How many PTO hours accrue each biweekly pay period from 120 hours a year?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'With 26 biweekly accrual periods, 120 annual PTO hours divided by 26 equals about 4.62 PTO hours per pay period.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I convert PTO hours to days?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Divide PTO hours by the standard hours in a workday. For example, 40 PTO hours divided by an 8-hour day equals 5 days.'
+      }
+    },
+    {
+      '@type': 'Question',
       name: 'Does this calculator determine legal PTO or vacation entitlement?',
       acceptedAnswer: {
         '@type': 'Answer',
@@ -48,8 +72,8 @@ const faqSchema = {
 ---
 
 <BaseLayout
-  title="Free PTO Accrual Calculator"
-  description="Calculate PTO accrual per pay period, accrued PTO to date, current available balance and year-end balance. Free browser calculator with no signup required."
+  title="PTO Accrual Calculator: Rate, Balance & Vacation Hours"
+  description="Free PTO accrual calculator for PTO per pay period, PTO accrual rate per hour worked, accrued balance, vacation hours and year-end projection. No signup."
   schema={[webAppSchema, faqSchema]}
 >
   <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Tools',href:'/tools/'},{name:'PTO Accrual Calculator'}]}/>
@@ -57,7 +81,7 @@ const faqSchema = {
   <header class="page-head wrap pto-head">
     <p class="eyebrow">FREE HR CALCULATOR</p>
     <h1>PTO Accrual Calculator</h1>
-    <p class="lede">Calculate PTO earned per pay period, accrued PTO to date and the employee’s available balance using your own organisation’s policy figures.</p>
+    <p class="lede">Calculate PTO earned per pay period, the PTO accrual rate per hour worked, accrued PTO to date and the employee’s available balance using your own organisation’s policy figures.</p>
     <p class="privacy-note">Free to use. No sign-up required. The calculator runs in your browser and does not need employee names or personal information.</p>
   </header>
 
@@ -80,6 +104,12 @@ const faqSchema = {
             <label for="hours-per-day">Hours in one standard workday</label>
             <input id="hours-per-day" name="hours-per-day" type="number" min="0.01" step="0.01" inputmode="decimal" value="8" required>
             <small>Used only to show the balance as an equivalent number of days.</small>
+          </div>
+
+          <div class="field">
+            <label for="annual-work-hours">Eligible work hours per year</label>
+            <input id="annual-work-hours" name="annual-work-hours" type="number" min="0.01" step="0.01" inputmode="decimal" value="2080" required>
+            <small>Used to show the equivalent PTO accrual rate per hour worked. Use 2,080 only if that matches the policy basis.</small>
           </div>
 
           <div class="field">
@@ -134,6 +164,8 @@ const faqSchema = {
         </div>
         <dl class="result-grid">
           <div><dt>Accrual per period</dt><dd id="accrual-per-period">4.62 hours</dd></div>
+          <div><dt>PTO per hour worked</dt><dd id="pto-per-hour">0.0577 h / hour</dd></div>
+          <div><dt>1 PTO hour per</dt><dd id="hours-per-pto-hour">17.33 work hours</dd></div>
           <div><dt>Accrued this year</dt><dd id="accrued-to-date">92.31 hours</dd></div>
           <div><dt>Starting / carryover</dt><dd id="result-starting">8.00 hours</dd></div>
           <div><dt>PTO used</dt><dd id="result-used">40.00 hours</dd></div>
@@ -164,11 +196,31 @@ const faqSchema = {
         <p><strong>Accrual per period</strong> = Annual PTO allowance ÷ Accrual periods per year</p>
         <p><strong>Accrued PTO to date</strong> = Accrual per period × Completed credited periods</p>
         <p><strong>Available PTO balance</strong> = Starting/carryover balance + Accrued PTO to date − PTO used</p>
+        <p><strong>PTO accrual rate per hour worked</strong> = Annual PTO allowance ÷ Eligible work hours per year</p>
       </div>
 
       <h2>Example: biweekly PTO accrual</h2>
       <p>An employee receives 120 PTO hours per year and accrues PTO across 26 biweekly periods. The accrual rate is 120 ÷ 26 = approximately 4.62 hours per period.</p>
       <p>After 20 credited periods, the employee has accrued about 92.31 hours during the year. If 8 hours were carried over and 40 hours have already been used, the calculated balance is about 60.31 hours.</p>
+
+      <h2>PTO accrual rate per hour worked</h2>
+      <p>If a policy accrues PTO from eligible hours worked, divide the annual PTO allowance by the eligible work hours used by that policy. With 120 PTO hours over 2,080 eligible work hours, the equivalent accrual factor is approximately <strong>0.0577 PTO hours per hour worked</strong>.</p>
+      <p>The same example can also be expressed as approximately <strong>1 PTO hour for every 17.33 eligible work hours</strong>. These two figures describe the same rate. Do not assume 2,080 hours applies to every employee or policy; part-time schedules, overtime treatment and policy definitions may use a different eligible-hours basis.</p>
+
+      <div class="rate-table-wrap">
+        <table class="rate-table">
+          <caption>Example PTO accrual rates using an 8-hour day and 2,080 eligible work hours per year</caption>
+          <thead><tr><th scope="col">Annual PTO</th><th scope="col">Weekly</th><th scope="col">Biweekly</th><th scope="col">Semimonthly</th><th scope="col">Monthly</th><th scope="col">Per hour worked</th></tr></thead>
+          <tbody>
+            <tr><td>80 h / 10 days</td><td>1.54 h</td><td>3.08 h</td><td>3.33 h</td><td>6.67 h</td><td>0.0385</td></tr>
+            <tr><td>120 h / 15 days</td><td>2.31 h</td><td>4.62 h</td><td>5.00 h</td><td>10.00 h</td><td>0.0577</td></tr>
+            <tr><td>160 h / 20 days</td><td>3.08 h</td><td>6.15 h</td><td>6.67 h</td><td>13.33 h</td><td>0.0769</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Vacation accrual calculator vs PTO accrual calculator</h2>
+      <p>The arithmetic can also be used as a vacation accrual calculator when the organisation has a known annual vacation allowance that is earned evenly by period or by eligible hours worked. “PTO” and “vacation” are not interchangeable in every policy, so use the entitlement and accrual method actually defined by the organisation.</p>
 
       <h2>What this PTO calculator does not decide</h2>
       <p>The arithmetic is intentionally policy-neutral. It does not decide when an accrual becomes available, whether an employee is eligible, whether a waiting period applies, whether unused PTO carries over, whether a cap applies, how a partial year is prorated, or how any statutory leave requirement should be handled.</p>
@@ -186,7 +238,16 @@ const faqSchema = {
       <p>Biweekly schedules normally have 26 periods in a 52-week year, while semimonthly schedules have 24 periods. The annual allowance can therefore be the same even though the amount credited in each period differs.</p>
 
       <h3>Can I use this for vacation or annual leave?</h3>
-      <p>You can use the arithmetic for a policy that distributes a known annual hour allowance evenly across periods. The tool does not determine whether a particular vacation, annual-leave or statutory-leave policy should use that method.</p>
+      <p>You can use the arithmetic for a policy that distributes a known annual hour allowance evenly across periods or eligible hours worked. The tool does not determine whether a particular vacation, annual-leave or statutory-leave policy should use that method.</p>
+
+      <h3>What is a 0.0577 PTO accrual rate?</h3>
+      <p>A rate of 0.0577 means approximately 0.0577 PTO hours are earned for each eligible hour worked. On a 2,080-hour annual basis, 0.0577 × 2,080 is approximately 120 PTO hours, or 15 eight-hour days.</p>
+
+      <h3>How many PTO hours accrue biweekly if the annual allowance is 120 hours?</h3>
+      <p>For 26 biweekly accrual periods, 120 ÷ 26 = approximately 4.62 PTO hours per pay period.</p>
+
+      <h3>How do I convert PTO hours to days?</h3>
+      <p>Divide the PTO hours by the standard hours in a workday. For example, 40 PTO hours ÷ 8 hours per day = 5 PTO days.</p>
 
       <h3>Does this calculator store employee data?</h3>
       <p>No employee identity is requested. The calculation is performed in the browser. If analytics are enabled through the site consent choice, calculator usage events contain only the event name and not the figures entered.</p>
@@ -207,6 +268,7 @@ const faqSchema = {
 
       const annualAllowance = document.getElementById('annual-allowance');
       const hoursPerDay = document.getElementById('hours-per-day');
+      const annualWorkHours = document.getElementById('annual-work-hours');
       const frequency = document.getElementById('frequency');
       const customField = document.getElementById('custom-period-field');
       const customPeriods = document.getElementById('custom-periods');
@@ -221,6 +283,8 @@ const faqSchema = {
       const availableBalance = document.getElementById('available-balance');
       const availableDays = document.getElementById('available-days');
       const accrualPerPeriod = document.getElementById('accrual-per-period');
+      const ptoPerHour = document.getElementById('pto-per-hour');
+      const hoursPerPtoHour = document.getElementById('hours-per-pto-hour');
       const accruedToDate = document.getElementById('accrued-to-date');
       const resultStarting = document.getElementById('result-starting');
       const resultUsed = document.getElementById('result-used');
@@ -255,6 +319,7 @@ const faqSchema = {
 
         const allowance = Number(annualAllowance.value);
         const dayHours = Number(hoursPerDay.value);
+        const eligibleAnnualHours = Number(annualWorkHours.value);
         const periods = getPeriodsPerYear();
         const completed = Number(completedPeriods.value);
         const starting = Number(startingBalance.value || 0);
@@ -267,6 +332,11 @@ const faqSchema = {
         }
         if (hoursPerDay.value.trim() === '' || !hoursPerDay.validity.valid || !Number.isFinite(dayHours) || dayHours <= 0) {
           error.textContent = 'Enter standard workday hours greater than zero.';
+          error.hidden = false;
+          return false;
+        }
+        if (annualWorkHours.value.trim() === '' || !annualWorkHours.validity.valid || !Number.isFinite(eligibleAnnualHours) || eligibleAnnualHours <= 0) {
+          error.textContent = 'Enter eligible work hours per year greater than zero.';
           error.hidden = false;
           return false;
         }
@@ -293,6 +363,8 @@ const faqSchema = {
 
         const perPeriod = allowance / periods;
         const accrued = perPeriod * completed;
+        const perHour = allowance / eligibleAnnualHours;
+        const workHoursPerPtoHour = allowance > 0 ? eligibleAnnualHours / allowance : null;
         const available = starting + accrued - used;
         const days = available / dayHours;
         const projected = starting + allowance - used;
@@ -300,6 +372,8 @@ const faqSchema = {
         availableBalance.textContent = hours(available);
         availableDays.textContent = `${days.toFixed(2)} days at ${dayHours.toFixed(2).replace(/\.00$/, '')} hours/day`;
         accrualPerPeriod.textContent = hours(perPeriod);
+        ptoPerHour.textContent = `${perHour.toFixed(4)} h / hour`;
+        hoursPerPtoHour.textContent = workHoursPerPtoHour === null ? '—' : `${workHoursPerPtoHour.toFixed(2)} work hours`;
         accruedToDate.textContent = hours(accrued);
         resultStarting.textContent = hours(starting);
         resultUsed.textContent = hours(used);
@@ -307,7 +381,7 @@ const faqSchema = {
         projectedYearEnd.textContent = hours(projected);
         explanation.textContent = `With ${allowance.toFixed(2).replace(/\.00$/, '')} annual PTO hours across ${periods} periods, each credited period earns ${perPeriod.toFixed(2)} hours. After ${completed} credited periods, ${starting.toFixed(2).replace(/\.00$/, '')} hours carried in and ${used.toFixed(2).replace(/\.00$/, '')} hours used, the calculated available balance is ${available.toFixed(2)} hours.`;
 
-        lastResult = { allowance, dayHours, periods, completed, starting, used, perPeriod, accrued, available, days, projected };
+        lastResult = { allowance, dayHours, eligibleAnnualHours, periods, completed, starting, used, perPeriod, perHour, workHoursPerPtoHour, accrued, available, days, projected };
         if (shouldTrack) track('pto_calculator_used');
         return true;
       };
@@ -322,7 +396,7 @@ const faqSchema = {
         calculate(false);
       });
 
-      [annualAllowance, hoursPerDay, customPeriods, completedPeriods, startingBalance, ptoUsed].forEach((input) => {
+      [annualAllowance, hoursPerDay, annualWorkHours, customPeriods, completedPeriods, startingBalance, ptoUsed].forEach((input) => {
         input.addEventListener('input', () => {
           copyStatus.textContent = '';
         });
@@ -331,6 +405,7 @@ const faqSchema = {
       resetButton.addEventListener('click', () => {
         annualAllowance.value = '120';
         hoursPerDay.value = '8';
+        annualWorkHours.value = '2080';
         frequency.value = '26';
         customPeriods.value = '26';
         completedPeriods.value = '20';
@@ -349,6 +424,8 @@ const faqSchema = {
           `Accrual periods: ${lastResult.periods} per year`,
           `Completed credited periods: ${lastResult.completed}`,
           `Accrual per period: ${lastResult.perPeriod.toFixed(2)} hours`,
+          `PTO accrual rate per eligible work hour: ${lastResult.perHour.toFixed(4)}`,
+          lastResult.workHoursPerPtoHour === null ? '1 PTO hour per: not applicable' : `1 PTO hour per: ${lastResult.workHoursPerPtoHour.toFixed(2)} eligible work hours`,
           `Accrued this year: ${lastResult.accrued.toFixed(2)} hours`,
           `Starting/carryover balance: ${lastResult.starting.toFixed(2)} hours`,
           `PTO used: ${lastResult.used.toFixed(2)} hours`,
@@ -376,7 +453,7 @@ const faqSchema = {
 
   <style>
     .pto-head{max-width:900px}.pto-head h1{font-size:clamp(2.3rem,4.5vw,3.8rem)}.privacy-note{font-size:.94rem;color:var(--muted)}
-    .calculator-section{padding:1rem 0 4rem}.calculator-layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap:2rem;align-items:start}.calculator-card,.results-card{border:1px solid var(--line);background:white;padding:2rem;box-shadow:0 12px 35px #243a5012}.results-card{position:sticky;top:1rem;background:#f6f8fa}.calculator-card-head{margin-bottom:1.5rem}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}.field label{display:block;font-weight:700;margin-bottom:.45rem}.field input,.field select{font:inherit;width:100%;padding:.75rem;border:1px solid #728394;background:white;color:var(--ink);border-radius:3px}.field small{display:block;margin-top:.4rem;color:var(--muted);font-size:.85rem;line-height:1.45}.calculator-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.5rem}.calculator-error{margin-top:1rem;padding:.8rem 1rem;border-left:4px solid #a33;background:#fff3f3}.primary-result{padding:1.25rem 0 1.5rem;border-bottom:1px solid var(--line)}.primary-result span,.primary-result small{display:block}.primary-result strong{display:block;font-size:clamp(2rem,4vw,3rem);line-height:1.05;margin:.35rem 0}.primary-result small{color:var(--muted)}.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:1rem 0}.result-grid div{padding:.8rem 0;border-bottom:1px solid var(--line)}.result-grid div:nth-child(odd){padding-right:.8rem}.result-grid div:nth-child(even){padding-left:.8rem}.result-grid dt{font-size:.82rem;color:var(--muted)}.result-grid dd{margin:.2rem 0 0;font-weight:700}.projection-note{font-size:.78rem;color:var(--muted)}.result-explanation{margin:1rem 0;padding:1rem;background:white;border-left:4px solid #087f9c}.copy-button{font:inherit;cursor:pointer;border:1px solid var(--line);background:white;padding:.65rem .9rem;font-weight:700}.copy-status{min-height:1.4em;font-size:.85rem}.toolkit-cta{margin-top:2rem;padding-top:2rem;border-top:2px solid var(--line)}.toolkit-cta h2{font-size:1.45rem}.formula-box{padding:1.25rem 1.5rem;background:#f6f8fa;border-left:4px solid #087f9c;margin:1.5rem 0}.formula-box p:last-child{margin-bottom:0}.tool-related{margin-top:3rem}.pto-head .lede{max-width:780px}
+    .calculator-section{padding:1rem 0 4rem}.rate-table-wrap{overflow-x:auto;margin:1.5rem 0}.rate-table{width:100%;border-collapse:collapse;min-width:680px}.rate-table caption{text-align:left;font-weight:700;margin-bottom:.6rem}.rate-table th,.rate-table td{padding:.8rem;border:1px solid var(--line);text-align:left}.rate-table th{background:#f6f8fa}.calculator-layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap:2rem;align-items:start}.calculator-card,.results-card{border:1px solid var(--line);background:white;padding:2rem;box-shadow:0 12px 35px #243a5012}.results-card{position:sticky;top:1rem;background:#f6f8fa}.calculator-card-head{margin-bottom:1.5rem}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}.field label{display:block;font-weight:700;margin-bottom:.45rem}.field input,.field select{font:inherit;width:100%;padding:.75rem;border:1px solid #728394;background:white;color:var(--ink);border-radius:3px}.field small{display:block;margin-top:.4rem;color:var(--muted);font-size:.85rem;line-height:1.45}.calculator-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.5rem}.calculator-error{margin-top:1rem;padding:.8rem 1rem;border-left:4px solid #a33;background:#fff3f3}.primary-result{padding:1.25rem 0 1.5rem;border-bottom:1px solid var(--line)}.primary-result span,.primary-result small{display:block}.primary-result strong{display:block;font-size:clamp(2rem,4vw,3rem);line-height:1.05;margin:.35rem 0}.primary-result small{color:var(--muted)}.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:1rem 0}.result-grid div{padding:.8rem 0;border-bottom:1px solid var(--line)}.result-grid div:nth-child(odd){padding-right:.8rem}.result-grid div:nth-child(even){padding-left:.8rem}.result-grid dt{font-size:.82rem;color:var(--muted)}.result-grid dd{margin:.2rem 0 0;font-weight:700}.projection-note{font-size:.78rem;color:var(--muted)}.result-explanation{margin:1rem 0;padding:1rem;background:white;border-left:4px solid #087f9c}.copy-button{font:inherit;cursor:pointer;border:1px solid var(--line);background:white;padding:.65rem .9rem;font-weight:700}.copy-status{min-height:1.4em;font-size:.85rem}.toolkit-cta{margin-top:2rem;padding-top:2rem;border-top:2px solid var(--line)}.toolkit-cta h2{font-size:1.45rem}.formula-box{padding:1.25rem 1.5rem;background:#f6f8fa;border-left:4px solid #087f9c;margin:1.5rem 0}.formula-box p:last-child{margin-bottom:0}.tool-related{margin-top:3rem}.pto-head .lede{max-width:780px}
     @media(max-width:900px){.calculator-layout{grid-template-columns:1fr}.results-card{position:static}.form-grid{grid-template-columns:1fr}}
     @media(max-width:560px){.calculator-card,.results-card{padding:1.25rem}.result-grid{grid-template-columns:1fr}.result-grid div:nth-child(odd),.result-grid div:nth-child(even){padding-left:0;padding-right:0}}
   </style>

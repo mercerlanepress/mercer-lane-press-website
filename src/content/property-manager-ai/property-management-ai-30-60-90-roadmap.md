@@ -37,13 +37,13 @@ Read the [tenant-data privacy checklist](/property-manager-ai/tenant-data-privac
 
 The rollout should make good practice easier, not add a new channel for uncontrolled data.
 
-# Days 1–30: Foundation
+## Days 1–30: Foundation
 
 The goal of the first month is not to build a sophisticated AI stack.
 
 It is to create a repeatable drafting habit.
 
-## Week 1: choose a primary tool and one high-frequency category
+### Week 1: choose a primary tool and one high-frequency category
 
 Pick the general-purpose AI tool your organization is prepared to use.
 
@@ -55,7 +55,7 @@ Create two or three saved prompts with clear variables.
 
 Use the [Role + Task + Context + Output formula](/property-manager-ai/property-manager-ai-prompt-formula/) so the prompts are understandable by someone other than the person who wrote them.
 
-## Week 2: add one more recurring category
+### Week 2: add one more recurring category
 
 Bring in a second set of routine tasks, such as rent-collection communication or another administrative category that fits your role.
 
@@ -63,7 +63,7 @@ Keep legal and compliance boundaries explicit.
 
 The purpose is to learn where AI actually removes repetitive drafting—not to find a reason to use it for every message.
 
-## Week 3: run one complete maintenance workflow
+### Week 3: run one complete maintenance workflow
 
 Use the [maintenance-request AI workflow](/property-manager-ai/maintenance-request-ai-workflow/) on a suitable request.
 
@@ -79,7 +79,7 @@ Follow the sequence:
 
 Afterward, ask what the workflow improved and where it created extra friction.
 
-## Week 4: review what was actually used
+### Week 4: review what was actually used
 
 Look at the prompts from the first three weeks.
 
@@ -96,7 +96,7 @@ Keep the useful prompts.
 
 Fix or remove the rest.
 
-## A useful Day-30 checkpoint
+### A useful Day-30 checkpoint
 
 By the end of the foundation stage, you should be able to answer:
 
@@ -108,11 +108,11 @@ By the end of the foundation stage, you should be able to answer:
 
 That is more valuable than a large prompt library nobody trusts.
 
-# Days 31–60: Workflow integration
+## Days 31–60: Workflow integration
 
 The second stage connects the individual drafting tasks.
 
-## Run a full vacancy-to-lease sequence when the opportunity arises
+### Run a full vacancy-to-lease sequence when the opportunity arises
 
 The book's workflow connects:
 
@@ -127,7 +127,7 @@ The goal is not to automate screening or compliance decisions.
 
 It is to make the communication sequence consistent and reduce repeated rewriting around those decisions.
 
-## Start a personal prompt library
+### Start a personal prompt library
 
 Create one shared location for approved reusable prompts.
 
@@ -155,7 +155,7 @@ For each prompt, keep:
 
 Do not store live tenant data inside the reusable prompt.
 
-## Bring owner reporting into the routine
+### Bring owner reporting into the routine
 
 Owner reports are a good test of whether the team can turn structured source data into consistent narrative without letting the model invent figures.
 
@@ -169,7 +169,7 @@ The safe sequence is:
 
 The AI draft should never become the financial source of truth.
 
-## Review the library at Day 60
+### Review the library at Day 60
 
 Look for gaps.
 
@@ -181,11 +181,11 @@ Where does one task naturally lead into another?
 
 Those are the best candidates for the next workflow—not whichever AI feature is newest.
 
-# Days 61–90: Optimization
+## Days 61–90: Optimization
 
 The third stage focuses on consistency and measurement.
 
-## Use prompt chaining carefully
+### Use prompt chaining carefully
 
 Prompt chaining means using one reviewed output as the context for a follow-up task.
 
@@ -199,7 +199,7 @@ The value is consistency across formats.
 
 Review after each meaningful transformation if the content will be public or tenant-facing.
 
-## Create tone presets
+### Create tone presets
 
 Recurring communication often needs a small set of predictable tone choices.
 
@@ -213,7 +213,7 @@ A preset should change style, not facts.
 
 If the tone instruction causes the model to add threats, promises, concessions, or claims that were not supplied, the prompt needs correction.
 
-## Build owner preference references if you manage several owners
+### Build owner preference references if you manage several owners
 
 Where owners have different reporting frequencies, repair-approval limits, or communication preferences, create a quick reference sheet in your approved system.
 
@@ -223,7 +223,7 @@ Do not ask the AI to “remember” owner instructions as the authoritative reco
 
 Keep the current preference in the system your team controls.
 
-## Measure a small number of operational outcomes
+### Measure a small number of operational outcomes
 
 The book suggests simple before-and-after measurement rather than vague impressions.
 
@@ -239,7 +239,7 @@ Choose one or two measures that already have reliable source data.
 
 Avoid creating an elaborate measurement program that costs more time than the drafting problem you are trying to improve.
 
-## Expand only after the core workflow is stable
+### Expand only after the core workflow is stable
 
 At Day 90, the goal is not “AI everywhere.”
 

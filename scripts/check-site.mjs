@@ -18,6 +18,8 @@ const html=[]; walk(dist,file=>file.endsWith('.html')&&html.push(file));
 const metadata=new Set();
 for(const file of html){
   const source=readFileSync(file,'utf8');
+  const h1Count=[...source.matchAll(/<h1(?:\s|>)/g)].length;
+  if(h1Count!==1) throw new Error(`Expected one page H1, found ${h1Count}: ${file}`);
   const title=source.match(/<title>(.*?)<\/title>/)?.[1];
   const description=source.match(/<meta name="description" content="([^"]*)"/)?.[1];
   if(!title||!description) throw new Error(`Missing title/description: ${file}`);

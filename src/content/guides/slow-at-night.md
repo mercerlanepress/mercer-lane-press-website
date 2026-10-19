@@ -8,6 +8,17 @@ related: [slow-speeds, keeps-disconnecting, weak-signal]
 ---
 Repeated evening slowdowns often point to heavier demand, but that demand may be on the provider network **or inside your home**. The useful test is a matched comparison: same device, same location, same connection method, and same tasks at different times.
 
+## Quick check: congestion, household traffic or Wi-Fi?
+
+| Comparison during the slowdown | What it helps you investigate |
+| --- | --- |
+| Ethernet and nearby Wi-Fi both slow, even with household downloads paused | Provider-side load, cellular conditions or the gateway; timing alone cannot confirm congestion. |
+| Speed recovers after a large household download or backup pauses | Competition for bandwidth inside the home. |
+| Ethernet stays usable but a distant Wi-Fi device slows | Local Wi-Fi coverage or interference. |
+| The connection disappears completely | A dropout: follow the [disconnecting guide](/5g-home-internet/keeps-disconnecting/). |
+
+Keep the same test device, service and connection method for each comparison. A single speed result cannot establish the cause.
+
 ## Why time of day matters
 
 A 5G sector has shared capacity, and providers manage traffic according to their networks and plans. At home, evening streaming, game downloads, backups, cameras, and software updates can also compete for the connection. Meanwhile, a distant room may still have a separate Wi-Fi problem. Timing is evidence, not proof of one cause.

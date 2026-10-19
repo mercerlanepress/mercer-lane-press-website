@@ -2,10 +2,11 @@
 export const landscapeSystem = {
   name: 'Landscape Contractor Estimating & Job Costing System',
   version: '1.1',
-  price: '8.99',
+  price: '2.99',
   currency: 'GBP',
-  priceLabel: '£8.99',
+  priceLabel: '£2.99',
   checkoutUrl: 'https://www.etsy.com/listing/4591278053',
   pagePath: '/tools/landscape-estimating-job-costing-system/',
   image: '/images/landscape-system/01_hero.webp',
 };
+

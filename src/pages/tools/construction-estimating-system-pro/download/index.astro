@@ -6,6 +6,7 @@ import Breadcrumbs from '../../../../components/Breadcrumbs.astro';
   title="Toolkit PRO Download"
   description="Secure download access for customers who purchased the Mercer Lane Construction Estimating & Job Costing Toolkit PRO."
   robots="noindex,nofollow"
+  sensitiveTool={true}
 >
   <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Tools',href:'/tools/'},{name:'Toolkit PRO',href:'/tools/construction-estimating-system-pro/'},{name:'Download'}]}/>
   <section class="section">
@@ -39,7 +40,12 @@ import Breadcrumbs from '../../../../components/Breadcrumbs.astro';
         actions.hidden = true;
       };
 
-      if (!sessionId || !sessionId.startsWith('cs_')) {
+      const analyticsAllowed = () => {
+        try { return localStorage.getItem('mlp-analytics-consent') === 'granted'; }
+        catch { return false; }
+      };
+
+      if (!sessionId || !sessionId.startsWith('cs_live_')) {
         fail('No verified checkout found', 'Open this page from the completion step of your Stripe checkout. If you already paid and need help, contact Mercer Lane Press using the checkout email address.');
         return;
       }
@@ -57,7 +63,7 @@ import Breadcrumbs from '../../../../components/Breadcrumbs.astro';
           message.textContent = 'Payment has been verified. Use the button below to download the Mercer Lane Construction Estimating & Job Costing Toolkit PRO package.';
           actions.hidden = false;
 
-          if (typeof window.gtag === 'function') {
+          if (data.livemode === true && analyticsAllowed() && typeof window.gtag === 'function') {
             window.gtag('event', 'purchase', {
               transaction_id: sessionId,
               currency: String(data.currency || 'USD').toUpperCase(),
@@ -69,7 +75,7 @@ import Breadcrumbs from '../../../../components/Breadcrumbs.astro';
         .catch((error) => fail('We could not verify this download', error.message || 'Please contact Mercer Lane Press for help.'));
 
       button.addEventListener('click', () => {
-        if (typeof window.gtag === 'function') {
+        if (!actions.hidden && analyticsAllowed() && typeof window.gtag === 'function') {
           window.gtag('event', 'file_download', { file_name: 'ML-Toolkit-PRO-v32.zip' });
         }
       });

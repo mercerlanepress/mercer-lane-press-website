@@ -10,17 +10,23 @@ related:
   - can-my-pc-run-local-ai
 ---
 
-"Runs locally" answers one important question:
+## Is local AI completely private? The short answer
 
-**Where does model inference happen?**
+**Local AI can keep model processing on your computer, but privacy depends on the whole workflow.** Check which model is active, where chats and documents are saved, and whether tools, sync or remote access send copies elsewhere. Running a downloaded model offline is useful evidence for that session; it is not a guarantee about everything the application or computer does while connected.
 
-It does not answer every other privacy question.
+## Check what “local” means in your setup
 
-A local model can process a prompt on your PC while the surrounding workflow still uses cloud sync, online search, backups, hosted tools, remote access, or shared storage.
+| Your setup | What to check |
+| --- | --- |
+| Downloaded model on this PC | Confirm that this model is selected for the task, rather than a hosted model. |
+| Documents in a synced folder | Check whether the original files, chat history or exports also have cloud copies. |
+| Web search or connected tools | Establish what the external service receives before attaching private material. |
+| Model running on another computer | Identify that machine and who controls its storage and access. “Local network” does not mean “only this PC.” |
 
-The useful rule is simple:
+For LM Studio specifically, its [offline-operation documentation](https://lmstudio.ai/docs/app/offline) distinguishes downloaded-model and document use from online model discovery, downloads and updates. Its [model-selection guide](https://lmstudio.ai/docs/bionic/models) distinguishes local, cloud and remote models. Check the active choice, not just the application name.
 
-**Judge privacy by the path the data takes, not by the word local on the product page.**
+If you enable a local API server, also check who can connect. LM Studio's [network-serving guidance](https://lmstudio.ai/docs/developer/core/server/serve-on-network) explains that serving beyond localhost widens access and recommends authentication. Sharing a server is a separate decision from running a model for yourself.
+
 
 ## Follow one prompt from start to finish
 
@@ -180,3 +186,10 @@ For regulated, legally privileged, highly sensitive, or safety-critical material
 A consumer local-AI setup is not a shortcut around governance.
 
 If private documents are your main use case, continue with [how to use local AI with private documents](/local-ai/use-local-ai-with-private-documents/).
+
+
+## Choose your next step
+
+Use the [LM Studio setup guide](/local-ai/set-up-local-ai-with-lm-studio/) if you still need a working local model, or the [private-document workflow](/local-ai/use-local-ai-with-private-documents/) if the model already runs. For a complete sequence covering hardware fit, setup, document use and ongoing checks, [explore Private AI on Your PC](/books/private-ai-on-your-pc/).
+
+Vendor references checked on 19 October 2026. Recheck the documentation for the version and features you use.

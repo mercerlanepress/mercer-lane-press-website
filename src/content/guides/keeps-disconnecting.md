@@ -56,11 +56,15 @@ For speed variation rather than a complete loss, use the [slow-speed guide](/5g-
 
 ## Copy this dropout log for provider support
 
-Use one row per interruption. Leave unavailable readings blank rather than guessing. Keep the log on your own device; it does not need account credentials or passwords.
+Copy this template for each interruption. Leave unavailable readings blank rather than guessing. Keep the log on your own device; it does not need account credentials or passwords.
 
-| Date and time | Duration | Devices affected | Ethernet online? | Gateway lights or app status | Recovery action |
-| --- | --- | --- | --- | --- | --- |
-| Example: 19:20 | 2 minutes | Laptop and phone | No | Record the actual status shown | Returned without restart |
-| | | | | | |
+| Field | Your observation |
+| --- | --- |
+| Date and time | |
+| Duration | |
+| Devices affected | |
+| Ethernet online? | |
+| Gateway lights or app status | Record the actual status shown. |
+| Recovery action | For example: returned without restart. |
 
 After several observations, tell support whether all devices fail together, whether Ethernet also fails, and whether the gateway restarts. For a repeatable seven-day investigation with symptom matrices and placement scoring, [explore The 5G Home Internet Troubleshooting Manual](/books/the-5g-home-internet-troubleshooting-manual/).

@@ -349,7 +349,7 @@ const faqSchema = {
           inputValue: rawInput.toFixed(2)
         };
 
-        if (track && typeof window.gtag === 'function') {
+        if (track && (() => { try { return localStorage.getItem('mlp-analytics-consent') === 'granted'; } catch { return false; } })() && typeof window.gtag === 'function') {
           window.gtag('event', 'tool_calculation', {
             tool_name: 'contractor_markup_margin_calculator',
             pricing_method: method.value

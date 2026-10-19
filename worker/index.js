@@ -83,6 +83,10 @@ function isPaidProSession(session, env) {
 
     session.payment_status === 'paid' &&
 
+    session.mode === 'payment' &&
+
+    session.livemode === true &&
+
     env.PRO_PAYMENT_LINK_ID &&
 
     session.payment_link === env.PRO_PAYMENT_LINK_ID
@@ -137,7 +141,7 @@ async function handleAccess(request, env) {
 
   return json(
 
-    { ok: true, currency: session.currency, amount_subtotal: session.amount_subtotal },
+    { ok: true, livemode: true, currency: session.currency, amount_subtotal: session.amount_subtotal },
 
     200,
 

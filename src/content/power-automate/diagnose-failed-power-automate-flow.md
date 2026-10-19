@@ -10,26 +10,29 @@ related:
   - process-excel-rows-without-duplicates
 ---
 
-When a Power Automate flow stops working, the fastest response is often not to edit it.
+## Power Automate flow failed: where to start
 
-Open the run history first.
+**Open the affected flow's run history, select the relevant run, and inspect the first action that failed or received the wrong data.** Record its error and actual inputs before editing. If no run exists, investigate the trigger; if the run is successful but the result is wrong, investigate the data and logic.
 
-The designer shows what you intended to build.
+| What happened? | Start here |
+| --- | --- |
+| The flow will not save | Read designer validation messages and check required fields and expressions. |
+| No run appears | Check the environment, flow status, source event and trigger conditions. |
+| A run contains a failed action | Open that action's inputs, outputs and error details. |
+| The run succeeds but the result is wrong | Compare the actual values and branch or loop taken with the intended result. |
 
-The run shows what actually happened.
+Microsoft's [cloud-flow troubleshooting guide](https://learn.microsoft.com/en-us/power-automate/troubleshoot-flow-errors) uses these distinct failure paths. They require different checks, so a generic restart or reconnection is not a diagnosis.
 
-## Use a four-question diagnosis
+## How to inspect the failed run
 
-Work from the trigger downward.
+1. Open the correct environment and the flow's details page.
+2. In run history, select the run matching the incident's time and source event.
+3. Expand the earliest relevant failed action. If the failure is inside a scope or loop, inspect the steps within it.
+4. Note the error code and message, then compare the actual inputs with the preceding action's outputs.
+5. Check whether earlier actions already created a file, sent a message or changed a record before you test again. A rerun needs a plan for work already completed.
 
-Ask:
+Inputs and outputs may contain business information. Redact sensitive values before sharing screenshots or asking for outside help.
 
-1. **Did the flow run at all?**
-2. **Did an action fail?**
-3. **Does an action show green but produce the wrong business result?**
-4. **Is every action green, but the business result is still wrong?**
-
-Each answer sends you to a different part of the process.
 
 ## 1. The flow did not run
 
@@ -156,6 +159,26 @@ Do not memorize one code as the diagnosis.
 
 Read the actual error message and the action's inputs and outputs.
 
+## Worked example: the wrong SharePoint ID
+
+In this fictional example, **Create item** succeeds and returns item ID `1432`. A later **Update item** fails because its ID input contains the human-readable reference `REQ-1432`.
+
+Inspect the Update item input and compare it with Create item's output. Map the numeric item ID from the appropriate preceding action, then test against a controlled record. Verify that the intended item changed. Before rerunning the original event, check whether Create item already created a record so you do not create a duplicate.
+
+The distinction is the record's identity versus its display reference. Changing the connection or granting wider access would not correct that mapping.
+
+## Error codes: the next question to ask
+
+| Error clue | Check before changing the flow |
+| --- | --- |
+| `InvalidTemplate` or an expression error | Which expression or reference is invalid, and what value or type did it receive? |
+| `401` | Is the action's connection able to authenticate? |
+| `403` | Does that identity have permission for the operation, and is a policy blocking it? |
+| `404` | Is the resource or identifier correct and still available? |
+| `429` | Is the service throttling requests, and what retry guidance applies to that connector? |
+
+Use the actual response alongside Microsoft's [cloud-flow error reference](https://learn.microsoft.com/en-us/power-automate/error-reference). Do not grant broader permissions or suppress a failure simply to make the run appear successful.
+
 ## Test one change at a time
 
 Once you have evidence for the likely cause:
@@ -196,3 +219,10 @@ That turns troubleshooting knowledge into something another owner can use.
 The most reliable rule is simple:
 
 **Before changing anything, ask what evidence tells you this is the part that is wrong.**
+
+
+## Continue with the workflow you are repairing
+
+For attachment and file problems, see [saving Outlook attachments to SharePoint](/power-automate/save-outlook-attachments-to-sharepoint/). For repeated rows or records, see [processing Excel rows without duplicates](/power-automate/process-excel-rows-without-duplicates/). [Automate the Office](/books/automate-the-office/) brings the individual workflows together with testing, handover and maintenance guidance.
+
+Microsoft references checked on 19 October 2026. Interface labels and connector behaviour can change.

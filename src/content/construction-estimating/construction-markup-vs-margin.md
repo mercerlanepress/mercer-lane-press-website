@@ -16,6 +16,27 @@ Project cost, company overhead, markup, margin, profit, and selling price are re
 
 The safest starting point is a complete project-cost base with visible classifications.
 
+## A 30% markup does not produce a 30% margin
+
+Suppose a fictional job has a complete cost base of **$1,000**. Adding 30% gives a **$1,300** selling price and $300 above cost. The margin is $300 ÷ $1,300 = **23.08%**.
+
+For a 30% target margin on that same cost base, divide $1,000 by 0.70. The selling price is **$1,428.57**, rounded to cents. That is $128.57 more than the markup calculation. These are teaching figures, not recommended contractor rates or targets.
+
+| Calculation | Cost base | Selling price | Amount above cost | Margin |
+|---|---:|---:|---:|---:|
+| Add 30% markup | $1,000 | $1,300.00 | $300.00 | 23.08% |
+| Target 30% margin | $1,000 | $1,428.57 | $428.57 | 30.00% |
+
+[Try both calculations in the free Contractor Markup & Margin Calculator](/tools/contractor-markup-margin-calculator/). Enter 1,000 as the cost base and 30 as the percentage, then switch between markup and target-margin modes. Keep the cost base unchanged so you compare like with like.
+
+## Check the finished job as well as the quote
+
+Correct pricing arithmetic cannot stop costs changing during the job. In a separate fictional example, revenue stays at $1,300 but total cost rises from $1,000 to $1,100. The amount left falls from $300 to $200, and margin falls from 23.08% to 15.38%. Include expected remaining costs when the job is unfinished.
+
+Use the [free Construction Job Profit Calculator](/tools/construction-job-profit-calculator/) to compare the accepted estimate with actual or forecast costs. Approved scope changes, costs incurred and cash collected are different records.
+
+If you need working files for that process, [Toolkit PRO v3.2](/tools/construction-estimating-system-pro/) supplies a separate Estimate & Quote Builder and Job Cost & Profit Control workbook, with fictional demos and a deliberate values-only handoff. Modern Excel desktop is required; Google Sheets and Excel Online are not claimed as supported. Review the file inventory and checkout information before deciding whether it fits your work.
+
 ## Start with project cost
 
 Project cost can include categories such as:

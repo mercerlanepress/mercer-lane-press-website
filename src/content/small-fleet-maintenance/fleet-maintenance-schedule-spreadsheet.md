@@ -8,6 +8,30 @@ related: ["small-fleet-maintenance-system", "fleet-defect-repair-workflow", "sma
 ---
 A fleet maintenance spreadsheet is useful only if its statuses can be trusted. The goal is not to create the largest workbook. It is to make the next required action visible without hiding missing data or moving the due point every time mileage changes.
 
+## Worked example: a booking does not reset the due mileage
+
+For this fictional example only, the adopted rule is 6,000 miles after the last verified completion. Last completion was recorded at 42,000 miles. The next due point is therefore **48,000 miles**.
+
+| Record | Mileage | Meaning |
+|---|---:|---|
+| Last verified completion | 42,000 | Fixed baseline for this rule |
+| Fictional interval | 6,000 | Teaching value, not a vehicle recommendation |
+| Next due point | 48,000 | Baseline plus interval |
+| Current accepted reading | 47,800 | 200 miles remain |
+| Later accepted reading | 48,100 | Due point passed by 100 miles |
+
+If the administrative warning window is 500 miles, 47,800 is **DUE SOON**. At 48,100 the calculator reports **OVERDUE**. Booking a workshop appointment does not provide completion evidence or move the 48,000-mile due point. Follow the applicable maintenance requirement and your operating procedures when deciding what happens next.
+
+[Check the example in the free Fleet Maintenance Due Calculator](/tools/fleet-maintenance-due-calculator/): choose mileage, enter the fictional baseline and interval, use today's date for the fictional current reading, set the warning to 500 miles and confirm the example source. Change current mileage from 47,800 to 48,100. For a real vehicle, verify its source before using the result. The figures above are not recommended service intervals.
+
+If the rule also has a time trigger, review both; a current mileage result does not override an expired date requirement. Missing or stale readings need review before a reassuring status can be trusted.
+
+## From one calculation to a fleet review
+
+The free calculator checks one requirement. The [Small Fleet Maintenance System v1.2](/tools/small-fleet-maintenance-system/) supplies connected Blank and fictional Demo Excel workbooks, a visual Quick Start, editable Word/PDF operational forms and use notes. Its workbook engine calculates date and mileage rules; hours, events and condition requirements need entered evidence and manual review.
+
+Start a review with three questions: which due points need attention, who owns the next action, and what evidence will close it? Record completion before applying a verified rule reset. The workbook does not send automatic reminders or certify vehicle safety. Excel desktop is required separately; Google Sheets and Excel for the web have not been verified.
+
 ## Start with separate record types
 
 For a small fleet, a strong workbook can use separate tables for:

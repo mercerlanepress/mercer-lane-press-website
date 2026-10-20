@@ -56,9 +56,9 @@ const schema = {
         <p>The method begins with the machine you already own and treats privacy, capability, speed, and maintenance as separate questions that need separate checks.</p>
       </div>
       <div class="grid-3">
-        <article class="card"><h3>Fit the model to the PC</h3><p>Record RAM, GPU and VRAM, storage, and normal background use. Start with a model class and context that leave the computer responsive rather than choosing the largest file that can technically load.</p></article>
+        <article class="card" id="hardware-fit"><h3>Fit the model to the PC</h3><p>Record RAM, GPU and VRAM, storage, and normal background use. Start with a model class and context that leave the computer responsive rather than choosing the largest file that can technically load.</p></article>
         <article class="card"><h3>Choose one starting route</h3><p>The main path uses a graphical desktop application, with LM Studio as the worked example, while Jan and Ollama are presented as alternatives for readers with different preferences or integration needs.</p></article>
-        <article class="card"><h3>Verify the privacy boundary</h3><p>Local inference is only one part of the path. Check the active model, app data folder, cloud sync, backups, web tools, plug-ins, remote access, and who else can use the computer.</p></article>
+        <article class="card" id="privacy-boundary"><h3>Verify the privacy boundary</h3><p>Local inference is only one part of the path. Check the active model, app data folder, cloud sync, backups, web tools, plug-ins, remote access, and who else can use the computer.</p></article>
         <article class="card"><h3>Use bounded everyday tasks</h3><p>Drafting from supplied facts, extraction, rewriting, transformation, and source-only document questions are treated as repeatable jobs with explicit rules for missing information and human review.</p></article>
         <article class="card"><h3>Troubleshoot in the cheapest order</h3><p>Close unnecessary apps, start a fresh chat, reduce context, adjust GPU offload where relevant, try a smaller quantisation or model, and only then consider hardware.</p></article>
         <article class="card"><h3>Keep a benchmark and change log</h3><p>Use the same small test pack when comparing models or after significant updates so a working setup changes because it improves real work, not because a new model is fashionable.</p></article>
@@ -75,6 +75,15 @@ const schema = {
         <article class="card"><h3>Test navigation, absence, and conflict</h3><p>Ask for facts you know are present, facts that are absent, and—where appropriate—conflicting values across controlled test documents before trusting the workflow broadly.</p></article>
       </div>
       <div class="notice"><strong>Important boundary.</strong> Local AI can reduce one exposure route by keeping model inference on your computer, but it does not automatically make the whole workflow private, secure, offline, or compliant. For confidential, regulated, legally privileged, or safety-critical material, follow the applicable organizational policies and approved systems.</div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <h2>Take the full setup and review method with you</h2>
+      <p>Choose this book if you want the hardware, setup, document and privacy checks in one sequence. If you only need a single fix, the free guides below are a useful starting point.</p>
+      <a class="button" href={book.purchaseUrl}>See Private AI on Your PC on Amazon</a>
+      <p class="byline">Amazon shows the available formats, current price and delivery options.</p>
     </div>
   </section>
 

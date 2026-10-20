@@ -10,11 +10,19 @@ related:
   - local-ai-slow-freezing-out-of-memory
 ---
 
-A first local-AI setup should prove one useful workflow, not create a collection of software and model files.
+## Set up LM Studio on Windows: the short version
 
-The simplest beginner route in *Private AI on Your PC* uses LM Studio as the worked example because it provides a graphical way to find, download, load, and chat with supported local models while showing information about model variants and device fit.
+**Install LM Studio from its official site, download one model that fits your PC, load it in Chat, then test a simple prompt before using your own documents.** Downloading a model stores the file; loading it makes the model ready to answer.
 
-The exact interface can change, so follow the workflow rather than memorizing a button position.
+| Stage | What success looks like |
+| --- | --- |
+| Check the PC | The application supports your hardware and there is memory left for Windows. |
+| Download | One chosen model finishes downloading and appears in your local library. |
+| Load | The model loads without making the PC unresponsive. |
+| Test | A short prompt produces a usable answer with the requested format. |
+| Verify | The downloaded model works in your offline test and you understand the privacy boundary. |
+
+Use the steps below for a first baseline. The [official LM Studio getting-started guide](https://lmstudio.ai/docs/app/basics) covers the current interface.
 
 ## Before you install anything
 
@@ -27,11 +35,11 @@ Record:
 - free storage;
 - normal background memory use.
 
-The book's September 2026 source check records LM Studio guidance recommending at least 16 GB RAM and at least 4 GB dedicated VRAM for its Windows application, with AVX2 required on x64. Smaller models can still be useful on some systems without a dedicated GPU, but application requirements and model behaviour change, so confirm the vendor's current documentation before relying on a specific requirement.
+LM Studio's [current Windows requirements](https://lmstudio.ai/docs/app/system-requirements) recommend at least 16 GB RAM and 4 GB dedicated VRAM; x64 CPUs require AVX2 support. Recommendations are not a promise that a particular model will fit. Check application compatibility separately from the memory needed for your chosen model.
 
 ## Step 1: install from the official source
 
-Use the official LM Studio website rather than a third-party download mirror.
+Use the [official LM Studio download page](https://lmstudio.ai/download) and choose the Windows build for your system.
 
 If the computer has a small system drive and a larger secondary drive, decide where model files should be stored before downloading several gigabytes of data.
 
@@ -49,7 +57,7 @@ The objective is not to prove that the biggest file can load. The objective is t
 
 Model downloads can be several gigabytes.
 
-Let the download finish before testing. Once the model is in the local library, load it into a chat session.
+Let the download finish before testing. In the current interface, use **Discover** to find and download a model, then **Chat** and the model loader to select the downloaded model. A completed download does not mean the model is already loaded.
 
 Keep Task Manager open while the model loads.
 
@@ -137,3 +145,12 @@ Do not install three runtimes and five versions of the same model on day one.
 Prove one setup for one task. Save the prompt that worked. Use it for several days. Add another tool only when you can name the feature you actually need.
 
 If the model is slow or unstable, follow the [local AI troubleshooting order](/local-ai/local-ai-slow-freezing-out-of-memory/) before reinstalling software or buying hardware.
+
+
+## If the first setup does not work
+
+If the model will not load or Windows becomes sluggish, use the [memory and performance troubleshooting guide](/local-ai/local-ai-slow-freezing-out-of-memory/). If it answers but the privacy boundary is unclear, use the [local-AI privacy checks](/local-ai/does-local-ai-keep-data-private/).
+
+[Private AI on Your PC](/books/private-ai-on-your-pc/) connects hardware selection, setup, document workflows and maintenance into the full sequence.
+
+Vendor references checked on 20 October 2026.

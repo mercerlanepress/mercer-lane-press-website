@@ -10,15 +10,27 @@ related:
   - home-assistant-matter-ipv6-multicast
 ---
 
-A Thread Border Router is not a generic smart-home "hub."
+## Thread border router missing or devices unreachable? Start here
 
-Its job is more specific:
+**First identify the Thread network, its border router and the commissioning phone's credentials. Then check the local network path and mesh coverage.** A visible network does not by itself prove that Home Assistant or your phone can commission a device onto it.
 
-**connect the Thread mesh to adjacent IP networks such as Ethernet or Wi-Fi.**
+| What you see | What to investigate first |
+| --- | --- |
+| No border router appears | Confirm the router is powered, configured and connected to the LAN; investigate local discovery before resetting endpoints. |
+| A network appears but cannot be made preferred | Check whether Home Assistant has that network's credentials. Discovery and possession of credentials are separate. |
+| Pairing uses an unexpected network | Check the phone's Thread credentials and the current Companion app commissioning procedure. |
+| Devices join but are unreachable | Check the local IPv6 path to the Matter controller, then coverage and powered Thread routers. |
+| One device fails after a powered plug moves | Test near known coverage or restore that plug before changing the whole network. |
 
-That role is essential for Matter-over-Thread devices that need to communicate with a Matter controller outside the Thread mesh.
+A Thread Border Router connects the Thread mesh to adjacent IP networks such as Ethernet or Wi-Fi. It is not automatically the Matter controller; one product may provide both roles.
 
-It is also a common source of confusion when a home contains several ecosystems.
+## A visible Thread network can still lack credentials
+
+Home Assistant's [Thread documentation](https://www.home-assistant.io/integrations/thread/) explains that border routers advertise through mDNS/DNS-SD without advertising their network credentials. You can therefore see a network without having the credentials required to make it preferred.
+
+The same documentation notes that Matter commissioning through the Companion apps uses the mobile device's preferred Thread network. Setting a preferred network in Home Assistant is not enough to establish which credentials the phone will use. Follow the current Android or iOS credential-sharing procedure for your existing network, then refresh the Thread view and verify the result.
+
+Do not share Thread credentials in public screenshots or troubleshooting posts.
 
 ## Separate three Thread roles
 
@@ -174,3 +186,8 @@ Confirm:
 Then commission one reachable device and keep it stable before scaling.
 
 For the broader setup path, start with [Matter-over-Wi-Fi vs Matter-over-Thread](/home-assistant-matter-thread/matter-over-wifi-vs-thread/). If pairing fails, use the [Matter commissioning troubleshooting checklist](/home-assistant-matter-thread/home-assistant-matter-commissioning-troubleshooting/).
+
+
+If devices join but remain unreachable, continue with the [local IPv6 and multicast checks](/home-assistant-matter-thread/home-assistant-matter-ipv6-multicast/). For the complete setup and maintenance sequence, see [The Home Assistant & Matter Owner's Manual](/books/the-home-assistant-and-matter-owners-manual/).
+
+Vendor reference checked on 20 October 2026. Interface labels and credential-sharing steps can change.

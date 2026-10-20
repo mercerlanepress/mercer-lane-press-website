@@ -106,6 +106,8 @@ Do not assume the metadata object itself is the file content.
 
 Test with a real uploaded file and open the copied result.
 
+If the documents arrive by Outlook instead of a Form, use the [Outlook attachments to SharePoint flow](/power-automate/save-outlook-attachments-to-sharepoint/) for the email-specific attachment loop and content mapping. Keep that intake path distinct from Forms upload handling.
+
 ## Build the destination folder after the reference exists
 
 If each request has its own folder, build the folder name from a stable reference.

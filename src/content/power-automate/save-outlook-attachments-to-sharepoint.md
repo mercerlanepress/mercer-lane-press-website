@@ -10,37 +10,46 @@ related:
   - diagnose-failed-power-automate-flow
 ---
 
-Saving email attachments automatically sounds simple:
+## How to save Outlook attachments to SharePoint automatically
 
-**email arrives → attachment → SharePoint file**
+**Use an Outlook email trigger, loop through the attachments you want to keep, retrieve each attachment's content, then pass its name and content to SharePoint's Create file action.** Test with one harmless document before adding routing or confirmations.
 
-The difficult part is not adding the actions. It is deciding exactly which messages and attachments count, what should happen when a filename already exists, and how the flow behaves on the second run.
+This guide saves the attached files. Saving the whole email is a different task: Outlook's **Export email (V2)** action exports an EML message. Decide which record you need before building the flow.
 
 ## Start with a controlled test
 
-Use:
+Use a test Outlook folder, an existing SharePoint document library and a message with one obvious attachment. Confirm that your connection can read the mailbox and write to the destination.
 
-- a controlled Outlook mailbox or folder;
-- a test SharePoint document library or folder;
-- a simple test message with one obvious attachment.
+For a shared mailbox, select the matching shared-mailbox trigger and check the connection's access. Do not assume that a flow built for your personal inbox will read a shared mailbox unchanged.
 
-Keep the first version deliberately small.
+## Map the trigger, attachment and SharePoint fields
 
-The purpose of the first build is to prove that the attachment content can be retrieved and written to SharePoint correctly.
+One approach uses **When a new email arrives (V3)** with **Include Attachments** set to **No**, followed by **Get Attachment (V2)** inside the attachment loop. Microsoft recommends this pattern when downloading attachments in the trigger causes timeouts.
 
-## The basic flow
+| Flow step | What to select or pass |
+| --- | --- |
+| Outlook trigger | The folder you are monitoring; for a shared mailbox, use the corresponding shared-mailbox trigger. |
+| Apply to each | The email's attachment collection. Put the qualifying-file condition inside this loop. |
+| Get Attachment (V2) | The email's Message Id and the current attachment's Attachment Id. Supply the original mailbox address when retrieving from a shared mailbox. |
+| SharePoint Create file | Your Site Address and Folder Path in an existing library; the attachment's name as File Name and its retrieved content as File Content. |
 
-A common structure is:
+Check the current [Office 365 Outlook connector reference](https://learn.microsoft.com/en-us/connectors/office365connector/) and [SharePoint connector reference](https://learn.microsoft.com/en-us/connectors/sharepointonline/) for field names and limitations. The designer may label dynamic values differently; choose them by their source and meaning.
 
-1. Trigger when a new email arrives.
-2. Check whether the message has attachments.
-3. Work through the attachment collection.
-4. Create the file in SharePoint using the attachment name and content.
-5. Open the created file and confirm that it is the expected document.
+Do not put an attachment ID, filename or metadata object into **File Content**. If you already retrieve content through a different supported pattern, inspect the output before adding a redundant download action.
 
-The attachment collection matters because one message may contain more than one attachment.
+## Worked example: keep the PDF, skip the signature
 
-That is why Power Automate may create an **Apply to each** loop even when your test email contains only one file.
+Suppose a fictional test message contains `JOB-104-quote.pdf` and `signature.png`. The agreed rule is to keep PDF quotes with a `JOB-` prefix in a test Quotes folder.
+
+1. Send the harmless test message to the monitored folder.
+2. In the attachment loop, check each attachment against the agreed filename and file-type rule.
+3. Retrieve and create the qualifying PDF; skip the signature image.
+4. Open the resulting PDF in SharePoint and compare it with the source.
+5. Repeat with two qualifying PDFs and check that both are saved.
+
+The expected result for the first message is **one usable PDF and no signature image**. A filename rule selects candidates; it does not validate the contents of an untrusted file.
+
+Next, send another message with the same PDF name. Use the duplicate rule below to decide the result before enabling the flow for normal mail.
 
 ## Test the actual file content
 
@@ -153,7 +162,7 @@ Inspect both the run history and the SharePoint result.
 
 ### The flow never fires
 
-Check the trigger folder, mailbox, connection, and trigger conditions.
+Check the trigger folder, mailbox, connection, and trigger conditions. Then use the [failed-flow run-history guide](/power-automate/diagnose-failed-power-automate-flow/) to distinguish a missing trigger run from an action failure.
 
 ### The file name is correct but content is wrong
 
@@ -185,4 +194,10 @@ When the flow is relied on by other people, record:
 
 The attachment action is only one part of a reliable document-handling process.
 
-For the same record-identity principles in a request process, read [Forms to SharePoint request tracking](/power-automate/forms-to-sharepoint-request-tracker/).
+## Continue with the process you need
+
+If files belong to tracked requests, use [Forms to SharePoint request tracking](/power-automate/forms-to-sharepoint-request-tracker/) to connect storage with record identity and status. If the save action fails, start with [diagnosing a failed Power Automate flow](/power-automate/diagnose-failed-power-automate-flow/) before changing several settings.
+
+For the wider sequence of building, testing, troubleshooting and handing over office flows, [explore Automate the Office](/books/automate-the-office/).
+
+Connector references checked on 20 October 2026. Recheck them for the version and environment you use.

@@ -39,6 +39,9 @@ for(const file of html){
   for(const image of source.matchAll(/<img[^>]+src="(\/[^"?]+)"[^>]*>/g)){
     if(!existsSync(join(dist,image[1]))) throw new Error(`Missing image ${image[1]} in ${file}`);
     if(!/\salt="[^"]+"/.test(image[0])) throw new Error(`Image without useful alt text in ${file}`);
+    if(image[1].startsWith('/images/books/') && /class="cover-shell(?:\s|"|$)/.test(source.slice(Math.max(0,image.index-120),image.index))){
+      if(!/\swidth="[1-9]\d*"/.test(image[0]) || !/\sheight="[1-9]\d*"/.test(image[0])) throw new Error(`Book cover without intrinsic dimensions in ${file}`);
+    }
   }
 }
 

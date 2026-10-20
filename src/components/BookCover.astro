@@ -1,9 +1,15 @@
 ---
-const { book, large = false } = Astro.props;
+import coverDimensions from '../data/book-cover-dimensions.json';
+const { book, large = false, eager = false } = Astro.props;
+// Keep these intrinsic dimensions in sync when adding or replacing a cover.
+const dimensions = coverDimensions[book.cover as keyof typeof coverDimensions];
+if (book.coverReady && !dimensions) {
+  throw new Error(`Missing intrinsic dimensions for book cover: ${book.cover}`);
+}
 ---
 <div class:list={['cover-shell', large && 'cover-large']}>
   {book.coverReady
-    ? <img src={book.cover} alt={'Cover of ' + book.title + ' by ' + book.author} loading={large ? 'eager' : 'lazy'} />
+    ? <img src={book.cover} alt={'Cover of ' + book.title + ' by ' + book.author} width={dimensions?.width} height={dimensions?.height} loading={large || eager ? 'eager' : 'lazy'} fetchpriority={large || eager ? 'high' : undefined} />
     : <div class="cover-placeholder" role="img" aria-label={'Placeholder cover for ' + book.title}>
         <small>MERCER LANE PRESS</small><h2>{book.title}</h2><p>{book.topics?.[0] ?? 'Practical guide'}</p><strong>{book.author}</strong>
       </div>}

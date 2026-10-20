@@ -19,7 +19,7 @@ const homeBooks=books.slice(0,6);
         <div class="notice"><strong>Featured book.</strong> Managing a small fleet? <em>{featuredBook.title}</em> provides a practical system for maintenance schedules, repair actions, vehicle records, costs and downtime. <a href={'/books/' + featuredBook.slug + '/'}>Explore the book →</a></div>
         <div class="actions"><a class="button" href="/books/">Browse our books</a><a class="button button-secondary" href="/guides/">Read practical guides</a></div>
       </div>
-      <BookCover book={featuredBook}/>
+      <BookCover book={featuredBook} eager/>
     </div>
   </section>
 

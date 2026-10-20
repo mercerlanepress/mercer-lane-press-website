@@ -32,7 +32,7 @@ A broad label such as “roof issue,” “damaged siding,” or “window defec
 
 This also helps keep causes separate from observations. Staining can be visible without the inspection establishing whether the source is current plumbing leakage, roofing leakage, condensation, or a previous event.
 
-When the source was not determined, preserve that uncertainty.
+When the source was not determined, preserve that uncertainty. Match the wording to the image using the [home inspection photo workflow](/home-inspection-reporting/home-inspection-photo-workflow/), so a close-up does not lose the location or imply an unconfirmed cause.
 
 ## 3. Explain significance only as far as the evidence supports
 
@@ -65,6 +65,8 @@ A concise finding is strong when the reader can locate the condition, understand
 Long findings become weaker when property-specific information is buried under generic education, repeated disclaimers, possible causes, or consequences that were not established.
 
 A practical editing rule is to ask whether every sentence performs at least one useful job: locate, describe, explain significance, communicate a limitation or uncertainty, recommend action, clarify priority, or interpret a photograph.
+
+If you reuse wording across reports, the [narrative-library guide](/home-inspection-reporting/home-inspection-narrative-library-system/) explains how to keep the property-specific variables visible.
 
 ## A final four-question check
 

@@ -24,6 +24,8 @@ For a single review, use the [free Excel performance review starter kit and loca
 ## Employee queries and cases
 Document intake factually, diagnose the type of issue, prepare neutral questions, use de-escalation or mediation structures where appropriate, and keep formal investigation and outcome steps inside the organization's process.
 
+For a leave-balance query, separate policy interpretation from arithmetic. The [PTO accrual calculator](/tools/pto-accrual-calculator/) can check the numbers using your own policy inputs; it does not decide entitlement.
+
 ## Compliance and documentation
 Templates can improve consistency, but they do not make AI-generated policy language legally sufficient. Use AI to structure drafts and change logs, then apply jurisdiction-specific review and the organization's approval process.
 

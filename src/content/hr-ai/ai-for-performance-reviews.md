@@ -14,6 +14,8 @@ Collect the manager's actual notes: achievements, missed expectations, examples,
 ## Ask for structure
 A useful prompt can request sections such as **Key Achievements, Strengths, Areas for Development, and Goals for Next Period**. The model can organize supplied material, but it does not know what actually happened unless you tell it.
 
+For a place to organize the evidence and draft, use the [free Excel performance review starter kit and AI Prompt Builder](/free-tools/performance-review-template-excel/). It includes a review workbook, editable form, printable PDFs and goals/actions for follow-up.
+
 ## Check specificity
 Generic praise and generic criticism are both weak. Replace vague language with verified examples that the manager can explain in the conversation.
 

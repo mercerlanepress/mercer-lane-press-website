@@ -31,6 +31,21 @@ Building materials can affect radio signals. Metal coatings, masonry, concrete, 
 
 A simple scorecard can rate cellular stability, useful speed, latency, whole-home Wi-Fi reach, access to safe power, and ventilation. Do not overvalue a tiny change in one signal number if the overall connection becomes less stable.
 
+## Record one comparable result for each location
+
+Copy this short record for each safe candidate. Use the same test device and method, pause other heavy traffic where practical, and compare at similar times.
+
+| Record | What to write down |
+| --- | --- |
+| Location and orientation | A name you can reproduce, such as upstairs west window, with a note of orientation. |
+| Time and connection | Test time, Ethernet or Wi-Fi, and the test device. |
+| Cellular observations | The gateway's reported connection and signal readings, using the same interface each time. |
+| Useful performance | Download, upload, latency and any dropouts during the same test period. |
+| Wi-Fi reach | Whether the rooms you use still have a usable connection. |
+| Longer check | Whether the leading location remains stable during normal use. |
+
+For example, a fictional window location might give a faster short speed test but more dropouts than an interior shelf. Repeat the comparison before choosing; the highest single speed result is not necessarily the best everyday location.
+
 ## Understand the tradeoff
 
 If moving the gateway improves Ethernet performance but weakens Wi-Fi in distant rooms, you have learned that placement helped the incoming cellular link and created or revealed a separate distribution issue. Ethernet cabling or a properly planned access point or mesh system might then be relevant. Confirm compatibility and placement requirements before purchasing.
@@ -41,4 +56,4 @@ If every safe location performs poorly even on Ethernet, more Wi-Fi equipment is
 
 Photograph or describe each spot, note orientation, record metrics from the official gateway interface, and state the time of each test. Weather and provider conditions can vary, so one fast result should not outweigh stable performance over multiple days.
 
-Continue with the [weak-signal guide](/5g-home-internet/weak-signal/) if readings remain poor, or the [disconnecting guide](/5g-home-internet/keeps-disconnecting/) if the connection drops. The manual includes a fuller placement-scoring method and seven-day stability test.
+Continue with the [weak-signal guide](/5g-home-internet/weak-signal/) if readings remain poor, or the [disconnecting guide](/5g-home-internet/keeps-disconnecting/) if the connection drops. If only evening performance changes, compare with the [slow-at-night troubleshooting guide](/5g-home-internet/slow-at-night/). [The 5G Home Internet Troubleshooting Manual](/books/the-5g-home-internet-troubleshooting-manual/) includes a fuller placement-scoring method and seven-day stability test.

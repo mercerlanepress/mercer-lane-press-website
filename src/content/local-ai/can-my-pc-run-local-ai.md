@@ -10,9 +10,18 @@ related:
   - does-local-ai-keep-data-private
 ---
 
-You do not need to buy a new graphics card before trying local AI.
+## Can your computer run local AI?
 
-The first job is simpler: find out what your current computer has, choose a modest model that fits comfortably, and test whether the waiting time and answer quality are acceptable for the work you actually want to do.
+**Your PC may run a smaller local model even if it cannot run a large one comfortably.** Check both the AI application's requirements and the available memory for the model, then test one task. Installed RAM, dedicated VRAM, model size and context length matter together.
+
+| Question | What to check before downloading |
+| --- | --- |
+| Can the application run? | Supported operating system, CPU instructions and current vendor requirements. |
+| Can the model load? | Model variant, available RAM/VRAM and the application's estimate at your chosen context. |
+| Is it useful on this PC? | Response time, factual accuracy and whether other applications remain usable. |
+| Do you need a GPU upgrade? | Identify the limiting task and component after testing a smaller model first. |
+
+For LM Studio on Windows, the [vendor requirements](https://lmstudio.ai/docs/app/system-requirements) recommend 16 GB RAM and 4 GB dedicated VRAM, with AVX2 required on x64. Those are application recommendations, not model-by-model guarantees. The 8 GB range below is a cautious small-model experiment, not a claim that every application supports that PC.
 
 ## Write down four numbers first
 
@@ -21,7 +30,7 @@ On Windows, open **Task Manager → Performance** and record:
 - installed system RAM;
 - GPU model;
 - dedicated GPU memory, if the computer has a discrete GPU;
-- free storage on the drive where model files will live.
+- free storage on the drive where model files will live (check **File Explorer → This PC**).
 
 Also note how much RAM the computer is already using before the AI application starts.
 
@@ -146,3 +155,8 @@ Before buying hardware, test cheaper changes first:
 Then measure again.
 
 For the next step, use the [beginner LM Studio setup guide](/local-ai/set-up-local-ai-with-lm-studio/) and keep the first installation deliberately small.
+
+
+For the full hardware-to-workflow sequence, [Private AI on Your PC](/books/private-ai-on-your-pc/) covers setup, testing, private documents and ongoing maintenance.
+
+Vendor requirements checked on 20 October 2026. The model-size ranges above are starting heuristics, not measured benchmarks for your hardware.

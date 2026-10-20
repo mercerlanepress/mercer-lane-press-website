@@ -160,6 +160,12 @@ That means the same system that held the scope, takeoff, labour and quotations c
 - lessons learned;
 - useful cost-history notes for future estimating.
 
-The [Mercer Lane Construction Estimating System PRO](/tools/construction-estimating-system-pro/) includes estimate-vs-actual, lessons and cost-history stages alongside the main estimate workflow in Microsoft Excel desktop.
+## Choose a quick profit check or ongoing Excel job control
+
+For a one-off check, use the free [Construction Job Profit Calculator](/tools/construction-job-profit-calculator/). Enter your revenue, direct costs and overhead allocation to compare gross profit with contribution after overhead. It runs in your browser; it does not retain a job-cost ledger or track individual transactions.
+
+For ongoing records, the paid [Construction Estimating & Job Costing Toolkit PRO](/tools/construction-estimating-system-pro/) v3.2 includes two core Microsoft Excel desktop workbooks. Use **Estimate & Quote Builder** for a job-specific estimate and customer proposal, then use **Job Cost & Profit Control** as the business master for accepted jobs, actual costs, remaining-cost forecasts and lessons for future estimates.
+
+The accepted baseline moves between the workbooks through a deliberate **copy-and-paste-values Job Handoff**. There are no external workbook links or automatic accounting imports, so later estimate changes do not silently alter the registered baseline. The supplied job-costing master supports up to 30 registered jobs; Google Sheets and Excel Online are not claimed as supported.
 
 For a broader checklist of what an estimating workbook should contain, see [construction estimating spreadsheet: what should an Excel system include?](/construction-estimating/construction-estimating-spreadsheet-what-to-include/).

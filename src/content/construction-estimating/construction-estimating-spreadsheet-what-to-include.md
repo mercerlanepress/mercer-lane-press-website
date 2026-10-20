@@ -163,6 +163,13 @@ For a very small, familiar job, a simple estimate sheet may be enough.
 
 As the job becomes more important or uncertain, the value shifts toward a workbook that keeps the decisions connected: scope, takeoff, cost build-up, commercial calculation, review, proposal and learning.
 
-The [Mercer Lane Construction Estimating System PRO](/tools/construction-estimating-system-pro/) is built around that complete workflow in Microsoft Excel desktop. It includes the main estimating workbook, a completed Oakridge demonstration, proposal layouts, focused calculators and tools, editable forms, printable review sheets and documentation.
+The paid [Construction Estimating & Job Costing Toolkit PRO](/tools/construction-estimating-system-pro/) v3.2 separates that workflow into two Microsoft Excel desktop workbooks:
+
+- **Estimate & Quote Builder:** save a separate file for each estimate, review the cost build-up and issue a Classic, Modern or Compact client proposal.
+- **Job Cost & Profit Control:** keep a business master for up to 30 accepted jobs, record actual costs and approved changes, and review remaining-cost forecasts and lessons learned.
+
+Move the accepted estimate baseline through the values-only **Job Handoff**. This is a manual copy-and-paste-values step, with no external workbook links or automatic accounting integration. The package includes clean copies of both core workbooks, both worked demos, five bonus workbooks, forms and documentation. Google Sheets and Excel Online are not claimed as supported.
+
+If you only need to check revenue, direct costs and overhead allocation for one job, start with the free browser-based [Construction Job Profit Calculator](/tools/construction-job-profit-calculator/). It calculates profit from your inputs without providing an ongoing job-cost ledger.
 
 It does not supply recommended rates, margins or overhead percentages. Those remain business decisions based on your own current information.

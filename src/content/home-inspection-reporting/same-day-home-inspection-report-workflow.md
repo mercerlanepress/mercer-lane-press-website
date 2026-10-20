@@ -38,9 +38,11 @@ At minimum, capture:
 
 When a routine significance or recommendation is already clear, it may be efficient to record that too.
 
+Use the [Context → Component → Detail photo workflow](/home-inspection-reporting/home-inspection-photo-workflow/) to keep images connected to the finding while you still have the property in front of you.
+
 Do not rely on a memory queue. Every unrecorded observation becomes another task competing for attention.
 
-For routine findings, select the correct narrative, update the variables, connect the photo, verify the recommendation, classify appropriately, and move on.
+For routine findings, select the correct narrative, update the variables, connect the photo, verify the recommendation, classify appropriately, and move on. A [controlled narrative library](/home-inspection-reporting/home-inspection-narrative-library-system/) supports that retrieval and editing step.
 
 For unusual findings, **capture first, solve later**. Preserve the facts, uncertainty, photographs, relevant measurements, and a review flag. Do not force a complex condition into the nearest canned narrative merely to finish it onsite.
 
@@ -80,7 +82,7 @@ Review high-risk certainty or urgency words, uncertainty that may have become ov
 
 A report can contain individually acceptable comments and still fail as a whole document.
 
-Before delivery, check identity, completeness, internal consistency, body and summary agreement, photographs, tone and usability, scope, and rendered output.
+Before delivery, check identity, completeness, internal consistency, body and summary agreement, photographs, tone and usability, scope, and rendered output. Use the [seven-pass home inspection report QA checklist](/home-inspection-reporting/home-inspection-report-qa-checklist/) to work through those checks deliberately.
 
 Open the exported report, not just the editor. Check whether images, links, page layout, headings, and other client-facing elements render as expected.
 

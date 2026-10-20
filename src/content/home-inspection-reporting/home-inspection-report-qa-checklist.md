@@ -50,7 +50,7 @@ Ask whether any sentence could have been copied from another property and surviv
 
 For report images, verify correct property, correct finding, correct location, useful context, useful detail, no unnecessary duplicates, and accurate annotations.
 
-A close-up should not create a stronger claim than the narrative supports, and an annotation should not convert an unconfirmed source into a stated cause.
+A close-up should not create a stronger claim than the narrative supports, and an annotation should not convert an unconfirmed source into a stated cause. If the missing context began during capture, review the [Context → Component → Detail photo workflow](/home-inspection-reporting/home-inspection-photo-workflow/).
 
 ## Pass 6: Summary and consistency
 
@@ -86,6 +86,6 @@ When QA catches an error, do not stop at correcting the sentence.
 
 Classify why the system allowed it: capture failure, template failure, retrieval failure, classification failure, or review failure.
 
-Then change the upstream process where appropriate.
+Then change the upstream process where appropriate. The [same-day home inspection report workflow](/home-inspection-reporting/same-day-home-inspection-report-workflow/) connects preparation, capture, departure checks and final review.
 
 The best QA system does more than repair today's report. It makes the same kind of error less likely to appear tomorrow.

@@ -42,6 +42,8 @@ COP describes the relationship between heat output and electricity input at a pa
 
 An instantaneous COP number should not be treated as a score. Outdoor temperature, heating-water temperature, domestic hot water, recovery, and defrost all affect the operating condition.
 
+To translate recorded kWh and your tariff into cost, use the [heat pump running cost calculator](/tools/heat-pump-running-cost-calculator/). Keep measured electricity separate from estimates that use a heat-demand and COP assumption.
+
 ## 3. Compare periods that mean something
 
 “Monday used 30 kWh and Tuesday used 42 kWh” is weak evidence without context.
@@ -65,7 +67,7 @@ As outdoor temperature falls, the building generally loses heat faster and needs
 
 The heat pump may also be working across a larger temperature difference, particularly when producing warmer water.
 
-Higher use in genuinely colder weather is not automatically evidence of poor operation.
+Higher use in genuinely colder weather is not automatically evidence of poor operation. If frost, vapour or heating pauses are part of the concern, use the [heat pump defrost and normal-behaviour guide](/heat-pump-owners/heat-pump-defrost-frost-steam-normal/) alongside the consumption record.
 
 ## Indoor target and setback recovery
 

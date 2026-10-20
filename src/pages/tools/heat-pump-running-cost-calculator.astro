@@ -34,10 +34,10 @@ const faqSchema = {'@context':'https://schema.org','@type':'FAQPage','mainEntity
       <div><label for="tariff">Electricity unit price (pence per kWh)</label><input id="tariff" type="number" inputmode="decimal" min="0" max="1000" step="any" value="25" style="display:block;width:100%;padding:.7rem;margin-top:.35rem"/></div>
       <div><label for="days">Days in the period to estimate</label><input id="days" type="number" inputmode="numeric" min="1" max="366" step="1" value="30" style="display:block;width:100%;padding:.7rem;margin-top:.35rem"/></div>
       <div class="actions"><button class="button" type="submit">Calculate running cost</button><button class="button button-secondary" type="reset">Reset example</button></div>
-      <p id="calc-error" role="alert" hidden style="color:#9b2c2c"></p>
+      <p id="calc-error" role="alert" tabindex="-1" hidden style="color:#9b2c2c"></p>
     </form>
     <section id="heat-results" class="card" aria-live="polite" aria-atomic="true" style="margin-top:1rem">
-      <p class="eyebrow">ESTIMATED RUNNING COST</p><h2 id="period-cost">£112.50 over 30 days</h2>
+      <p class="eyebrow">ESTIMATED RUNNING COST</p><h2 id="period-cost" tabindex="-1">£112.50 over 30 days</h2>
       <p id="detail-line">15.00 kWh/day × 25.00p/kWh</p>
       <div class="grid-2">
         <div><h3>Daily</h3><p id="daily-cost">£3.75</p></div>
@@ -49,6 +49,13 @@ const faqSchema = {'@context':'https://schema.org','@type':'FAQPage','mainEntity
       <p id="annual-line">Annualised electricity at the same average use: 5,475.00 kWh</p>
       <p id="heat-cost-line" hidden></p>
     </section>
+    <aside class="notice" aria-labelledby="heat-next-step">
+      <h2 id="heat-next-step">What to check next</h2>
+      <p>If the cost looks high, use the <a href="/heat-pump-owners/heat-pump-high-electricity-use-checks/">free high electricity-use checklist</a> to review metering, weather, hot water and controls.</p>
+      <p>For a complete operating method, <a href="/books/the-new-heat-pump-owners-operating-manual/">The New Heat Pump Owner’s Operating Manual by Gareth Fenwick</a> covers flow temperature, weather compensation, comfort and when to contact an installer.</p>
+      <a class="button" href="/books/the-new-heat-pump-owners-operating-manual/">Preview the book and contents</a>
+    </aside>
+    <p class="small">Your entered figures stay in this page and are not sent to analytics. If you allow analytics, we count calculator use and book-link clicks without the figures you enter.</p>
     <h2>How to estimate heat pump electricity costs</h2>
     <p>If you have a dedicated electricity reading, use that. Running cost equals <strong>electricity used (kWh) × tariff (£/kWh)</strong>. You can enter daily or annual electricity use. For example, 15 kWh/day at 25p/kWh costs £3.75 per day, while 5,475 kWh/year at the same rate costs £1,368.75 per year.</p>
     <p>If you only know useful heat delivered, divide delivered heat (kWh) by the <strong>COP or SCOP</strong> that represents the same period to estimate electricity consumption. A COP of 3 means approximately 3 kWh of useful heat per 1 kWh of electricity in that period. A seasonal SCOP is usually the more appropriate basis for an annual heat-demand calculation.</p>
@@ -65,7 +72,6 @@ const faqSchema = {'@context':'https://schema.org','@type':'FAQPage','mainEntity
     <h3>Why might my actual bill differ?</h3><p>Weather, indoor temperature, hot-water use, flow temperature, controls, defrost cycles, backup heating and metering scope can all change actual consumption and cost.</p>
     <h2>Heat pump using more electricity than expected?</h2>
     <p>Compare similar weather and comfort requirements before adjusting controls. Record the tariff, meter period, heating and hot-water schedules, indoor target and any error messages. Read the <a href="/heat-pump-owners/">free UK heat pump owner troubleshooting guides</a> for a structured approach.</p>
-    <div class="notice"><strong>Want a complete operating method?</strong> <a href="/books/the-new-heat-pump-owners-operating-manual/">The New Heat Pump Owner's Operating Manual by Gareth Fenwick</a> covers controls, flow temperature, weather compensation, comfort, electricity-use investigations and when to contact an installer. <a href="https://www.amazon.co.uk/dp/B0HF51WQ1F">See the book on Amazon UK</a>.</div>
   </div></section>
   <script>
     const form = document.querySelector<HTMLFormElement>('#heat-cost-form');
@@ -103,10 +109,19 @@ const faqSchema = {'@context':'https://schema.org','@type':'FAQPage','mainEntity
       heatCostLine.hidden = method !== 'heat';
       if (method === 'heat') heatCostLine.textContent = 'Variable electricity cost per kWh of useful heat at this efficiency: ' + number(val('tariff') / val('cop')) + 'p';
     }
-    form?.addEventListener('submit', event => {event.preventDefault();recalc();});
+    form?.addEventListener('submit', event => {event.preventDefault();recalc();if (!$('heat-results').hidden) $('period-cost').focus();else $('calc-error').focus();});
     form?.addEventListener('input', recalc);
     form?.addEventListener('change', recalc);
     form?.addEventListener('reset', () => window.setTimeout(recalc,0));
     recalc();
   </script>
+  <style>
+    #heat-cost-form input[type="number"],#heat-cost-form select{font:inherit;min-height:44px;min-width:0}
+    #heat-cost-form input[type="radio"]{width:20px;height:20px;vertical-align:middle}
+    #heat-cost-form fieldset label{display:block;padding:.4rem 0;cursor:pointer}
+    #heat-cost-form button{font:inherit;cursor:pointer;min-height:44px}
+    #heat-next-step{font-size:1.65rem}
+    #period-cost{scroll-margin-top:1.5rem}
+    @media(max-width:560px){#heat-cost-form,#heat-results{padding:1.25rem}#heat-cost-form .actions{display:grid}#heat-cost-form button{width:100%}}
+  </style>
 </BaseLayout>

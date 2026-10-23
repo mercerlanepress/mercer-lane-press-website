@@ -1,0 +1,10 @@
+---
+import { getCollection, render } from 'astro:content';
+import UnderfloorHeatingOwnerArticleLayout from '../../layouts/UnderfloorHeatingOwnerArticleLayout.astro';
+export async function getStaticPaths() {
+  return (await getCollection('underfloorHeatingOwnerGuides')).map(entry => ({ params: { slug: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<UnderfloorHeatingOwnerArticleLayout entry={entry}><Content /></UnderfloorHeatingOwnerArticleLayout>

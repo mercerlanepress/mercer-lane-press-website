@@ -1,3 +1,4 @@
+import { solarPanelsInstalledNowWhat } from './solar-panels-installed-now-what';
 export interface Book {
   slug: string; title: string; subtitle: string; author: string; authorSlug: string;
   publisher: string; description: string; cover: string; coverReady: boolean;
@@ -5,7 +6,7 @@ export interface Book {
   outcomes?: string[]; themes?: string[]; hubSlug?: string; hubLabel?: string;
 }
 
-export const books: Book[] = [{
+export const books: Book[] = [solarPanelsInstalledNowWhat,{
   slug: 'the-ai-workflow-playbook-for-executive-assistants',
   title: 'The AI Workflow Playbook for Executive Assistants',
   subtitle: 'Safe, Practical Systems for Meetings, Communication, Executive Support, Projects, and Office Productivity',

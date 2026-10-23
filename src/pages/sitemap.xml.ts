@@ -15,6 +15,7 @@ export const GET: APIRoute = async () => {
   const familyAdminGuides = await getCollection('familyAdminGuides');
   const heatPumpOwnerGuides = await getCollection('heatPumpOwnerGuides');
   const solarPanelOwnerGuides = await getCollection('solarPanelOwnerGuides');
+  const underfloorHeatingOwnerGuides = await getCollection('underfloorHeatingOwnerGuides');
   const localAiGuides = await getCollection('localAiGuides');
   const beginnerTelescopeObservingGuides = await getCollection('beginnerTelescopeObservingGuides');
   const deepSkyAstrophotographyGuides = await getCollection('deepSkyAstrophotographyGuides');
@@ -48,7 +49,7 @@ export const GET: APIRoute = async () => {
     '/tools/family-admin-reset-planner/', '/tools/family-admin-operating-system/', '/books/stop-drowning-in-family-admin/', '/family-admin/',
     '/books/the-small-fleet-maintenance-operating-manual/', '/small-fleet-maintenance/',
     '/construction-job-costing/', '/tools/construction-job-profit-calculator/', '/free-tools/performance-review-template-excel/', '/tools/pto-accrual-calculator/', '/tools/hr-manager-toolkit/',
-    '/', '/books/', '/authors/', '/guides/', '/tools/', '/tools/contractor-markup-margin-calculator/', '/tools/construction-estimating-system-pro/', '/terms/', '/digital-products/', '/dog-guides/', '/5g-home-internet/', '/local-business-ai/', '/ai-scam-defence/', '/reactive-dog-walking/', '/dog-enrichment/', '/cooperative-care/', '/rescue-dog-first-90-days/', '/over-aroused-dog/', '/reliable-recall/', '/heat-pump-owners/', '/solar-panel-owners/', '/local-ai/', '/beginner-telescope-observing/', '/deep-sky-astrophotography/', '/construction-estimating/', '/landscape-contractor-estimating/', '/home-assistant-matter-thread/', '/genealogy-brick-walls/', '/power-automate/', '/pickleball-doubles/', '/youth-soccer-coaching/', '/ham-radio-technician-exam/', '/epa-608-universal-exam/', '/first-year-homeowner/', '/property-manager-ai/', '/bookkeeper-ai/', '/maintenance-planning/', '/aquarium-troubleshooting/', '/home-inspection-reporting/', '/vending-machine-route/', '/pool-troubleshooting/', '/manufacturing-supervision/', '/hotel-housekeeping-supervision/', '/hr-ai/', '/executive-assistant-ai/', '/about/', '/contact/', '/privacy/',
+    '/', '/books/', '/authors/', '/guides/', '/tools/', '/tools/contractor-markup-margin-calculator/', '/tools/construction-estimating-system-pro/', '/terms/', '/digital-products/', '/dog-guides/', '/5g-home-internet/', '/local-business-ai/', '/ai-scam-defence/', '/reactive-dog-walking/', '/dog-enrichment/', '/cooperative-care/', '/rescue-dog-first-90-days/', '/over-aroused-dog/', '/reliable-recall/', '/heat-pump-owners/', '/solar-panel-owners/', '/underfloor-heating-owners/', '/local-ai/', '/beginner-telescope-observing/', '/deep-sky-astrophotography/', '/construction-estimating/', '/landscape-contractor-estimating/', '/home-assistant-matter-thread/', '/genealogy-brick-walls/', '/power-automate/', '/pickleball-doubles/', '/youth-soccer-coaching/', '/ham-radio-technician-exam/', '/epa-608-universal-exam/', '/first-year-homeowner/', '/property-manager-ai/', '/bookkeeper-ai/', '/maintenance-planning/', '/aquarium-troubleshooting/', '/home-inspection-reporting/', '/vending-machine-route/', '/pool-troubleshooting/', '/manufacturing-supervision/', '/hotel-housekeeping-supervision/', '/hr-ai/', '/executive-assistant-ai/', '/about/', '/contact/', '/privacy/',
     ...books.map(({ slug }) => '/books/' + slug + '/'),
     ...authors.map(({ slug }) => '/authors/' + slug + '/'),
     ...guides.map(({ id }) => '/5g-home-internet/' + id + '/'),
@@ -63,6 +64,7 @@ export const GET: APIRoute = async () => {
     ...familyAdminGuides.map(({ id }) => '/family-admin/' + id + '/'),
     ...heatPumpOwnerGuides.map(({ id }) => '/heat-pump-owners/' + id + '/'),
     ...solarPanelOwnerGuides.map(({ id }) => '/solar-panel-owners/' + id + '/'),
+    ...underfloorHeatingOwnerGuides.map(({ id }) => '/underfloor-heating-owners/' + id + '/'),
     ...localAiGuides.map(({ id }) => '/local-ai/' + id + '/'),
     ...beginnerTelescopeObservingGuides.map(({ id }) => '/beginner-telescope-observing/' + id + '/'),
     ...deepSkyAstrophotographyGuides.map(({ id }) => '/deep-sky-astrophotography/' + id + '/'),

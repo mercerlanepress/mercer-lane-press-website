@@ -8,11 +8,9 @@ export const solarPanelsInstalledNowWhat: Book = {
   authorSlug: 'gareth-fenwick',
   publisher: 'Mercer Lane Press',
   description: 'A practical UK homeowner’s operating guide for understanding an installed domestic solar PV system. Organize handover documents, distinguish generation from import and export readings, follow up export-payment registration, check electricity bills, compare performance fairly, and report possible faults with useful evidence. Includes a 30-day owner system, worked examples, checklists, and record-keeping pages.',
-  cover: '/images/books/solar-panels-installed-now-what-front-cover.jpg',
-  // Kept false until the owner uploads the exact supplied cover to the branch.
-  // Do not set true while the image file is missing: the site verifies every rendered image.
-  coverReady: false,
-  purchaseUrl: 'https://www.amazon.com/dp/B0HMS4KNVQ',
+  cover: '/images/books/Solar_Panels_Installed_Now_What_Front_Cover.jpg',
+  coverReady: true,
+  purchaseUrl: 'https://www.amazon.co.uk/dp/B0HMS4KNVQ',
   intendedReader: 'UK homeowners who have recently had grid-connected rooftop solar panels installed, or who have acquired a home with existing panels and want to understand the records, metering, payments, bills and everyday performance without attempting electrical work.',
   problems: [
     'The installer has left, but the owner is unsure which documents, equipment details, warranties and network records should be retained.',

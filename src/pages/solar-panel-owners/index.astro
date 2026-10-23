@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('solarPanelOwnerGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Solar Panel Owner Guides for UK Homeowners',
+  url: 'https://mercerlanepress.com/solar-panel-owners/',
+  description: 'Practical UK domestic solar PV owner guides on handover documents, export payments, meter readings, bills, tariffs and troubleshooting.',
+  hasPart: guides.map(guide => ({ '@type': 'WebPage', name: guide.data.title, url: 'https://mercerlanepress.com/solar-panel-owners/' + guide.id + '/' }))
+};
+---
+<BaseLayout title="Solar Panel Owners: UK Solar PV Bills, Export & Troubleshooting" description="Understand your UK home solar panels after installation: export MPANs, SEG payments, import and export meters, bills, monitoring and safe fault checks." schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Guides',href:'/guides/'},{name:'Solar Panel Owners'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">UK HOME SOLAR PV</p>
+    <h1>Solar Panel Owner Guides: What to Check After Installation</h1>
+    <p class="lede">The panels are installed. The next job is understanding the paperwork, the measurements, the payment route and the signs worth investigating—without touching the electrical system.</p>
+  </header>
+  <section class="section">
+    <div class="wrap narrow prose">
+      <h2>Why does my solar electricity bill still arrive?</h2>
+      <p>Solar generation can reduce grid imports while the panels are producing, but the household may still import at night or in low-light conditions, and standing charges generally remain. Export payments may appear separately. Use the <a href="/solar-panel-owners/solar-app-smart-meter-electricity-bill/">meter-and-bill comparison guide</a> before assuming the app or bill is wrong.</p>
+      <h2>Am I automatically paid for solar electricity exported to the grid?</h2>
+      <p>No. In Great Britain, the Smart Export Guarantee involves a supplier application and qualifying metering and documentation. A running solar system does not itself confirm an active export account or start date. Northern Ireland has different arrangements. Start with the <a href="/solar-panel-owners/solar-export-payments-seg-export-mpan/">SEG and export MPAN guide</a>.</p>
+      <h2>What should I do when the app reports zero generation?</h2>
+      <p>Check the app's refresh time and any owner-visible status before assuming the panels stopped working. A stale data connection and an equipment fault can look similar. Avoid resets outside the manufacturer's approved owner instructions. See <a href="/solar-panel-owners/solar-panels-not-generating-app-offline/">the symptom-first guide</a>.</p>
+      <h2>A practical owner rhythm</h2>
+      <p><strong>First month:</strong> identify equipment, secure handover records, establish export-account status and record matched readings. <strong>Monthly:</strong> check generation, import/export records, bills and payment statements. <strong>Annually:</strong> review comparable performance, warranties, tariff terms and unresolved issues.</p>
+    </div>
+  </section>
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Start with your specific question</h2><p>Each guide isolates one owner problem, suggests safe checks and identifies which organization can take the next action.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/solar-panel-owners/" label="UK SOLAR PV OWNER GUIDE" />)}</div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap narrow prose">
+      <h2>Read the complete operating guide</h2>
+      <p>By <a href="/authors/gareth-fenwick/">Gareth Fenwick</a>, <a href="/books/solar-panels-installed-now-what/"><em>Solar Panels Installed — Now What?</em></a> brings the owner’s 30-day startup, document register, meter explanations, export-payment checks, worked bill examples, seasonal comparisons, fault reporting and monthly worksheets into a single reference.</p>
+      <p><a class="button" href="/books/solar-panels-installed-now-what/">Explore the solar owner’s book</a></p>
+      <p>Managing other home energy systems? See the separate <a href="/heat-pump-owners/">UK heat pump owner guides</a>.</p>
+      <div class="notice"><strong>Owner safety boundary.</strong> The information here does not certify an installation or replace a supplier's current tariff terms. Keep away from exposed wiring, roof equipment and electrical enclosures; ask a qualified professional to assess suspected defects.</div>
+    </div>
+  </section>
+</BaseLayout>

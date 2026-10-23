@@ -8,9 +8,8 @@ export const livingWithUnderfloorHeating: Book = {
   authorSlug: 'gareth-fenwick',
   publisher: 'Mercer Lane Press',
   description: 'A practical UK homeowner guide to understanding an existing wet or electric underfloor heating system. Learn what thermostat displays really mean, identify zones and common components, compare warm-up and scheduling behaviour, investigate persistent cold rooms and running-cost questions safely, and prepare useful observations for a qualified professional. Includes a system passport, room-performance log, schedule experiment, billing comparison and handover worksheets.',
-  cover: '/images/books/living-with-underfloor-heating-front-cover.jpg',
-  // Switch to true once the owner's supplied JPEG is committed at the path above.
-  coverReady: false,
+  cover: '/images/books/Living_With_Underfloor_Heating_Front_Cover.jpg',
+  coverReady: true,
   purchaseUrl: 'https://www.amazon.co.uk/dp/B0HN5NN41D',
   intendedReader: 'UK homeowners who have inherited, moved into or already live with underfloor heating and want to understand their installed controls, room behaviour, heating bills and safe next steps, without attempting plumbing, electrical work or commissioning.',
   problems: [

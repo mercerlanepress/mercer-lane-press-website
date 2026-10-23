@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import GuideCard from '../../components/GuideCard.astro';
+
+const guides = (await getCollection('underfloorHeatingOwnerGuides')).sort((a,b) => a.data.order - b.data.order);
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'UK Underfloor Heating Owner Guides',
+  url: 'https://mercerlanepress.com/underfloor-heating-owners/',
+  description: 'UK homeowner guidance on wet and electric underfloor heating thermostats, cold zones, schedules, floor coverings and running costs.',
+  hasPart: guides.map(guide => ({ '@type': 'WebPage', name: guide.data.title, url: 'https://mercerlanepress.com/underfloor-heating-owners/' + guide.id + '/' }))
+};
+---
+<BaseLayout title="Underfloor Heating Problems, Controls & Running Costs | UK Owners" description="Free UK underfloor heating guides covering cold rooms, thermostat settings, wet and electric UFH, schedules, manifolds and running costs." schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Guides',href:'/guides/'},{name:'Underfloor Heating'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">UK HOME UNDERFLOOR HEATING</p>
+    <h1>Underfloor Heating: Practical Help for UK Homeowners</h1>
+    <p class="lede">A floor that does not feel hot is not necessarily broken. Start with what the room is doing, what the controls are requesting and which checks an owner can carry out safely.</p>
+  </header>
+  <section class="section">
+    <div class="wrap narrow prose">
+      <h2>Why is my underfloor heating not getting warm?</h2>
+      <p>First distinguish a cool-feeling floor from a room that stays below its target temperature. Check the actual air temperature, the thermostat's current mode and when comfort was scheduled. A heating icon may only show a request, not that hot water is flowing. <a href="/underfloor-heating-owners/underfloor-heating-not-getting-warm/">Follow the safe first checks.</a></p>
+      <h2>What settings should I use?</h2>
+      <p>No single time or temperature setting suits every home. A heavy screed, lightweight floor, heat pump and electric bathroom mat can respond very differently. Learn your exact controller's programme and use comparable observations before changing one permitted user setting. <a href="/underfloor-heating-owners/should-underfloor-heating-be-on-all-the-time/">Compare scheduling approaches.</a></p>
+      <h2>Why is just one room cold?</h2>
+      <p>A zone is not necessarily a room, and a manifold loop is not necessarily a zone. Compare that room's air-temperature shortfall, mode, floor finish and heat loss with neighbouring rooms. Do not alter loop meters or balancing valves as a test. <a href="/underfloor-heating-owners/one-room-cold-underfloor-heating/">See the room-by-room investigation guide.</a></p>
+      <h2>Can I work out running costs from my bill?</h2>
+      <p>You can check billed kWh, unit rates and standing charges, but a combined boiler or heat-pump bill usually cannot isolate the energy used by an underfloor circuit. <a href="/underfloor-heating-owners/underfloor-heating-running-costs-uk/">Read the UK billing guide.</a></p>
+    </div>
+  </section>
+  <section class="section section-tint">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">FREE PRACTICAL GUIDES</p><h2>Choose the question you need to solve</h2><p>Each guide gives ordinary user-level checks, evidence worth recording, and the point where a qualified professional should take over.</p></div>
+      <div class="grid-3">{guides.map(guide => <GuideCard guide={guide} base="/underfloor-heating-owners/" label="UK UNDERFLOOR HEATING" />)}</div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap narrow prose">
+      <h2>A complete owner reference</h2>
+      <p><a href="/books/living-with-underfloor-heating/"><em>Living With Underfloor Heating</em></a> by <a href="/authors/gareth-fenwick/">Gareth Fenwick</a> combines the controls, heating-zone explanations, realistic running-cost comparisons and symptom-first diagnosis with a system passport, room log, two-page schedule experiment, engineer brief and handover checklists.</p>
+      <p><a class="button" href="/books/living-with-underfloor-heating/">Explore the book</a></p>
+      <p>If your floor is supplied by a heat pump, see our <a href="/heat-pump-owners/">heat pump owner guides</a>. For other household energy systems, explore <a href="/solar-panel-owners/">solar panel owner guides</a>.</p>
+      <div class="notice"><strong>Safe owner boundary.</strong> These are observation and ordinary user-control guides, not installation, repair or commissioning instructions. For a leak near electrics, repeated electrical trips, gas or carbon monoxide concerns, dangerous heating or visible damage, stop testing and seek urgent appropriate help.</div>
+    </div>
+  </section>
+</BaseLayout>

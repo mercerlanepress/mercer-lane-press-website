@@ -43,6 +43,7 @@ export const GET: APIRoute = async () => {
   const reliableRecallGuides = await getCollection('reliableRecallGuides');
   const smallFleetMaintenanceGuides = await getCollection('smallFleetMaintenanceGuides');
   const paths = [
+    '/tools/vending-machine-profit-calculator/',
     '/tools/landscape-estimating-job-costing-system/',
     '/tools/heat-pump-running-cost-calculator/',
     '/tools/fleet-maintenance-due-calculator/', '/tools/small-fleet-maintenance-system/',

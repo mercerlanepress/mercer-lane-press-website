@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Contractor Excel Workbook Setup',
+  serviceType: 'Remote Microsoft Excel workbook setup and workflow assistance',
+  provider: {'@type':'Organization',name:'Mercer Lane Press',url:'https://mercerlanepress.com/'},
+  url: 'https://mercerlanepress.com/services/contractor-excel-workbook-setup/',
+  areaServed: 'GB',
+  description: 'A limited-scope remote service to help small contractors configure and use their existing Excel estimating and job-costing workbooks with their own source information.'
+};
+const enquiry = 'mailto:mercerlanepress@gmail.com?subject=Contractor%20Excel%20workbook%20setup%20enquiry&body=Business%20type%3A%0AWhat%20I%20need%20help%20with%3A%0AExisting%20Excel%20version%3A%0AApproximate%20number%20of%20jobs%3A%0A';
+---
+<BaseLayout
+  title="Contractor Excel Workbook Setup"
+  description="Remote Excel estimating and job-costing workbook setup for small UK contractors. Clear fixed-scope packages. Enquire before sharing commercially sensitive files."
+  schema={schema}
+>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Tools',href:'/tools/'},{name:'Contractor workbook setup'}]}/>
+  <header class="page-head wrap">
+    <p class="eyebrow">UK PILOT · REMOTE EXCEL SUPPORT</p>
+    <h1>Get your estimating or job-costing workbook working for your business</h1>
+    <p class="lede">Already have the figures, but need help organising an Excel workflow? We can help configure a practical workbook around information and assumptions you provide.</p>
+    <div class="actions"><a class="button" href={enquiry}>Ask about a setup</a><a class="button button-secondary" href="/tools/construction-estimating-system-pro/">Prefer a do-it-yourself toolkit?</a></div>
+  </header>
+
+  <section class="section section-tint"><div class="wrap">
+    <div class="section-head"><h2>Choose a clearly scoped starting point</h2><p>Introductory UK pilot prices, subject to suitability and a written scope agreed before any paid work. No subscription.</p></div>
+    <div class="grid-2">
+      <article class="card">
+        <p class="eyebrow">ONE WORKBOOK</p><h3>Starter setup — £99</h3>
+        <p>Up to 90 minutes of remote Excel configuration or guided workbook setup for one existing estimating or job-costing workbook.</p>
+        <ul><li>Review the structure and the specific problem you describe.</li><li>Set up agreed categories and entries using your supplied data.</li><li>Provide a brief handover note and one small correction round.</li></ul>
+        <p><a class="text-link" href={enquiry}>Enquire about Starter setup →</a></p>
+      </article>
+      <article class="card">
+        <p class="eyebrow">TWO-WORKBOOK WORKFLOW</p><h3>Estimate-to-job-cost setup — £199</h3>
+        <p>Up to three hours of remote help configuring the estimating-to-actual-cost workflow in compatible Excel desktop workbooks.</p>
+        <ul><li>Organise categories and agreed job handoff fields.</li><li>Show how to enter actual costs and forecast remaining costs.</li><li>Supply a short usage walkthrough and one small correction round.</li></ul>
+        <p><a class="text-link" href={enquiry}>Enquire about the workflow setup →</a></p>
+      </article>
+    </div>
+  </div></section>
+
+  <section class="section"><div class="wrap prose">
+    <h2>How it works</h2>
+    <ol><li>Email a short description of your business, your Excel version and where your current process gets stuck. Please do not send client files or sensitive cost data with your first message.</li><li>We review whether the task fits one of the packages and confirm deliverables, limitations, file handling and price before you pay.</li><li>If agreed, we work with the inputs and files you choose to provide, then return the agreed workbooks and a concise handover note.</li></ol>
+    <h2>What this does not include</h2>
+    <p>This is spreadsheet setup and workflow assistance, not a construction estimating service, quantity surveying, accounting, tax advice or a review of the accuracy of your rates, scope, measurements or commercial decisions. We do not promise profit improvements or quote accuracy. Complex automations, external integrations, new software development and ongoing support are outside the pilot scope.</p>
+    <p>Work is subject to availability and suitability. An enquiry is free and does not oblige either party to proceed.</p>
+    <div class="actions"><a class="button" href={enquiry}>Describe your spreadsheet problem</a></div>
+  </div></section>
+
+  <section class="section section-tint"><div class="wrap prose">
+    <h2>Prefer to set it up yourself?</h2>
+    <p>Use our free <a href="/tools/construction-job-profit-calculator/">Construction Job Profit Calculator</a> for a one-job check, or explore the <a href="/tools/construction-estimating-system-pro/">Construction Estimating &amp; Job Costing Toolkit PRO</a> for downloadable Excel desktop workbooks and worked examples.</p>
+  </div></section>
+</BaseLayout>

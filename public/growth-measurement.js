@@ -108,7 +108,7 @@
     // Exact host allowlist avoids lookalike domains and other outbound links.
     const amazonUk = ['www.amazon.co.uk', 'amazon.co.uk'].includes(url.hostname);
     const amazonUs = ['www.amazon.com', 'amazon.com'].includes(url.hostname);
-    if (current[1] === 'book' && (amazonUk || amazonUs) && /^\\/dp\\/[A-Z0-9]{10}\\/?$/.test(url.pathname)) {
+    if (current[1] === 'book' && (amazonUk || amazonUs) && /^\/dp\/[A-Z0-9]{10}\/?$/.test(url.pathname)) {
       send('book_retailer_click', {checkout_provider: amazonUk ? 'amazon_uk' : 'amazon_us'});
     }
   });

@@ -50,6 +50,32 @@ The exact structure should match how the business estimates and records real cos
 
 If the estimate groups costs one way and accounting records them another way, the post-job comparison becomes harder to interpret. That is worth resolving before trying to automate variance reporting.
 
+## Worked example: compare the accepted estimate with the finished job
+
+The figures below are **fictional US-dollar training data**, not recommended prices, contractor margins or industry benchmarks. They show why comparing costs alone can mislead when approved changes also alter revenue.
+
+A contractor accepts a job at **$35,000** of revenue against **$27,000** of estimated direct costs. During the job, one customer change is approved for **$1,000** of additional revenue. At completion the records show:
+
+| Direct job cost | Accepted estimate | Final actual | Actual minus estimate | Illustrative reason |
+| --- | ---: | ---: | ---: | --- |
+| Materials | $8,000 | $9,200 | +$1,200 | **E:** purchased quantity was underestimated |
+| Labour | $11,000 | $12,200 | +$1,200 | **P:** more person-hours needed on site |
+| Subcontractors | $6,000 | $6,000 | $0 | No variance recorded |
+| Equipment | $1,500 | $1,500 | $0 | No variance recorded |
+| Other direct costs | $500 | $800 | +$300 | **C:** cost of the approved customer change |
+| **Total direct costs** | **$27,000** | **$29,700** | **+$2,700** | |
+
+The calculation is deliberately explicit:
+
+- **Accepted direct gross profit:** $35,000 − $27,000 = **$8,000**.
+- **Revised final revenue:** $35,000 + $1,000 approved change = **$36,000**.
+- **Final direct gross profit:** $36,000 − $29,700 = **$6,300**.
+- **Change in direct gross profit:** $6,300 − $8,000 = **−$1,700**.
+
+The job incurred **$2,700 more direct cost** than estimated, but the **$1,000 approved increase in revenue** partly offset that movement. This example excludes company overhead, financing, taxes and cash-collection timing; direct gross profit is not the same as net business profit or cash in the bank.
+
+The next step is to look behind the three nonzero variances, not merely copy the final numbers into the next estimate. Check the material quantity build-up (**E**), actual labour hours and access (**P**), and whether the change was documented and approved (**C**). Preserve the original estimate and a separate log of approved changes so the comparison remains auditable.
+
 ## Materials: ask whether the quantity or price moved
 
 If material cost was higher than estimated, the cause may be very different depending on what happened.

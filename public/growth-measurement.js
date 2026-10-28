@@ -46,22 +46,41 @@
   const current = classifyRoute(location.pathname);
   if (!current) return;
   const consent = () => { try { return localStorage.getItem('mlp-analytics-consent') === 'granted'; } catch { return false; } };
-  const sources = ['pinterest', 'tiktok', 'youtube'];
-  const campaigns = ['construction_202610', 'fleet_202610'];
-  const contents = ['a1_markup', 'a2_profit_fade', 'a3_handoff', 'b1_due_point', 'b2_booking', 'b3_weekly_review'];
+  const campaignRules = {
+    construction_202610: {
+      sources: ['pinterest', 'tiktok', 'youtube'],
+      contents: ['a1_markup', 'a2_profit_fade', 'a3_handoff']
+    },
+    fleet_202610: {
+      sources: ['pinterest', 'tiktok', 'youtube'],
+      contents: ['b1_due_point', 'b2_booking', 'b3_weekly_review']
+    },
+    construction_pilot_2026_10: {
+      sources: ['pinterest', 'youtube', 'linkedin'],
+      contents: [
+        'pin01', 'pin02', 'pin03', 'pin04', 'pin05', 'pin06',
+        'video01_markup', 'video01_product', 'video02_profit',
+        'video02_product', 'video03_remaining', 'video03_product',
+        'post01_markup', 'post02_remaining'
+      ]
+    }
+  };
+  const allowedCampaign = (source, name, content) => {
+    const rule = Object.hasOwn(campaignRules, name) ? campaignRules[name] : null;
+    return !!rule && rule.sources.includes(source) && rule.contents.includes(content);
+  };
   let campaign = {};
   const attribution = () => {
     try {
       const query = new URLSearchParams(location.search);
       const source = query.get('utm_source'), name = query.get('utm_campaign'), content = query.get('utm_content');
-      if (sources.includes(source) && campaigns.includes(name) && contents.includes(content) &&
-          ((name === campaigns[0] && content.startsWith('a')) || (name === campaigns[1] && content.startsWith('b')))) {
+      if (allowedCampaign(source, name, content)) {
         campaign = {campaign_source: source, campaign_name: name, campaign_content: content};
         sessionStorage.setItem('mlp-growth-campaign', JSON.stringify(campaign));
         return true;
       }
       const saved = JSON.parse(sessionStorage.getItem('mlp-growth-campaign') || '{}');
-      if (sources.includes(saved.campaign_source) && campaigns.includes(saved.campaign_name) && contents.includes(saved.campaign_content)) campaign = saved;
+      if (allowedCampaign(saved.campaign_source, saved.campaign_name, saved.campaign_content)) campaign = saved;
     } catch { /* Storage is optional. */ }
     return false;
   };

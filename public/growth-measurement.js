@@ -6,6 +6,7 @@
     '/tools/fleet-maintenance-due-calculator/': ['fleet', 'tool', 'fleet_due'],
     '/tools/heat-pump-running-cost-calculator/': ['heat_pump', 'tool', 'heat_cost'],
     '/tools/pto-accrual-calculator/': ['hr', 'tool', 'pto_accrual'],
+    '/tools/family-admin-reset-planner/': ['family', 'tool', 'family_reset'],
     '/free-tools/performance-review-template-excel/': ['hr', 'tool', 'review_template'],
     '/books/the-new-heat-pump-owners-operating-manual/': ['heat_pump', 'book', 'heat_pump_manual'],
     '/tools/construction-estimating-system-pro/': ['construction', 'product', 'toolkit_pro'],
@@ -16,7 +17,33 @@
     '/construction-estimating/construction-markup-vs-margin/': ['construction', 'guide', 'markup_guide'],
     '/small-fleet-maintenance/fleet-maintenance-schedule-spreadsheet/': ['fleet', 'guide', 'fleet_schedule_guide']
   };
-  const current = routes[location.pathname];
+  // Share one classifier between entry and destination events. The fallback
+  // covers every book page and published guide without duplicating a large
+  // route list. Exclude non-guide directories through an explicit allowlist.
+  const guideRoots = new Set([
+    '5g-home-internet', 'ai-scam-defence', 'aquarium-troubleshooting',
+    'beginner-telescope-observing', 'bookkeeper-ai', 'construction-estimating',
+    'cooperative-care', 'deep-sky-astrophotography', 'dog-enrichment',
+    'epa-608-universal-exam', 'executive-assistant-ai', 'family-admin',
+    'first-year-homeowner', 'genealogy-brick-walls', 'ham-radio-technician-exam',
+    'heat-pump-owners', 'home-assistant-matter-thread', 'home-inspection-reporting',
+    'hotel-housekeeping-supervision', 'hr-ai', 'landscape-contractor-estimating',
+    'local-ai', 'local-business-ai', 'maintenance-planning',
+    'manufacturing-supervision', 'over-aroused-dog', 'pickleball-doubles',
+    'pool-troubleshooting', 'power-automate', 'property-manager-ai',
+    'reactive-dog-walking', 'reliable-recall', 'rescue-dog-first-90-days',
+    'small-fleet-maintenance', 'solar-panel-owners', 'underfloor-heating-owners',
+    'vending-machine-route', 'youth-soccer-coaching'
+  ]);
+  const classifyRoute = path => {
+    if (routes[path]) return routes[path];
+    const parts = path.split('/').filter(Boolean);
+    if (parts.length !== 2) return null;
+    if (parts[0] === 'books') return ['books', 'book', parts[1]];
+    if (guideRoots.has(parts[0])) return [parts[0], 'guide', parts[1]];
+    return null;
+  };
+  const current = classifyRoute(location.pathname);
   if (!current) return;
   const consent = () => { try { return localStorage.getItem('mlp-analytics-consent') === 'granted'; } catch { return false; } };
   const sources = ['pinterest', 'tiktok', 'youtube'];
@@ -69,12 +96,20 @@
     if (!link || !consent()) return;
     let url;
     try { url = new URL(link.href, location.href); } catch { return; }
-    const destination = url.origin === location.origin ? routes[url.pathname] : null;
+    const destination = url.origin === location.origin ? classifyRoute(url.pathname) : null;
     if (destination?.[1] === 'product' && current[1] === 'tool') send('tool_to_product', {destination_id: destination[2]});
     if (destination?.[1] === 'book' && current[1] === 'tool') send('tool_to_book', {destination_id: destination[2]});
     if (destination?.[1] === 'tool' && current[1] === 'guide') send('guide_to_tool', {destination_id: destination[2]});
+    if (destination?.[1] === 'product' && current[1] === 'guide') send('guide_to_product', {destination_id: destination[2]});
+    if (destination?.[1] === 'book' && current[1] === 'guide') send('guide_to_book', {destination_id: destination[2]});
     const isEtsy = ['etsy.com', 'www.etsy.com'].includes(url.hostname) && /^\/listing\/\d+/.test(url.pathname);
     if (current[1] === 'product' && (isEtsy || url.hostname === 'buy.stripe.com')) send('product_checkout_click', {checkout_provider: isEtsy ? 'etsy' : 'stripe'});
-    if (current[0] === 'heat_pump' && ['www.amazon.co.uk', 'amazon.co.uk'].includes(url.hostname) && url.pathname === '/dp/B0HF51WQ1F') send('book_retailer_click', {checkout_provider: 'amazon_uk'});
+    // Record retailer intent, never claim that an Amazon sale happened.
+    // Exact host allowlist avoids lookalike domains and other outbound links.
+    const amazonUk = ['www.amazon.co.uk', 'amazon.co.uk'].includes(url.hostname);
+    const amazonUs = ['www.amazon.com', 'amazon.com'].includes(url.hostname);
+    if (current[1] === 'book' && (amazonUk || amazonUs) && /^\\/dp\\/[A-Z0-9]{10}\\/?$/.test(url.pathname)) {
+      send('book_retailer_click', {checkout_provider: amazonUk ? 'amazon_uk' : 'amazon_us'});
+    }
   });
 })();

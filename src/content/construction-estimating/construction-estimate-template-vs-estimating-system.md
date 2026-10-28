@@ -152,6 +152,21 @@ That is where a contractor can learn whether the problem was estimating, product
 
 Read [construction job costing spreadsheet: estimate vs actual](/construction-estimating/construction-job-costing-spreadsheet-estimate-vs-actual/).
 
+## Compare a simple template with the full Excel workflow
+
+A simple worksheet may be exactly right for a small, familiar job. The table compares a **basic single-sheet estimate** with the actual features of the Mercer Lane Construction Estimating & Job Costing Toolkit PRO v3.2; it does not imply that every third-party template lacks these functions.
+
+| Decision or requirement | Basic single-sheet estimate | Toolkit PRO v3.2 |
+| --- | --- | --- |
+| Price a short, familiar job | Often sufficient if it records scope, quantities, costs and price clearly | Can do this, but introduces additional review steps |
+| Record what is included, excluded or unresolved | Only if the chosen template has suitable fields | Scope records and readiness checks are part of the estimate workflow |
+| Preserve quantity sources and purchasing assumptions | Depends on fields built into the sheet | Dedicated takeoff and material-cost workflow |
+| Compare subcontract prices on the same scope | Requires a separate comparison or custom fields | Subcontract quote review is integrated into the estimate process |
+| Issue a customer proposal without exposing internal calculations | Possible with a carefully controlled output | Classic, Modern and Compact proposal outputs |
+| Freeze the accepted estimate and compare later costs | Requires a separate job-costing record | Manual values-only handoff to Job Cost & Profit Control for actuals and forecasts |
+
+**How to use the comparison:** If all you need is a reliable quote for a small, repeatable job, start with the simpler option. If scope changes, subcontract packages, job-cost forecasts or traceable assumptions are frequent, examine the [complete toolkit contents and compatibility](/tools/construction-estimating-system-pro/) before buying. The toolkit requires modern Microsoft Excel desktop; it does not automatically import accounting transactions or promise an accurate price without reliable inputs.
+
 ## A practical rule
 
 Use the simplest tool that still makes the important decisions visible.

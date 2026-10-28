@@ -33,6 +33,49 @@ product.click('https://www.etsy.com/listing/4587620301/'); assert.equal(product.
 const count=product.events.length; product.click('https://etsy.com.evil.example/listing/4587620301/'); assert.equal(product.events.length,count);
 assert.ok(product.events.every(e=>e[1]!=='purchase'));
 const invalid=setup(tool,'granted','?utm_source=unknown&utm_campaign=construction_202610&utm_content=a1_markup'); assert.equal(invalid.session.size,0);
+const pilotContents = [
+  ['pinterest', 'pin01'], ['pinterest', 'pin02'], ['pinterest', 'pin03'],
+  ['pinterest', 'pin04'], ['pinterest', 'pin05'], ['pinterest', 'pin06'],
+  ['youtube', 'video01_markup'], ['youtube', 'video01_product'],
+  ['youtube', 'video02_profit'], ['youtube', 'video02_product'],
+  ['youtube', 'video03_remaining'], ['youtube', 'video03_product'],
+  ['linkedin', 'post01_markup'], ['linkedin', 'post02_remaining']
+];
+for (const [source, content] of pilotContents) {
+  const query = `?utm_source=${source}&utm_campaign=construction_pilot_2026_10&utm_content=${content}&customer_email=private@example.com&cost=1000`;
+  const entry = setup(tool, 'granted', query);
+  assert.equal(entry.events.filter(e => e[1] === 'campaign_entry').length, 1);
+  assert.equal(entry.events[0][2].campaign_content, content);
+  assert.ok(!JSON.stringify(entry.events).includes('private'));
+  assert.ok(!JSON.stringify(entry.events).includes('1000'));
+  const saved = JSON.parse(entry.session.get('mlp-growth-campaign'));
+  const onward = setup('/tools/construction-estimating-system-pro/', 'granted', '', false, saved);
+  assert.equal(onward.events[0][2].campaign_name, 'construction_pilot_2026_10');
+  assert.equal(onward.events[0][2].campaign_content, content);
+  const deniedPilot = setup(tool, 'denied', query);
+  assert.equal(deniedPilot.events.length, 0);
+  assert.equal(deniedPilot.session.size, 0);
+  entry.change('denied');
+  const count = entry.events.length;
+  entry.click(target);
+  assert.equal(entry.events.length, count);
+  assert.equal(entry.session.size, 0);
+}
+for (const [source, name, content] of [
+  ['pinterest', 'construction_pilot_2026_10', 'unreviewed_content'],
+  ['unknown', 'construction_pilot_2026_10', 'pin01'],
+  ['tiktok', 'construction_pilot_2026_10', 'pin01'],
+  ['pinterest', 'fleet_202610', 'pin01'],
+  ['pinterest', 'construction_202610', 'b1_due_point'],
+  ['pinterest', 'construction_pilot_2026_10', 'a1_markup'],
+  ['pinterest', '__proto__', 'pin01']
+]) {
+  const entry = setup(tool, 'granted', `?utm_source=${source}&utm_campaign=${name}&utm_content=${content}`);
+  assert.equal(entry.session.size, 0);
+  assert.ok(entry.events.every(e => !('campaign_name' in e[2])));
+  const invalidSaved = setup(tool, 'granted', '', false, {campaign_source:source, campaign_name:name, campaign_content:content});
+  assert.ok(invalidSaved.events.every(e => !('campaign_name' in e[2])));
+}
 const unrelated=setup('/contact/','granted'); assert.equal(unrelated.events.length,0);
 const guide=setup('/small-fleet-maintenance/fleet-maintenance-schedule-spreadsheet/','granted');guide.click('https://mercerlanepress.com/tools/fleet-maintenance-due-calculator/');assert.equal(guide.events.at(-1)[1],'guide_to_tool');
 const heat=setup('/tools/heat-pump-running-cost-calculator/','denied');

@@ -1,10 +1,11 @@
 ---
 title: "Construction Markup vs Margin: Keep Cost, Overhead and Selling Price Separate"
-description: "Understand the arithmetic difference between markup and margin, separate project cost from company overhead, and check that the same business cost is not being recovered twice."
+description: "See why 30% markup gives 23.08% margin in a worked $1,000 example. Check the cost base, overhead allocation and formulas before setting a selling price."
 published: 2026-09-23
 summary: "Markup compares an addition with cost; margin compares profit with selling price. The arithmetic is universal, but a real contractor's overhead method and target percentages must come from the company's own financial information."
 order: 5
 related:
+  - construction-job-costing-spreadsheet-estimate-vs-actual
   - estimate-construction-labor-hours-first-jobs
   - compare-subcontractor-quotes-by-scope
   - red-team-bid-review-construction-estimate
@@ -18,6 +19,8 @@ The safest starting point is a complete project-cost base with visible classific
 
 ## A 30% markup does not produce a 30% margin
 
+**Markup divides the amount above cost by cost. Margin divides that same amount by selling price.** The denominator changes, so the same percentage produces a different price.
+
 Suppose a fictional job has a complete cost base of **$1,000**. Adding 30% gives a **$1,300** selling price and $300 above cost. The margin is $300 ÷ $1,300 = **23.08%**.
 
 For a 30% target margin on that same cost base, divide $1,000 by 0.70. The selling price is **$1,428.57**, rounded to cents. That is $128.57 more than the markup calculation. These are teaching figures, not recommended contractor rates or targets.
@@ -29,11 +32,40 @@ For a 30% target margin on that same cost base, divide $1,000 by 0.70. The selli
 
 [Try both calculations in the free Contractor Markup & Margin Calculator](/tools/contractor-markup-margin-calculator/). Enter 1,000 as the cost base and 30 as the percentage, then switch between markup and target-margin modes. Keep the cost base unchanged so you compare like with like.
 
+## What is inside the $1,000 cost base?
+
+For this teaching example, assume the contractor has included the following costs for the defined scope. These allocations are invented to explain the calculation, not drawn from a customer job or an industry rate schedule.
+
+| Included cost | Amount |
+| --- | ---: |
+| Materials | $420 |
+| Labor, including the employer costs used in this example | $380 |
+| Job-specific equipment, delivery and disposal | $120 |
+| Allocated company overhead | $80 |
+| **Cost base used for both pricing calculations** | **$1,000** |
+
+The $80 overhead allocation is already inside the $1,000. Adding it again would count the same allowance twice. If your business recovers overhead through a different method, rebuild the cost base consistently before comparing prices.
+
+Here, “amount above cost” means the amount left after the listed costs, including that overhead allocation. It is not direct gross profit calculated before company overhead, and it is not a statement of net business profit after every expense and tax. Inclusions matter as much as the percentage label.
+
+### Reproduce the calculation
+
+Using percentages as decimals:
+
+- **Price from markup:** cost × (1 + markup) = $1,000 × 1.30 = **$1,300.00**.
+- **Margin at that price:** (price − cost) ÷ price = $300 ÷ $1,300 = **23.08%**.
+- **Price from target margin:** cost ÷ (1 − margin) = $1,000 ÷ 0.70 = **$1,428.57**.
+- **Equivalent markup for that target:** margin ÷ (1 − margin) = 0.30 ÷ 0.70 = **42.86%**.
+
+Retain precision during calculation and round the final selling price to cents. Displayed percentages are rounded to two decimal places. The target-margin formula requires a margin below 100%; a 100% margin cannot recover a positive cost base at a finite price.
+
 ## Check the finished job as well as the quote
 
 Correct pricing arithmetic cannot stop costs changing during the job. In a separate fictional example, revenue stays at $1,300 but total cost rises from $1,000 to $1,100. The amount left falls from $300 to $200, and margin falls from 23.08% to 15.38%. Include expected remaining costs when the job is unfinished.
 
 Use the [free Construction Job Profit Calculator](/tools/construction-job-profit-calculator/) to compare the accepted estimate with actual or forecast costs. Approved scope changes, costs incurred and cash collected are different records.
+
+For a category-by-category example, see [how remaining costs reveal construction profit fade](/construction-estimating/construction-job-costing-spreadsheet-estimate-vs-actual/#forecast-the-finished-job-before-all-the-bills-arrive). That example uses direct costs before company overhead; keep the different cost definitions visible when comparing results.
 
 If you need working files for that process, [Toolkit PRO v3.2](/tools/construction-estimating-system-pro/) supplies a separate Estimate & Quote Builder and Job Cost & Profit Control workbook, with fictional demos and a deliberate values-only handoff. Modern Excel desktop is required; Google Sheets and Excel Online are not claimed as supported. Review the file inventory and checkout information before deciding whether it fits your work.
 

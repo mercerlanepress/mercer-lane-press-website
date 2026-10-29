@@ -2,16 +2,17 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
 const source = readFileSync(new URL('../public/growth-measurement.js', import.meta.url), 'utf8');
-function setup(path, initialConsent, query = '', blocked = false, savedCampaign = null) {
+function setup(path, initialConsent, query = '', blocked = false, savedCampaign = null, referrer = '', savedAi = null) {
   let choice = initialConsent;
   const events = [], listeners = {}, clicks = {};
   const session = new Map(savedCampaign ? [['mlp-growth-campaign', JSON.stringify(savedCampaign)]] : []);
+  if (savedAi) session.set('mlp-ai-source', savedAi);
   const context = {
     URL, URLSearchParams, location: {pathname:path, origin:'https://mercerlanepress.com', href:'https://mercerlanepress.com'+path+query, search:query},
     localStorage: { getItem() { if (blocked) throw Error('Storage blocked'); return choice; } },
     sessionStorage: {setItem:(k,v)=>session.set(k,v), getItem:k=>session.get(k), removeItem:k=>session.delete(k)},
     window: {gtag:(...args)=>events.push(args), addEventListener:(n,cb)=>listeners[n]=cb},
-    document: {addEventListener:(n,cb)=>clicks[n]=cb, getElementById:()=>({hidden:context.resultHidden})}
+    document: {referrer, addEventListener:(n,cb)=>clicks[n]=cb, getElementById:()=>({hidden:context.resultHidden})}
   };
   vm.runInNewContext(source, context);
   return {events,session, submit(valid, id='heat-cost-form') {context.resultHidden=!valid;clicks.submit?.({target:{id}});}, change(value) { choice=value; listeners['mlp:analytics-consent']?.({detail:value}); }, click(href) { clicks.click?.({target:{closest:()=>({href})}}); }};
@@ -119,3 +120,29 @@ assert.equal(deniedGuide.events.length,0);
 assert.ok([...newBook.events,...broadGuide.events,...officeGuide.events].every(e=>e[1]!=='purchase'));
 
 console.log('Growth measurement checks passed: deny/accept/revoke, blocked storage, event de-duplication, allowlisted attribution, input exclusion, correct Etsy/Stripe destinations and no purchase claims.');
+
+// AI referral labels must survive an internal journey, remain consent gated,
+// reject lookalikes, and never include prompts or complete referring URLs.
+const ai = setup(tool, 'granted', '?utm_source=chatgpt.com&prompt=private');
+assert.equal(ai.events[0][2].ai_source, 'chatgpt');
+assert.equal(ai.events.filter(e=>e[1]==='ai_referred_entry').length, 1);
+ai.click(target); assert.equal(ai.events.at(-1)[2].ai_source, 'chatgpt');
+assert.ok(!JSON.stringify(ai.events).includes('private'));
+const onwardAi = setup('/tools/construction-estimating-system-pro/', 'granted', '', false, null, 'https://mercerlanepress.com/tools/contractor-markup-margin-calculator/', 'chatgpt');
+assert.equal(onwardAi.events[0][2].ai_source, 'chatgpt');
+for (const ref of ['https://chatgpt.com.evil.example/private', 'https://example.com/?chatgpt.com']) {
+  const other = setup(tool,'granted','',false,null,ref,'chatgpt');
+  assert.ok(other.events.every(e=>!e[2].ai_source));
+}
+const refAi = setup(tool,'granted','',false,null,'https://www.perplexity.ai/search/private');
+assert.equal(refAi.events[0][2].ai_source, 'perplexity');
+assert.ok(!JSON.stringify(refAi.events).includes('/search/private'));
+const noAi = setup(tool,'denied','?utm_source=chatgpt.com');
+assert.equal(noAi.events.length,0); assert.equal(noAi.session.size,0);
+ai.change('denied'); assert.equal(ai.session.size,0);
+const forged = setup(tool,'granted','',false,null,'','unapproved');
+assert.ok(forged.events.every(e=>!e[2].ai_source));
+console.log('AI referral tests passed: consent, internal carryover, revocation, exact hosts and private-URL exclusion.');
+
+assert.equal(onwardAi.events.filter(e=>e[1]==='ai_referred_entry').length,0);
+assert.ok(setup(tool,'granted','?utm_source=__proto__').events.every(e=>!e[2].ai_source));

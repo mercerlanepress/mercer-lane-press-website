@@ -69,6 +69,36 @@
     const rule = Object.hasOwn(campaignRules, name) ? campaignRules[name] : null;
     return !!rule && rule.sources.includes(source) && rule.contents.includes(content);
   };
+  // Fixed labels only: never retain a referring URL, prompt or arbitrary query.
+  const aiHosts = {
+    'chatgpt.com': 'chatgpt', 'chat.openai.com': 'chatgpt',
+    'perplexity.ai': 'perplexity', 'www.perplexity.ai': 'perplexity',
+    'claude.ai': 'claude', 'gemini.google.com': 'gemini',
+    'copilot.microsoft.com': 'copilot'
+  };
+  let aiSource = '';
+  const aiAttribution = () => {
+    let incomingVisit = false;
+    try {
+      const tagged = new URLSearchParams(location.search).get('utm_source');
+      const referrer = document.referrer ? new URL(document.referrer) : null;
+      const incoming = (Object.hasOwn(aiHosts, tagged) ? aiHosts[tagged] : '') ||
+        (referrer && Object.hasOwn(aiHosts, referrer.hostname) ? aiHosts[referrer.hostname] : '');
+      if (incoming) {
+        incomingVisit = true;
+        aiSource = incoming;
+        sessionStorage.setItem('mlp-ai-source', aiSource);
+      } else if (!referrer || referrer.origin === location.origin) {
+        const saved = sessionStorage.getItem('mlp-ai-source');
+        if (Object.values(aiHosts).includes(saved)) aiSource = saved;
+      } else {
+        // Another external source starts a new journey in this tab.
+        aiSource = '';
+        sessionStorage.removeItem('mlp-ai-source');
+      }
+    } catch { /* Referrer parsing and session storage are optional. */ }
+    return incomingVisit;
+  };
   let campaign = {};
   const attribution = () => {
     try {
@@ -86,22 +116,25 @@
   };
   const send = (name, extra = {}) => {
     if (!consent() || typeof window.gtag !== 'function') return false;
-    window.gtag('event', name, {campaign_group: current[0], page_kind: current[1], page_id: current[2], ...campaign, ...extra});
+    window.gtag('event', name, {campaign_group: current[0], page_kind: current[1], page_id: current[2], ...campaign, ...(aiSource ? {ai_source: aiSource} : {}), ...extra});
     return true;
   };
   let entered = false;
   const enter = () => {
     if (entered || !consent()) return;
+    const incomingAi = aiAttribution();
     const isCampaign = attribution();
     entered = send(current[1] === 'tool' ? 'tool_entry' : 'funnel_page_entry');
     if (isCampaign) send('campaign_entry');
+    if (incomingAi) send('ai_referred_entry');
   };
   enter();
   window.addEventListener('mlp:analytics-consent', event => {
     if (event.detail === 'granted') enter();
     else {
       campaign = {};
-      try { sessionStorage.removeItem('mlp-growth-campaign'); } catch { /* Optional storage. */ }
+      aiSource = '';
+      try { sessionStorage.removeItem('mlp-growth-campaign'); sessionStorage.removeItem('mlp-ai-source'); } catch { /* Optional storage. */ }
     }
   });
   // A valid explicit calculation, never the prefilled example or each keystroke.

@@ -1,10 +1,11 @@
 ---
 title: "Construction Job Costing Spreadsheet: Estimate vs Actual"
-description: "Use an estimate-vs-actual construction job costing spreadsheet to compare planned and real project costs, identify variance causes and improve future estimates."
+description: "Follow a worked construction job from accepted estimate to remaining-cost forecast and final actuals. See how profit fades even when approved revenue rises."
 published: 2026-10-02
-summary: "Estimate-vs-actual job costing turns a completed job into estimating feedback. Compare the original cost assumptions with actual materials, labour, subcontract and job-specific costs, then record why the variance occurred."
+summary: "Compare the accepted estimate with costs incurred plus costs still to come. A worked job shows profit fade, approved changes and the difference between forecast profit and cash collected."
 order: 9
 related:
+  - construction-markup-vs-margin
   - construction-estimating-spreadsheet-what-to-include
   - estimate-construction-labor-hours-first-jobs
   - red-team-bid-review-construction-estimate
@@ -75,6 +76,46 @@ The calculation is deliberately explicit:
 The job incurred **$2,700 more direct cost** than estimated, but the **$1,000 approved increase in revenue** partly offset that movement. This example excludes company overhead, financing, taxes and cash-collection timing; direct gross profit is not the same as net business profit or cash in the bank.
 
 The next step is to look behind the three nonzero variances, not merely copy the final numbers into the next estimate. Check the material quantity build-up (**E**), actual labour hours and access (**P**), and whether the change was documented and approved (**C**). Preserve the original estimate and a separate log of approved changes so the comparison remains auditable.
+
+## Forecast the finished job before all the bills arrive
+
+**Forecast final direct cost = direct cost incurred to date + estimated direct cost still to come.** Subtract that forecast from approved revenue to estimate direct gross profit at completion.
+
+Return to the same fictional job before completion. Approved revenue is now $36,000. The contractor reviews costs incurred and the work still required:
+
+| Direct cost | Incurred to date | Still to come | Forecast final cost |
+| --- | ---: | ---: | ---: |
+| Materials | $6,500 | $2,700 | $9,200 |
+| Labour | $6,200 | $6,000 | $12,200 |
+| Subcontractors | $5,000 | $1,000 | $6,000 |
+| Equipment | $1,200 | $300 | $1,500 |
+| Other direct costs | $800 | $0 | $800 |
+| **Total** | **$19,700** | **$10,000** | **$29,700** |
+
+“Incurred” includes costs of work or supplies already received, including identified unpaid bills. “Still to come” covers costs not already included in that column. Reconcile the two so an outstanding subcontract balance or supplier invoice is counted once. Do not use cash paid as a substitute for costs incurred.
+
+Subtracting only $19,700 from the full approved revenue would leave $16,300. That is not forecast final profit: another $10,000 of direct costs remains. The forecast direct gross profit is **$36,000 − $29,700 = $6,300**, before company overhead and the other exclusions stated above.
+
+In this teaching example the forecast matches the eventual result. Real forecasts must be revised as quantities, remaining hours, commitments and scope become clearer.
+
+## What profit fade means in this example
+
+Profit fade is a reduction in expected profit as the job develops. Compare the accepted baseline with the forecast using the same cost definitions:
+
+| Measure | Accepted baseline | Forecast at review |
+| --- | ---: | ---: |
+| Revenue | $35,000 | $36,000 |
+| Direct costs | $27,000 | $29,700 |
+| Direct gross profit | $8,000 | $6,300 |
+| Direct gross margin | 22.86% | 17.50% |
+
+Expected direct gross profit has fallen **$1,700**, despite revenue increasing. Direct gross margin has fallen **5.36 percentage points**, using unrounded figures before displaying two decimals.
+
+The movement can be reconciled: $8,000 original profit + $1,000 approved change revenue − $300 change cost − $1,200 material overrun − $1,200 labour overrun = **$6,300**. The approved change contributes $700; the other overruns consume $2,400.
+
+Check the remaining work rather than estimating cost-to-complete from a vague percentage finished. List remaining materials, person-hours, subcontract balances, rentals and known rework. Keep disputed or unapproved change revenue separate from the approved-revenue calculation.
+
+For pricing before the job starts, see [the worked markup-versus-margin example](/construction-estimating/construction-markup-vs-margin/). Its cost base includes an overhead allocation; this job example deliberately shows direct gross profit before company overhead.
 
 ## Materials: ask whether the quantity or price moved
 

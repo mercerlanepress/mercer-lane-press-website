@@ -1,6 +1,6 @@
 ---
-title: "Home Assistant Thread Border Router Troubleshooting: Networks, Credentials and Coverage"
-description: "Understand Thread Border Routers, multiple Thread networks, credentials, powered mesh routers, radio placement, and the checks to make when Matter-over-Thread devices become unreliable."
+title: "Home Assistant Thread Troubleshooting: Missing Router or Unreachable Device"
+description: "Thread border router missing or Matter device unreachable? Check Home Assistant discovery, phone credentials, IPv6 and mesh coverage before resetting devices."
 published: 2026-09-23
 summary: "A Border Router connects Thread to the home IP network. Reliability depends on the intended Thread network, shared credentials, physical mesh coverage, and a working local path to the Matter controller."
 order: 3
@@ -31,6 +31,26 @@ Home Assistant's [Thread documentation](https://www.home-assistant.io/integratio
 The same documentation notes that Matter commissioning through the Companion apps uses the mobile device's preferred Thread network. Setting a preferred network in Home Assistant is not enough to establish which credentials the phone will use. Follow the current Android or iOS credential-sharing procedure for your existing network, then refresh the Thread view and verify the result.
 
 Do not share Thread credentials in public screenshots or troubleshooting posts.
+
+## Check the network in Home Assistant before changing it
+
+Open **Settings → Connectivity → Thread** in the current Home Assistant interface. If your version groups integrations differently, use **Settings → Devices & services** and look for Thread. Identify the intended network and its border router before importing credentials or selecting a preferred network.
+
+A Thread-capable USB radio is not proof that a Thread border router is running. Check its installed firmware and the applicable hardware setup instructions; a radio configured for Zigbee is not operating as a Thread radio merely because the hardware supports both. Avoid reflashing working hardware as an exploratory troubleshooting step.
+
+## Worked example: a visible network that cannot be made preferred
+
+In this **fictional diagnostic example**, a phone already controls a Matter-over-Thread plug through an existing ecosystem. Home Assistant can see the Thread network, but cannot make it preferred.
+
+| Observation | What it establishes |
+| --- | --- |
+| The existing ecosystem still controls the plug | That existing control path works; it does not prove Home Assistant has the credentials. |
+| Home Assistant lists the network | Discovery is working, but discovery does not supply the network's credentials. |
+| The preferred-network option is unavailable | Check credential availability before buying a second border router or resetting the plug. |
+
+Follow the [official credential-import procedure](https://www.home-assistant.io/integrations/thread/#making-a-network-your-preferred-network) in the Companion app, refresh the Thread view, and check whether the network can now be selected. Use the procedure for your phone and existing ecosystem; do not assume every platform shares credentials in the same way.
+
+If that resolves network selection but commissioning still fails, continue with the phone's commissioning path and local IPv6 checks. One resolved credential problem does not prove that every network layer is healthy.
 
 ## Separate three Thread roles
 
@@ -121,6 +141,14 @@ If an endpoint is reliable near known coverage and unreliable at the original lo
 
 Do not factory-reset the fabric simply because the symptom appears "Matter-related."
 
+## Joined the mesh but still unreachable: check the IPv6 path
+
+A device joining Thread is not proof that traffic can reach Home Assistant. Use the [official IPv6 troubleshooting section](https://www.home-assistant.io/integrations/thread/#ipv6-is-not-working) to check the Home Assistant host and the local network router. For virtual machines or containers, include the relevant virtual-network or container layer.
+
+Record the deployment type and the exact OTBR warning before making changes. A bridged virtual machine and a system routing between networks do not have the same forwarding requirements. Do not copy a command intended for another deployment or disable the firewall to test a guess.
+
+For a guided next step, use the [local IPv6 and multicast checklist](/home-assistant-matter-thread/home-assistant-matter-ipv6-multicast/).
+
 ## Watch 2.4 GHz placement
 
 Thread shares the 2.4 GHz band with Zigbee and common Wi-Fi.
@@ -190,4 +218,4 @@ For the broader setup path, start with [Matter-over-Wi-Fi vs Matter-over-Thread]
 
 If devices join but remain unreachable, continue with the [local IPv6 and multicast checks](/home-assistant-matter-thread/home-assistant-matter-ipv6-multicast/). For the complete setup and maintenance sequence, see [The Home Assistant & Matter Owner's Manual](/books/the-home-assistant-and-matter-owners-manual/).
 
-Vendor reference checked on 20 October 2026. Interface labels and credential-sharing steps can change.
+Vendor reference checked on 29 October 2026. Interface labels and credential-sharing steps can change.

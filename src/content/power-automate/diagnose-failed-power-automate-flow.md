@@ -1,6 +1,6 @@
 ---
-title: "How to Diagnose a Failed Power Automate Flow With Run History"
-description: "A practical Power Automate troubleshooting sequence: start with the exact run, find the first failed or wrong action, inspect inputs and outputs, then change one thing and retest the business result."
+title: "Power Automate Flow Failed? Diagnose Run History and Error Codes"
+description: "Find why a Power Automate cloud flow failed: inspect run history, inputs and error codes, trace skipped actions, and test a fix without duplicating earlier work."
 published: 2026-09-21
 summary: "The designer shows intent; run history shows evidence. Read the exact run from the trigger downward until you find the first action that failed or produced the wrong data."
 order: 6
@@ -61,6 +61,12 @@ Do not start with the last red box just because it is visually obvious.
 A downstream action may fail only because an earlier action produced the wrong value.
 
 The first failure is usually the best place to begin.
+
+## A skipped action is a clue, not necessarily the cause
+
+If a later action was skipped, inspect the branch, loop or containing scope before editing that action. It may not have been eligible to run after an earlier failure or a condition that took another path.
+
+For a scope-level `ActionFailed` message, open the scope and find the underlying action error. Record that specific error rather than treating the scope's summary as the diagnosis. Compare the action's configured run-after conditions with what actually happened. Do not change them merely to hide a failure.
 
 ## 3. Inspect inputs and outputs
 
@@ -179,6 +185,23 @@ The distinction is the record's identity versus its display reference. Changing 
 
 Use the actual response alongside Microsoft's [cloud-flow error reference](https://learn.microsoft.com/en-us/power-automate/error-reference). Do not grant broader permissions or suppress a failure simply to make the run appear successful.
 
+## Make a repair record before you rerun
+
+For the fictional SharePoint example above, a short record makes the diagnosis reviewable:
+
+| Record | Example entry |
+| --- | --- |
+| Intended result | Update the item created for this request. |
+| Last confirmed success | Create item returned numeric ID 1432. |
+| First relevant failure | Update item received REQ-1432 instead of the item ID. |
+| Proposed correction | Map the returned numeric ID to the update action. |
+| Controlled test | Use a test record and verify that the intended item changes. |
+| Rerun check | Establish whether the original run already created its item before repeating the event. |
+
+Use redacted identifiers in shared notes. Record the real error message from your run; this is an illustrative mapping mistake, not a claim that every SharePoint failure has this cause.
+
+After correcting a downstream action, decide whether the safe recovery is to update an existing item, resume through an established recovery path, or repeat a controlled event. A connection repair does not undo emails sent or records created earlier in the run.
+
 ## Test one change at a time
 
 Once you have evidence for the likely cause:
@@ -225,4 +248,4 @@ The most reliable rule is simple:
 
 For attachment and file problems, see [saving Outlook attachments to SharePoint](/power-automate/save-outlook-attachments-to-sharepoint/). For repeated rows or records, see [processing Excel rows without duplicates](/power-automate/process-excel-rows-without-duplicates/). [Automate the Office](/books/automate-the-office/) brings the individual workflows together with testing, handover and maintenance guidance.
 
-Microsoft references checked on 19 October 2026. Interface labels and connector behaviour can change.
+Microsoft references checked on 29 October 2026. Interface labels and connector behaviour can change.

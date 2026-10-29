@@ -1,6 +1,6 @@
 ---
-title: "How to Set Up Local AI on Windows With LM Studio"
-description: "A beginner setup route for local AI on a Windows PC using LM Studio: choose one model, test hardware fit, run a smoke test, and verify offline behaviour."
+title: "LM Studio Setup on Windows: Download, Load and Test a Model"
+description: "Set up LM Studio on Windows, download and load a local model, then check its answers and offline operation with a repeatable first-chat test."
 published: 2026-09-23
 summary: "Use one desktop application, one modest model, and one repeatable task. Download, load, test, verify, and record what worked before exploring advanced settings."
 order: 2
@@ -87,6 +87,18 @@ If the answer is fluent but alters factual details, do not make that model your 
 
 A useful model needs both acceptable quality and acceptable reliability for the tasks you intend to give it.
 
+### A first-chat test you can check yourself
+
+Use invented information rather than private documents for the first test. Paste this source and instruction into a new chat:
+
+> Source: Cedar Workshop opens Monday to Thursday, 09:00–16:00. Order CW-104 contains 12 brass handles. Collection is Thursday, 14:00. No delivery service is stated.
+>
+> Return four labelled lines: opening days; order number; quantity; collection time. Use only the source. Then state whether delivery is available; if the source does not say, answer “not stated”.
+
+Check the response against the source: Monday to Thursday; CW-104; 12; Thursday at 14:00; delivery not stated. Wording can differ, but the facts must remain intact. A confident claim that delivery is unavailable adds information the source did not provide.
+
+Keep that same source for the offline test below. If one model changes the order number or invents a delivery policy, record the failure before trying another model. This fictional exercise checks a narrow task; passing it is not evidence that the model is reliable for every document or decision.
+
 ## Step 6: test the local session offline
 
 After the model and required runtime are downloaded:
@@ -147,10 +159,21 @@ Prove one setup for one task. Save the prompt that worked. Use it for several da
 If the model is slow or unstable, follow the [local AI troubleshooting order](/local-ai/local-ai-slow-freezing-out-of-memory/) before reinstalling software or buying hardware.
 
 
+## Downloaded, loaded or offline: which stage failed?
+
+| Symptom | Next check |
+| --- | --- |
+| Model downloaded, but no answer | In Chat, select the local model and let it finish loading. A file in the library is not an active model. |
+| PC becomes unresponsive during loading | Stop the attempt, check available memory, and choose a smaller model or context before repeating. |
+| Chat works online but not offline | Check that you selected the downloaded model and that its required runtime is already installed. |
+| Answers appear but alter the supplied facts | Repeat the source-only test and compare models on the same task. Loading successfully is not the same as answering accurately. |
+
+LM Studio's [offline-operation documentation](https://lmstudio.ai/docs/app/offline) separates locally available features from operations that still require an internet connection. Download the required files before disconnecting; do not use an offline test to claim the whole computer is isolated when reconnected.
+
 ## If the first setup does not work
 
 If the model will not load or Windows becomes sluggish, use the [memory and performance troubleshooting guide](/local-ai/local-ai-slow-freezing-out-of-memory/). If it answers but the privacy boundary is unclear, use the [local-AI privacy checks](/local-ai/does-local-ai-keep-data-private/).
 
 [Private AI on Your PC](/books/private-ai-on-your-pc/) connects hardware selection, setup, document workflows and maintenance into the full sequence.
 
-Vendor references checked on 20 October 2026.
+Vendor references checked on 29 October 2026.

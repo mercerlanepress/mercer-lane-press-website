@@ -11,6 +11,21 @@
 6. **Evidence-based marketing.** Track exposure, traffic, genuine product interest and verified sales separately. Don't call a YouTube view or outbound click a book sale.
 7. **Minimal cost and controlled change.** Reuse the current ChatGPT, static website and local rendering tools where practical. Do not add paid subscriptions or automatically post without an assessed benefit and owner approval.
 
+## KDP portfolio and release decision gate
+Do not use a new title as the automatic fix for weak existing sales. Before allocating one of the limited paperback upload slots, log in the project brief:
+
+| Evidence | What to check |
+| --- | --- |
+| Reader and problem | Specific buyer, repeatable job to be done, why the existing books are inadequate |
+| Commercial demand | Dated evidence from actual competing listings, live BSR where available, review complaints and plausible royalty; clearly mark any estimate as an estimate |
+| Distinctive offer | Why this book is meaningfully different, not a renamed or lightly rewritten repeat |
+| Economics | Expected royalty per edition, production effort, potential follow-on demand and realistic downside |
+| Account and quality risk | Originality, factual verification, KDP content and metadata rules, cover, interior audit and required AI disclosure |
+
+**Decision:** choose one of *publish*, *improve an existing title*, *run a low-cost validation test*, or *reject*. A candidate is not approved simply because it is a boring niche, has competitors or looks attractive in search results. For books that appear to sell, review the exact customer problem and identify genuinely new, nonduplicative follow-ons.
+
+For an existing title with low sales, diagnose exposure and appeal separately: listing discoverability, cover/thumb legibility, title and promise, reviews, interior sample and price. Do not promise that changing a cover will fix absent demand. Retain high-quality content rather than deliberately sacrificing it for click-through.
+
 ## Standard workflow for every project
 
 ### 1. Brief and source inventory

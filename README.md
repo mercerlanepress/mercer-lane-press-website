@@ -4,7 +4,7 @@ This repository contains Version 1 of the official [Mercer Lane Press](https://m
 
 ## Mercer Lane Press production standards
 
-For future books, digital products, promo videos, carousels and site content, follow the [production playbook](docs/PRODUCTION_PLAYBOOK.md), [premium video standard](docs/VIDEO_PRODUCTION_STANDARD.md), and [marketing assets playbook](docs/MARKETING_ASSETS_PLAYBOOK.md). These supplement (not replace) the verified book intake and review-before-merge process. Code assistants should also read [AGENTS.md](AGENTS.md).
+For future books, digital products, promo videos, carousels and site content, follow the [production playbook](docs/PRODUCTION_PLAYBOOK.md), [premium video standard](docs/VIDEO_PRODUCTION_STANDARD.md), and [marketing assets playbook](docs/MARKETING_ASSETS_PLAYBOOK.md). For conversion and SEO experiments, use the [Construction Toolkit PRO pilot](docs/CONVERSION_AND_DISCOVERY_PILOT.md) and existing [AI discovery measurement](docs/ai-discovery-measurement.md). These supplement (not replace) the verified book intake and review-before-merge process. Code assistants should also read [AGENTS.md](AGENTS.md).
 
 ## Before you start
 

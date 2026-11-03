@@ -2,6 +2,10 @@
 
 This repository contains Version 1 of the official [Mercer Lane Press](https://mercerlanepress.com) website. It is a static website built with **Astro**: Astro turns the source files in this repository into ordinary HTML and CSS files that a web host can deliver quickly. There is no database, account system, CMS, or server application.
 
+## Mercer Lane Press production standards
+
+For future books, digital products, promo videos, carousels and site content, follow the [production playbook](docs/PRODUCTION_PLAYBOOK.md), [premium video standard](docs/VIDEO_PRODUCTION_STANDARD.md), and [marketing assets playbook](docs/MARKETING_ASSETS_PLAYBOOK.md). These supplement (not replace) the verified book intake and review-before-merge process. Code assistants should also read [AGENTS.md](AGENTS.md).
+
 ## Before you start
 
 Install [Node.js](https://nodejs.org/) (the current Long Term Support version is appropriate). Node includes **npm**, the tool that downloads the project's software packages and runs its commands. A terminal is the text-based application where you enter the commands below.

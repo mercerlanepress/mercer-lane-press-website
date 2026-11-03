@@ -34,6 +34,13 @@ Original restrained instrumental music should support the story, not dominate it
 8. **Revise and rerender.** Fix the weak elements and repeat the contact-sheet + full playback check. Block delivery if a critical error persists.
 9. **Delivery.** Provide a verified MP4, editable sources when practical, known audio/media provenance, title/caption/CTA text and any platform-specific variants requested.
 
+## Scene continuity and reusable sources
+For a coherent animated explanation, establish a **visual continuity lock** before final rendering: core subject geometry, view/camera, background, permitted colours, correct real product assets, and text-safe zones. Give each scene a concrete start/end visual state; where appropriate, reuse the previous ending state as the next scene's starting state. A transition should explain the next causal step, not merely hide a cut.
+
+For generated-image or time-lapse material, preserve the approved reference frame and check each successive stage for subject drift, impossible physical transformations and visual discontinuity. Label illustrative or simulated visuals clearly where a viewer could mistake them for actual site footage or tested product output.
+
+Use a scene table with seconds, exact on-screen text, purpose, source evidence, start/end state, animation method, audio and purchase destination. Build reusable, editable assets from the approved treatments and retain the director brief and test results alongside the MP4. Prefer a small pilot of a new open-source animation framework, with verified licence/security/quality, over changing the entire toolchain for novelty.
+
 ## Quality gate
 A release candidate passes only if:
 - Text remains legible on a phone and does not cover the book or primary illustration.

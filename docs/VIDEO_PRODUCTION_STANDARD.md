@@ -5,6 +5,17 @@
 ## Creative brief
 Start with one specific homeowner, contractor, reader or genealogy problem that the *actual* published book or product addresses. A typical vertical short is about 27–35 seconds (use other lengths when the brief requires), 9:16 with clear mobile-safe typography. Story arc: intriguing reader problem → original visual explanation/example → useful insight → genuine book/product reveal → direct verified CTA. The viewer should learn something even if they never buy.
 
+## First-ten-second hook and retention gate (November 2026)
+Before building scenes, complete the [video campaign brief and QA record](templates/VIDEO_CAMPAIGN_BRIEF.md). Write and compare at least two credible hooks before committing production effort; three candidates are useful for a major campaign, but do not mass-produce variants without data.
+
+- **Four S test:** a clear **subject**, a real reason to care (**stakes/outcome**), **speed through concise wording** (not accelerated speech), and unambiguous **clarity**. A visual trick without the intended reader or benefit is not an effective product hook.
+- **Triple alignment:** the first on-screen headline, spoken phrase and visible subject must communicate the same idea. Review the opening once with sound off and once without the headline; neither should contradict the other.
+- **Immediate lock-in:** the next 5–10 seconds must provide the first piece of proof, demonstration, consequence or useful mechanism promised by the hook. Do not spend those seconds on a logo reveal, generic imagery or delayed setup.
+- **Native short-form script:** structure the short for its own medium, even when adapted from a longer manuscript, book or guide. Do not assume cropping a long explainer produces a useful short.
+- **Useful progression:** move from problem → evidence → mechanism/example → payoff → genuine product reveal. Specific beats are flexible; each scene should raise understanding rather than simply escalate spectacle.
+- **Honesty:** headline curiosity is allowed; invented facts, misleading cliffhangers, unsupported certainty and a sales pitch disguised as teaching are not.
+- **Review first seconds separately:** inspect the opening 0–3s, immediate 3–9s lock-in, and full MP4. Later compare available platform retention with outcomes; viral-prediction software is a hypothesis aid, not verified performance.
+
 ## Visual direction
 - Create original coherent SVG/vector illustrations with subject-specific visual detail (cutaway house, changing heat-flow diagram, contractor cost breakdown, family-record comparison, product UI).
 - Animate what the explanation *means*: relationships, decisions, comparisons, causality, movement and transformations. Use connected shape morphs, camera movement or masking only when they improve comprehension.

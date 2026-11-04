@@ -52,6 +52,11 @@ For generated-image or time-lapse material, preserve the approved reference fram
 
 Use a scene table with seconds, exact on-screen text, purpose, source evidence, start/end state, animation method, audio and purchase destination. Build reusable, editable assets from the approved treatments and retain the director brief and test results alongside the MP4. Prefer a small pilot of a new open-source animation framework, with verified licence/security/quality, over changing the entire toolchain for novelty.
 
+## Deliverable and evidence bundle
+For each approved campaign, retain the completed [video campaign brief](templates/VIDEO_CAMPAIGN_BRIEF.md) alongside its script, shot plan, approved real source/cover, editable vector/animation project, final MP4, thumbnail, caption/subtitle file, platform-specific posting text, licences/provenance, verified URL, and QA/approval notes. Actual binary media and unpublished source extracts belong in an appropriate private media workspace, **not** this public repository.
+
+Do not label an export as final merely because it rendered. The release gate depends on inspection of the **real** output, fixing the three weakest scenes or defects, and rechecking. Confirm every word fits within its designed card **at every animation point**, not only at the first frame. Record any unresolved limitation explicitly.
+
 ## Quality gate
 A release candidate passes only if:
 - Text remains legible on a phone and does not cover the book or primary illustration.

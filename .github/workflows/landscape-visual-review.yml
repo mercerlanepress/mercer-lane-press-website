@@ -1,0 +1,61 @@
+name: Landscape page visual review
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/landscape-visual-review.yml'
+      - 'src/pages/tools/landscape-estimating-job-costing-system/index.astro'
+      - 'src/data/landscape-system.ts'
+      - 'src/styles/global.css'
+      - 'scripts/check-landscape-conversion.mjs'
+
+permissions:
+  contents: read
+
+jobs:
+  screenshots:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Install and build Astro
+        run: |
+          npm install
+          npm run build
+      - name: Capture responsive renders from the real built page
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx astro preview --host 127.0.0.1 --port 4321 > /tmp/mercer-preview.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl --fail --silent --output /dev/null "http://127.0.0.1:4321/tools/landscape-estimating-job-costing-system/"; then break; fi
+            sleep 1
+          done
+          curl --fail --silent --output /dev/null "http://127.0.0.1:4321/tools/landscape-estimating-job-costing-system/"
+          CHROME="$(command -v google-chrome || command -v chromium || true)"
+          test -n "$CHROME"
+          mkdir -p visual-review
+          URL="http://127.0.0.1:4321/tools/landscape-estimating-job-costing-system/"
+          "$CHROME" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars --window-size=390,900 --screenshot=visual-review/mobile-390.png "$URL"
+          "$CHROME" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars --window-size=1440,1000 --screenshot=visual-review/desktop-1440.png "$URL"
+          "$CHROME" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars --window-size=390,2800 --screenshot=visual-review/mobile-long-390.png "$URL"
+          "$CHROME" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars --window-size=1440,2200 --screenshot=visual-review/desktop-long-1440.png "$URL"
+          test -s visual-review/mobile-390.png
+          test -s visual-review/desktop-1440.png
+          test "$(stat -c %s visual-review/mobile-long-390.png)" -gt 12000
+          test "$(stat -c %s visual-review/desktop-long-1440.png)" -gt 25000
+          file visual-review/*.png
+          printf 'Screenshots document a browser render, not independent human visual approval.\n' > visual-review/README.txt
+      - name: Store screenshots for human visual QA
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: landscape-responsive-screenshots
+          path: visual-review/
+          if-no-files-found: warn
+          retention-days: 14

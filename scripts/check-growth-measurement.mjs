@@ -82,7 +82,7 @@ for (const [source, name, content] of [
  // free checklist's tool-to-product and tool-to-book journey.
  const landscapeContents = [
    ['youtube','v01_busy_job'], ['youtube','v02_markup'],
-   ['tiktok','v03_missing_costs'], ['instagram','v04_bid_check'],
+   ['tiktok','v03_missing_costs'], ['instagram','v04_excel_demo'],
    ['youtube','v05_job_actual'], ['pinterest','p01_checklist'],
    ['pinterest','p02_markup'], ['pinterest','p03_estimate'],
    ['instagram','c01_costs'], ['linkedin','post01_bid']

@@ -9,6 +9,12 @@ This repository is the live website source for Mercer Lane Press. For all work i
 
 These are operational guidelines, not authority to publish, spend money or claim results.
 
+## Required practical templates
+- Before drafting or rendering any new promotional video, create a project-specific working copy of [VIDEO_CAMPAIGN_BRIEF](docs/templates/VIDEO_CAMPAIGN_BRIEF.md). Verify subject–stakes–clarity, align text/visual/voice, and show lock-in proof within the following 5–10 seconds. Complete the sound-on, mobile and factual QA checklist on the actual MP4 before marking it final.
+- Before committing production effort to a new KDP niche, digital product or major software feature, complete [OPPORTUNITY_EVIDENCE_LOG](docs/templates/OPPORTUNITY_EVIDENCE_LOG.md) with actual problem and willingness-to-pay evidence; prefer a low-cost test or improving an established offer when evidence is missing.
+- Retain the approved Mercer Lane creative examples as references and improve their shortcomings; do not substitute generic AI defaults or add paid tools just because they appear in a YouTube demonstration.
+- These templates are working documents. Do not commit unpublished manuscripts, personal customer information or raw copyrighted source media to this public repository.
+
 ## Non-negotiables
 - Ground book descriptions, technical guidance, claims, imagery and CTAs in supplied verified source material. Do not invent cover imagery, bestseller status, prices, ratings, testimonials, results, endorsements or Amazon URLs.
 - Match the site's actual current visual system in `src/styles/global.css`; do not fabricate fixed brand colours or change the public site's design merely because a creative reference uses them.

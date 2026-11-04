@@ -26,6 +26,17 @@ Do not use a new title as the automatic fix for weak existing sales. Before allo
 
 For an existing title with low sales, diagnose exposure and appeal separately: listing discoverability, cover/thumb legibility, title and promise, reviews, interior sample and price. Do not promise that changing a cover will fix absent demand. Retain high-quality content rather than deliberately sacrificing it for click-through.
 
+## Problem and willingness-to-pay gate (November 2026)
+Use the [opportunity evidence log](templates/OPPORTUNITY_EVIDENCE_LOG.md) for **new KDP titles**, major digital-product features and app ideas before building a complete product. Look for first-hand recurring problems: genuine 3-star/critical reviews, workarounds, support requests, manual multi-step workflows, and precise customer questions. Preserve dated source references; do not manufacture customer statements from an AI persona.
+
+1. Distinguish a painful problem from an interesting topic: identify what a particular buyer repeatedly struggles to do.
+2. Verify payment evidence separately from interest. Competing paid offers, independently verified orders and an actual customer price are stronger than comments, BSR approximations, search volume or influencer income anecdotes.
+3. Describe a distinct, substantiated benefit over established competitors. Narrower target buyer and better worked examples are valid differentiators; near-identical covers and superficial renaming are not.
+4. Try the cheapest honest test: improve an existing listing, publish a demonstrable sample, test a working screenshot or small feature, or gather independent buyers' feedback. Set time/cost/stop criteria in advance.
+5. Decide between **improve existing**, **small test**, **produce**, or **reject**, recording missing evidence. Treat 'not proven' as not proven, not as a guaranteed failure or success.
+
+Use commercial data only at its warranted precision. A live Amazon Best Sellers Rank is not a verified unit-sales estimate and a claimed extraordinary KDP result from an interview is not a repeatable forecast.
+
 ## Standard workflow for every project
 
 ### 1. Brief and source inventory

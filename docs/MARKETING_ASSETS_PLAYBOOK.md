@@ -11,6 +11,13 @@ Before producing a campaign, gather the actual book cover/product art, relevant 
 - Clear negative rules: generic AI stock look, misleading mockups, fabricated data/screenshots, incompatible styles and excessively small text.
 - Reusable components and motion grammar. Reference current `src/styles/global.css` for the actual site; do not hard-code made-up brand colours.
 
+## Reference-led art direction instead of generic AI design
+Maintain a **curated approved-exemplar library** by campaign subject: energy/renovation, contractor/estimating, genealogy, dog training and digital tools. Capture only permitted reference URLs or low-risk screenshots plus a short note about the specific quality worth reusing (hierarchy, contrast, spacing, rhythm, causal animation, visual density). Label whether each reference is an *owned approved Mercer Lane asset* or *third-party inspiration*; do not treat inspiration as licensed source artwork.
+
+Start every design from the actual book/product material and the current website design tokens, not a generic 'make it premium' prompt. For high-impact new creative directions, compare a small number of materially different layouts and refine the strongest; do not multiply versions for their own sake. Inspect both full-size and phone-size views. Explicitly check text within its boundaries and factual labels at every animated state. Preserve the rationale for the chosen design and incorporate approved corrections into the next campaign's brief.
+
+Use [video campaign brief and QA record](templates/VIDEO_CAMPAIGN_BRIEF.md) for every future video handoff. Reuse published approved exemplars as **style references**, while producing a new narrative and original illustrations for each topic.
+
 ## Copy specification (`copy.md` equivalent)
 Reader-first, useful and natural. Start with one concrete problem or surprising question the source material can resolve. Deliver a specific real explanation before the product CTA; never promise outcomes the book does not establish. Avoid formulaic triple lists, repeated rhetorical patterns, filler, superlatives and mechanical calls to action. Keep concise American English for US-targeted book marketing when appropriate. Human editorial review must preserve scientific, financial and legal/technical accuracy. Maintain correct platform AI disclosures where required; do not use copy editing to evade disclosure.
 
@@ -39,6 +46,11 @@ Reuse existing analytics/consent conventions and known campaign names; check [co
 - Guide-to-product and product-checkout click events as **intent**, not sales.
 - Separately verified Amazon/KDP or Etsy/Stripe sales data, if accessible. Do not attribute all purchases to a video without evidence.
 - Reporting windows, unknowns and any omitted or incomplete platform data.
+
+## Hook, landing-page and sales experiments
+Before launching a batch, define one specific product question, a single verified destination, and the first success metric that could disprove the idea. Test better opening words and scene-2 proof *before* producing more full-length videos. If early attention is weak, change the hook; if qualified viewers visit but few click the CTA, examine reader fit and the landing page; if checkout clicks occur without verified sales, examine the real transaction path without assuming every click is a buyer.
+
+Record **initial retention** or comparable early-view metrics where a platform provides them, average view duration, website entries, product-page visits, checkout-intent actions and separately verified purchases. Use matched reporting windows and note sample-size, consent and attribution limits. Neither views nor model-generated virality predictions establish revenue. A campaign should not get a second production batch by default if results are unmeasured or if source facts/CTA are unverified.
 
 ## Gate for recurring content
 Start with human-approved weekly batches and existing zero/low-cost tools. Only consider automated scheduling, external render APIs or additional subscriptions after showing a repeatable content format, stable fact-checking process and a measurable traffic or revenue benefit.

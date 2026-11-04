@@ -51,6 +51,25 @@ Default target 27–35 seconds, vertical 9:16, unless otherwise briefed. Adapt s
 - Verified CTA **words**, platform-supported link location and actual destination:
 - Product reveal must use the real approved cover or real product material, not a synthetic recreation.
 
+## 3A. Reference/look lock, scene-zero test and change control (November 2026)
+**Required before committing to a full render** for a new creative direction; when reusing a previously approved treatment, reference its existing approval instead of generating extra assets.
+
+- Creative treatment: approved original flat-vector editorial / subject-specific paper collage / other explicitly approved direction:
+- Actual site/product cover and design-system references:
+- One reference frame or short design board, with asset provenance and licensing:
+- Reference approved by / date / location (or reused existing approved reference):
+- Stable frame geometry, camera and safe margins:
+- **Scene-zero render:** opening shot plus representative voice and restrained audio, link and duration:
+- First-frame text–image–voice agreement: pass / fail / not tested:
+- Opening 0–3s mobile read: pass / fail / not tested:
+- Immediate 3–9s lock-in demonstrated: pass / fail / not tested:
+- Approval to render remaining scenes: yes / no / not obtained; approved by/date:
+- Production budget: existing tools / predicted external spend / approved cap (default no new spend):
+- Reusable source files, approved assets and fixed elements that must **not** be rerendered during later corrections:
+- Changes requested to approved elements, their precise reason and reapproval status:
+
+Only produce a full render after the reference and scene-zero checks pass. Revise *specific faulty shots/text/audio segments* and preserve approved material, followed by complete final-MP4 QA. A rendered preview is not automatically an approved video, and skipped gates must be recorded as exceptions rather than silently marked passed.
+
 ## 4. QA on the rendered MP4 — complete before asking for publication
 Use [ ] until observed. No box can be checked by inspecting the storyboard alone.
 

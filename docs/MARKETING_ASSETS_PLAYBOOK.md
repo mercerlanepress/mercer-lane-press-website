@@ -47,5 +47,10 @@ Reuse existing analytics/consent conventions and known campaign names; check [co
 - Separately verified Amazon/KDP or Etsy/Stripe sales data, if accessible. Do not attribute all purchases to a video without evidence.
 - Reporting windows, unknowns and any omitted or incomplete platform data.
 
+## Hook, landing-page and sales experiments
+Before launching a batch, define one specific product question, a single verified destination, and the first success metric that could disprove the idea. Test better opening words and scene-2 proof *before* producing more full-length videos. If early attention is weak, change the hook; if qualified viewers visit but few click the CTA, examine reader fit and the landing page; if checkout clicks occur without verified sales, examine the real transaction path without assuming every click is a buyer.
+
+Record **initial retention** or comparable early-view metrics where a platform provides them, average view duration, website entries, product-page visits, checkout-intent actions and separately verified purchases. Use matched reporting windows and note sample-size, consent and attribution limits. Neither views nor model-generated virality predictions establish revenue. A campaign should not get a second production batch by default if results are unmeasured or if source facts/CTA are unverified.
+
 ## Gate for recurring content
 Start with human-approved weekly batches and existing zero/low-cost tools. Only consider automated scheduling, external render APIs or additional subscriptions after showing a repeatable content format, stable fact-checking process and a measurable traffic or revenue benefit.

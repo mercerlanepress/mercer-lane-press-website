@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+const file='/downloads/Performance_Reviews_Editable_Manager_Toolkit.html';
+const schema={
+  '@context':'https://schema.org','@type':'WebPage',
+  name:'Performance Reviews That Actually Help — Free Manager Toolkit',
+  description:'14 editable performance-review and improvement-plan worksheets plus a fictional completed review example. Free, without signup.',
+  url:'https://mercerlanepress.com/performance-review-toolkit/'
+};
+const forms=[
+  'Review preparation','Evidence ledger','Metric sanity check','Evidence-to-review draft',
+  'Fairness and calibration','Review conversation','Measurable goals','Positive development',
+  'PIP readiness','Formal improvement plan (draft)','Weekly improvement check-in','End-of-plan outcome',
+  'Sensitive-issue escalation','Manager coaching self-audit'
+];
+---
+<BaseLayout title="Free Performance Review Manager Toolkit | Mercer Lane Press" description="Download 14 editable performance-review, goal-setting, coaching, PIP and follow-up forms plus a fictional example. Free, no signup." schema={schema}>
+  <Breadcrumbs items={[{name:'Home',href:'/'},{name:'Tools',href:'/tools/'},{name:'Performance review manager toolkit'}]}/>
+  <section class="hero section-tint">
+    <div class="wrap resource-hero">
+      <div>
+        <p class="eyebrow">FREE COMPANION TO THE BOOK</p>
+        <h1>Performance Reviews That Actually Help — Manager Toolkit</h1>
+        <p class="lede">Fourteen reusable management worksheets and a completed fictional case, designed for readers who want to turn evidence, fair feedback and achievable goals into a practical review process.</p>
+        <div class="actions">
+          <a class="button" href={file} download>Download editable toolkit</a>
+          <a class="button button-secondary" href={file}>Preview forms</a>
+        </div>
+        <p class="resource-detail">Free HTML file • Works offline • No registration, email address or payment</p>
+      </div>
+      <aside class="card quick-summary">
+        <h2>Inside the download</h2>
+        <p>Click an entry cell to edit it. Save an edited copy as an HTML file, or use Print / Save as PDF.</p>
+        <p><strong>14 blank forms + 1 completed fictional example.</strong> Use the forms for learning and adapt them only where workplace policy permits.</p>
+      </aside>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What's included</h2>
+        <p>Preparation, drafting, the meeting, development, responsible escalation and follow-up.</p>
+      </div>
+      <ol class="form-grid">{forms.map(name=><li>{name}</li>)}</ol>
+    </div>
+  </section>
+  <section class="section section-tint">
+    <div class="wrap narrow">
+      <h2>How to use it</h2>
+      <p>Download and open the HTML file in a browser. Type into the editable working-entry cells. Use <strong>Save my edited copy</strong> to preserve the text inside a local HTML copy, or use your browser's print command to save a PDF.</p>
+      <p>The templates are not a replacement for an organization's approved HR systems. Do not place actual employee records, medical information, confidential complaints or protected-leave details into personal or unauthorized files or AI tools. For consequential decisions, follow employer policy and obtain qualified US HR/employment-law advice as appropriate.</p>
+      <div class="notice"><strong>Privacy and access:</strong> the downloaded toolkit can be used offline and does not transmit typed content to Mercer Lane Press. No subscription is needed. Its working entries are stored only in any copy you explicitly save.</div>
+      <div class="actions"><a class="button" href={file} download>Get the free companion toolkit</a></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap narrow">
+      <h2>Looking for a shorter individual-review template?</h2>
+      <p>Our separate <a href="/free-tools/performance-review-template-excel/">free performance-review starter kit</a> includes an Excel workbook, Word form and printable PDFs for one review. This companion toolkit is a broader set of methods and forms matched to <em>Performance Reviews That Actually Help</em>.</p>
+      <p>Both resources are optional practical tools. The book explains how to evaluate evidence, avoid unfair comparisons, have a useful conversation and choose proportionate next steps.</p>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+.resource-hero{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(245px,1fr);gap:2rem;align-items:center}
+.quick-summary h2{font-size:1.2rem}
+.resource-detail{font-size:.91rem;color:var(--muted,#536576);margin-top:.7rem}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem 1.6rem;max-width:900px;padding-left:1.5rem}
+.form-grid li{padding:.35rem .5rem}
+@media(max-width:760px){.resource-hero{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}}
+</style>

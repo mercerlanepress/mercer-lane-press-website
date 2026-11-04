@@ -77,6 +77,48 @@ for (const [source, name, content] of [
   const invalidSaved = setup(tool, 'granted', '', false, {campaign_source:source, campaign_name:name, campaign_content:content});
   assert.ok(invalidSaved.events.every(e => !('campaign_name' in e[2])));
 }
+
+ // Landscape campaign: opt-in attribution, no arbitrary query capture, and the
+ // free checklist's tool-to-product and tool-to-book journey.
+ const landscapeContents = [
+   ['youtube','v01_busy_job'], ['youtube','v02_markup'],
+   ['tiktok','v03_missing_costs'], ['instagram','v04_bid_check'],
+   ['youtube','v05_job_actual'], ['pinterest','p01_checklist'],
+   ['pinterest','p02_markup'], ['pinterest','p03_estimate'],
+   ['instagram','c01_costs'], ['linkedin','post01_bid']
+ ];
+ const landscapeTool='/tools/landscape-bid-readiness-checklist/';
+ const landscapeProduct='https://mercerlanepress.com/tools/landscape-estimating-job-costing-system/';
+ const landscapeBook='https://mercerlanepress.com/books/landscape-contractor-estimating-and-pricing/';
+ for (const [source, content] of landscapeContents) {
+   const query = '?utm_source='+source+'&utm_medium=organic_social&utm_campaign=landscape_bid_2026_11&utm_content='+content+'&customer=private';
+   const entry = setup(landscapeTool,'granted',query);
+   assert.equal(entry.events[0][1],'tool_entry');
+   assert.equal(entry.events.filter(e=>e[1]==='campaign_entry').length,1);
+   assert.equal(entry.events[0][2].campaign_group,'landscape');
+   assert.equal(entry.events[0][2].campaign_content,content);
+   assert.ok(!JSON.stringify(entry.events).includes('private'));
+   entry.click(landscapeProduct);
+   assert.equal(entry.events.at(-1)[1],'tool_to_product');
+   entry.click(landscapeBook);
+   assert.equal(entry.events.at(-1)[1],'tool_to_book');
+   const denied = setup(landscapeTool,'denied',query);
+   assert.equal(denied.events.length,0);
+   assert.equal(denied.session.size,0);
+ }
+ for (const query of [
+   '?utm_source=unknown&utm_campaign=landscape_bid_2026_11&utm_content=p01_checklist',
+   '?utm_source=pinterest&utm_campaign=landscape_bid_2026_11&utm_content=private',
+   '?utm_source=pinterest&utm_campaign=landscape_bid_2026_11&utm_content=v99_draft'
+ ]) {
+   const invalid = setup(landscapeTool,'granted',query);
+   assert.ok(invalid.events.every(e=>!e[2].campaign_name));
+ }
+ const landscapeGuide = setup('/landscape-contractor-estimating/landscape-markup-vs-margin/','granted');
+ landscapeGuide.click('https://mercerlanepress.com/tools/landscape-bid-readiness-checklist/');
+ assert.equal(landscapeGuide.events.at(-1)[1],'guide_to_tool');
+ console.log('Landscape campaign checks passed: approved sources/content, consent, input exclusion and funnel transitions.');
+
 const unrelated=setup('/contact/','granted'); assert.equal(unrelated.events.length,0);
 const guide=setup('/small-fleet-maintenance/fleet-maintenance-schedule-spreadsheet/','granted');guide.click('https://mercerlanepress.com/tools/fleet-maintenance-due-calculator/');assert.equal(guide.events.at(-1)[1],'guide_to_tool');
 const heat=setup('/tools/heat-pump-running-cost-calculator/','denied');

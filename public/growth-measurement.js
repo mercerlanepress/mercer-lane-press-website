@@ -12,6 +12,7 @@
     '/tools/construction-estimating-system-pro/': ['construction', 'product', 'toolkit_pro'],
     '/tools/small-fleet-maintenance-system/': ['fleet', 'product', 'fleet_system'],
     '/tools/landscape-estimating-job-costing-system/': ['landscape', 'product', 'landscape_system'],
+    '/tools/landscape-bid-readiness-checklist/': ['landscape', 'tool', 'bid_checklist'],
     '/tools/hr-manager-toolkit/': ['hr', 'product', 'hr_ai_toolkit'],
     '/tools/family-admin-operating-system/': ['family', 'product', 'family_admin'],
     '/construction-estimating/construction-markup-vs-margin/': ['construction', 'guide', 'markup_guide'],
@@ -54,6 +55,15 @@
     fleet_202610: {
       sources: ['pinterest', 'tiktok', 'youtube'],
       contents: ['b1_due_point', 'b2_booking', 'b3_weekly_review']
+    },
+    landscape_bid_2026_11: {
+      sources: ['youtube', 'pinterest', 'tiktok', 'instagram', 'linkedin'],
+      contents: [
+        'v01_busy_job', 'v02_markup', 'v03_missing_costs',
+        'v04_excel_demo', 'v05_job_actual',
+        'p01_checklist', 'p02_markup', 'p03_estimate',
+        'c01_costs', 'post01_bid'
+      ]
     },
     construction_pilot_2026_10: {
       sources: ['pinterest', 'youtube', 'linkedin'],

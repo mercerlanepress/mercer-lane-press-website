@@ -60,7 +60,7 @@
       sources: ['youtube', 'pinterest', 'tiktok', 'instagram', 'linkedin'],
       contents: [
         'v01_busy_job', 'v02_markup', 'v03_missing_costs',
-        'v04_bid_check', 'v05_job_actual',
+        'v04_excel_demo', 'v05_job_actual',
         'p01_checklist', 'p02_markup', 'p03_estimate',
         'c01_costs', 'post01_bid'
       ]

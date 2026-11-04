@@ -43,10 +43,12 @@ jobs:
           URL="http://127.0.0.1:4321/tools/landscape-estimating-job-costing-system/"
           "$CHROME" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars --window-size=390,900 --screenshot=visual-review/mobile-390.png "$URL"
           "$CHROME" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars --window-size=1440,1000 --screenshot=visual-review/desktop-1440.png "$URL"
-          "$CHROME" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars --window-size=390,900 --screenshot=visual-review/mobile-choice-390.png "${URL}#choose"
-          "$CHROME" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars --window-size=1440,1000 --screenshot=visual-review/desktop-choice-1440.png "${URL}#choose"
+          "$CHROME" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars --window-size=390,900 --virtual-time-budget=3500 --screenshot=visual-review/mobile-choice-390.png "${URL}#choose"
+          "$CHROME" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars --window-size=1440,1000 --virtual-time-budget=3500 --screenshot=visual-review/desktop-choice-1440.png "${URL}#choose"
           test -s visual-review/mobile-390.png
           test -s visual-review/desktop-1440.png
+          test "$(stat -c %s visual-review/mobile-choice-390.png)" -gt 12000
+          test "$(stat -c %s visual-review/desktop-choice-1440.png)" -gt 25000
           file visual-review/*.png
           printf 'Screenshots document a browser render, not independent human visual approval.\n' > visual-review/README.txt
       - name: Store screenshots for human visual QA

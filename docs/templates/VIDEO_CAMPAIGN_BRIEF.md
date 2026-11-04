@@ -17,7 +17,7 @@
 - Constraints: no invented facts, pages, product screens, performance claims, testimonials, prices, or destinations.
 
 ## 2. Choose the hook before drawing
-Write three **short, factual** candidate hooks. Each must include **subject, stakes/outcome, speed of comprehension and clarity**; speed means fewer words, not rushed narration.
+Write at least two **short, factual** candidate hooks (three preferred for major campaigns). Each must include **subject, stakes/outcome, speed of comprehension and clarity**; speed means fewer words, not rushed narration.
 
 | Candidate | Exact on-screen text | Spoken first line | First visible subject | Reader reason to watch | Is this claim verified? |
 | --- | --- | --- | --- | --- | --- |

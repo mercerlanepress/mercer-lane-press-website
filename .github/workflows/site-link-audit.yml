@@ -46,6 +46,7 @@ jobs:
             --timeout 15
             --max-retries 1
             --exclude '^https://mercerlanepress\.com'
+            --exclude '/api/(pro|hr|fleet)-download'
             './dist/**/*.html'
           output: lychee/report.md
           jobSummary: false

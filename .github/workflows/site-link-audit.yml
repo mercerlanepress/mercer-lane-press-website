@@ -39,12 +39,13 @@ jobs:
           # Do not treat a rate limit or 403 as proof a product link is broken.
           args: >-
             --no-progress
+            --root-dir ./dist
             --timeout 15
             --max-retries 1
             --exclude '^https://mercerlanepress\.com'
             './dist/**/*.html'
           output: lychee/report.md
-          jobSummary: true
+          jobSummary: false
           fail: false
 
       - name: Upload audit report for review

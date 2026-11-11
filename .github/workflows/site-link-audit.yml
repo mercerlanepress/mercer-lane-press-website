@@ -37,6 +37,9 @@ jobs:
         with:
           # Outbound-link failures are advisory: Amazon/Etsy sometimes block bots.
           # Do not treat a rate limit or 403 as proof a product link is broken.
+          # Worker API routes are implemented in worker/*.js, not in static dist/.
+          # The file checker intentionally excludes these URLs; test paid download
+          # access separately with appropriate authenticated staging transactions.
           args: >-
             --no-progress
             --root-dir ./dist

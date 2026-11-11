@@ -1,0 +1,18 @@
+{
+  "ci": {
+    "collect": {
+      "staticDistDir": "./dist",
+      "numberOfRuns": 1,
+      "url": [
+        "http://localhost/",
+        "http://localhost/books/",
+        "http://localhost/guides/",
+        "http://localhost/tools/"
+      ]
+    },
+    "upload": {
+      "target": "filesystem",
+      "outputDir": "./lighthouse-reports"
+    }
+  }
+}

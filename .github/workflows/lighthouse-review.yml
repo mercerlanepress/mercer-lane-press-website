@@ -1,0 +1,49 @@
+name: Lighthouse site report (review only)
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'astro.config.mjs'
+      - '.github/workflows/lighthouse-review.yml'
+      - 'lighthouserc.json'
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    name: Review mobile performance, SEO and accessibility
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install and build
+        run: |
+          npm install
+          npm run build
+
+      - name: Run Lighthouse against locally built static site
+        continue-on-error: true
+        run: |
+          npm install --no-save @lhci/cli@0.16.x
+          npx lhci autorun
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+
+      - name: Upload local-only HTML and JSON reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-review-reports
+          path: lighthouse-reports/
+          if-no-files-found: warn

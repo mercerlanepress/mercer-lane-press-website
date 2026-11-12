@@ -107,6 +107,35 @@ try {
   });
   assert.ok((await state()).events.includes('book_retailer_click'), 'After consenting, Amazon retailer intent must still be recorded.');
 
+  // Open the actual HR and construction book pages and click the real
+  // companion links, checking the consented book_to_product GA4 queue event.
+  for (const [bookPath, productPath, destinationId] of [
+    ['/books/ai-productivity-for-hr-professionals/', '/tools/hr-manager-toolkit/', 'hr_ai_toolkit'],
+    ['/books/construction-estimating-for-your-first-jobs/', '/tools/construction-estimating-system-pro/', 'toolkit_pro']
+  ]) {
+    await open(bookPath);
+    const result = await page.evaluate(path => {
+      const link = [...document.querySelectorAll('a[href]')]
+        .find(a => new URL(a.href, location.href).pathname === path);
+      if (!link) return {found:false};
+      // Prevent navigation but let our delegated document listener see the click.
+      document.addEventListener('click', e => e.preventDefault(), {capture:true, once:true});
+      link.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true}));
+      const events = (window.dataLayer || []).map(args => Array.from(args))
+        .filter(x => x[0] === 'event' && x[1] === 'book_to_product');
+      return {
+        found:true,
+        count:events.length,
+        destination:events.at(-1)?.[2]?.destination_id,
+        accidentalPurchase:(window.dataLayer || []).some(x => x[0] === 'event' && x[1] === 'purchase')
+      };
+    }, productPath);
+    assert.equal(result.found, true, 'The companion link must exist on ' + bookPath);
+    assert.equal(result.count, 1, 'One consented book_to_product event must fire on ' + bookPath);
+    assert.equal(result.destination, destinationId, 'Book companion destination ID must match');
+    assert.equal(result.accidentalPurchase, false, 'Clicking a companion is not a purchase');
+  }
+
   // Revoke consent, reload, verify the Google script is absent on the next load.
   await openSettings();
   const googleBeforeRevocation = googleRequests.length;

@@ -5,7 +5,7 @@ import vm from 'node:vm';
 const layout = readFileSync(new URL('../src/layouts/BaseLayout.astro', import.meta.url), 'utf8');
 const banner = readFileSync(new URL('../src/components/AnalyticsConsent.astro', import.meta.url), 'utf8');
 const privacy = readFileSync(new URL('../src/pages/privacy/index.astro', import.meta.url), 'utf8');
-const scriptPattern = /<script is:inline define:vars=\{\{ measurementId \}\}>([\s\S]*?)<\/script>\}/g;
+const scriptPattern = /<script is:inline define:vars=\{\{ measurementId \}\}>([\s\S]*?)<\/script>/g;
 const layoutScripts = [...layout.matchAll(scriptPattern)].map(match => match[1]);
 const bannerScripts = [...banner.matchAll(scriptPattern)].map(match => match[1]);
 assert.equal(layoutScripts.length, 2, 'The ordinary and sensitive layout analytics scripts must both exist.');

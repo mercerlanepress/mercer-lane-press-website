@@ -14,6 +14,19 @@ for(const name of readdirSync(bookPagesDir)){
 }
 
 const dist=join(root,'dist');
+// The homepage LCP image must use generated responsive WebPs; avoid silently
+// regressing to the 624 KB full-resolution JPEG for modern browsers.
+const homepage=readFileSync(join(dist,'index.html'),'utf8');
+if (!homepage.includes('type="image/webp"') || !homepage.includes('sizes="(max-width: 720px) 260px, 360px"')) {
+  throw new Error('Homepage featured cover is missing its responsive WebP <source> or accurate sizes.');
+}
+for (const width of [480, 800]) {
+  const filename=`The_Small_Fleet_Maintenance_Front_Cover-${width}.webp`;
+  const file=join(dist,'images','books',filename);
+  if (!existsSync(file)) throw new Error(`Missing generated homepage WebP: ${file}`);
+  if (!homepage.includes(filename)) throw new Error(`Homepage does not reference generated WebP ${filename}`);
+  if (statSync(file).size >= 624392 * 0.8) throw new Error(`Generated homepage WebP is unexpectedly large: ${filename}`);
+}
 const html=[]; walk(dist,file=>file.endsWith('.html')&&html.push(file));
 const metadata=new Set();
 for(const file of html){

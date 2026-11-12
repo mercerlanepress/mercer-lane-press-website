@@ -162,6 +162,7 @@
     if (destination?.[1] === 'product' && current[1] === 'tool') send('tool_to_product', {destination_id: destination[2]});
     if (destination?.[1] === 'book' && current[1] === 'tool') send('tool_to_book', {destination_id: destination[2]});
     if (destination?.[1] === 'tool' && current[1] === 'guide') send('guide_to_tool', {destination_id: destination[2]});
+    if (destination?.[1] === 'product' && current[1] === 'book') send('book_to_product', {destination_id: destination[2]});
     if (destination?.[1] === 'product' && current[1] === 'guide') send('guide_to_product', {destination_id: destination[2]});
     if (destination?.[1] === 'book' && current[1] === 'guide') send('guide_to_book', {destination_id: destination[2]});
     const isEtsy = ['etsy.com', 'www.etsy.com'].includes(url.hostname) && /^\/listing\/\d+/.test(url.pathname);

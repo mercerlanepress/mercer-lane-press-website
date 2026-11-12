@@ -119,6 +119,26 @@ for (const [source, name, content] of [
  assert.equal(landscapeGuide.events.at(-1)[1],'guide_to_tool');
  console.log('Landscape campaign checks passed: approved sources/content, consent, input exclusion and funnel transitions.');
 
+// New optional book-to-product journeys are consent-gated *intent*, not sales.
+for (const [bookPath,productPath,productId] of [
+  ['/books/ai-productivity-for-hr-professionals/','/tools/hr-manager-toolkit/','hr_ai_toolkit'],
+  ['/books/construction-estimating-for-your-first-jobs/','/tools/construction-estimating-system-pro/','toolkit_pro']
+]) {
+  const href='https://mercerlanepress.com'+productPath;
+  const optedIn=setup(bookPath,'granted');
+  optedIn.click(href);
+  assert.equal(optedIn.events.at(-1)[1],'book_to_product');
+  assert.equal(optedIn.events.at(-1)[2].destination_id,productId);
+  assert.ok(optedIn.events.every(e=>e[1]!=='purchase'));
+  const optedOut=setup(bookPath,'denied');
+  optedOut.click(href);
+  assert.equal(optedOut.events.length,0);
+  optedIn.change('denied');
+  const before=optedIn.events.length;
+  optedIn.click(href);
+  assert.equal(optedIn.events.length,before);
+}
+console.log('Book companion click tests passed: route IDs, consent, withdrawal, and no false sale attribution.');
 const unrelated=setup('/contact/','granted'); assert.equal(unrelated.events.length,0);
 const guide=setup('/small-fleet-maintenance/fleet-maintenance-schedule-spreadsheet/','granted');guide.click('https://mercerlanepress.com/tools/fleet-maintenance-due-calculator/');assert.equal(guide.events.at(-1)[1],'guide_to_tool');
 const heat=setup('/tools/heat-pump-running-cost-calculator/','denied');

@@ -33,11 +33,16 @@ try {
   });
   const page = await browser.newPage();
   const googleRequests = [];
+  const stripeRequests = [];
   await page.setRequestInterception(true);
   page.on('request', req => {
     const url = req.url();
     if (/^https:\/\/(?:[^/]+\.)?(?:googletagmanager\.com|google-analytics\.com|doubleclick\.net)\//.test(url)) {
       googleRequests.push(url);
+      req.abort('blockedbyclient').catch(() => {});
+    } else if (new URL(url).hostname === 'buy.stripe.com') {
+      // Safety guard: testing purchase buttons must never create live Checkout Sessions.
+      stripeRequests.push(url);
       req.abort('blockedbyclient').catch(() => {});
     } else req.continue().catch(() => {});
   });
@@ -136,6 +141,41 @@ try {
     assert.equal(result.accidentalPurchase, false, 'Clicking a companion is not a purchase');
   }
 
+  // Validate the *real* purchase buttons without navigating to Stripe.
+  // Never open a live checkout: inspect hrefs and dispatch a canceled click
+  // so the site's consent-gated delegate can record checkout *intent*.
+  for (const [productPath, stripeUrl, displayedPrice] of [
+    ['/tools/construction-estimating-system-pro/', 'https://buy.stripe.com/00wfZj3M9fKt5A62JSds400', 'US$19.99'],
+    ['/tools/hr-manager-toolkit/', 'https://buy.stripe.com/5kQbJ35UhfKtgeK708ds401', '$24.99']
+  ]) {
+    await open(productPath);
+    const result = await page.evaluate(({stripeUrl, displayedPrice}) => {
+      const checkoutLinks = [...document.querySelectorAll('a[href]')]
+        .filter(a => new URL(a.href, location.href).hostname === 'buy.stripe.com');
+      if (!checkoutLinks.length) return {found:false};
+      const offeredPricesMatch = document.body.textContent.includes(displayedPrice);
+      const linksAgree = checkoutLinks.every(a => a.href === stripeUrl);
+      const prior = (window.dataLayer || []).filter(x => x[0] === 'event' && x[1] === 'product_checkout_click').length;
+      document.addEventListener('click', e => e.preventDefault(), {capture:true, once:true});
+      checkoutLinks[0].dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true}));
+      const events = (window.dataLayer || []).map(args => Array.from(args))
+        .filter(x => x[0] === 'event' && x[1] === 'product_checkout_click');
+      return {
+        found:true,linksAgree,offeredPricesMatch,
+        newEvents:events.length-prior,
+        provider:events.at(-1)?.[2]?.checkout_provider,
+        accidentalPurchase:(window.dataLayer || []).some(x => x[0] === 'event' && x[1] === 'purchase')
+      };
+    }, {stripeUrl, displayedPrice});
+    assert.equal(result.found, true, 'A Stripe purchase button must exist on '+productPath);
+    assert.equal(result.linksAgree, true, 'Every Stripe CTA must match the verified live Payment Link for '+productPath);
+    assert.equal(result.offeredPricesMatch, true, 'The current purchase price must be disclosed on '+productPath);
+    assert.equal(result.newEvents, 1, 'Click must emit one consented product_checkout_click event');
+    assert.equal(result.provider, 'stripe', 'Checkout intent must be attributed to Stripe');
+    assert.equal(result.accidentalPurchase, false, 'A checkout click is NOT a completed sale');
+    assert.equal(stripeRequests.length, 0, 'This QA must never create any live Stripe session');
+  }
+
   // Revoke consent, reload, verify the Google script is absent on the next load.
   await openSettings();
   const googleBeforeRevocation = googleRequests.length;
@@ -146,7 +186,7 @@ try {
   assert.equal(s.bannerHidden, true);
   assert.equal(googleRequests.length, googleBeforeRevocation);
 
-  console.log('Chromium consent/network QA passed: denied first visit and return, one Google script and pageview after grant, retailer event, and no Google request after withdrawal.');
+  console.log('Chromium consent/network QA passed: denied/return, one GA tag/pageview after grant, retailer and book-companion events, both real Stripe CTA hrefs/prices/consented intent events, no Stripe requests and no Google request after withdrawal.');
 } finally {
   await browser?.close().catch(() => {});
   await new Promise(resolveClose => server.close(resolveClose));

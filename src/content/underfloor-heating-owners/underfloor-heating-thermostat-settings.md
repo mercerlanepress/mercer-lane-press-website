@@ -28,7 +28,7 @@ First establish **what is being measured**. A room-air target and a floor-probe 
 
 For a normal comfort adjustment, record the existing user setting and change only the documented room target or schedule. If the display is controlling floor temperature, or you cannot tell, identify the sensor mode from your records or ask the installer before making a change. Do not enter installer menus to remove a limit.
 
-### Two manufacturer examples that explain confusing behaviour
+### Manufacturer examples that explain confusing behaviour
 
 | Model or feature | What the manufacturer documents | Useful interpretation |
 | --- | --- | --- |

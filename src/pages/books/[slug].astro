@@ -27,6 +27,8 @@ const schema = {
   author:{'@type':'Person',name:book.author,url:'https://mercerlanepress.com/authors/' + book.authorSlug + '/'},
   publisher:{'@type':'Organization',name:book.publisher,url:'https://mercerlanepress.com/'},
   description:book.description,
+  sameAs:book.purchaseUrl,
+  ...(book.coverReady ? {image:new URL(book.cover,Astro.site).href} : {}),
   url:'https://mercerlanepress.com/books/' + book.slug + '/'
 };
 ---
@@ -76,4 +78,6 @@ const schema = {
       <div class="grid-3">{book.outcomes.map((item:string)=><article class="card"><p class="feature-highlight">{item}</p></article>)}</div>
     </div>
   </section>}
+  {book.scopeNote && <section class="section section-tint"><div class="wrap narrow prose"><h2>Scope and limits</h2><p>{book.scopeNote}</p></div></section>}
+  {book.relatedLinks?.length && <section class="section"><div class="wrap"><div class="section-head"><p class="eyebrow">RELATED READING</p><h2>Explore related practical resources</h2></div><div class="actions">{book.relatedLinks.map((link:{href:string;label:string}) => <a class="button button-secondary" href={link.href}>{link.label}</a>)}</div></div></section>}
 </BaseLayout>

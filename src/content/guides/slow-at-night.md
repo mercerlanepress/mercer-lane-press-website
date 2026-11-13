@@ -46,13 +46,17 @@ A 5G sector has shared capacity, and providers manage traffic according to their
 
 ### A comparison sheet you can copy
 
-Use the same device and test method in each row. Write down the date as well as the time; keep gateway placement unchanged during this comparison. Record unavailable readings as "not shown". A speed test consumes data, so consider any plan allowance before repeating tests.
+Copy this record for three observations: a quiet daytime period, the evening slowdown, and the same evening after pausing nonessential large transfers. Use the same device and test method, and keep gateway placement unchanged. Record unavailable readings as "not shown". A speed test consumes data, so consider any plan allowance before repeating tests.
 
-| Date and time | Ethernet or nearby Wi-Fi | Download / upload (Mbps) | Latency (ms) | Household activity | Ordinary task outcome |
-| --- | --- | --- | --- | --- | --- |
-| Quiet daytime period | | | | | |
-| Evening before pausing large transfers | | | | | |
-| Evening after pausing nonessential transfers | | | | | |
+| Field | Your observation |
+| --- | --- |
+| Date, time and comparison period | |
+| Test device and speed-test service/server | |
+| Connection | Ethernet or nearby Wi-Fi; note the band if known |
+| Download and upload | Record both, in Mbps |
+| Latency | Record milliseconds (ms) |
+| Household activity | Note streams, backups or transfers and what was paused |
+| Ordinary task outcome | For example, whether the same video call remains usable |
 
 **Illustrative example:** if the same wired test is 80 Mbps by day, 9 Mbps in the evening and 10 Mbps after household transfers pause, local transfers alone do not explain the difference. Provider load, radio conditions, the gateway or the test service still need investigation. Those numbers are an example of reasoning, not an expected speed or proof of congestion.
 

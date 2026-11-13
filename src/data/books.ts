@@ -1,8 +1,10 @@
+import { additionalPracticalBooks } from './additional-practical-books';
 import { solarPanelsInstalledNowWhat } from './solar-panels-installed-now-what';
 import { livingWithUnderfloorHeating } from './living-with-underfloor-heating';
 export interface Book {
   slug: string; title: string; subtitle: string; author: string; authorSlug: string;
   publisher: string; description: string; cover: string; coverReady: boolean;
+  category?: string; scopeNote?: string; relatedLinks?: { href: string; label: string }[];
   purchaseUrl: string; intendedReader?: string; problems?: string[]; topics?: string[];
   outcomes?: string[]; themes?: string[]; hubSlug?: string; hubLabel?: string;
 }
@@ -1247,8 +1249,8 @@ export const books: Book[] = [livingWithUnderfloorHeating, solarPanelsInstalledN
   themes: ['dog recall training','long-line recall','recall proofing','dog distractions','dog sniffing','wildlife recall','off-leash readiness','emergency recall','reward-based dog training','dog training outdoors'],
   hubSlug: 'reliable-recall',
   hubLabel: 'Reliable recall and long-line proofing guides'
-}
-
+},
+...additionalPracticalBooks
 ];
 
 export const featuredBook = books[0];

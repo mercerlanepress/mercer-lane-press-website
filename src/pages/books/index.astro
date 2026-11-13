@@ -17,8 +17,8 @@ const categoryDefinitions=[
 ];
 
 const knownHubs=new Set(categoryDefinitions.flatMap(category=>category.hubs));
-const baseSections=categoryDefinitions.map(category=>({...category,books:allBooks.filter(book=>book.hubSlug && category.hubs.includes(book.hubSlug))})).filter(category=>category.books.length);
-const uncategorized=allBooks.filter(book=>!book.hubSlug || !knownHubs.has(book.hubSlug));
+const baseSections=categoryDefinitions.map(category=>({...category,books:allBooks.filter(book=>book.category === category.id || (book.hubSlug && category.hubs.includes(book.hubSlug)))})).filter(category=>category.books.length);
+const uncategorized=allBooks.filter(book=>!book.category && (!book.hubSlug || !knownHubs.has(book.hubSlug)));
 const sections=uncategorized.length ? [...baseSections,{id:'other',label:'Other Practical Guides',description:'Additional Mercer Lane Press titles.',hubs:[],books:uncategorized}] : baseSections;
 ---
 <BaseLayout title="Books" description="Browse the Mercer Lane Press catalogue by subject, including AI and work, home and family admin, technology, dogs and pets, trades, operations, and practical hobbies.">

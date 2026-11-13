@@ -3,6 +3,7 @@ import { glob } from 'astro/loaders';
 
 const guideSchema = z.object({
   title: z.string(), description: z.string(), published: z.coerce.date(),
+  updated: z.coerce.date().optional(),
   summary: z.string(), order: z.number(), related: z.array(z.string())
 });
 

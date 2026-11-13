@@ -2,6 +2,7 @@
 title: Why Does My 5G Home Internet Keep Disconnecting?
 description: Troubleshoot 5G home internet that keeps disconnecting, dropping out or turning off, with a controlled test sequence for gateway, signal and network causes.
 published: 2026-09-19
+updated: 2026-11-13
 summary: Separate a true internet outage from a gateway, Wi-Fi, or single-device interruption.
 order: 1
 related: [slow-speeds, weak-signal, gateway-placement]
@@ -21,6 +22,15 @@ During the next dropout, compare a second device before restarting anything. If 
 | Internet stays connected but becomes slow each evening | Matched daytime and evening tests | Use the [slow-at-night comparison](/5g-home-internet/slow-at-night/) rather than treating every slowdown as a dropout. |
 
 **5G home internet and 5 GHz Wi-Fi are different.** The first is the gateway's cellular connection to the provider; the second is a local Wi-Fi band. A phone losing its 5 GHz Wi-Fi connection does not by itself show that the provider's 5G service has failed.
+
+## Use the support instructions for your exact gateway
+
+Record the provider, gateway model and whether you have one combined gateway or a separate modem and router. That distinction changes which cable, status light and restart procedure matters.
+
+- **T-Mobile:** its [Home Internet troubleshooting instructions](https://www.t-mobile.com/support/home-internet/customer-support.html) include T-Life diagnostics and separate checks for Wi-Fi loss, power and slow service. The diagnostic result is a useful addition to your interruption log. Follow the instructions for your supplied device rather than applying a reset sequence from another router.
+- **Verizon:** its [5G Home Modem connection guide](https://www.verizon.com/support/knowledge-base-309019/) distinguishes power, coax and modem-to-router Ethernet checks. Those checks apply to that equipment arrangement; they are not instructions to look for a coax connection on every 5G gateway.
+
+These are manufacturer/provider sources, checked on November 13, 2026. Use your own provider's current model manual if your equipment differs. Keep serial numbers, account details and Wi-Fi passwords out of public support posts.
 
 ## Before changing anything
 
@@ -66,5 +76,17 @@ Copy this template for each interruption. Leave unavailable readings blank rathe
 | Ethernet online? | |
 | Gateway lights or app status | Record the actual status shown. |
 | Recovery action | For example: returned without restart. |
+
+### Worked example: a Wi-Fi dropout that looks like a 5G outage
+
+**Illustrative example, not a measured customer result:** a laptop loses its meeting connection at 7:40 p.m. A second device on the same gateway still loads a new web page over Ethernet. The gateway has not restarted. The laptop reconnects when moved into the gateway's room.
+
+| Observation | What it establishes | What it does not establish |
+| --- | --- | --- |
+| Another device loads new content over Ethernet during the interruption | Internet is reaching that device through the gateway at that moment | That the cellular link never has a separate intermittent fault |
+| Laptop reconnects near the gateway | Location or local Wi-Fi deserves the next comparison | That buying a mesh system is necessary |
+| No gateway restart observed | No restart was seen during this event | That the gateway's hardware is definitely healthy |
+
+The next step is a repeat comparison on the affected device, not a claim that the provider's tower is faulty. If Ethernet also fails during a later event, log that as a different observation rather than forcing both events into the same diagnosis.
 
 After several observations, tell support whether all devices fail together, whether Ethernet also fails, and whether the gateway restarts. For a repeatable seven-day investigation with symptom matrices and placement scoring, [explore The 5G Home Internet Troubleshooting Manual](/books/the-5g-home-internet-troubleshooting-manual/).

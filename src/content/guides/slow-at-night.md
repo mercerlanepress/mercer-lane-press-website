@@ -2,6 +2,7 @@
 title: Why Does 5G Home Internet Slow Down at Night?
 description: Test whether evening 5G home internet slowdowns are caused by provider congestion, local household demand, Wi-Fi, or one application.
 published: 2026-09-19
+updated: 2026-11-13
 summary: Use matched daytime and evening tests to distinguish network congestion from activity inside the home.
 order: 3
 related: [slow-speeds, keeps-disconnecting, weak-signal]
@@ -43,6 +44,24 @@ A 5G sector has shared capacity, and providers manage traffic according to their
 
 ## What to give provider support
 
+### A comparison sheet you can copy
+
+Copy this record for three observations: a quiet daytime period, the evening slowdown, and the same evening after pausing nonessential large transfers. Use the same device and test method, and keep gateway placement unchanged. Record unavailable readings as "not shown". A speed test consumes data, so consider any plan allowance before repeating tests.
+
+| Field | Your observation |
+| --- | --- |
+| Date, time and comparison period | |
+| Test device and speed-test service/server | |
+| Connection | Ethernet or nearby Wi-Fi; note the band if known |
+| Download and upload | Record both, in Mbps |
+| Latency | Record milliseconds (ms) |
+| Household activity | Note streams, backups or transfers and what was paused |
+| Ordinary task outcome | For example, whether the same video call remains usable |
+
+**Illustrative example:** if the same wired test is 80 Mbps by day, 9 Mbps in the evening and 10 Mbps after household transfers pause, local transfers alone do not explain the difference. Provider load, radio conditions, the gateway or the test service still need investigation. Those numbers are an example of reasoning, not an expected speed or proof of congestion.
+
+If the evening result instead rises substantially after a backup pauses, repeat that comparison another day before drawing a conclusion. Keep a note of whether the actual task, such as a video call, improves too.
+
 Provide dates, exact time ranges, wired-versus-Wi-Fi comparisons, affected devices, signal readings shown by the official interface, and whether the problem clears later without a restart. This evidence is more actionable than repeated resets.
 
 ## Purchases that probably will not solve congestion
@@ -50,3 +69,9 @@ Provide dates, exact time ranges, wired-versus-Wi-Fi comparisons, affected devic
 Wi-Fi extenders and mesh systems redistribute the connection already available at the gateway. They cannot add capacity to the provider's cellular sector. A different local router may improve home coverage, but it will not fix a slowdown demonstrated on Ethernet at the gateway. Avoid external antennas or modifications unless the provider and gateway manufacturer explicitly support them.
 
 For general performance diagnosis, start with [the slow-speed procedure](/5g-home-internet/slow-speeds/). The manual adds a seven-day stability test and troubleshooting log for building a clearer case without changing several variables at once.
+
+## Provider guidance behind these checks
+
+[T-Mobile's network-speed guidance](https://www.t-mobile.com/support/home-internet/t-mobile-gateway/network-speed) separates gateway placement, household device demand, interference and connection type. It recommends Ethernet where possible. Use that guidance for the local checks; a speed comparison still cannot establish how much capacity your provider's cell has available.
+
+Source checked November 13, 2026. This guide offers a way to organise your observations; it does not report a laboratory test of any provider or gateway.

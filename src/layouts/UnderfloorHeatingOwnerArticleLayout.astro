@@ -2,7 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 const { entry } = Astro.props;
-const { title, description, published, related } = entry.data;
+const { title, description, published, updated, related } = entry.data;
 const url = new URL('/underfloor-heating-owners/' + entry.id + '/', Astro.site).href;
 const schema = {
   '@context': 'https://schema.org',
@@ -10,6 +10,7 @@ const schema = {
   headline: title,
   description,
   datePublished: published.toISOString().slice(0,10),
+  ...(updated ? {dateModified: updated.toISOString().slice(0,10)} : {}),
   author: { '@type': 'Person', name: 'Gareth Fenwick', url: 'https://mercerlanepress.com/authors/gareth-fenwick/' },
   publisher: { '@type': 'Organization', name: 'Mercer Lane Press', url: 'https://mercerlanepress.com/' },
   mainEntityOfPage: url
@@ -23,6 +24,7 @@ const schema = {
       <h1>{title}</h1>
       <p class="lede">{description}</p>
       <p class="byline">By <a href="/authors/gareth-fenwick/">Gareth Fenwick</a> · Published <time datetime={published.toISOString()}>{published.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'})}</time></p>
+      {updated && <p class="byline">Updated <time datetime={updated.toISOString()}>{updated.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'})}</time></p>}
     </header>
     <div class="article-body"><slot /></div>
     <aside class="book-note">

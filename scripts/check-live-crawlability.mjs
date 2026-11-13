@@ -112,7 +112,7 @@ try {
   const r = await get('https://www.mercerlanepress.com/');
   report('www home', r);
   if (r.status !== 200 || r.url !== origin + '/') warnings.push('www home: consider redirect/canonical audit; ' + r.status + ' ' + r.url);
-  else warnings.push('www responds directly: verify whether its final URL canonicalizes to the apex domain');
+  else console.log('www host resolves to the canonical apex homepage (redirect followed).');
 } catch (e) {
   warnings.push('www home not verified: ' + String(e));
 }
